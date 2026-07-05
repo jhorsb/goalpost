@@ -1,0 +1,81 @@
+"""CLI: dry-run prints the call plan and cost estimate without any network;
+audit validates config before doing anything."""
+
+from pathlib import Path
+
+from typer.testing import CliRunner
+
+from goalpost.cli import app
+
+runner = CliRunner()
+
+
+def write_slice_config(tmp_path: Path) -> Path:
+    prompt = tmp_path / "prompt.txt"
+    prompt.write_text("Screen this candidate.\nCV: {cv}\nJob spec: {job_spec}")
+    corpus = tmp_path / "cases.yaml"
+    corpus.write_text(
+        "cases:\n"
+        "  - case_id: c1\n"
+        "    cv_text: 'a cv'\n"
+        "    job_spec_text: 'a spec'\n"
+    )
+    config = tmp_path / "audit.yaml"
+    config.write_text(
+        f"""
+audit_id: cli-test
+audit_seed: 42
+max_spend_usd: 0.5
+corpus_path: {corpus}
+output_dir: {tmp_path / "audits"}
+canonicaliser_model: claude-sonnet-4-5-20250929
+extractor_model: claude-sonnet-4-5-20250929
+conditions:
+  - {{temperature: 0.0, repeats: 5}}
+suts:
+  - name: screener
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    elicitation_mode: structured
+    prompt_template_path: {prompt}
+"""
+    )
+    return config
+
+
+def test_dry_run_prints_plan_and_exits_without_network(tmp_path, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)  # no key: proves no network
+    config = write_slice_config(tmp_path)
+    result = runner.invoke(app, ["audit", "--config", str(config), "--dry-run"])
+    assert result.exit_code == 0
+    assert "5" in result.output  # planned calls
+    assert "$" in result.output  # estimated cost
+    assert "dry run" in result.output.lower()
+
+
+def test_dry_run_estimates_scale_with_repeats(tmp_path, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    config = write_slice_config(tmp_path)
+    text = config.read_text().replace("repeats: 5", "repeats: 10")
+    config.write_text(text)
+    result = runner.invoke(app, ["audit", "--config", str(config), "--dry-run"])
+    assert result.exit_code == 0
+    assert "10" in result.output
+
+
+def test_audit_missing_config_errors():
+    result = runner.invoke(app, ["audit", "--config", "/nonexistent.yaml"])
+    assert result.exit_code != 0
+
+
+def test_shared_canonicaliser_and_sut_model_rejected(tmp_path, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    config = write_slice_config(tmp_path)
+    text = config.read_text().replace(
+        "canonicaliser_model: claude-sonnet-4-5-20250929",
+        "canonicaliser_model: claude-haiku-4-5-20251001",
+    )
+    config.write_text(text)
+    result = runner.invoke(app, ["audit", "--config", str(config), "--dry-run"])
+    assert result.exit_code != 0
+    assert "canonicaliser" in result.output.lower()
