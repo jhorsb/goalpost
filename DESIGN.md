@@ -171,3 +171,53 @@ Strict TDD; the Iron Law holds across every delegation boundary (RED written and
 ## 10. Stack
 
 Python 3.11+, pydantic v2 throughout, typer CLI, uv for env/deps, Jinja2 for reports, pytest. Provider adapters: thin uniform interface over Anthropic / OpenAI / OpenAI-compatible endpoints; model strings only in config; **current provider API shapes verified via docs lookup at build time, not assumed**.
+
+---
+
+## 11. Amendment changelog (design-dialogue record)
+
+The design was presented in seven sections and validated one at a time (2026-07-05). Every author amendment, attributed to the section it modified — raw material for the write-up's methodology section. All are integrated in the body above; this is the record of what the dialogue changed.
+
+**Section 1 — Architecture (4):**
+1. Freeform extractor must carry an *empirical self-agreement score* reported alongside anything it touched, not a bare `extracted` flag; unreportable freeform numbers withheld (gate later refined by S3-1).
+2. Perturbation engine appears explicitly in the pipeline; variants materialised as a frozen derived artifact, deterministic from corpus + seed + config.
+3. Elicitation mode is part of SUT identity — first-class field everywhere; no cross-mode comparison without explicit flagging.
+4. Version-stamping generalised: every stage writes its version into its artifact; full provenance tuple on every reported number.
+
+**Section 2 — Data model (5 + 1 question resolved):**
+1. Explicit lineage keys on every record (transcript: case/variant hash + repetition_index + condition; run: transcript_id; normalised: run_id); no positional joins.
+2. SUT identity (provider, model, prompt hash, mode) split from Condition (temperature, seeds, N); condition is a field and a metrics grouping axis — the T=0 finding is a within-SUT claim.
+3. Extractor calls get full TranscriptRecord treatment and go through the cache.
+4. Failures flow into metrics with explicit denominators; refusal/parse-failure rates reported.
+5. Version-keyed output directories extended to `normalised/`.
+6. *Author query resolved:* bare-text recourse was the assistant's simplification; the honours two-field schema (`{action_id, description}`, reasons `{reason_id, direction, note}`) adopted.
+
+**Section 3 — Metrics (3):**
+1. Extractor gate inverted (asymmetric): extractor noise only attenuates, so high measured stability with self-agreement ≥ 0.90 is reportable as a *lower bound*; the +0.15 margin applies only to instability claims and the reason–recourse gap; self-agreement computed per item type (reasons vs recourse), stratified sample, k=3 uncached — differential extraction difficulty must not fabricate the gap.
+2. Coverage companions (emptiness rate, mean set size) printed beside every stability number; headlines driven by empty∧empty pairs flagged.
+3. Per-case effective n_pairs reported; minimum enforced for inclusion in aggregates; exclusions listed.
+
+**Section 4 — Normaliser (3 + 2 notes):**
+1. Reason–recourse gap reported at all three ladder levels with per-item-type normaliser lift published — taxonomy asymmetry must not manufacture the finding. (Phase 0 confirmation: honours headline was cluster-level.)
+2. Taxonomy frozen per audit; promotion between audits only; mixed-taxonomy comparisons hard-error — remedy is re-normalising all SUTs under the newest version.
+3. NOVEL items score as normalised-text singletons; NOVEL rate published per SUT per item type; material NOVEL-rate differences flagged in comparisons.
+4. *Note:* canonicaliser calls become TranscriptRecords through the cache.
+5. *Note:* all cluster hits on multi-hit items logged and surfaced in taxonomy review.
+
+**Section 5 — Reports (3 + 1 note):**
+1. Ranking eligibility floors — SUTs enter the ranked table only if they clear coverage/denominator/NOVEL thresholds; others listed unranked with reasons; overlapping-IQR rows render as tie-bands, not strict order.
+2. Verbal anchor bands become a committed, versioned artifact stamped into every report; the lay headline uses a data-derived statistic ("ask twice; on average only 1 in 3 recommendations appears both times"), not an adjective.
+3. Perturbation results added to all renderings — per-class breakdowns in the appendix, an above-the-fold lay line for decision flips under immaterial edits, and a lay sentence for plain decision stability.
+4. *Note:* page one carries a minimal provenance stamp (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
+
+**Section 6 — Config/CLI/cost/testing (3 + 1 note):**
+1. Cache key includes case/variant hash + repetition_index — repeats must never be cache hits; provider seeds derived per repetition and recorded; extractor self-agreement cache bypass via nonce.
+2. Pinned model snapshots required where available; floating aliases hard-warned; provider-returned model/fingerprint recorded per transcript; intra-audit fingerprint drift flagged.
+3. Budget enforcement at block boundaries only (block = all N repeats of one SUT × condition × case); breadth-balanced interleaving across SUTs; incomplete audits banner with explicit missing-block list.
+4. *Note:* taxonomy content hash validated against `taxonomy_version` at config time.
+
+**Section 7 — Delegation (2):**
+1. Runner core (block scheduling, seed derivation, interleaving, budget stops, resume) joins the never-delegate list — "glassware is delegable, protocol isn't" — with named regression tests for seed-per-repetition and block-boundary semantics; extractor/canonicaliser invocation plumbing explicitly main-thread.
+2. Phase 2 builds thin main-thread versions of the delegable components; Phase 3 Codex briefs harden them against RED tests partly derived from the slice's recorded transcripts.
+
+**Post-sign-off (D-012):** extractor thresholds (0.90 / +0.15) pre-registered — revisable at most once, only before any reportable audit, only on slice calibration data, rationale logged, both values disclosed thereafter. The slice runs both elicitation modes to generate that calibration data.

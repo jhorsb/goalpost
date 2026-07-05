@@ -2,6 +2,8 @@
 
 Running log of assumptions, resolved ambiguities, and departures from the kickoff prompt. Ground-truth hierarchy: dissertation > kickoff prompt (scope/constraints/process) > logged judgement.
 
+**Append-only from D-012 onward (author instruction, 2026-07-05):** new entries go at the end, lab-notebook rules. Entries D-001–D-011 predate the rule and keep their original (reverse-chronological) placement.
+
 ---
 
 ## 2026-07-05 — Phase 0
@@ -39,3 +41,8 @@ Fresh-context sub-agent independently extracted the fidelity-critical items; zer
 
 **D-007 · Proxy echo / policy contradiction deferred to V2.**
 The dissertation's contradiction metric keyword-matches protected-attribute terms; the kickoff (§5, §9.5) rules protected-attribute machinery out of V1. V1 keeps only direction-flip contradiction. Gap G9.
+
+---
+
+**D-012 · Pre-registered extractor-threshold protocol; slice runs both modes (2026-07-05, author instruction at Phase 1 sign-off).**
+The extractor self-agreement thresholds (reportability at self-agreement ≥ 0.90; +0.15 margin over measured stability for instability claims and the reason–recourse gap) are design constants chosen by judgement, not derived from data. Protocol: they may be revised **at most once**, **only before any reportable audit is run**, **only on the basis of the Phase 2 slice's calibration data**, with the rationale logged here; any subsequent report that relies on the revised thresholds must disclose both the original and revised values. Accordingly, the Phase 2 vertical slice runs **both elicitation modes**: structured to prove the spine end-to-end, freeform to generate the calibration data this protocol depends on.
