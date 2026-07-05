@@ -20,7 +20,14 @@
       "Bash(python3.13 --version)",
       "Bash(uv run *)",
       "Bash(git commit --quiet -m 'feat: metrics core, test-first \\(23 tests: golden + property\\) *)",
-      "Bash(git commit --quiet -m 'feat: normaliser stages 1-2, test-first \\(honours text rules + taxonomy semantics\\) *)"
+      "Bash(git commit --quiet -m 'feat: normaliser stages 1-2, test-first \\(honours text rules + taxonomy semantics\\) *)",
+      "Bash(uv sync *)",
+      "Bash(uv pip *)",
+      "Bash(xxd .venv/lib/python3.14/site-packages/_editable_impl_goalpost.pth)",
+      "Bash(grep -iE \"editable|goalpost|pth$\")",
+      "Bash(.venv/bin/python -c \"import goalpost; print\\('venv python direct: ok'\\)\")",
+      "Bash(.venv/bin/python -c ' *)",
+      "Bash(git commit --quiet -m 'feat: structured-tail parser, test-first; pin Python 3.12 \\(D-013\\) *)"
     ]
   }
 }
