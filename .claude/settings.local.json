@@ -37,7 +37,9 @@
       "Bash(git commit --quiet -m 'feat: reporter \\(lay page + technical appendix\\), test-first; versioned anchors artifact *)",
       "Bash(git commit --quiet -m 'feat: CLI \\(audit --dry-run, report\\), test-first; cost plan before any network *)",
       "Bash(.venv/bin/python -c \"import goalpost; print\\('ok'\\)\")",
-      "Bash(.venv/bin/python -c \"import goalpost; print\\('import ok:', goalpost.__file__\\)\")"
+      "Bash(.venv/bin/python -c \"import goalpost; print\\('import ok:', goalpost.__file__\\)\")",
+      "Bash(ant auth *)",
+      "Bash(git commit --quiet -m 'docs: status — slice green offline, live run blocked on credentials *)"
     ]
   }
 }
