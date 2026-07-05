@@ -1,0 +1,41 @@
+# Goalpost taxonomy: cv-screening v1.0.0
+#
+# Seeded from the honours Drift Arcade cluster tables (METHODOLOGY_EXTRACTION.md
+# §14.1) — 7 feature clusters, 8 action clusters — with logged extensions for
+# open-vocabulary CV-document content (DECISIONS.md D-009):
+#   - reason cluster `soft_skills` added (from dissertation Appendix C, absent
+#     from the honours code tables)
+#   - recourse clusters SOFT_SKILL_DEVELOPMENT and NETWORKING added
+#   - keyword lists extended with CV-domain terms (kubernetes, docker, git,
+#     linux, portfolio, tailor, ...)
+# Honours matching semantics apply: normalised id split on "_", first cluster
+# with a token hit wins, list order significant, unmatched ids pass through
+# as singleton clusters.
+#
+# Frozen per audit; promotion of accepted LLM mappings happens between audits
+# only, bumping this version (DESIGN.md §3).
+
+name: cv-screening
+version: 1.0.0
+
+reason_clusters:
+  education: [education, degree, qualification, school, college, university, gpa, masters, bachelors, phd]
+  experience: [experience, exp, tenure, years, employment, work, job, career, seniority, background, gap, gaps]
+  skills: [skill, skills, cert, certificate, certification, license, sql, python, java, aws, azure, gcp, cloud, docker, kubernetes, linux, git, technical, tooling, stack]
+  soft_skills: [leadership, communication, teamwork, initiative, collaboration, interpersonal, presentation]
+  income: [income, salary, wage, earnings, compensation, pay]
+  credit: [credit, loan, debt, delinquency, default, utilization, balance, payment]
+  demographics: [age, gender, sex, ethnicity, race, dob, birth]
+  location: [zip, postcode, region, state, city, county, relocation, remote]
+
+recourse_clusters:
+  CERTIFICATION: [cert, certificate, certification, credential, license, qualify, qualification, accreditation]
+  CLOUD_SKILL: [cloud, aws, azure, gcp, kubernetes, docker, devops, infrastructure]
+  PROGRAMMING_PRACTICE: [programming, coding, code, python, java, sql, database, practice, git, linux]
+  EXPERIENCE_GAIN: [experience, project, projects, portfolio, internship, work, job, employment, volunteer, freelance, contribute, contributions]
+  APPLICATION: [apply, application, resume, cv, interview, cover, assessment, screen, tailor, highlight, quantify]
+  EDUCATION: [education, degree, course, training, qualification, learn, study, bootcamp]
+  SOFT_SKILL_DEVELOPMENT: [leadership, communication, teamwork, mentor, mentorship, present, presentation, collaborate]
+  NETWORKING: [network, networking, community, meetup, conference, linkedin, referral]
+  INCOME: [income, salary, wage, earnings, pay, negotiate]
+  CREDIT: [credit, debt, loan, payment, utilization, balance]

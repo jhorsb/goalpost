@@ -132,9 +132,11 @@ def run_audit_blocks(
                 continue
 
         client = client_factory(block.sut)
-        prompt = block.sut.prompt_template.format(
-            cv=block.case.cv_text, job_spec=block.case.job_spec_text
-        )
+        # Replace-based substitution, not str.format: operator templates and
+        # the appended output contract legitimately contain JSON braces.
+        prompt = block.sut.prompt_template.replace(
+            "{cv}", block.case.cv_text
+        ).replace("{job_spec}", block.case.job_spec_text)
         block_transcripts = []
         for repetition_index in range(block.condition.repeats):
             seed = derive_seed(
