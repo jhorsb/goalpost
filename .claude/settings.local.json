@@ -12,7 +12,14 @@
       "Bash(git commit --quiet -m 'docs: reconcile independent cross-extraction; gaps G1-G12 final *)",
       "Bash(git commit --quiet -m 'docs: resolve G1/G3/G5/G12 from author'\\\\''s honours code; close phase 0 *)",
       "Bash(git commit --quiet -m 'docs: DESIGN.md — phase 1 design, validated section-by-section *)",
-      "Bash(git commit --quiet -m 'docs: D-012 threshold pre-registration; DESIGN.md amendment changelog; append-only DECISIONS rule *)"
+      "Bash(git commit --quiet -m 'docs: D-012 threshold pre-registration; DESIGN.md amendment changelog; append-only DECISIONS rule *)",
+      "Bash(uv --version)",
+      "Read(//Users/jamiehorsburgh/.local/bin/**)",
+      "Bash(python3.11 --version)",
+      "Bash(python3.12 --version)",
+      "Bash(python3.13 --version)",
+      "Bash(uv run *)",
+      "Bash(git commit --quiet -m 'feat: metrics core, test-first \\(23 tests: golden + property\\) *)"
     ]
   }
 }

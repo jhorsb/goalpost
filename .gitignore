@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.hypothesis/
+dist/
+# response cache is bulky and reconstructible; transcripts are evidence and ARE committed
+.cache/
+.DS_Store
