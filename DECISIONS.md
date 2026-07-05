@@ -24,6 +24,13 @@ PyMuPDF (available on system Python 3.9). LaTeX-produced PDF; extraction clean. 
 **D-006 · V1 headline metrics (proposed, pending checkpoint).**
 Fidelity and Arcade Score do not transfer to the tool's setting (no SHAP ground truth; Arcade demoted by the dissertation itself). Proposed V1 headlines: Recourse Stability Score, Reason Stability Score, Decision Stability, plus direction-flip rate. Gaps G7/G8.
 
+**D-010 · Phase 0 sign-off received; defaults accepted; code repo provided.**
+Author approved all G1–G12 defaults ("defaults fine") and provided the honours-project code at `~/Projects/Honours_Notebooks/`. Phase 0 checkpoint closed.
+
+**D-009 · G1/G3/G5/G12 resolved from author's code (see METHODOLOGY_EXTRACTION.md §14).**
+Real taxonomy is **7 feature clusters + 8 action clusters** (PDF said 8+8; Appendix C listed 5). Full v2 prompt, policy-lens texts, and contradiction keyword lists recovered verbatim. Jaccard: sets are IDs **without** direction, all-pairs mean, empty∧empty=1.0, unmatched IDs pass through as singleton clusters, candidate→condition aggregation is an unweighted mean. Parser is token-anchored balanced-delimiter JSON extraction, not regex. Goalpost's normaliser will inherit this machinery with a fresh committed taxonomy (the honours keyword lists seed it, extended for CV-document content); deviations from the honours taxonomy get logged.
+Nuances for METHODOLOGY.md honesty: baseline lens has an empty contradiction-keyword list (its 0% rate is structural); fairness keywords are education-tier proxies + gender/ethnicity (not "age" as the PDF implies); candidate selection was a seeded random sample, not curated to span the SHAP distribution; a `prompt_nudge` condition dimension exists in code but is unmentioned in the PDF.
+
 **D-008 · Cross-extraction reconciliation complete.**
 Fresh-context sub-agent independently extracted the fidelity-critical items; zero content conflicts with the primary extraction, same internal inconsistencies found independently. Six additional unspecified items adopted into the extraction doc (§11), one consequential enough to become gap G12 (Jaccard set identity). Cross-extraction committed as evidence at `extraction/CROSS_EXTRACTION.md`.
 
