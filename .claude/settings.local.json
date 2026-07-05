@@ -33,7 +33,8 @@
       "Skill(claude-api)",
       "Skill(claude-api:*)",
       "Bash(uv add *)",
-      "Bash(git commit --quiet -m 'feat: provider adapters over official SDKs, test-first \\(normalisation + pricing\\) *)"
+      "Bash(git commit --quiet -m 'feat: provider adapters over official SDKs, test-first \\(normalisation + pricing\\) *)",
+      "Bash(git commit --quiet -m 'feat: reporter \\(lay page + technical appendix\\), test-first; versioned anchors artifact *)"
     ]
   }
 }
