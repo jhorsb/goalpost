@@ -19,7 +19,8 @@
       "Bash(python3.12 --version)",
       "Bash(python3.13 --version)",
       "Bash(uv run *)",
-      "Bash(git commit --quiet -m 'feat: metrics core, test-first \\(23 tests: golden + property\\) *)"
+      "Bash(git commit --quiet -m 'feat: metrics core, test-first \\(23 tests: golden + property\\) *)",
+      "Bash(git commit --quiet -m 'feat: normaliser stages 1-2, test-first \\(honours text rules + taxonomy semantics\\) *)"
     ]
   }
 }
