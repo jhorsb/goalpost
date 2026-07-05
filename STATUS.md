@@ -9,12 +9,11 @@
 - Full text extracted (PyMuPDF, 44 pages, clean); tables 4–9 spot-checked against rendered pages — extraction faithful.
 - `METHODOLOGY_EXTRACTION.md` written: full page-referenced extraction, discrepancy register (D1–D9), translation-gaps list (G1–G11) with proposed defaults.
 - `DECISIONS.md` started (D-001…D-007).
-- Independent cross-extraction sub-agent dispatched (fresh context, fidelity-critical items only); reconciliation pending its return.
+- Independent cross-extraction complete (fresh-context sub-agent): **zero content conflicts**; six extra ambiguities adopted; reconciled in METHODOLOGY_EXTRACTION.md §11; evidence at `extraction/CROSS_EXTRACTION.md`. Gaps now G1–G12.
 
 ## Next
-- Reconcile cross-extraction against primary extraction (→ §11 of METHODOLOGY_EXTRACTION.md).
-- Present Phase 0 checkpoint to the author: extraction, reconciliation, gaps list, batched questions.
-- **HARD STOP** — no product code before sign-off.
+- **HARD STOP** — Phase 0 checkpoint presented; awaiting author sign-off. No product code before then.
+- On sign-off: Phase 1 design (invoke brainstorming skill; produce DESIGN.md).
 
 ## Open questions for the author (batched at checkpoint)
 1. Can you provide the honours-project Phase 2 code repo (cluster mappings, full prompt templates)? (G1/G3 — highest priority)

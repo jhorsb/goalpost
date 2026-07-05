@@ -24,5 +24,8 @@ PyMuPDF (available on system Python 3.9). LaTeX-produced PDF; extraction clean. 
 **D-006 · V1 headline metrics (proposed, pending checkpoint).**
 Fidelity and Arcade Score do not transfer to the tool's setting (no SHAP ground truth; Arcade demoted by the dissertation itself). Proposed V1 headlines: Recourse Stability Score, Reason Stability Score, Decision Stability, plus direction-flip rate. Gaps G7/G8.
 
+**D-008 · Cross-extraction reconciliation complete.**
+Fresh-context sub-agent independently extracted the fidelity-critical items; zero content conflicts with the primary extraction, same internal inconsistencies found independently. Six additional unspecified items adopted into the extraction doc (§11), one consequential enough to become gap G12 (Jaccard set identity). Cross-extraction committed as evidence at `extraction/CROSS_EXTRACTION.md`.
+
 **D-007 · Proxy echo / policy contradiction deferred to V2.**
 The dissertation's contradiction metric keyword-matches protected-attribute terms; the kickoff (§5, §9.5) rules protected-attribute machinery out of V1. V1 keeps only direction-flip contradiction. Gap G9.

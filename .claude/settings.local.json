@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'chore: add source dissertation \\(Horsburgh 2026, Explanation Drift\\) *)",
+      "Bash(python3 -c \"import fitz; print\\('pymupdf', fitz.__doc__\\)\")",
+      "Bash(python3 -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(python3 -)",
+      "Bash(python3 -c ' *)",
+      "Bash(git commit --quiet -m 'docs: phase 0 primary extraction, decision log, status *)",
+      "Bash(git commit --quiet -m 'docs: reconcile independent cross-extraction; gaps G1-G12 final *)"
+    ]
+  }
+}

@@ -233,7 +233,22 @@ Positioning relative to prior work (for METHODOLOGY.md framing): the dissertatio
 
 ## 11. Independent cross-extraction reconciliation
 
-*(To be completed when the fresh-context sub-agent's extraction returns — every discrepancy between the two readings will be listed and resolved here.)*
+A fresh-context sub-agent independently extracted the fidelity-critical items (metric definitions, normalisation procedure, elicitation design, all results tables, experimental parameters) from the PDF with no sight of this document. Its full output is committed at [`extraction/CROSS_EXTRACTION.md`](extraction/CROSS_EXTRACTION.md).
+
+**Result: zero content conflicts.** Both readings agree on every formula, every table value, every caption parameter, and independently identified the same dissertation-internal inconsistencies (cluster inventory 8+8 vs 5+0; EDI composite arithmetic; feature-count 23/24/15; subgroup-n prose vs Table 5; total-call arithmetic). Note: the cross-extraction cites physical PDF pages (= printed page + 1); this document cites printed pages.
+
+The cross-extraction surfaced **six ambiguities the primary extraction had not itemised**; all verified against the source and adopted:
+
+1. **Jaccard set identity (consequential — added as gap G12):** whether the compared reason sets contain feature IDs alone or (feature ID, direction) tuples is not specified anywhere.
+2. **Raw- and normalised-level Jaccard values are never reported** — only cluster-level numbers appear in the document, so there is no reference point for how much the clustering step lifts the scores.
+3. **Direction-flip rate (D_flip) denominator** not specified.
+4. **Appendix B template version unstated** — the printed template lacks all three v2 constraints (JSON format, closed vocabulary, direction labels); whether it is v1, or v2 with constraints living in `{format_instructions}`, is not stated. (Primary extraction had assumed "v2 skeleton"; the more cautious reading is adopted.)
+5. **Phase 1 train/test split proportions and seed** not specified (seed 42 is stated only for Drift Arcade). Minor — Phase 1 is out of tool scope.
+6. **Stage-count nit:** pipeline described as "six-stage" but seven stages are listed (§3.2.2).
+
+It also sharpened two points: (a) Stage 5's wording "computes Jaccard similarity *across conditions*" is ambiguous, but every reported result is within-condition across repeats — a between-condition Jaccard is never reported; (b) the sensitivity-table captions imply ~1,600 sensitivity calls against the stated "~300 further" — cell reuse across analyses is the only consistent reading (discrepancy D8, confirmed independently).
+
+Conclusion: the scientific core of this extraction is corroborated by two independent readings. Remaining uncertainty is confined to items the document genuinely does not specify (G1, G3, G5, G12), which is precisely what the author's Phase 2 code repo would resolve.
 
 ---
 
@@ -292,3 +307,6 @@ Each gap: the ambiguity or forced decision, then a **proposed default** the auth
 
 **G11 — Sampling parameters and seeds.** Dissertation used T=0.2 core with a T∈{0.0,0.2,0.7} sweep; seed 42 fixed for the engine (API-side sampling seeds are not mentioned and OpenAI seed support is best-effort at most).
 *Proposed default:* default audit config runs T=0.0 and T=0.7 per SUT (bounds the temperature story; T=0 is the "structural, not sampling noise" demonstration), configurable list. Engine seed fixed and recorded; provider seed parameter recorded when supported but never relied on for the stability claim.
+
+**G12 — Jaccard set identity: feature IDs alone, or (feature, direction) tuples?** The parser extracts direction per reason, and direction flips are scored separately (D_flip), which *suggests* the Jaccard sets are feature/cluster IDs without direction — but the document never says (found independently by the cross-extraction).
+*Proposed default:* Jaccard over cluster IDs without direction (keeps the metric aligned with the separate direction-flip rate and avoids double-counting flips); confirm against the author's code if provided.
