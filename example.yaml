@@ -1,0 +1,23 @@
+# Goalpost slice audit — one case, one model, both elicitation modes (D-012).
+# Works out of the box: `goalpost audit --config example.yaml --dry-run`
+audit_id: slice-live-001
+audit_seed: 42
+max_spend_usd: 0.50
+corpus_path: corpora/slice-v1/cases.yaml
+output_dir: audits
+# canonicaliser/extractor must differ from every SUT model (hard-validated)
+canonicaliser_model: claude-sonnet-4-5-20250929
+extractor_model: claude-sonnet-4-5-20250929
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: haiku-screener-structured
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: haiku-screener-freeform
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    elicitation_mode: freeform
+    prompt_template_path: prompts/example_screener.txt

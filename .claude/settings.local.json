@@ -35,7 +35,9 @@
       "Bash(uv add *)",
       "Bash(git commit --quiet -m 'feat: provider adapters over official SDKs, test-first \\(normalisation + pricing\\) *)",
       "Bash(git commit --quiet -m 'feat: reporter \\(lay page + technical appendix\\), test-first; versioned anchors artifact *)",
-      "Bash(git commit --quiet -m 'feat: CLI \\(audit --dry-run, report\\), test-first; cost plan before any network *)"
+      "Bash(git commit --quiet -m 'feat: CLI \\(audit --dry-run, report\\), test-first; cost plan before any network *)",
+      "Bash(.venv/bin/python -c \"import goalpost; print\\('ok'\\)\")",
+      "Bash(.venv/bin/python -c \"import goalpost; print\\('import ok:', goalpost.__file__\\)\")"
     ]
   }
 }

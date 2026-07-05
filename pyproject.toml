@@ -30,3 +30,4 @@ packages = ["src/goalpost"]
 testpaths = ["tests"]
 addopts = "-q"
 pythonpath = ["src"]
+

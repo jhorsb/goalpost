@@ -1,0 +1,61 @@
+# Goalpost slice corpus v1 — one hand-authored case for the Phase 2
+# vertical slice. Entirely fictional; persona deliberately non-referential
+# (kickoff §9.2). The full starter corpus (~20-30 cases) is Phase 3 and
+# will be LLM-drafted then frozen (DESIGN.md, D-011).
+
+cases:
+  - case_id: slice-001
+    cv_text: |
+      ROWAN MERRIDEW
+      rowan.merridew@example.invalid | Casterbridge, UK
+
+      PROFILE
+      Backend developer with four years of experience building internal
+      tooling for a mid-sized logistics firm. Comfortable owning small
+      services end to end; looking to move into a platform engineering role.
+
+      EXPERIENCE
+      Software Developer — Wessex Freight Systems Ltd, Casterbridge
+      2022 - present
+      - Built and maintain a Python (Flask) shipment-tracking API used by
+        three internal teams; ~40k requests/day.
+      - Migrated batch reporting jobs from cron scripts to a queued worker
+        system (Redis, Celery), cutting overnight processing from 6h to 90m.
+      - Wrote the team's integration-test harness (pytest); coverage on the
+        core service rose from ~20% to ~75%.
+
+      Junior Developer — same employer
+      2020 - 2022
+      - Bug fixes and small features on a legacy Django monolith.
+      - Introduced Git workflow to replace shared-drive versioning.
+
+      SKILLS
+      Python (strong), SQL/PostgreSQL, Redis, Celery, Git, Linux basics,
+      some Docker (containerised the test suite). No cloud platform
+      experience beyond a hobby VPS.
+
+      EDUCATION
+      BSc Computing, University of Casterbridge, 2020 (2:1)
+
+      OTHER
+      Two-year gap before university (family care). Occasional contributor
+      to a small open-source scheduling library.
+    job_spec_text: |
+      PLATFORM ENGINEER — Meridian Grocery Group (fictional posting)
+
+      We run our own Kubernetes clusters across two cloud providers (AWS
+      primary, GCP secondary) supporting ~200 microservices.
+
+      You will:
+      - Build and operate CI/CD pipelines and internal developer tooling.
+      - Manage infrastructure as code (Terraform) across environments.
+      - Join a light on-call rotation for platform incidents.
+
+      We need:
+      - 3+ years of software or infrastructure engineering experience.
+      - Production experience with Kubernetes and at least one major cloud
+        provider (AWS preferred).
+      - Strong scripting ability (Python or Go).
+      - Experience with observability tooling (Prometheus, Grafana or
+        similar) is a plus.
+      - AWS or CKA certification is a plus.
