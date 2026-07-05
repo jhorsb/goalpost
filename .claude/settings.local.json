@@ -10,7 +10,8 @@
       "Bash(python3 -c ' *)",
       "Bash(git commit --quiet -m 'docs: phase 0 primary extraction, decision log, status *)",
       "Bash(git commit --quiet -m 'docs: reconcile independent cross-extraction; gaps G1-G12 final *)",
-      "Bash(git commit --quiet -m 'docs: resolve G1/G3/G5/G12 from author'\\\\''s honours code; close phase 0 *)"
+      "Bash(git commit --quiet -m 'docs: resolve G1/G3/G5/G12 from author'\\\\''s honours code; close phase 0 *)",
+      "Bash(git commit --quiet -m 'docs: DESIGN.md — phase 1 design, validated section-by-section *)"
     ]
   }
 }

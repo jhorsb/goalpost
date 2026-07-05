@@ -24,6 +24,9 @@ PyMuPDF (available on system Python 3.9). LaTeX-produced PDF; extraction clean. 
 **D-006 · V1 headline metrics (proposed, pending checkpoint).**
 Fidelity and Arcade Score do not transfer to the tool's setting (no SHAP ground truth; Arcade demoted by the dissertation itself). Proposed V1 headlines: Recourse Stability Score, Reason Stability Score, Decision Stability, plus direction-flip rate. Gaps G7/G8.
 
+**D-011 · Phase 1 design validated section-by-section (brainstorming process).**
+Author decisions: elicitation = **both modes in V1** (structured contract default + freeform with pinned extractor); normaliser = **layered** (keywords → pinned-LLM fallback, logged/cached/promotable); corpus = **LLM-drafted then frozen** with content hashes. 24 author amendments folded in — highlights: asymmetric extractor gate (high stability reportable as lower bound at self-agreement ≥ 0.90; instability claims and the reason–recourse gap need +0.15 margin; agreement per item type); SUT identity split from Condition; elicitation mode in SUT identity; cache key includes repetition_index (repeats never cache hits); budget stops at block boundaries with breadth-balanced interleaving; taxonomy frozen per audit, promotion between audits, mixed-version comparisons hard-error; NOVEL singletons + published NOVEL rates; ranking eligibility floors + tie-bands; data-derived lay headline with committed anchors artifact; runner core added to never-delegate list; Phase 2 builds thin main-thread versions of delegable components. Full detail in DESIGN.md.
+
 **D-010 · Phase 0 sign-off received; defaults accepted; code repo provided.**
 Author approved all G1–G12 defaults ("defaults fine") and provided the honours-project code at `~/Projects/Honours_Notebooks/`. Phase 0 checkpoint closed.
 
