@@ -35,10 +35,12 @@ def _plan(config: AuditConfig, cases: list[Case]) -> dict:
             sut.model,
             input_tokens=EST_INPUT_TOKENS,
             output_tokens=EST_OUTPUT_TOKENS,
+            overrides=config.pricing,
         ) + extractor_calls * compute_cost(
-            config.extractor_model,
+            config.extractor.model,
             input_tokens=EST_INPUT_TOKENS,
             output_tokens=EST_OUTPUT_TOKENS,
+            overrides=config.pricing,
         )
         plan["suts"].append(
             {
@@ -113,15 +115,10 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     needs_extractor = any(
         s.elicitation_mode == "freeform" for s in audit_config.suts
     )
-    canonicaliser = make_client(
-        _provider_for(audit_config.canonicaliser_model),
-        audit_config.canonicaliser_model,
-    )
+    pricing = audit_config.pricing
+    canonicaliser = make_client(audit_config.canonicaliser, pricing=pricing)
     extractor = (
-        make_client(
-            _provider_for(audit_config.extractor_model),
-            audit_config.extractor_model,
-        )
+        make_client(audit_config.extractor, pricing=pricing)
         if needs_extractor
         else None
     )
@@ -129,7 +126,7 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     result = run_audit(
         config=audit_config,
         cases=cases,
-        client_factory=lambda sut: make_client(sut.provider, sut.model),
+        client_factory=lambda sut: make_client(sut, pricing=pricing),
         canonicaliser_client=canonicaliser,
         extractor_client=extractor,
         taxonomy_path=Path("taxonomies/cv-screening-v1.yaml"),
@@ -152,8 +149,6 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     typer.echo(f"Report: {report_dir / 'report.md'}")
 
 
-def _provider_for(model: str) -> str:
-    return "anthropic" if model.startswith("claude") else "openai"
 
 
 @app.command()

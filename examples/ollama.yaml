@@ -1,0 +1,35 @@
+# Goalpost against a LOCAL model: zero API keys, zero cost.
+#   brew install ollama && ollama serve
+#   ollama pull llama3.1:8b && ollama pull qwen2.5:7b
+# (canonicaliser/extractor must be a different model from every SUT)
+audit_id: slice-live-local
+audit_seed: 42
+max_spend_usd: 0.50
+corpus_path: corpora/slice-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai_compatible
+  model: qwen2.5:7b
+  base_url: http://localhost:11434/v1
+extractor:
+  provider: openai_compatible
+  model: qwen2.5:7b
+  base_url: http://localhost:11434/v1
+pricing:
+  llama3.1:8b: {input: 0.0, output: 0.0}
+  qwen2.5:7b: {input: 0.0, output: 0.0}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: local-llama-structured
+    provider: openai_compatible
+    model: llama3.1:8b
+    base_url: http://localhost:11434/v1
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: local-llama-freeform
+    provider: openai_compatible
+    model: llama3.1:8b
+    base_url: http://localhost:11434/v1
+    elicitation_mode: freeform
+    prompt_template_path: prompts/example_screener.txt

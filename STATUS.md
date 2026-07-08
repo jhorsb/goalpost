@@ -19,8 +19,8 @@
 - `example.yaml` dry-run verified: 30 calls, est. $0.245, cap $0.50.
 
 ## Next
-- **BLOCKED on author:** provide `ANTHROPIC_API_KEY` (put it in `.env` — see `.env.example`).
-- Then: `goalpost audit --config example.yaml` (live, both modes, cost printed), commit transcripts as fixtures + offline replay test, demo.
+- **BLOCKED on author (one of, any lab):** an `ANTHROPIC_API_KEY`, an `OPENAI_API_KEY`, an `OPENROUTER_API_KEY` (or any OpenAI-compatible endpoint key), **or** a local Ollama install — see `example.yaml`, `examples/openrouter.yaml`, `examples/ollama.yaml` (D-014).
+- Then: `./goalpost.sh audit --config <whichever>.yaml` (live, both modes, cost printed), commit transcripts as fixtures + offline replay test, demo.
 
 ## Environment note
 Python pinned 3.12 (D-013). Editable-install `.pth` files under ~/Documents get macOS UF_HIDDEN flags applied asynchronously (iCloud); breaks imports on Python 3.14, transiently flaky elsewhere. If `goalpost` import fails: `uv sync --reinstall-package goalpost`.

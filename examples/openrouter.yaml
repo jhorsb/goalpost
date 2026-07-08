@@ -1,0 +1,39 @@
+# Goalpost via OpenRouter: ONE key (OPENROUTER_API_KEY), any lab's models.
+# The natural route for multi-vendor comparison audits ("I tested N systems").
+# Model IDs and pricing: https://openrouter.ai/models — set pricing overrides
+# so budget enforcement uses real rates instead of the conservative default.
+audit_id: slice-live-openrouter
+audit_seed: 42
+max_spend_usd: 0.50
+corpus_path: corpora/slice-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai_compatible
+  model: mistralai/mistral-small-3.1-24b-instruct
+  base_url: https://openrouter.ai/api/v1
+  api_key_env: OPENROUTER_API_KEY
+extractor:
+  provider: openai_compatible
+  model: mistralai/mistral-small-3.1-24b-instruct
+  base_url: https://openrouter.ai/api/v1
+  api_key_env: OPENROUTER_API_KEY
+pricing:  # $/1M tokens — check current rates on the OpenRouter model page
+  meta-llama/llama-3.3-70b-instruct: {input: 0.10, output: 0.30}
+  mistralai/mistral-small-3.1-24b-instruct: {input: 0.10, output: 0.30}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: llama70b-screener-structured
+    provider: openai_compatible
+    model: meta-llama/llama-3.3-70b-instruct
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: llama70b-screener-freeform
+    provider: openai_compatible
+    model: meta-llama/llama-3.3-70b-instruct
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    elicitation_mode: freeform
+    prompt_template_path: prompts/example_screener.txt
