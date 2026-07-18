@@ -137,6 +137,12 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     report_dir.mkdir(parents=True, exist_ok=True)
     (report_dir / "report.md").write_text(render_report(result.metrics))
     (report_dir / "report.html").write_text(render_report_html(result.metrics))
+    if len(result.metrics.get("suts", [])) > 1:
+        from goalpost.reporter import render_comparison
+
+        (report_dir / "comparison.md").write_text(
+            render_comparison(result.metrics)
+        )
 
     typer.echo(f"Audit complete: {result.audit_dir}")
     typer.echo(f"Actual cost: ${result.metrics['total_cost_usd']:.4f}")
@@ -165,6 +171,10 @@ def report(audit_dir: Path = typer.Argument(...)):
     report_dir.mkdir(parents=True, exist_ok=True)
     (report_dir / "report.md").write_text(render_report(metrics))
     (report_dir / "report.html").write_text(render_report_html(metrics))
+    if len(metrics.get("suts", [])) > 1:
+        from goalpost.reporter import render_comparison
+
+        (report_dir / "comparison.md").write_text(render_comparison(metrics))
     typer.echo(f"Report: {report_dir / 'report.md'}")
 
 

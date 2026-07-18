@@ -79,3 +79,49 @@ def test_shared_canonicaliser_and_sut_model_rejected(tmp_path, monkeypatch):
     result = runner.invoke(app, ["audit", "--config", str(config), "--dry-run"])
     assert result.exit_code != 0
     assert "canonicaliser" in result.output.lower()
+
+
+def test_report_command_writes_comparison_for_multi_sut(tmp_path):
+    import json
+
+    metrics = {
+        "audit_id": "cmp-cli",
+        "suts": [
+            {
+                "name": name, "sut_id": name * 8, "elicitation_mode": "structured",
+                "extracted": False,
+                "conditions": [{
+                    "condition_id": "t0.0_n5", "temperature": 0.0, "repeats": 5,
+                    "cases": [],
+                    "aggregates": {
+                        "recourse_cluster": {"mean": mean, "median": mean,
+                                             "iqr": (mean - 0.1, mean + 0.1),
+                                             "n_included": 5, "excluded": []},
+                        "reason_cluster": {"mean": 0.9, "median": 0.9,
+                                           "iqr": (0.85, 0.95),
+                                           "n_included": 5, "excluded": []},
+                        "min_pairs_floor": 3,
+                    },
+                }],
+            }
+            for name, mean in (("alpha", 0.7), ("bravo", 0.3))
+        ],
+        "total_cost_usd": 0.5,
+        "missing_blocks": [],
+        "provenance": {
+            "corpus_hash": "h", "runner_version": "0.1.0",
+            "parser_version": "0.1.0", "normaliser_version": "0.1.0",
+            "taxonomy_version": "1.0.0+abc", "metrics_version": "0.1.0",
+            "audit_version": "0.1.0",
+        },
+    }
+    audit_dir = tmp_path / "aud"
+    (audit_dir / "metrics" / "0.1.0").mkdir(parents=True)
+    (audit_dir / "metrics" / "0.1.0" / "metrics.json").write_text(
+        json.dumps(metrics)
+    )
+    result = runner.invoke(app, ["report", str(audit_dir)])
+    assert result.exit_code == 0
+    comparison = audit_dir / "report" / "comparison.md"
+    assert comparison.exists()
+    assert "alpha" in comparison.read_text()
