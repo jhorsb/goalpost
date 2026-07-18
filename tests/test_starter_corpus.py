@@ -57,12 +57,16 @@ def test_no_real_company_markers(cases):
         "google analytics", "google sheets", "ms office",
         "oxfordshire", "cambridgeshire",
     ]
+    import re
+
     for c in cases:
         low = (c["cv_text"] + c["job_spec_text"]).lower()
         for context in allowed_contexts:
             low = low.replace(context, "")
         for term in banned:
-            assert term not in low, f"{c['case_id']}: {term}"
+            # word-boundary match: invented towns like "Foxford" must not
+            # trip the "oxford" screen
+            assert not re.search(rf"\b{term}\b", low), f"{c['case_id']}: {term}"
 
 
 def test_strength_bands_spread(cases):
