@@ -268,3 +268,110 @@ def render_report_html(metrics: dict) -> str:
         "padding:0 1rem;line-height:1.5}pre{white-space:pre-wrap}</style>"
         "</head><body><pre>" + body + "</pre></body></html>"
     )
+
+
+def _comparison_row(sut: dict) -> dict | None:
+    """Pool condition-level recourse aggregates for one SUT (slice scope:
+    first condition; multi-condition pooling arrives with the batch work)."""
+    conditions = sut.get("conditions") or []
+    if not conditions:
+        return None
+    agg = conditions[0].get("aggregates", {}).get("recourse_cluster", {})
+    if agg.get("mean") is None:
+        return None
+    return {
+        "name": sut["name"],
+        "mode": sut["elicitation_mode"],
+        "mean": agg["mean"],
+        "iqr": tuple(agg["iqr"]) if agg.get("iqr") else None,
+        "n_included": agg.get("n_included", 0),
+    }
+
+
+def _eligibility(sut: dict, row: dict | None) -> str | None:
+    """Return None if rankable, else the human-readable reason
+    (author amendment S5-1: floors, unranked-with-reasons)."""
+    if row is None:
+        return "no aggregable cases (all excluded or none scored)"
+    if row["n_included"] < 1:
+        return "no cases cleared the n_pairs floor"
+    if sut.get("extracted"):
+        sa = sut.get("extractor_self_agreement", {})
+        if not _reportable(row["mean"], sa.get("recourse", {}).get("mean_jaccard")):
+            return (
+                "extractor self-agreement below the pre-registered gate "
+                f"(recourse {sa.get('recourse', {}).get('mean_jaccard', 0):.2f} "
+                f"< {GATE_AGREEMENT:.2f})"
+            )
+    return None
+
+
+def render_comparison(metrics: dict) -> str:
+    """Multi-SUT comparison: ranked table with tie-bands on overlapping
+    IQRs; ineligible SUTs listed unranked with reasons; cross-mode banner."""
+    rows, unranked = [], []
+    for sut in metrics["suts"]:
+        row = _comparison_row(sut)
+        reason = _eligibility(sut, row)
+        if reason is None:
+            rows.append(row)
+        else:
+            unranked.append({"name": sut["name"], "mode": sut["elicitation_mode"],
+                             "reason": reason})
+
+    rows.sort(key=lambda r: r["mean"], reverse=True)
+
+    # Tie-bands: a row joins the current band if its IQR overlaps the
+    # band leader's IQR; otherwise it starts a new band (S5-1: overlapping
+    # IQRs must not be oversold as a strict order).
+    band = 0
+    leader_iqr = None
+    for row in rows:
+        iqr = row["iqr"] or (row["mean"], row["mean"])
+        if leader_iqr is None or iqr[1] < leader_iqr[0]:
+            band += 1
+            leader_iqr = iqr
+        row["band"] = band
+
+    lines = [f"# Goalpost comparison — {metrics['audit_id']}", ""]
+    modes = {s["elicitation_mode"] for s in metrics["suts"]}
+    if len(modes) > 1:
+        lines.append(
+            "> **Cross-mode comparison.** These systems were measured under "
+            "different elicitation modes (structured vs freeform); their "
+            "numbers are not strictly like-for-like. Rows are labelled."
+        )
+        lines.append("")
+
+    lines.append("Ranked by recourse stability (cluster level). Rows sharing "
+                 "a tie-band have overlapping spreads: treat them as "
+                 "statistically indistinguishable, not ordered.")
+    lines.append("")
+    lines.append("| band | SUT | mode | recourse stability | IQR | cases |")
+    lines.append("|---|---|---|---|---|---|")
+    for row in rows:
+        iqr_text = (
+            f"[{row['iqr'][0]:.2f}, {row['iqr'][1]:.2f}]" if row["iqr"] else "—"
+        )
+        lines.append(
+            f"| {row['band']} | {row['name']} | {row['mode']} "
+            f"| {row['mean']:.2f} | {iqr_text} | {row['n_included']} |"
+        )
+    lines.append("")
+
+    if unranked:
+        lines.append("## Unranked")
+        lines.append("")
+        lines.append("These systems did not clear the eligibility floors and "
+                     "are listed without a rank:")
+        lines.append("")
+        for entry in unranked:
+            lines.append(f"- **{entry['name']}** ({entry['mode']}): {entry['reason']}")
+        lines.append("")
+
+    prov = metrics["provenance"]
+    lines.append(
+        f"*goalpost {prov['audit_version']} · {ANCHORS['version']} · "
+        f"taxonomy {prov['taxonomy_version']} · report {REPORT_VERSION}*"
+    )
+    return "\n".join(lines)

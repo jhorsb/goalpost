@@ -157,3 +157,96 @@ def test_structured_mode_never_gated():
     md = render_report(metrics_fixture(recourse=0.36, extracted=False))
     assert "withheld" not in md.lower()
     assert "recourse stability 0.36" in md
+
+
+# ── multi-SUT comparison report (DESIGN.md §5) ───────────────────────
+
+from goalpost.reporter import render_comparison
+
+
+def comparison_fixture():
+    def sut(name, mode, recourse_mean, iqr, agreement=0.95):
+        s = {
+            "name": name,
+            "sut_id": name + "0000000000",
+            "elicitation_mode": mode,
+            "extracted": mode == "freeform",
+            "conditions": [{
+                "condition_id": "t0.0_n5",
+                "temperature": 0.0,
+                "repeats": 5,
+                "cases": [],
+                "aggregates": {
+                    "recourse_cluster": {
+                        "mean": recourse_mean, "median": recourse_mean,
+                        "iqr": iqr, "n_included": 5, "excluded": [],
+                    },
+                    "reason_cluster": {
+                        "mean": 0.9, "median": 0.9, "iqr": (0.85, 0.95),
+                        "n_included": 5, "excluded": [],
+                    },
+                    "min_pairs_floor": 3,
+                },
+            }],
+        }
+        if mode == "freeform":
+            s["extractor_self_agreement"] = {
+                "k": 3,
+                "reasons": {"mean_jaccard": agreement},
+                "recourse": {"mean_jaccard": agreement},
+            }
+        return s
+
+    return {
+        "audit_id": "cmp",
+        "suts": [
+            sut("alpha", "structured", 0.70, (0.60, 0.80)),
+            sut("bravo", "structured", 0.65, (0.55, 0.75)),  # IQR overlaps alpha
+            sut("charlie", "structured", 0.30, (0.25, 0.35)),  # disjoint
+            sut("delta", "freeform", 0.40, (0.30, 0.50), agreement=0.60),  # gated
+        ],
+        "total_cost_usd": 1.0,
+        "missing_blocks": [],
+        "provenance": {
+            "corpus_hash": "h", "runner_version": "0.1.0",
+            "parser_version": "0.1.0", "normaliser_version": "0.1.0",
+            "taxonomy_version": "1.0.0+abc", "metrics_version": "0.1.0",
+            "audit_version": "0.1.0",
+        },
+    }
+
+
+def test_comparison_ranks_eligible_by_recourse_mean():
+    md = render_comparison(comparison_fixture())
+    assert md.index("alpha") < md.index("bravo") < md.index("charlie")
+
+
+def test_comparison_overlapping_iqrs_share_tie_band():
+    md = render_comparison(comparison_fixture())
+    # alpha and bravo overlap -> band 1; charlie disjoint -> band 2
+    lines = [l for l in md.splitlines() if "|" in l]
+    alpha_band = next(l.split("|")[1].strip() for l in lines if "alpha" in l)
+    bravo_band = next(l.split("|")[1].strip() for l in lines if "bravo" in l)
+    charlie_band = next(l.split("|")[1].strip() for l in lines if "charlie" in l)
+    assert alpha_band == bravo_band
+    assert charlie_band != alpha_band
+
+
+def test_comparison_gated_sut_listed_unranked_with_reason():
+    md = render_comparison(comparison_fixture())
+    assert "unranked" in md.lower()
+    assert "delta" in md
+    lines = [l for l in md.splitlines() if "delta" in l]
+    assert any("gate" in l.lower() for l in lines)
+
+
+def test_comparison_cross_mode_banner():
+    md = render_comparison(comparison_fixture())
+    assert "different elicitation mode" in md.lower() or "cross-mode" in md.lower()
+
+
+def test_comparison_single_mode_no_banner():
+    fixture = comparison_fixture()
+    fixture["suts"] = [s for s in fixture["suts"] if s["elicitation_mode"] == "structured"]
+    md = render_comparison(fixture)
+    assert "cross-mode" not in md.lower()
