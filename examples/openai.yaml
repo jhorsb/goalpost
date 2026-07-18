@@ -1,0 +1,30 @@
+# Goalpost slice audit on OpenAI credit: one case, both elicitation modes.
+# SUT = gpt-4o-mini (pinned snapshot — honours-continuity: the dissertation's
+# stabler model); extractor/canonicaliser = gpt-4.1-mini (different model,
+# as hard-required).
+audit_id: slice-live-openai
+audit_seed: 42
+max_spend_usd: 0.50
+corpus_path: corpora/slice-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-mini-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-mini-2025-04-14
+pricing:  # $/1M tokens
+  gpt-4.1-mini-2025-04-14: {input: 0.40, output: 1.60}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: gpt4omini-screener-structured
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: gpt4omini-screener-freeform
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: freeform
+    prompt_template_path: prompts/example_screener.txt
