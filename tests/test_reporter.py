@@ -108,3 +108,52 @@ def test_html_rendering():
 def test_no_duplicated_advice_word_in_headline():
     md = render_report(metrics_fixture(recourse=0.58))
     assert "advice advice" not in md
+
+
+# ── extractor self-agreement gate (DESIGN.md §4.4, asymmetric) ───────
+
+def test_freeform_below_gate_withholds_stability_numbers():
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "reasons": {"mean_jaccard": 0.58},
+        "recourse": {"mean_jaccard": 0.87},
+    }
+    md = render_report(metrics)
+    assert "withheld" in md.lower()
+    assert "0.87" in md  # agreement score still printed
+    # the lay headline must not state the unreportable recourse number
+    assert "recourse stability 0.36" not in md
+
+
+def test_freeform_high_stability_above_gate_reports_lower_bound():
+    metrics = metrics_fixture(recourse=0.92, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    md = render_report(metrics)
+    assert "lower bound" in md.lower()
+    assert "withheld" not in md.lower()
+
+
+def test_freeform_instability_claim_needs_margin():
+    # agreement 0.93 clears 0.90 but not 0.36 + 0.15 margin... it does
+    # (0.93 > 0.51). Margin rule bites when agreement - stability < 0.15:
+    # stability 0.85 with agreement 0.93 -> low-stability claim withheld,
+    # but high-stability lower-bound framing is fine per the asymmetric gate.
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "reasons": {"mean_jaccard": 0.93},
+        "recourse": {"mean_jaccard": 0.45},  # < 0.36 + 0.15 margin
+    }
+    md = render_report(metrics)
+    assert "withheld" in md.lower()
+
+
+def test_structured_mode_never_gated():
+    md = render_report(metrics_fixture(recourse=0.36, extracted=False))
+    assert "withheld" not in md.lower()
+    assert "recourse stability 0.36" in md

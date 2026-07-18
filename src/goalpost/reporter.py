@@ -80,6 +80,25 @@ def _sut_headline_numbers(sut: dict) -> dict:
     return {k: mean(v) for k, v in values.items()}
 
 
+# Pre-registered gate constants (D-012; unrevised per D-016).
+GATE_AGREEMENT = 0.90
+GATE_MARGIN = 0.15
+HIGH_STABILITY_BAND = 0.85
+
+
+def _reportable(stability: float | None, agreement: float | None) -> bool:
+    """Asymmetric gate (DESIGN.md §4.4): extractor noise only attenuates,
+    so high stability survives as a lower bound at agreement ≥ 0.90;
+    instability claims additionally need agreement ≥ stability + margin."""
+    if stability is None or agreement is None:
+        return False
+    if agreement < GATE_AGREEMENT:
+        return False
+    if stability >= HIGH_STABILITY_BAND:
+        return True
+    return agreement - stability >= GATE_MARGIN
+
+
 def render_report(metrics: dict) -> str:
     lines: list[str] = []
     audit_id = metrics["audit_id"]
@@ -89,6 +108,13 @@ def render_report(metrics: dict) -> str:
         heads = _sut_headline_numbers(sut)
         recourse = heads["recourse"] if heads["recourse"] is not None else 0.0
         extracted = sut.get("extracted", False)
+        sa = sut.get("extractor_self_agreement", {})
+        recourse_ok = (not extracted) or _reportable(
+            heads["recourse"], sa.get("recourse", {}).get("mean_jaccard")
+        )
+        reasons_ok = (not extracted) or _reportable(
+            heads["reasons"], sa.get("reasons", {}).get("mean_jaccard")
+        )
 
         lines.append(f"# Goalpost audit — {sut['name']}")
         lines.append("")
@@ -102,26 +128,42 @@ def render_report(metrics: dict) -> str:
 
         lines.append("## The headline")
         lines.append("")
-        lower_bound_note = ""
-        if extracted:
-            lower_bound_note = (
-                " Because this system was measured through an extractor, "
-                "treat this as a **lower bound** on its instability being "
-                "worse — the true stability is at least this good."
+        if not recourse_ok:
+            sa_recourse = sa.get("recourse", {}).get("mean_jaccard")
+            sa_reasons = sa.get("reasons", {}).get("mean_jaccard")
+            lines.append(
+                "**Stability numbers for this system are withheld.** It was "
+                "measured through an extraction model whose measured "
+                "self-agreement (reasons "
+                f"{sa_reasons if sa_reasons is not None else 0:.2f}, recourse "
+                f"{sa_recourse if sa_recourse is not None else 0:.2f}, "
+                f"k={sa.get('k')}) does not meet the pre-registered "
+                f"reportability gate (≥ {GATE_AGREEMENT:.2f}, with a "
+                f"{GATE_MARGIN:.2f} margin for instability claims). A less "
+                "consistent extractor can fabricate instability, so no "
+                "stability claim is made. Re-run with a stronger extractor."
             )
-        lines.append(
-            f"**If you {headline_statistic(recourse)}.** "
-            f"In our measurement, its improvement {anchor_label(recourse)} "
-            f"(recourse stability {recourse:.2f} on a 0–1 scale)."
-            + lower_bound_note
-        )
+        else:
+            lower_bound_note = ""
+            if extracted:
+                lower_bound_note = (
+                    " Because this system was measured through an extractor, "
+                    "treat this as a **lower bound** on its instability being "
+                    "worse — the true stability is at least this good."
+                )
+            lines.append(
+                f"**If you {headline_statistic(recourse)}.** "
+                f"In our measurement, its improvement {anchor_label(recourse)} "
+                f"(recourse stability {recourse:.2f} on a 0–1 scale)."
+                + lower_bound_note
+            )
         lines.append("")
         if heads["decision"] is not None:
             lines.append(
                 f"The *decision itself* agreed with its most common answer "
                 f"{heads['decision']:.0%} of the time across repeat runs."
             )
-        if heads["reasons"] is not None:
+        if recourse_ok and reasons_ok and heads["reasons"] is not None:
             lines.append(
                 f"The *reasons given* were substantially steadier than the "
                 f"advice (reason stability {heads['reasons']:.2f} vs recourse "
