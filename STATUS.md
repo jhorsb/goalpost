@@ -1,7 +1,7 @@
 # STATUS.md
 
 **Project:** Goalpost — CLI audit instrument for decision/reason/recourse stability in LLM-mediated screening.
-**Current phase:** Phase 2 — vertical slice COMPLETE (live run done); demo delivered; awaiting Phase 3 go-ahead.
+**Current phase:** Phase 3 — full build (orchestrator mode).
 **Last updated:** 2026-07-06
 
 ## Done

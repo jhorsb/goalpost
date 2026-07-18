@@ -1,0 +1,46 @@
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "scripting_languages", "normalised": "scripting_languages", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "aws_certification", "normalised": "aws_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "kubernetes_training", "normalised": "kubernetes_training", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "terraform_learning", "normalised": "terraform_learning", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "scripting_ability", "normalised": "scripting_ability", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "kubernetes_training", "normalised": "kubernetes_training", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "terraform_learning", "normalised": "terraform_learning", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_tools", "normalised": "ci_cd_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "aws_certification", "normalised": "aws_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "scripting_ability", "normalised": "scripting_ability", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "aws_certification", "normalised": "aws_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "kubernetes_training", "normalised": "kubernetes_training", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "learn_terraform", "normalised": "learn_terraform", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "scripting_ability", "normalised": "scripting_ability", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "aws_certification", "normalised": "aws_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "kubernetes_training", "normalised": "kubernetes_training", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "terraform_experience", "normalised": "terraform_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "scripting_ability", "normalised": "scripting_ability", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "study_infrastructure_as_code", "normalised": "study_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE", "EDUCATION"]}
+{"raw": "build_ci_cd_pipelines", "normalised": "build_ci_cd_pipelines", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "learn_go", "normalised": "learn_go", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}

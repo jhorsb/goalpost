@@ -1,0 +1,28 @@
+# Slice calibration rerun (D-015.4 / D-012): stronger extractor.
+# Change from slice-live-openai: extractor+canonicaliser gpt-4.1-mini -> gpt-4.1.
+audit_id: slice-live-002-gpt41-extractor
+audit_seed: 42
+max_spend_usd: 0.50
+corpus_path: corpora/slice-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:  # $/1M tokens
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: gpt4omini-screener-structured
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: gpt4omini-screener-freeform
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: freeform
+    prompt_template_path: prompts/example_screener.txt

@@ -1,0 +1,70 @@
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "platform_engineering_focus", "normalised": "platform_engineering_focus", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_pipelines", "normalised": "ci_cd_pipelines", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "scripting_ability_python", "normalised": "scripting_ability_python", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "scripting_ability_go", "normalised": "scripting_ability_go", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "observability_tooling", "normalised": "observability_tooling", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "familiarize_with_infrastructure_as_code", "normalised": "familiarize_with_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE"]}
+{"raw": "develop_ci_cd_skills", "normalised": "develop_ci_cd_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "explore_observability_tools", "normalised": "explore_observability_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "platform_engineering_focus", "normalised": "platform_engineering_focus", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_pipelines", "normalised": "ci_cd_pipelines", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "scripting_ability", "normalised": "scripting_ability", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "go_experience", "normalised": "go_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "observability_tooling", "normalised": "observability_tooling", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "familiarize_with_infrastructure_as_code", "normalised": "familiarize_with_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE"]}
+{"raw": "develop_ci_cd_skills", "normalised": "develop_ci_cd_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "explore_observability_tools", "normalised": "explore_observability_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "platform_engineering_focus", "normalised": "platform_engineering_focus", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_pipelines", "normalised": "ci_cd_pipelines", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "scripting_ability_python", "normalised": "scripting_ability_python", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "scripting_ability_go", "normalised": "scripting_ability_go", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "observability_tooling", "normalised": "observability_tooling", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "familiarize_with_infrastructure_as_code", "normalised": "familiarize_with_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE"]}
+{"raw": "develop_ci_cd_skills", "normalised": "develop_ci_cd_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "explore_observability_tools", "normalised": "explore_observability_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "platform_engineering_focus", "normalised": "platform_engineering_focus", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_pipelines", "normalised": "ci_cd_pipelines", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "python_skills", "normalised": "python_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "go_experience", "normalised": "go_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "observability_tooling", "normalised": "observability_tooling", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "familiarize_with_infrastructure_as_code", "normalised": "familiarize_with_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE"]}
+{"raw": "develop_ci_cd_skills", "normalised": "develop_ci_cd_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "explore_observability_tools", "normalised": "explore_observability_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "platform_engineering_focus", "normalised": "platform_engineering_focus", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "infrastructure_as_code", "normalised": "infrastructure_as_code", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "ci_cd_pipelines", "normalised": "ci_cd_pipelines", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "scripting_ability_python", "normalised": "scripting_ability_python", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "scripting_ability_go", "normalised": "scripting_ability_go", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "observability_tooling", "normalised": "observability_tooling", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_cloud_experience", "normalised": "gain_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "learn_kubernetes", "normalised": "learn_kubernetes", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EDUCATION"]}
+{"raw": "familiarize_with_infrastructure_as_code", "normalised": "familiarize_with_infrastructure_as_code", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "PROGRAMMING_PRACTICE"]}
+{"raw": "develop_ci_cd_skills", "normalised": "develop_ci_cd_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "explore_observability_tools", "normalised": "explore_observability_tools", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}

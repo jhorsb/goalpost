@@ -1,0 +1,161 @@
+{
+  "audit_id": "slice-live-002-gpt41-extractor",
+  "suts": [
+    {
+      "name": "gpt4omini-screener-structured",
+      "sut_id": "a634bbe86dc4c9a1",
+      "elicitation_mode": "structured",
+      "extracted": false,
+      "conditions": [
+        {
+          "condition_id": "t0.0_n5",
+          "temperature": 0.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "slice-001",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.8666666666666666,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.8666666666666666,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.30666666666666664,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.30666666666666664,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5383333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gpt4omini-screener-freeform",
+      "sut_id": "8032528d3a0f7321",
+      "elicitation_mode": "freeform",
+      "extracted": true,
+      "conditions": [
+        {
+          "condition_id": "t0.0_n5",
+          "temperature": 0.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "slice-001",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.7618181818181818,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.7618181818181818,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 1.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "extractor_self_agreement": {
+        "k": 3,
+        "reasons": {
+          "mean_jaccard": 1.0
+        },
+        "recourse": {
+          "mean_jaccard": 0.9555555555555555
+        }
+      }
+    }
+  ],
+  "total_cost_usd": 0.0320652,
+  "missing_blocks": [],
+  "provenance": {
+    "corpus_hash": "372ea810e47047d0f9124d03490fd14dae302b7e2e56f58fb819177b67553856",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.1.0",
+    "audit_version": "0.1.0"
+  }
+}
