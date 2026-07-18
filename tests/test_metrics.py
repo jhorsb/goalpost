@@ -176,3 +176,47 @@ def test_pairwise_mean_permutation_invariant(sets):
     forward = pairwise_jaccard_stats(sets).mean_jaccard
     backward = pairwise_jaccard_stats(list(reversed(sets))).mean_jaccard
     assert forward == pytest.approx(backward)
+
+
+# ── cross-case aggregation (DESIGN.md §4: IQR + eligibility floors) ──
+
+from goalpost.metrics import aggregate_cases
+
+
+def test_aggregate_reports_mean_median_iqr():
+    agg = aggregate_cases(
+        [{"value": 0.2, "n_pairs": 10}, {"value": 0.4, "n_pairs": 10},
+         {"value": 0.6, "n_pairs": 10}, {"value": 0.8, "n_pairs": 10}],
+        min_pairs=3,
+    )
+    assert agg.mean == pytest.approx(0.5)
+    assert agg.median == pytest.approx(0.5)
+    assert agg.iqr == (pytest.approx(0.35), pytest.approx(0.65))
+    assert agg.n_included == 4
+    assert agg.excluded == []
+
+
+def test_aggregate_excludes_below_pair_floor_and_lists_them():
+    agg = aggregate_cases(
+        [{"value": 1.0, "n_pairs": 10, "case_id": "a"},
+         {"value": 0.0, "n_pairs": 1, "case_id": "b"}],
+        min_pairs=3,
+    )
+    assert agg.n_included == 1
+    assert agg.mean == 1.0
+    assert agg.excluded == [{"case_id": "b", "reason": "n_pairs 1 < 3"}]
+
+
+def test_aggregate_none_values_excluded_with_reason():
+    agg = aggregate_cases(
+        [{"value": None, "n_pairs": 0, "case_id": "a"},
+         {"value": 0.5, "n_pairs": 5, "case_id": "b"}],
+        min_pairs=3,
+    )
+    assert agg.n_included == 1
+    assert any("no scorable pairs" in e["reason"] for e in agg.excluded)
+
+
+def test_aggregate_empty_input():
+    agg = aggregate_cases([], min_pairs=3)
+    assert agg.mean is None and agg.median is None and agg.n_included == 0

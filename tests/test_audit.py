@@ -193,3 +193,12 @@ def test_freeform_mode_extracts_and_reports_self_agreement(tmp_path):
     assert sa["recourse"]["mean_jaccard"] == 1.0
     assert sa["k"] == 3
     assert result.metrics["suts"][0]["extracted"] is True
+
+
+def test_condition_carries_cross_case_aggregates(tmp_path):
+    result, _ = run_structured(tmp_path)
+    agg = result.metrics["suts"][0]["conditions"][0]["aggregates"]
+    assert agg["recourse_cluster"]["mean"] == pytest.approx(0.5)
+    assert agg["recourse_cluster"]["n_included"] == 1
+    assert agg["reason_cluster"]["mean"] == 1.0
+    assert agg["min_pairs_floor"] == 3

@@ -12,6 +12,7 @@ from goalpost.config import AuditConfig, Case
 from goalpost.elicitation import OUTPUT_CONTRACT, build_extractor_prompt
 from goalpost.metrics import (
     METRICS_VERSION,
+    aggregate_cases,
     coverage_companions,
     decision_stability,
     direction_flip_rate,
@@ -30,6 +31,7 @@ from goalpost.runner import RUNNER_VERSION, CallCache, plan_blocks, run_audit_bl
 
 AUDIT_VERSION = "0.1.0"
 SELF_AGREEMENT_K = 3
+MIN_PAIRS_FLOOR = 3  # eligibility floor for cross-case aggregation (S3-3)
 
 
 @dataclass
@@ -346,11 +348,29 @@ def run_audit(
                 entry = {"case_id": case.case_id}
                 entry.update(_case_metrics(case_runs, n_attempted=condition.repeats))
                 case_entries.append(entry)
+            aggregates = {
+                f"{item}_cluster": vars(
+                    aggregate_cases(
+                        [
+                            {
+                                "case_id": e["case_id"],
+                                "value": e[f"{item}_stability"]["cluster"]["mean_jaccard"],
+                                "n_pairs": e[f"{item}_stability"]["cluster"]["n_pairs"],
+                            }
+                            for e in case_entries
+                        ],
+                        min_pairs=MIN_PAIRS_FLOOR,
+                    )
+                )
+                for item in ("reason", "recourse")
+            }
+            aggregates["min_pairs_floor"] = MIN_PAIRS_FLOOR
             sut_conditions.append({
                 "condition_id": condition.condition_id,
                 "temperature": condition.temperature,
                 "repeats": condition.repeats,
                 "cases": case_entries,
+                "aggregates": aggregates,
             })
 
         sut_entry = {

@@ -109,3 +109,59 @@ def direction_flip_rate(direction_maps: list[dict[str, str]]) -> float:
         return 0.0
     flips = sum(1 for directions in seen.values() if len(directions) > 1)
     return flips / len(seen)
+
+
+@dataclass(frozen=True)
+class CaseAggregate:
+    mean: float | None
+    median: float | None
+    iqr: tuple[float, float] | None
+    n_included: int
+    excluded: list[dict]
+
+
+def _quantile(sorted_values: list[float], q: float) -> float:
+    """Linear-interpolation quantile (matches statistics.quantiles n=4
+    inclusive method for the quartile case)."""
+    if len(sorted_values) == 1:
+        return sorted_values[0]
+    position = q * (len(sorted_values) - 1)
+    lower = int(position)
+    fraction = position - lower
+    upper = min(lower + 1, len(sorted_values) - 1)
+    return sorted_values[lower] * (1 - fraction) + sorted_values[upper] * fraction
+
+
+def aggregate_cases(entries: list[dict], *, min_pairs: int) -> CaseAggregate:
+    """Case → condition aggregation: unweighted mean plus median/IQR, with
+    an effective-n_pairs eligibility floor; exclusions are listed, never
+    silent (DESIGN.md §4, author amendment S3-3)."""
+    included: list[float] = []
+    excluded: list[dict] = []
+    for entry in entries:
+        case_id = entry.get("case_id")
+        if entry.get("value") is None:
+            excluded.append(
+                {"case_id": case_id, "reason": "no scorable pairs"}
+            )
+        elif entry.get("n_pairs", 0) < min_pairs:
+            excluded.append(
+                {
+                    "case_id": case_id,
+                    "reason": f"n_pairs {entry.get('n_pairs', 0)} < {min_pairs}",
+                }
+            )
+        else:
+            included.append(entry["value"])
+
+    if not included:
+        return CaseAggregate(None, None, None, 0, excluded)
+
+    ordered = sorted(included)
+    return CaseAggregate(
+        mean=sum(ordered) / len(ordered),
+        median=_quantile(ordered, 0.5),
+        iqr=(_quantile(ordered, 0.25), _quantile(ordered, 0.75)),
+        n_included=len(ordered),
+        excluded=excluded,
+    )
