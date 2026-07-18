@@ -28,6 +28,9 @@ packages = ["src/goalpost"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q"
+addopts = "-q -m 'not codex'"
 pythonpath = ["src"]
+markers = [
+    "codex: delegated RED tests — deselected by default; Codex runs -m codex and makes them pass (kickoff §4b)",
+]
 

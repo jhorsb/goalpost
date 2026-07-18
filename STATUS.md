@@ -18,12 +18,18 @@
   - reporter (lay page + tech appendix, versioned anchors, lower-bound framing) + CLI (`goalpost audit --dry-run`, `goalpost report`)
 - `example.yaml` dry-run verified: 30 calls, est. $0.245, cap $0.50.
 
+## Phase 3 progress (2026-07-06)
+- Done, test-first: extractor gate enforced in reporter; cross-case aggregation (mean/median/IQR, n_pairs floor, listed exclusions) wired into audit output; perturbation engine (5 immaterial classes, deterministic, CV-only); frozen starter corpus (25 cases, 5 roles, banded, $0.38); multi-SUT comparison report (tie-bands, eligibility floors, cross-mode banner) + comparison.md in CLI.
+- Delegation opened: 3 Codex briefs drafted with committed RED tests (see DELEGATION.md).
+- D-015/D-016 actioned: repo moved to ~/Projects; gpt-4.1 extractor clears the gate (1.00/0.956); thresholds unrevised.
+
 ## Next
-- Phase 2 exit criteria met: offline suite green (103), live run recorded ($0.0095), fixtures committed, reports rendered.
-- Open for author at demo: extractor self-agreement below pre-registered gate (D-015.4); recommendation to move repo out of ~/Documents (D-015.1).
+- Batch hardening (main thread): perturbation wire-through into audit runs + decision-flip reporting; resume CLI; concurrency.
+- Author: ferry Codex briefs when convenient; returned diffs reviewed per DELEGATION.md rules.
+- Then Phase 4 validation run (fresh corpus, 2-3 SUTs) and Phase 5 docs.
 
 ## Environment note
 Python pinned 3.12 (D-013). Editable-install `.pth` files under ~/Documents get macOS UF_HIDDEN flags applied asynchronously (iCloud); breaks imports on Python 3.14, transiently flaky elsewhere. If `goalpost` import fails: `uv sync --reinstall-package goalpost`.
 
 ## Delegation
-- Sub-agents: cross-extraction (done, Phase 0). Codex: none yet — Phase 3 lanes prepped in DESIGN.md §9.
+- See DELEGATION.md: 3 Codex briefs drafted with RED tests (`pytest -m codex`); sub-agent log current.
