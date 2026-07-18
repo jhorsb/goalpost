@@ -1,5 +1,7 @@
 #!/bin/sh
-# Launcher that survives the iCloud UF_HIDDEN flag on editable-install .pth
-# files (see DECISIONS.md D-013): clear the flag, then run the CLI.
-chflags nohidden .venv/lib/python*/site-packages/*.pth 2>/dev/null
-exec uv run goalpost "$@"
+# Launcher hardened against iCloud interference with ~/Documents
+# (DECISIONS.md D-013/D-015): venv lives outside the synced tree, and
+# PYTHONPATH=src avoids the editable-install .pth mechanism entirely.
+cd "$(dirname "$0")"
+export UV_PROJECT_ENVIRONMENT="$HOME/.venvs/goalpost"
+PYTHONPATH=src exec uv run python -m goalpost.cli "$@"

@@ -26,7 +26,9 @@ def _sha256_int(*parts) -> int:
     for part in parts:
         digest.update(str(part).encode("utf-8"))
         digest.update(b"\x1f")
-    return int.from_bytes(digest.digest()[:8], "big")
+    # Providers require seeds within signed int64 (OpenAI rejects above
+    # 2^63-1) — mask to 63 bits. Found by the first live run.
+    return int.from_bytes(digest.digest()[:8], "big") & (2**63 - 1)
 
 
 def derive_seed(

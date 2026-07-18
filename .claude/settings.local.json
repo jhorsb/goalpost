@@ -42,9 +42,10 @@
       "Bash(git commit --quiet -m 'docs: status — slice green offline, live run blocked on credentials *)",
       "Bash(ollama list *)",
       "Bash(curl -s --max-time 2 http://localhost:11434/api/tags)",
-      "Bash(sed -i '' 's|- \\\\*\\\\*BLOCKED on author:\\\\*\\\\* provide `ANTHROPIC_API_KEY` \\(put it in `.env` — see `.env.example`\\).|- **BLOCKED on author \\(one of, any lab\\):** an `ANTHROPIC_API_KEY`, an `OPENAI_API_KEY`, an `OPENROUTER_API_KEY` \\(or any OpenAI-compatible endpoint key\\), **or** a local Ollama install — see `example.yaml`, `examples/openrouter.yaml`, `examples/ollama.yaml` \\(D-014\\).|' STATUS.md)",
       "Bash(sed -i '' 's|- Then: `goalpost audit --config example.yaml` \\(live, both modes, cost printed\\), commit transcripts as fixtures + offline replay test, demo.|- Then: `./goalpost.sh audit --config <whichever>.yaml` \\(live, both modes, cost printed\\), commit transcripts as fixtures + offline replay test, demo.|' STATUS.md)",
-      "Bash(git commit --quiet -m 'feat: provider-agnostic endpoints \\(D-014\\), test-first *)"
+      "Bash(git commit --quiet -m 'feat: provider-agnostic endpoints \\(D-014\\), test-first *)",
+      "Bash(./goalpost.sh audit *)",
+      "Bash(git commit --quiet -m 'feat: OpenAI slice config \\(est. $0.0295, cap $0.50\\) *)"
     ]
   }
 }

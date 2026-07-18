@@ -161,3 +161,13 @@ def test_resume_fills_only_missing_blocks(tmp_path):
     )
     assert len(second.completed_blocks) == 1
     assert len(client2.calls) == COND.repeats  # only the missing block ran
+
+
+def test_seed_fits_signed_int64_provider_requirement():
+    # OpenAI (and most providers) reject seeds above 2^63-1; sha256-derived
+    # seeds must stay within signed-int64 range. Found by the first live run.
+    seeds = [
+        derive_seed(42, f"sut{i}", "t0.0_n5", f"hash{i}", i) for i in range(200)
+    ]
+    assert all(0 <= s <= 2**63 - 1 for s in seeds)
+    assert len(set(seeds)) == 200  # still distinct
