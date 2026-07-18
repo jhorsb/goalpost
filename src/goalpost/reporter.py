@@ -111,7 +111,7 @@ def render_report(metrics: dict) -> str:
             )
         lines.append(
             f"**If you {headline_statistic(recourse)}.** "
-            f"In our measurement, its improvement advice {anchor_label(recourse)} "
+            f"In our measurement, its improvement {anchor_label(recourse)} "
             f"(recourse stability {recourse:.2f} on a 0–1 scale)."
             + lower_bound_note
         )

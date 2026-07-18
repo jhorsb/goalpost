@@ -103,3 +103,8 @@ def test_html_rendering():
 
     html = render_report_html(metrics_fixture())
     assert html.startswith("<!DOCTYPE html>") or html.startswith("<html")
+
+
+def test_no_duplicated_advice_word_in_headline():
+    md = render_report(metrics_fixture(recourse=0.58))
+    assert "advice advice" not in md

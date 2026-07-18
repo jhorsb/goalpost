@@ -1,7 +1,7 @@
 # STATUS.md
 
 **Project:** Goalpost — CLI audit instrument for decision/reason/recourse stability in LLM-mediated screening.
-**Current phase:** Phase 2 — vertical slice built and green offline; live run blocked on API credentials.
+**Current phase:** Phase 2 — vertical slice COMPLETE (live run done); demo delivered; awaiting Phase 3 go-ahead.
 **Last updated:** 2026-07-06
 
 ## Done
@@ -19,8 +19,8 @@
 - `example.yaml` dry-run verified: 30 calls, est. $0.245, cap $0.50.
 
 ## Next
-- **BLOCKED on author (one of, any lab):** an `ANTHROPIC_API_KEY`, an `OPENAI_API_KEY`, an `OPENROUTER_API_KEY` (or any OpenAI-compatible endpoint key), **or** a local Ollama install — see `example.yaml`, `examples/openrouter.yaml`, `examples/ollama.yaml` (D-014).
-- Then: `./goalpost.sh audit --config <whichever>.yaml` (live, both modes, cost printed), commit transcripts as fixtures + offline replay test, demo.
+- Phase 2 exit criteria met: offline suite green (103), live run recorded ($0.0095), fixtures committed, reports rendered.
+- Open for author at demo: extractor self-agreement below pre-registered gate (D-015.4); recommendation to move repo out of ~/Documents (D-015.1).
 
 ## Environment note
 Python pinned 3.12 (D-013). Editable-install `.pth` files under ~/Documents get macOS UF_HIDDEN flags applied asynchronously (iCloud); breaks imports on Python 3.14, transiently flaky elsewhere. If `goalpost` import fails: `uv sync --reinstall-package goalpost`.
