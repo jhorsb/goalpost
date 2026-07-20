@@ -125,3 +125,48 @@ def test_report_command_writes_comparison_for_multi_sut(tmp_path):
     comparison = audit_dir / "report" / "comparison.md"
     assert comparison.exists()
     assert "alpha" in comparison.read_text()
+
+
+def test_resume_requires_stored_config(tmp_path):
+    result = runner.invoke(app, ["resume", str(tmp_path)])
+    assert result.exit_code != 0
+    assert "config.yaml" in result.output
+
+
+def test_resume_loads_stored_config_and_replans(tmp_path, monkeypatch):
+    # Stored config + corpus present: resume should reach the planning
+    # stage (we stub the live runner to observe the loaded config).
+    import yaml as yaml_mod
+
+    corpus = tmp_path / "cases.yaml"
+    corpus.write_text(
+        "cases:\n  - {case_id: c1, cv_text: 'a cv', job_spec_text: 'a spec'}\n"
+    )
+    audit_dir = tmp_path / "aud"
+    audit_dir.mkdir()
+    (audit_dir / "config.yaml").write_text(yaml_mod.safe_dump({
+        "audit_id": "aud",
+        "audit_seed": 42,
+        "max_spend_usd": 0.5,
+        "corpus_path": str(corpus),
+        "output_dir": str(tmp_path),
+        "canonicaliser": {"provider": "anthropic",
+                          "model": "claude-sonnet-4-5-20250929"},
+        "extractor": {"provider": "anthropic",
+                      "model": "claude-sonnet-4-5-20250929"},
+        "conditions": [{"temperature": 0.0, "repeats": 5}],
+        "suts": [{"name": "s", "provider": "openai",
+                  "model": "gpt-4o-mini-2024-07-18",
+                  "elicitation_mode": "structured",
+                  "prompt_template": "CV: {cv} Spec: {job_spec}"}],
+    }))
+    seen = {}
+
+    def fake_run_live(config, cases):
+        seen["audit_id"] = config.audit_id
+        seen["n_cases"] = len(cases)
+
+    monkeypatch.setattr("goalpost.cli._run_live", fake_run_live)
+    result = runner.invoke(app, ["resume", str(audit_dir)])
+    assert result.exit_code == 0
+    assert seen == {"audit_id": "aud", "n_cases": 1}

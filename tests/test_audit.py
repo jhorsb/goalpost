@@ -300,3 +300,83 @@ def test_perturbations_disabled_by_default_no_extra_calls(tmp_path):
         output_root=tmp_path,
     )
     assert client.calls == 4  # repeats only, no variant calls
+
+
+# ── idempotent re-runs + resume (runner core) ────────────────────────
+
+def test_rerun_same_audit_dir_no_duplicates_and_no_new_calls(tmp_path):
+    import json as json_mod
+    from pathlib import Path
+
+    client = ScriptedClient([
+        structured_response("aws_certification"),
+        structured_response("aws_certification"),
+        structured_response("get_certified"),
+        structured_response("build_portfolio"),
+    ])
+    kwargs = dict(
+        config=make_config(),
+        cases=[CASE],
+        client_factory=lambda sut: client,
+        canonicaliser_client=FakeCanonicaliser(),
+        extractor_client=None,
+        taxonomy_path=TAXONOMY,
+        output_root=tmp_path,
+    )
+    first = run_audit(**kwargs)
+    calls_after_first = client.calls
+    second = run_audit(**kwargs)
+    assert client.calls == calls_after_first  # cache served everything
+
+    def transcript_count(result):
+        records = []
+        for path in Path(result.audit_dir).rglob("transcripts.jsonl"):
+            records += [json_mod.loads(l) for l in path.read_text().splitlines()]
+        return len(records)
+
+    assert transcript_count(second) == transcript_count(first) == 4
+    # cached re-run costs nothing
+    assert second.metrics["total_cost_usd"] == 0.0
+
+
+def test_budget_stopped_audit_resumes_to_completion(tmp_path):
+    """First run under a tight budget leaves missing blocks; a second run
+    of the same audit dir with a raised budget completes only the missing
+    work (cached blocks are free)."""
+    case2 = Case(case_id="c2", cv_text="other cv", job_spec_text="other spec")
+    client = ScriptedClient([structured_response("aws_certification")])
+    config = make_config()
+    config.max_spend_usd = 0.005  # allows first block (4 x 0.001), not both
+    first = run_audit(
+        config=config, cases=[CASE, case2],
+        client_factory=lambda sut: client,
+        canonicaliser_client=FakeCanonicaliser(), extractor_client=None,
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    assert first.metrics["missing_blocks"]
+    calls_after_first = client.calls
+
+    config2 = make_config()
+    config2.max_spend_usd = 1.0
+    second = run_audit(
+        config=config2, cases=[CASE, case2],
+        client_factory=lambda sut: client,
+        canonicaliser_client=FakeCanonicaliser(), extractor_client=None,
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    assert second.metrics["missing_blocks"] == []
+    assert client.calls == calls_after_first + 4  # only the missing block ran
+    assert len(second.metrics["suts"][0]["conditions"][0]["cases"]) == 2
+
+
+def test_audit_writes_resolved_config(tmp_path):
+    from pathlib import Path
+
+    result, _ = run_structured(tmp_path)
+    config_file = Path(result.audit_dir) / "config.yaml"
+    assert config_file.exists()
+    import yaml as yaml_mod
+
+    stored = yaml_mod.safe_load(config_file.read_text())
+    assert stored["audit_id"] == "slice-test"
+    assert stored["suts"][0]["model"]

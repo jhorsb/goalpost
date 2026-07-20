@@ -158,6 +158,25 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
 
 
 @app.command()
+def resume(audit_dir: Path = typer.Argument(...)):
+    """Re-run an audit from its stored resolved config. Completed calls are
+    served from the content-addressed cache (free); only missing blocks hit
+    the API. Budget is enforced fresh from the stored cap."""
+    config_file = audit_dir / "config.yaml"
+    if not config_file.exists():
+        typer.echo(f"No config.yaml in {audit_dir} — nothing to resume", err=True)
+        raise typer.Exit(2)
+    data = yaml.safe_load(config_file.read_text())
+    audit_config = AuditConfig(**data)
+    if not audit_config.corpus_path:
+        typer.echo("Stored config has no corpus_path", err=True)
+        raise typer.Exit(2)
+    cases = load_cases(Path(audit_config.corpus_path))
+    typer.echo(f"Resuming audit {audit_config.audit_id} ({len(cases)} cases)")
+    _run_live(audit_config, cases)
+
+
+@app.command()
 def report(audit_dir: Path = typer.Argument(...)):
     """Re-render reports from recorded metrics; no API calls."""
     from goalpost.reporter import render_report, render_report_html

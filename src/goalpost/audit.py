@@ -8,6 +8,8 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
+import yaml
+
 from goalpost.config import AuditConfig, Case
 from goalpost.elicitation import OUTPUT_CONTRACT, build_extractor_prompt
 from goalpost.metrics import (
@@ -41,8 +43,10 @@ class AuditResult:
 
 
 def _write_jsonl(path: Path, records: list[dict]) -> None:
+    """Overwrite-mode: every artifact is written whole, once per audit run,
+    so re-running an audit dir is idempotent (no duplicate records)."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a") as f:
+    with path.open("w") as f:
         for record in records:
             f.write(json.dumps(record, default=str) + "\n")
 
@@ -224,6 +228,9 @@ def run_audit(
     taxonomies = load_taxonomies(taxonomy_path)
     audit_dir = Path(output_root) / config.audit_id
     audit_dir.mkdir(parents=True, exist_ok=True)
+    (audit_dir / "config.yaml").write_text(
+        yaml.safe_dump(config.model_dump(mode="json"), sort_keys=False)
+    )
     cache = CallCache(audit_dir / ".cache")
 
     corpus_hash = "|".join(sorted(c.content_hash for c in cases))
@@ -258,10 +265,7 @@ def run_audit(
 
         for t in run_result.transcripts:
             t["role"] = "sut"
-        _write_jsonl(
-            audit_dir / "transcripts" / sut.sut_id / "transcripts.jsonl",
-            run_result.transcripts,
-        )
+        sut_transcripts = list(run_result.transcripts)
 
         # Parse (freeform: through the extractor, extractor calls transcripted)
         runs = []
@@ -270,16 +274,13 @@ def run_audit(
                 parsed, ext_response = _extract_run(
                     transcript["response_text"], extractor_client
                 )
-                _write_jsonl(
-                    audit_dir / "transcripts" / sut.sut_id / "transcripts.jsonl",
-                    [{
-                        "role": "extractor",
-                        "source_transcript_id": transcript["transcript_id"],
-                        "response_text": ext_response["text"],
-                        "cost_usd": ext_response.get("cost_usd", 0.0),
-                        "runner_version": RUNNER_VERSION,
-                    }],
-                )
+                sut_transcripts.append({
+                    "role": "extractor",
+                    "source_transcript_id": transcript["transcript_id"],
+                    "response_text": ext_response["text"],
+                    "cost_usd": ext_response.get("cost_usd", 0.0),
+                    "runner_version": RUNNER_VERSION,
+                })
                 total_cost += ext_response.get("cost_usd", 0.0)
             else:
                 parsed = parse_structured_response(transcript["response_text"])
@@ -385,7 +386,7 @@ def run_audit(
                 run_result.transcripts, extractor_client
             )
         if config.perturbations.enabled and config.perturbations.classes:
-            perturbation_cost, perturbation_report = _run_perturbations(
+            perturbation_cost, perturbation_report, variant_records = _run_perturbations(
                 config=config,
                 cases=cases,
                 effective_sut=effective_sut,
@@ -398,6 +399,11 @@ def run_audit(
             )
             total_cost += perturbation_cost
             sut_entry["perturbations"] = perturbation_report
+            sut_transcripts.extend(variant_records)
+        _write_jsonl(
+            audit_dir / "transcripts" / sut.sut_id / "transcripts.jsonl",
+            sut_transcripts,
+        )
         metrics_suts.append(sut_entry)
 
     metrics = {
@@ -445,7 +451,7 @@ def _run_perturbations(
     variants_dir = audit_dir / "variants"
     variants_dir.mkdir(parents=True, exist_ok=True)
     (variants_dir / "variants.yaml").write_text(
-        __import__("yaml").safe_dump(
+        yaml.safe_dump(
             {
                 "perturbations_version": PERTURBATIONS_VERSION,
                 "seed": config.audit_seed,
@@ -485,10 +491,6 @@ def _run_perturbations(
 
     for t in run_result.transcripts:
         t["role"] = "sut_variant"
-    _write_jsonl(
-        audit_dir / "transcripts" / sut.sut_id / "transcripts.jsonl",
-        run_result.transcripts,
-    )
 
     # Modal decision per (condition, variant)
     from collections import defaultdict
@@ -554,7 +556,7 @@ def _run_perturbations(
     ]
     overall_n = sum(c["n_variants"] for c in classes)
     overall_flips = sum(c["decision_flips"] for c in classes)
-    return cost, {
+    report = {
         "seed": config.audit_seed,
         "classes": classes,
         "overall_decision_flip_rate": (
@@ -562,3 +564,4 @@ def _run_perturbations(
         ),
         "missing_blocks": [b.block_id for b in run_result.missing_blocks],
     }
+    return cost, report, run_result.transcripts
