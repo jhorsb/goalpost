@@ -1,0 +1,427 @@
+{"raw": "gain_go_experience", "normalised": "gain_go_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_additional_certifications", "normalised": "obtain_additional_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "expand_multi_cloud_exposure", "normalised": "expand_multi_cloud_exposure", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL"]}
+{"raw": "kubernetes_experience", "normalised": "kubernetes_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "certifications", "normalised": "certifications", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "observability_tools", "normalised": "observability_tools", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "go_scripting", "normalised": "go_scripting", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_go_experience", "normalised": "gain_go_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_multi_cloud_architecture", "normalised": "highlight_multi_cloud_architecture", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "APPLICATION"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "certifications", "normalised": "certifications", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "scalability_experience", "normalised": "scalability_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "go_scripting", "normalised": "go_scripting", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "gain_large_scale_experience", "normalised": "gain_large_scale_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_go_skills", "normalised": "develop_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "highlight_multi_cloud_experience", "normalised": "highlight_multi_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "gain_high_traffic_experience", "normalised": "gain_high_traffic_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "learn_go", "normalised": "learn_go", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}
+{"raw": "highlight_multi_cloud_projects", "normalised": "highlight_multi_cloud_projects", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "high_demand_experience", "normalised": "high_demand_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "go_scripting_experience", "normalised": "go_scripting_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "gain_high_traffic_experience", "normalised": "gain_high_traffic_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_go_skills", "normalised": "develop_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "highlight_multi_cloud_projects", "normalised": "highlight_multi_cloud_projects", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "scripting_skills", "normalised": "scripting_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "observability_experience", "normalised": "observability_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "kubernetes_management", "normalised": "kubernetes_management", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "cloud_certification", "normalised": "cloud_certification", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_gcp_production_experience", "normalised": "gain_gcp_production_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "improve_scripting_skills", "normalised": "improve_scripting_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "expand_observability_knowledge", "normalised": "expand_observability_knowledge", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "scaling_experience", "normalised": "scaling_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "go_skills", "normalised": "go_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_gcp_experience", "normalised": "gain_gcp_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "improve_go_skills", "normalised": "improve_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "highlight_scaling_experience", "normalised": "highlight_scaling_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "multi_cloud_exposure", "normalised": "multi_cloud_exposure", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "programming_skills", "normalised": "programming_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "production_scale_experience", "normalised": "production_scale_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_multi_cloud_experience", "normalised": "gain_multi_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "develop_go_skills", "normalised": "develop_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "increase_production_experience", "normalised": "increase_production_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_certifications", "normalised": "obtain_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "enhance_observability_skills", "normalised": "enhance_observability_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "experience_level", "normalised": "experience_level", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "multi_cloud_exposure", "normalised": "multi_cloud_exposure", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "observability_expertise", "normalised": "observability_expertise", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "kubernetes_certification", "normalised": "kubernetes_certification", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_multi_cloud_experience", "normalised": "gain_multi_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "strengthen_observability_skills", "normalised": "strengthen_observability_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "obtain_kubernetes_certification", "normalised": "obtain_kubernetes_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "increase_years_experience", "normalised": "increase_years_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "experience_duration", "normalised": "experience_duration", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "multi_cloud_exposure", "normalised": "multi_cloud_exposure", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "programming_skills", "normalised": "programming_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "production_scale_experience", "normalised": "production_scale_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_multi_cloud_experience", "normalised": "gain_multi_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "improve_go_skills", "normalised": "improve_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "increase_production_exposure", "normalised": "increase_production_exposure", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "experience_years", "normalised": "experience_years", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "multi_cloud_exposure", "normalised": "multi_cloud_exposure", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "production_scale_experience", "normalised": "production_scale_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_more_production_experience", "normalised": "gain_more_production_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "expand_multi_cloud_skills", "normalised": "expand_multi_cloud_skills", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL"]}
+{"raw": "develop_observability_skills", "normalised": "develop_observability_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "obtain_additional_certifications", "normalised": "obtain_additional_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "years_experience", "normalised": "years_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "observability_exposure", "normalised": "observability_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "production_k8s_experience", "normalised": "production_k8s_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_more_experience", "normalised": "gain_more_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "enhance_observability_skills", "normalised": "enhance_observability_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "expand_multi_cloud_exposure", "normalised": "expand_multi_cloud_exposure", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL"]}
+{"raw": "improve_go_skills", "normalised": "improve_go_skills", "cluster": "PROGRAMMING_PRACTICE", "source": "llm", "all_hits": []}
+{"raw": "junit_ci_cd_experience", "normalised": "junit_ci_cd_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "high_demand_experience", "normalised": "high_demand_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "collaborative_skills", "normalised": "collaborative_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "kubernetes_certification", "normalised": "kubernetes_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "CLOUD_SKILL"]}
+{"raw": "highlight_team_experience", "normalised": "highlight_team_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "multi_cloud_experience", "normalised": "multi_cloud_experience", "cluster": "CLOUD_SKILL", "source": "rule", "all_hits": ["CLOUD_SKILL", "EXPERIENCE_GAIN"]}
+{"raw": "cloud_experience", "normalised": "cloud_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "skills"]}
+{"raw": "automation_skills", "normalised": "automation_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "observability_tools", "normalised": "observability_tools", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "certifications", "normalised": "certifications", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "production_experience", "normalised": "production_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "ci_cd_experience", "normalised": "ci_cd_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_jenkins_experience", "normalised": "gain_jenkins_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_high_demand_experience", "normalised": "highlight_high_demand_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "pursue_advanced_certifications", "normalised": "pursue_advanced_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "tableau_experience", "normalised": "tableau_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_tableau_proficiency", "normalised": "gain_tableau_proficiency", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "gain_insurance_experience", "normalised": "gain_insurance_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "tableau_experience", "normalised": "tableau_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "statistical_expertise", "normalised": "statistical_expertise", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_tableau_certification", "normalised": "gain_tableau_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION"]}
+{"raw": "pursue_insurance_analytics_course", "normalised": "pursue_insurance_analytics_course", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}
+{"raw": "tableau_experience", "normalised": "tableau_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "statistical_expertise", "normalised": "statistical_expertise", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_tableau_experience", "normalised": "gain_tableau_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_insurance_knowledge", "normalised": "develop_insurance_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "highlight_relevant_skills", "normalised": "highlight_relevant_skills", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "SQL_python_skills", "normalised": "sql_python_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "tableau_exposure", "normalised": "tableau_exposure", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "insurance_domain", "normalised": "insurance_domain", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_tableau_experience", "normalised": "gain_tableau_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "expand_insurance_knowledge", "normalised": "expand_insurance_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "tableau_experience", "normalised": "tableau_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "statistical_depth", "normalised": "statistical_depth", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_tableau_certification", "normalised": "gain_tableau_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION"]}
+{"raw": "gain_insurance_domain_experience", "normalised": "gain_insurance_domain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "enhance_statistical_skills", "normalised": "enhance_statistical_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "limited_sql_proficiency", "normalised": "limited_sql_proficiency", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "insurance_domain_exposure", "normalised": "insurance_domain_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "gain_experience", "normalised": "gain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_bi_skills", "normalised": "develop_bi_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "expand_insurance_knowledge", "normalised": "expand_insurance_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "limited_tool_proficiency", "normalised": "limited_tool_proficiency", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "domain_knowledge", "normalised": "domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_advanced_sql_python_experience", "normalised": "gain_advanced_sql_python_experience", "cluster": "PROGRAMMING_PRACTICE", "source": "rule", "all_hits": ["PROGRAMMING_PRACTICE", "EXPERIENCE_GAIN"]}
+{"raw": "build_insurance_domain_knowledge", "normalised": "build_insurance_domain_knowledge", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "develop_dashboard_skills", "normalised": "develop_dashboard_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "limited_technical_proficiency", "normalised": "limited_technical_proficiency", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "domain_knowledge", "normalised": "domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_professional_experience", "normalised": "gain_professional_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "advance_technical_skills", "normalised": "advance_technical_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "build_insurance_domain_knowledge", "normalised": "build_insurance_domain_knowledge", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "improve_stakeholder_communication", "normalised": "improve_stakeholder_communication", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "rule", "all_hits": ["SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "limited_bi_tool_exposure", "normalised": "limited_bi_tool_exposure", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "domain_knowledge", "normalised": "domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "advanced_skills", "normalised": "advanced_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "gain_experience", "normalised": "gain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_bi_skills", "normalised": "develop_bi_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "domain_knowledge", "normalised": "domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "highlight_stakeholder_engagement", "normalised": "highlight_stakeholder_engagement", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "basic_sql_and_python", "normalised": "basic_sql_and_python", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "limited_bi_dashboard_experience", "normalised": "limited_bi_dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "no_insurance_domain_exposure", "normalised": "no_insurance_domain_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "gain_experience", "normalised": "gain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "advance_sql_python", "normalised": "advance_sql_python", "cluster": "PROGRAMMING_PRACTICE", "source": "rule", "all_hits": ["PROGRAMMING_PRACTICE"]}
+{"raw": "build_bi_dashboard_expertise", "normalised": "build_bi_dashboard_expertise", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "gain_insurance_domain_knowledge", "normalised": "gain_insurance_domain_knowledge", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "experience_duration", "normalised": "experience_duration", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "tableau_exposure", "normalised": "tableau_exposure", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "insurance_domain_experience", "normalised": "insurance_domain_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_insurance_experience", "normalised": "gain_insurance_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "advance_tableau_skills", "normalised": "advance_tableau_skills", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "extend_experience", "normalised": "extend_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "sql_proficiency", "normalised": "sql_proficiency", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "python_skills", "normalised": "python_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "statistical_knowledge", "normalised": "statistical_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_insurance_risk_modeling_experience", "normalised": "gain_insurance_risk_modeling_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_domain_knowledge", "normalised": "highlight_domain_knowledge", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "technical_skills", "normalised": "technical_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_insurance_domain_experience", "normalised": "gain_insurance_domain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_relevant_experience", "normalised": "highlight_relevant_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "insurance_experience", "normalised": "insurance_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "python_skills", "normalised": "python_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "domain_knowledge", "normalised": "domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "advanced_python", "normalised": "advanced_python", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "highlight_insurance_projects", "normalised": "highlight_insurance_projects", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "expand_python_experience", "normalised": "expand_python_experience", "cluster": "PROGRAMMING_PRACTICE", "source": "rule", "all_hits": ["PROGRAMMING_PRACTICE", "EXPERIENCE_GAIN"]}
+{"raw": "deepen_statistical_knowledge", "normalised": "deepen_statistical_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "technical_skills", "normalised": "technical_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "insurance_domain_knowledge", "normalised": "insurance_domain_knowledge", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "highlight_insurance_domain_experience", "normalised": "highlight_insurance_domain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "gain_certifications", "normalised": "gain_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "improve_cv_focus", "normalised": "improve_cv_focus", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "insurance_domain_experience", "normalised": "insurance_domain_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "python_skills", "normalised": "python_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "dashboard_experience", "normalised": "dashboard_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "risk_modeling_exposure", "normalised": "risk_modeling_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "gain_domain_expertise", "normalised": "gain_domain_expertise", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "highlight_domain_experience", "normalised": "highlight_domain_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "health_safety_compliance", "normalised": "health_safety_compliance", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "qualification_alignment", "normalised": "qualification_alignment", "cluster": "education", "source": "rule", "all_hits": ["education"]}
+{"raw": "industry_standard_skills", "normalised": "industry_standard_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "client_focused_communication", "normalised": "client_focused_communication", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "rule", "all_hits": ["SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "progress_reporting", "normalised": "progress_reporting", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "risk_management", "normalised": "risk_management", "cluster": "CLOUD_SKILL", "source": "llm", "all_hits": []}
+{"raw": "additional_certifications", "normalised": "additional_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "health_safety_familiarity", "normalised": "health_safety_familiarity", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "qualification_alignment", "normalised": "qualification_alignment", "cluster": "education", "source": "rule", "all_hits": ["education"]}
+{"raw": "client_management_experience", "normalised": "client_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "project_reporting_skills", "normalised": "project_reporting_skills", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "health_safety_certification", "normalised": "health_safety_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION"]}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "budget_ownership", "normalised": "budget_ownership", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "health_safety_compliance", "normalised": "health_safety_compliance", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "relevant_qualifications", "normalised": "relevant_qualifications", "cluster": "education", "source": "llm", "all_hits": []}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "client_focused_communication", "normalised": "client_focused_communication", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "rule", "all_hits": ["SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "progress_reporting", "normalised": "progress_reporting", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "industry_standards", "normalised": "industry_standards", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_communication", "normalised": "stakeholder_communication", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "health_safety_familiarity", "normalised": "health_safety_familiarity", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "qualification_alignment", "normalised": "qualification_alignment", "cluster": "education", "source": "rule", "all_hits": ["education"]}
+{"raw": "relevant_industry_experience", "normalised": "relevant_industry_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "highlight_client_management_skills", "normalised": "highlight_client_management_skills", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "demonstrate_problem_solving", "normalised": "demonstrate_problem_solving", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "update_cv_with_metrics", "normalised": "update_cv_with_metrics", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "project_budget_management", "normalised": "project_budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_management", "normalised": "stakeholder_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "health_safety_standards", "normalised": "health_safety_standards", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_additional_experience", "normalised": "gain_additional_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_certifications", "normalised": "obtain_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "demonstrate_full_project_management", "normalised": "demonstrate_full_project_management", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "insufficient_experience", "normalised": "insufficient_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "project_budget_management", "normalised": "project_budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "industry_standards", "normalised": "industry_standards", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "gain_additional_experience", "normalised": "gain_additional_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_prince2_or_apm", "normalised": "obtain_prince2_or_apm", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "develop_full_project_lifecycle_skills", "normalised": "develop_full_project_lifecycle_skills", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_management", "normalised": "stakeholder_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "qualification", "normalised": "qualification", "cluster": "education", "source": "rule", "all_hits": ["education"]}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "early_planning_experience", "normalised": "early_planning_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "innovative_solutions", "normalised": "innovative_solutions", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_experience_in_early_planning", "normalised": "gain_experience_in_early_planning", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_innovation_experience", "normalised": "highlight_innovation_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "enhance_reporting_skills", "normalised": "enhance_reporting_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_management", "normalised": "stakeholder_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "prince2_certification", "normalised": "prince2_certification", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "early_planning_experience", "normalised": "early_planning_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "innovative_solutions", "normalised": "innovative_solutions", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "highlight_planning_experience", "normalised": "highlight_planning_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "gain_innovation_exposure", "normalised": "gain_innovation_exposure", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "improve_reporting_skills", "normalised": "improve_reporting_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "relevant_experience", "normalised": "relevant_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "full_lifecycle_management", "normalised": "full_lifecycle_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_management", "normalised": "stakeholder_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "PRINCE2_certification", "normalised": "prince2_certification", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "highlight_project_planning_experience", "normalised": "highlight_project_planning_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "broaden_stakeholder_examples", "normalised": "broaden_stakeholder_examples", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "detail_problem_solving_skills", "normalised": "detail_problem_solving_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "familiarity_with_industry_standards", "normalised": "familiarity_with_industry_standards", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "project_management_experience", "normalised": "project_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "full_project_lifecycle", "normalised": "full_project_lifecycle", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "stakeholder_management", "normalised": "stakeholder_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "PRINCE2_certification", "normalised": "prince2_certification", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "budget_management", "normalised": "budget_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "early_planning_experience", "normalised": "early_planning_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "innovative_solutions", "normalised": "innovative_solutions", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_planning_experience", "normalised": "gain_planning_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_innovation", "normalised": "highlight_innovation", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "improve_reporting_skills", "normalised": "improve_reporting_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "payment_support_exposure", "normalised": "payment_support_exposure", "cluster": "credit", "source": "rule", "all_hits": ["credit"]}
+{"raw": "metrics_and_process_improvement", "normalised": "metrics_and_process_improvement", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "escalation_management", "normalised": "escalation_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_collaboration", "normalised": "cross_functional_collaboration", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "communication_skills", "normalised": "communication_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills", "soft_skills"]}
+{"raw": "team_development", "normalised": "team_development", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "technical_collaboration", "normalised": "technical_collaboration", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "payment_support_exposure", "normalised": "payment_support_exposure", "cluster": "credit", "source": "rule", "all_hits": ["credit"]}
+{"raw": "metrics_and_process_improvement", "normalised": "metrics_and_process_improvement", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "escalation_management", "normalised": "escalation_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_collaboration", "normalised": "cross_functional_collaboration", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "communication_skills", "normalised": "communication_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills", "soft_skills"]}
+{"raw": "additional_management_experience", "normalised": "additional_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "technical_collaboration", "normalised": "technical_collaboration", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "payment_support_experience", "normalised": "payment_support_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "credit"]}
+{"raw": "metrics_and_process_improvement", "normalised": "metrics_and_process_improvement", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "escalation_management", "normalised": "escalation_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_collaboration", "normalised": "cross_functional_collaboration", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "team_coaching", "normalised": "team_coaching", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "additional_payments_exposure", "normalised": "additional_payments_exposure", "cluster": "INCOME", "source": "llm", "all_hits": []}
+{"raw": "leadership_certification", "normalised": "leadership_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "cross_functional_training", "normalised": "cross_functional_training", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "payment_support_exposure", "normalised": "payment_support_exposure", "cluster": "credit", "source": "rule", "all_hits": ["credit"]}
+{"raw": "metrics_and_process_improvement", "normalised": "metrics_and_process_improvement", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "escalation_management", "normalised": "escalation_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_collaboration", "normalised": "cross_functional_collaboration", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "communication_skills", "normalised": "communication_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills", "soft_skills"]}
+{"raw": "additional_payments_experience", "normalised": "additional_payments_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "leadership_certification", "normalised": "leadership_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "technical_collaboration_skills", "normalised": "technical_collaboration_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "management_experience", "normalised": "management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "team_size_management", "normalised": "team_size_management", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "leadership_development", "normalised": "leadership_development", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "tooling_collaboration", "normalised": "tooling_collaboration", "cluster": "skills", "source": "rule", "all_hits": ["skills", "soft_skills"]}
+{"raw": "fintech_exposure", "normalised": "fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "gain_management_experience", "normalised": "gain_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_coaching_skills", "normalised": "develop_coaching_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "lead_tooling_projects", "normalised": "lead_tooling_projects", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "highlight_team_development", "normalised": "highlight_team_development", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "increase_fintech_exposure", "normalised": "increase_fintech_exposure", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "management_experience", "normalised": "management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "team_size_exposure", "normalised": "team_size_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "fintech_exposure", "normalised": "fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_experience", "normalised": "cross_functional_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_management_experience", "normalised": "gain_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_coaching_skills", "normalised": "develop_coaching_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "increase_fintech_knowledge", "normalised": "increase_fintech_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "cross_functional_projects", "normalised": "cross_functional_projects", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "supervisory_experience", "normalised": "supervisory_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "payments_exposure", "normalised": "payments_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "team_management_scale", "normalised": "team_management_scale", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "coaching_experience", "normalised": "coaching_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "highlight_leadership_experience", "normalised": "highlight_leadership_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "expand_fintech_knowledge", "normalised": "expand_fintech_knowledge", "cluster": "EDUCATION", "source": "llm", "all_hits": []}
+{"raw": "demonstrate_cross_functional_collaboration", "normalised": "demonstrate_cross_functional_collaboration", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "fintech_exposure", "normalised": "fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "escalation_management", "normalised": "escalation_management", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_more_leadership_experience", "normalised": "gain_more_leadership_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "obtain_fintech_certifications", "normalised": "obtain_fintech_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "highlight_escalation_and_coaching_experience", "normalised": "highlight_escalation_and_coaching_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "team_management_experience", "normalised": "team_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "industry_exposure", "normalised": "industry_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "leadership_development", "normalised": "leadership_development", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "cross_functional_experience", "normalised": "cross_functional_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "gain_larger_team_management_experience", "normalised": "gain_larger_team_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "specialize_in_payments_fintech", "normalised": "specialize_in_payments_fintech", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "highlight_cross_functional_collaboration", "normalised": "highlight_cross_functional_collaboration", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "develop_coaching_skills", "normalised": "develop_coaching_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "support_experience", "normalised": "support_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "team_coaching", "normalised": "team_coaching", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "payment_or_fintech_exposure", "normalised": "payment_or_fintech_exposure", "cluster": "credit", "source": "rule", "all_hits": ["credit"]}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "SLAs_and_metrics", "normalised": "slas_and_metrics", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_fintech_experience", "normalised": "gain_fintech_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_leadership_skills", "normalised": "develop_leadership_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "rule", "all_hits": ["SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "highlight_metrics", "normalised": "highlight_metrics", "cluster": "APPLICATION", "source": "rule", "all_hits": ["APPLICATION"]}
+{"raw": "support_experience", "normalised": "support_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "team_coaching", "normalised": "team_coaching", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "industry_exposure", "normalised": "industry_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "SLAs_and_metrics", "normalised": "slas_and_metrics", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_management_experience", "normalised": "gain_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "industry_certifications", "normalised": "industry_certifications", "cluster": "CERTIFICATION", "source": "llm", "all_hits": []}
+{"raw": "leadership_training", "normalised": "leadership_training", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "support_experience", "normalised": "support_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "team_support", "normalised": "team_support", "cluster": "soft_skills", "source": "llm", "all_hits": []}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "payments_fintech_exposure", "normalised": "payments_fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "management_skills", "normalised": "management_skills", "cluster": "skills", "source": "rule", "all_hits": ["skills"]}
+{"raw": "cross_functional_collaboration", "normalised": "cross_functional_collaboration", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "gain_management_experience", "normalised": "gain_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_payments_experience", "normalised": "obtain_payments_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "develop_coaching_skills", "normalised": "develop_coaching_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "highlight_cross_functional_work", "normalised": "highlight_cross_functional_work", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "support_experience_duration", "normalised": "support_experience_duration", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "payments_or_fintech_exposure", "normalised": "payments_or_fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "SLAs_and_metrics", "normalised": "slas_and_metrics", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_management_experience", "normalised": "gain_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "extend_support_experience", "normalised": "extend_support_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_fintech_exposure", "normalised": "obtain_fintech_exposure", "cluster": "EXPERIENCE_GAIN", "source": "llm", "all_hits": []}
+{"raw": "develop_coaching_skills", "normalised": "develop_coaching_skills", "cluster": "SOFT_SKILL_DEVELOPMENT", "source": "llm", "all_hits": []}
+{"raw": "support_experience", "normalised": "support_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "escalation_handling", "normalised": "escalation_handling", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "team_coaching", "normalised": "team_coaching", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "payment_or_fintech_exposure", "normalised": "payment_or_fintech_exposure", "cluster": "credit", "source": "rule", "all_hits": ["credit"]}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "SLAs_and_metrics", "normalised": "slas_and_metrics", "cluster": "skills", "source": "llm", "all_hits": []}
+{"raw": "gain_leadership_experience", "normalised": "gain_leadership_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "obtain_payments_experience", "normalised": "obtain_payments_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "formal_coaching_training", "normalised": "formal_coaching_training", "cluster": "EDUCATION", "source": "rule", "all_hits": ["EDUCATION"]}
+{"raw": "leadership_experience", "normalised": "leadership_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience", "soft_skills"]}
+{"raw": "fintech_exposure", "normalised": "fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "complex_escalations", "normalised": "complex_escalations", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "gain_formal_leadership_experience", "normalised": "gain_formal_leadership_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "SOFT_SKILL_DEVELOPMENT"]}
+{"raw": "obtain_payments_certification", "normalised": "obtain_payments_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION"]}
+{"raw": "highlight_escalation_experience", "normalised": "highlight_escalation_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}
+{"raw": "team_management_experience", "normalised": "team_management_experience", "cluster": "experience", "source": "rule", "all_hits": ["experience"]}
+{"raw": "fintech_exposure", "normalised": "fintech_exposure", "cluster": "experience", "source": "llm", "all_hits": []}
+{"raw": "leadership_depth", "normalised": "leadership_depth", "cluster": "soft_skills", "source": "rule", "all_hits": ["soft_skills"]}
+{"raw": "gain_formal_team_management_experience", "normalised": "gain_formal_team_management_experience", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN"]}
+{"raw": "obtain_payments_certification", "normalised": "obtain_payments_certification", "cluster": "CERTIFICATION", "source": "rule", "all_hits": ["CERTIFICATION"]}
+{"raw": "highlight_process_improvement_projects", "normalised": "highlight_process_improvement_projects", "cluster": "EXPERIENCE_GAIN", "source": "rule", "all_hits": ["EXPERIENCE_GAIN", "APPLICATION"]}

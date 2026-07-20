@@ -1,0 +1,27 @@
+# Perturbation smoke audit: do immaterial edits flip decisions?
+# 1 SUT x 5 borderline cases x (base + 2 perturbation classes) x 5 repeats.
+audit_id: phase4-perturbation-smoke-001
+audit_seed: 42
+max_spend_usd: 0.25
+concurrency: 2
+corpus_path: phase4/smoke-cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+perturbations:
+  enabled: true
+  classes: [whitespace, bullet_style, date_format]
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: gpt-4o-mini
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt

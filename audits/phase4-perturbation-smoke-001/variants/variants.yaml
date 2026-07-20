@@ -1,0 +1,527 @@
+perturbations_version: 0.1.0
+seed: 42
+variants:
+- variant_id: sc-platform-engineer-02+whitespace
+  case_id: sc-platform-engineer-02
+  perturbation_class: whitespace
+  content_hash: 899e9f535b4535c972a92ed56c7a1164b82123c4324267ba33bd62ec40e1f58a
+  cv_text: "Maxwell Cotter    \nmaxwell.cotter@example.invalid | Brindleford\n\nPROFILE\
+    \  \nPlatform Engineer with just over three years’ experience supporting and automating\
+    \ cloud-native infrastructure. Adept at managing Kubernetes clusters on AWS, implementing\
+    \ infrastructure as code with Terraform, and maintaining CI/CD pipelines. Collaborative\
+    \ and motivated to improve reliability and observability. Eager to deepen skills\
+    \ with GCP and multi-cloud environments.  \n\nEXPERIENCE    \nPlatform Engineer\
+    \    \nCloudspire Markets Ltd, Brindleford    \nMay 2022 – Present    \n- Managed\
+    \ AWS-based production environments supporting a B2B e-commerce platform; maintained\
+    \ and upgraded Kubernetes clusters (EKS).  \n- Developed and reviewed Terraform\
+    \ modules to standardise infrastructure provisioning.    \n- Maintained and extended\
+    \ Jenkins pipelines for CI/CD; introduced GitHub Actions for selected microservices,\
+    \ increasing deployment velocity.    \n- Supported an on-call rota, diagnosing\
+    \ outages and collaborating with developers to resolve incidents and improve system\
+    \ reliability.    \n- Integrated Prometheus and Grafana for monitoring; set up\
+    \ basic alerting and dashboarding for application metrics.  \n- Delivered internal\
+    \ workshops on infrastructure automation and monitoring practices.\n\n\nDevOps\
+    \ Engineer  \nNorthwell Digital Foods, Welford-on-Green  \nJuly 2020 – April 2022\
+    \  \n- Assisted in migration from on-prem to AWS, focusing on containerisation\
+    \ and initial Kubernetes adoption.  \n- Automated stateless service deployments\
+    \ with Helm and basic bash/Python scripts.  \n- Helped implement ELK stack for\
+    \ centralised log management and troubleshooting.    \n- Contributed to Terraform\
+    \ codebase for managing VPCs, EC2, and S3 resources.    \n- Supported small team\
+    \ with day-to-day troubleshooting and monitoring system health.  \n\n\nSKILLS\
+    \  \n- Public Cloud: AWS (EC2, EKS, S3, IAM), basic GCP exposure in sandbox environments\
+    \    \n- Containerisation: Kubernetes (EKS), Helm    \n- Infrastructure as Code:\
+    \ Terraform  \n- CI/CD: Jenkins, GitHub Actions    \n- Programming: Python (intermediate),\
+    \ Go (basic scripting)    \n- Observability: Prometheus, Grafana, ELK  \n- Collaboration:\
+    \ JIRA, Slack, Confluence\n\nEDUCATION  \nBSc (Hons) Computing and Networks  \
+    \  \nLinfield Technical University, Linfield  \n2017 – 2020\n\n\nOTHER    \n-\
+    \ AWS Certified Solutions Architect – Associate (2023)  \n- Actively studying\
+    \ for Certified Kubernetes Administrator (CKA)"
+- variant_id: sc-platform-engineer-02+bullet_style
+  case_id: sc-platform-engineer-02
+  perturbation_class: bullet_style
+  content_hash: 9852de9deea824c3029c3b791a66294b4d27f3e450468f2ff44188e30763eca5
+  cv_text: "Maxwell Cotter  \nmaxwell.cotter@example.invalid | Brindleford\n\nPROFILE\
+    \  \nPlatform Engineer with just over three years’ experience supporting and automating\
+    \ cloud-native infrastructure. Adept at managing Kubernetes clusters on AWS, implementing\
+    \ infrastructure as code with Terraform, and maintaining CI/CD pipelines. Collaborative\
+    \ and motivated to improve reliability and observability. Eager to deepen skills\
+    \ with GCP and multi-cloud environments.\n\nEXPERIENCE  \nPlatform Engineer  \n\
+    Cloudspire Markets Ltd, Brindleford  \nMay 2022 – Present  \n• Managed AWS-based\
+    \ production environments supporting a B2B e-commerce platform; maintained and\
+    \ upgraded Kubernetes clusters (EKS).  \n• Developed and reviewed Terraform modules\
+    \ to standardise infrastructure provisioning.  \n• Maintained and extended Jenkins\
+    \ pipelines for CI/CD; introduced GitHub Actions for selected microservices, increasing\
+    \ deployment velocity.  \n• Supported an on-call rota, diagnosing outages and\
+    \ collaborating with developers to resolve incidents and improve system reliability.\
+    \  \n• Integrated Prometheus and Grafana for monitoring; set up basic alerting\
+    \ and dashboarding for application metrics.  \n• Delivered internal workshops\
+    \ on infrastructure automation and monitoring practices.\n\nDevOps Engineer  \n\
+    Northwell Digital Foods, Welford-on-Green  \nJuly 2020 – April 2022  \n• Assisted\
+    \ in migration from on-prem to AWS, focusing on containerisation and initial Kubernetes\
+    \ adoption.  \n• Automated stateless service deployments with Helm and basic bash/Python\
+    \ scripts.  \n• Helped implement ELK stack for centralised log management and\
+    \ troubleshooting.  \n• Contributed to Terraform codebase for managing VPCs, EC2,\
+    \ and S3 resources.  \n• Supported small team with day-to-day troubleshooting\
+    \ and monitoring system health.\n\nSKILLS  \n• Public Cloud: AWS (EC2, EKS, S3,\
+    \ IAM), basic GCP exposure in sandbox environments  \n• Containerisation: Kubernetes\
+    \ (EKS), Helm  \n• Infrastructure as Code: Terraform  \n• CI/CD: Jenkins, GitHub\
+    \ Actions  \n• Programming: Python (intermediate), Go (basic scripting)  \n• Observability:\
+    \ Prometheus, Grafana, ELK  \n• Collaboration: JIRA, Slack, Confluence\n\nEDUCATION\
+    \  \nBSc (Hons) Computing and Networks  \nLinfield Technical University, Linfield\
+    \  \n2017 – 2020\n\nOTHER  \n• AWS Certified Solutions Architect – Associate (2023)\
+    \  \n• Actively studying for Certified Kubernetes Administrator (CKA)\n"
+- variant_id: sc-platform-engineer-02+date_format
+  case_id: sc-platform-engineer-02
+  perturbation_class: date_format
+  content_hash: 20f1fe676436005dff51633fa069ab021ff4b1ff67216f6e3b09421907b8343d
+  cv_text: "Maxwell Cotter  \nmaxwell.cotter@example.invalid | Brindleford\n\nPROFILE\
+    \  \nPlatform Engineer with just over three years’ experience supporting and automating\
+    \ cloud-native infrastructure. Adept at managing Kubernetes clusters on AWS, implementing\
+    \ infrastructure as code with Terraform, and maintaining CI/CD pipelines. Collaborative\
+    \ and motivated to improve reliability and observability. Eager to deepen skills\
+    \ with GCP and multi-cloud environments.\n\nEXPERIENCE  \nPlatform Engineer  \n\
+    Cloudspire Markets Ltd, Brindleford  \nMay 2022 – Present  \n- Managed AWS-based\
+    \ production environments supporting a B2B e-commerce platform; maintained and\
+    \ upgraded Kubernetes clusters (EKS).  \n- Developed and reviewed Terraform modules\
+    \ to standardise infrastructure provisioning.  \n- Maintained and extended Jenkins\
+    \ pipelines for CI/CD; introduced GitHub Actions for selected microservices, increasing\
+    \ deployment velocity.  \n- Supported an on-call rota, diagnosing outages and\
+    \ collaborating with developers to resolve incidents and improve system reliability.\
+    \  \n- Integrated Prometheus and Grafana for monitoring; set up basic alerting\
+    \ and dashboarding for application metrics.  \n- Delivered internal workshops\
+    \ on infrastructure automation and monitoring practices.\n\nDevOps Engineer  \n\
+    Northwell Digital Foods, Welford-on-Green  \nJuly 2020 – April 2022  \n- Assisted\
+    \ in migration from on-prem to AWS, focusing on containerisation and initial Kubernetes\
+    \ adoption.  \n- Automated stateless service deployments with Helm and basic bash/Python\
+    \ scripts.  \n- Helped implement ELK stack for centralised log management and\
+    \ troubleshooting.  \n- Contributed to Terraform codebase for managing VPCs, EC2,\
+    \ and S3 resources.  \n- Supported small team with day-to-day troubleshooting\
+    \ and monitoring system health.\n\nSKILLS  \n- Public Cloud: AWS (EC2, EKS, S3,\
+    \ IAM), basic GCP exposure in sandbox environments  \n- Containerisation: Kubernetes\
+    \ (EKS), Helm  \n- Infrastructure as Code: Terraform  \n- CI/CD: Jenkins, GitHub\
+    \ Actions  \n- Programming: Python (intermediate), Go (basic scripting)  \n- Observability:\
+    \ Prometheus, Grafana, ELK  \n- Collaboration: JIRA, Slack, Confluence\n\nEDUCATION\
+    \  \nBSc (Hons) Computing and Networks  \nLinfield Technical University, Linfield\
+    \  \n2017 – 2020\n\nOTHER  \n- AWS Certified Solutions Architect – Associate (2023)\
+    \  \n- Actively studying for Certified Kubernetes Administrator (CKA)\n"
+- variant_id: sc-data-analyst-02+whitespace
+  case_id: sc-data-analyst-02
+  perturbation_class: whitespace
+  content_hash: a4ffda44573986ddd8c53ded16484833e783b8bff1d714fea96dafb9eec86fa9
+  cv_text: "Eleanor Broadley  \neleanor.broadley@example.invalid | Wrenthorpe  \n\n\
+    PROFILE  \nDetail-oriented data professional with two years of experience working\
+    \ in analytics roles across financial services and retail. Adept in SQL and Python\
+    \ for data extraction and cleaning, and experienced in producing reports and visualizations\
+    \ for business users. Familiar with statistical analysis techniques and enthusiastic\
+    \ about applying data-driven solutions to real-world business challenges. Strong\
+    \ communicator with a track record of effective collaboration across departments.\
+    \ Keen to further develop expertise in insurance analytics within a dynamic and\
+    \ supportive environment.  \n\nEXPERIENCE  \nHarborough Credit Limited, Data Analyst\
+    \  \nApril 2022 – Present    \n- Developed and maintained SQL queries to extract\
+    \ customer and transaction data for monthly finance reports, improving reporting\
+    \ efficiency by 15%.    \n- Built automated Python scripts to clean data feeds,\
+    \ reducing manual processing for the risk team.  \n- Created dashboards in Power\
+    \ BI to track loan application trends, enabling management to identify key market\
+    \ segments.  \n- Worked with risk analysts to support credit risk modelling projects,\
+    \ providing data summaries and basic statistical analyses.    \n- Delivered findings\
+    \ to business users in regular meetings, translating technical results into actionable\
+    \ insights.\n\n\nLindley Homewares, Junior BI Analyst    \nJuly 2021 – March 2022\
+    \  \n- Assisted in transforming point-of-sale and inventory data into actionable\
+    \ sales reports using SQL.    \n- Supported migration of legacy Excel reports\
+    \ to Tableau dashboards under supervision.    \n- Produced simple ad hoc analyses\
+    \ to answer sales management queries, presenting findings in clear, accessible\
+    \ summaries.    \n- Coordinated with IT and sales teams to validate data integrity\
+    \ and resolve discrepancies.  \n\n\nSKILLS  \n- Proficient in SQL (data extraction,\
+    \ transformation, joins, reporting)    \n- Working knowledge of Python (Pandas,\
+    \ data cleansing, basic scripting)  \n- Experience with Power BI and introductory\
+    \ Tableau (dashboard building and maintenance)    \n- Competent in Excel for analysis\
+    \ and reporting  \n- Foundational knowledge of statistics and data validation\
+    \  \n- Strong verbal and written communication    \n- Stakeholder engagement across\
+    \ technical and non-technical teams\n\nEDUCATION    \nWestcroft University, BSc\
+    \ (Hons) Mathematics    \n2017 – 2021  \n\n\nOTHER  \n- Currently undertaking\
+    \ online course in insurance analytics  \n- Volunteered as data steward for Wrenthorpe\
+    \ Community Fundraiser 2023"
+- variant_id: sc-data-analyst-02+bullet_style
+  case_id: sc-data-analyst-02
+  perturbation_class: bullet_style
+  content_hash: 73006ec116c31322df719648ba885169aab467d73e5360269ca057a39bc7bfe0
+  cv_text: "Eleanor Broadley  \neleanor.broadley@example.invalid | Wrenthorpe\n\n\
+    PROFILE  \nDetail-oriented data professional with two years of experience working\
+    \ in analytics roles across financial services and retail. Adept in SQL and Python\
+    \ for data extraction and cleaning, and experienced in producing reports and visualizations\
+    \ for business users. Familiar with statistical analysis techniques and enthusiastic\
+    \ about applying data-driven solutions to real-world business challenges. Strong\
+    \ communicator with a track record of effective collaboration across departments.\
+    \ Keen to further develop expertise in insurance analytics within a dynamic and\
+    \ supportive environment.\n\nEXPERIENCE  \nHarborough Credit Limited, Data Analyst\
+    \  \nApril 2022 – Present  \n• Developed and maintained SQL queries to extract\
+    \ customer and transaction data for monthly finance reports, improving reporting\
+    \ efficiency by 15%.  \n• Built automated Python scripts to clean data feeds,\
+    \ reducing manual processing for the risk team.  \n• Created dashboards in Power\
+    \ BI to track loan application trends, enabling management to identify key market\
+    \ segments.  \n• Worked with risk analysts to support credit risk modelling projects,\
+    \ providing data summaries and basic statistical analyses.  \n• Delivered findings\
+    \ to business users in regular meetings, translating technical results into actionable\
+    \ insights.\n\nLindley Homewares, Junior BI Analyst  \nJuly 2021 – March 2022\
+    \  \n• Assisted in transforming point-of-sale and inventory data into actionable\
+    \ sales reports using SQL.  \n• Supported migration of legacy Excel reports to\
+    \ Tableau dashboards under supervision.  \n• Produced simple ad hoc analyses to\
+    \ answer sales management queries, presenting findings in clear, accessible summaries.\
+    \  \n• Coordinated with IT and sales teams to validate data integrity and resolve\
+    \ discrepancies.\n\nSKILLS  \n• Proficient in SQL (data extraction, transformation,\
+    \ joins, reporting)  \n• Working knowledge of Python (Pandas, data cleansing,\
+    \ basic scripting)  \n• Experience with Power BI and introductory Tableau (dashboard\
+    \ building and maintenance)  \n• Competent in Excel for analysis and reporting\
+    \  \n• Foundational knowledge of statistics and data validation  \n• Strong verbal\
+    \ and written communication  \n• Stakeholder engagement across technical and non-technical\
+    \ teams\n\nEDUCATION  \nWestcroft University, BSc (Hons) Mathematics  \n2017 –\
+    \ 2021\n\nOTHER  \n• Currently undertaking online course in insurance analytics\
+    \  \n• Volunteered as data steward for Wrenthorpe Community Fundraiser 2023\n"
+- variant_id: sc-data-analyst-02+date_format
+  case_id: sc-data-analyst-02
+  perturbation_class: date_format
+  content_hash: 8afdeedfcc62925992dcf9053e221d253f8a814bd03a800c7063aade003eac1f
+  cv_text: "Eleanor Broadley  \neleanor.broadley@example.invalid | Wrenthorpe\n\n\
+    PROFILE  \nDetail-oriented data professional with two years of experience working\
+    \ in analytics roles across financial services and retail. Adept in SQL and Python\
+    \ for data extraction and cleaning, and experienced in producing reports and visualizations\
+    \ for business users. Familiar with statistical analysis techniques and enthusiastic\
+    \ about applying data-driven solutions to real-world business challenges. Strong\
+    \ communicator with a track record of effective collaboration across departments.\
+    \ Keen to further develop expertise in insurance analytics within a dynamic and\
+    \ supportive environment.\n\nEXPERIENCE  \nHarborough Credit Limited, Data Analyst\
+    \  \nApril 2022 – Present  \n- Developed and maintained SQL queries to extract\
+    \ customer and transaction data for monthly finance reports, improving reporting\
+    \ efficiency by 15%.  \n- Built automated Python scripts to clean data feeds,\
+    \ reducing manual processing for the risk team.  \n- Created dashboards in Power\
+    \ BI to track loan application trends, enabling management to identify key market\
+    \ segments.  \n- Worked with risk analysts to support credit risk modelling projects,\
+    \ providing data summaries and basic statistical analyses.  \n- Delivered findings\
+    \ to business users in regular meetings, translating technical results into actionable\
+    \ insights.\n\nLindley Homewares, Junior BI Analyst  \nJuly 2021 – March 2022\
+    \  \n- Assisted in transforming point-of-sale and inventory data into actionable\
+    \ sales reports using SQL.  \n- Supported migration of legacy Excel reports to\
+    \ Tableau dashboards under supervision.  \n- Produced simple ad hoc analyses to\
+    \ answer sales management queries, presenting findings in clear, accessible summaries.\
+    \  \n- Coordinated with IT and sales teams to validate data integrity and resolve\
+    \ discrepancies.\n\nSKILLS  \n- Proficient in SQL (data extraction, transformation,\
+    \ joins, reporting)  \n- Working knowledge of Python (Pandas, data cleansing,\
+    \ basic scripting)  \n- Experience with Power BI and introductory Tableau (dashboard\
+    \ building and maintenance)  \n- Competent in Excel for analysis and reporting\
+    \  \n- Foundational knowledge of statistics and data validation  \n- Strong verbal\
+    \ and written communication  \n- Stakeholder engagement across technical and non-technical\
+    \ teams\n\nEDUCATION  \nWestcroft University, BSc (Hons) Mathematics  \n2017 –\
+    \ 2021\n\nOTHER  \n- Currently undertaking online course in insurance analytics\
+    \  \n- Volunteered as data steward for Wrenthorpe Community Fundraiser 2023\n"
+- variant_id: sc-frontend-developer-02+whitespace
+  case_id: sc-frontend-developer-02
+  perturbation_class: whitespace
+  content_hash: 7be4f95a20357fbc331574bf94991816c22b7c03fce2535279313db7576b2cb3
+  cv_text: "Ruby Finlay    \nruby.finlay@example.invalid | Newridge-on-Thames  \n\n\
+    \nPROFILE  \nFront-end developer with just over three years’ experience building\
+    \ web applications with React and TypeScript. Committed to creating performant,\
+    \ visually consistent interfaces and improving developer workflows. Hands-on experience\
+    \ with component libraries and collaborative projects, with a growing focus on\
+    \ accessibility and testing. Eager to contribute to ambitious teams making digital\
+    \ experiences more inclusive and responsive.  \n\nEXPERIENCE    \nJunior Frontend\
+    \ Developer    \nAutumnArc Solutions, Baneshire    \nMarch 2021 – Present    \n\
+    - Developed and maintained user-facing features for a property search platform\
+    \ using React (v17+) and TypeScript, collaborating closely with UI/UX designers.\
+    \  \n- Contributed to a small design system: created a reusable button set and\
+    \ helped document component usage, but have not led a full design system effort.\
+    \    \n- Participated in accessibility reviews for major product releases; implemented\
+    \ semantic HTML and basic ARIA attributes, but limited experience with advanced\
+    \ WCAG criteria.  \n- Wrote and maintained unit tests with Jest; integrated Testing\
+    \ Library for several new features, and fixed test failures in existing codebase.\
+    \    \n- Worked with backend engineers to integrate REST APIs; familiar with code\
+    \ reviews and using git in a collaborative team setting, primarily via GitLab.\
+    \  \n- Monitored performance using Lighthouse; made some improvements to resource\
+    \ loading, but limited experience with formal performance budgeting.  \n- Assisted\
+    \ with migration of selected pages to Next.js (v12), though have not set up server-side\
+    \ rendering independently.  \n- Supported basic CI integration with GitLab pipelines;\
+    \ limited exposure to full CI/CD workflows and GitHub Actions.  \n\n\nFrontend\
+    \ Intern  \nGreenleaf Digital, Porthurst    \nJuly 2020 – Feb 2021    \n- Built\
+    \ simple React components for a not-for-profit events app.  \n- Shadowed senior\
+    \ developers in feature planning and code review sessions.    \n- Gained initial\
+    \ experience with TypeScript and basic accessibility practices.\n\nSKILLS  \n\
+    - React (3 years), TypeScript (2 years), JavaScript (ES6+)  \n- CSS Modules, Styled\
+    \ Components  \n- Basic Next.js, Git, REST APIs  \n- Jest, Testing Library   \
+    \ \n- Figma (handoff), Storybook (basic)    \n- Awareness of accessibility standards\
+    \ (working towards WCAG 2.1 AA)  \n\nEDUCATION  \nDiploma in Web Application Development\
+    \    \nArden Technical College, Baneshire  \n2018 – 2020  \n\n\nOTHER  \nMember,\
+    \ Baneshire Frontend Meetup (2022– )  "
+- variant_id: sc-frontend-developer-02+bullet_style
+  case_id: sc-frontend-developer-02
+  perturbation_class: bullet_style
+  content_hash: 9eb81243024eb52958840f673cc7984c310f03cc4671016d033fe271a57a6259
+  cv_text: "Ruby Finlay  \nruby.finlay@example.invalid | Newridge-on-Thames\n\nPROFILE\
+    \  \nFront-end developer with just over three years’ experience building web applications\
+    \ with React and TypeScript. Committed to creating performant, visually consistent\
+    \ interfaces and improving developer workflows. Hands-on experience with component\
+    \ libraries and collaborative projects, with a growing focus on accessibility\
+    \ and testing. Eager to contribute to ambitious teams making digital experiences\
+    \ more inclusive and responsive.\n\nEXPERIENCE  \nJunior Frontend Developer  \n\
+    AutumnArc Solutions, Baneshire  \nMarch 2021 – Present  \n• Developed and maintained\
+    \ user-facing features for a property search platform using React (v17+) and TypeScript,\
+    \ collaborating closely with UI/UX designers.  \n• Contributed to a small design\
+    \ system: created a reusable button set and helped document component usage, but\
+    \ have not led a full design system effort.  \n• Participated in accessibility\
+    \ reviews for major product releases; implemented semantic HTML and basic ARIA\
+    \ attributes, but limited experience with advanced WCAG criteria.  \n• Wrote and\
+    \ maintained unit tests with Jest; integrated Testing Library for several new\
+    \ features, and fixed test failures in existing codebase.  \n• Worked with backend\
+    \ engineers to integrate REST APIs; familiar with code reviews and using git in\
+    \ a collaborative team setting, primarily via GitLab.  \n• Monitored performance\
+    \ using Lighthouse; made some improvements to resource loading, but limited experience\
+    \ with formal performance budgeting.  \n• Assisted with migration of selected\
+    \ pages to Next.js (v12), though have not set up server-side rendering independently.\
+    \  \n• Supported basic CI integration with GitLab pipelines; limited exposure\
+    \ to full CI/CD workflows and GitHub Actions.\n\nFrontend Intern  \nGreenleaf\
+    \ Digital, Porthurst  \nJuly 2020 – Feb 2021  \n• Built simple React components\
+    \ for a not-for-profit events app.  \n• Shadowed senior developers in feature\
+    \ planning and code review sessions.  \n• Gained initial experience with TypeScript\
+    \ and basic accessibility practices.\n\nSKILLS  \n• React (3 years), TypeScript\
+    \ (2 years), JavaScript (ES6+)  \n• CSS Modules, Styled Components  \n• Basic\
+    \ Next.js, Git, REST APIs  \n• Jest, Testing Library  \n• Figma (handoff), Storybook\
+    \ (basic)  \n• Awareness of accessibility standards (working towards WCAG 2.1\
+    \ AA)\n\nEDUCATION  \nDiploma in Web Application Development  \nArden Technical\
+    \ College, Baneshire  \n2018 – 2020\n\nOTHER  \nMember, Baneshire Frontend Meetup\
+    \ (2022– )\n"
+- variant_id: sc-frontend-developer-02+date_format
+  case_id: sc-frontend-developer-02
+  perturbation_class: date_format
+  content_hash: 19c4784a46690211bc4403d41fa0dc7788df12a2f493dfb67a4f0fca977144d0
+  cv_text: "Ruby Finlay  \nruby.finlay@example.invalid | Newridge-on-Thames\n\nPROFILE\
+    \  \nFront-end developer with just over three years’ experience building web applications\
+    \ with React and TypeScript. Committed to creating performant, visually consistent\
+    \ interfaces and improving developer workflows. Hands-on experience with component\
+    \ libraries and collaborative projects, with a growing focus on accessibility\
+    \ and testing. Eager to contribute to ambitious teams making digital experiences\
+    \ more inclusive and responsive.\n\nEXPERIENCE  \nJunior Frontend Developer  \n\
+    AutumnArc Solutions, Baneshire  \nMarch 2021 – Present  \n- Developed and maintained\
+    \ user-facing features for a property search platform using React (v17+) and TypeScript,\
+    \ collaborating closely with UI/UX designers.  \n- Contributed to a small design\
+    \ system: created a reusable button set and helped document component usage, but\
+    \ have not led a full design system effort.  \n- Participated in accessibility\
+    \ reviews for major product releases; implemented semantic HTML and basic ARIA\
+    \ attributes, but limited experience with advanced WCAG criteria.  \n- Wrote and\
+    \ maintained unit tests with Jest; integrated Testing Library for several new\
+    \ features, and fixed test failures in existing codebase.  \n- Worked with backend\
+    \ engineers to integrate REST APIs; familiar with code reviews and using git in\
+    \ a collaborative team setting, primarily via GitLab.  \n- Monitored performance\
+    \ using Lighthouse; made some improvements to resource loading, but limited experience\
+    \ with formal performance budgeting.  \n- Assisted with migration of selected\
+    \ pages to Next.js (v12), though have not set up server-side rendering independently.\
+    \  \n- Supported basic CI integration with GitLab pipelines; limited exposure\
+    \ to full CI/CD workflows and GitHub Actions.\n\nFrontend Intern  \nGreenleaf\
+    \ Digital, Porthurst  \nJuly 2020 – Feb 2021  \n- Built simple React components\
+    \ for a not-for-profit events app.  \n- Shadowed senior developers in feature\
+    \ planning and code review sessions.  \n- Gained initial experience with TypeScript\
+    \ and basic accessibility practices.\n\nSKILLS  \n- React (3 years), TypeScript\
+    \ (2 years), JavaScript (ES6+)  \n- CSS Modules, Styled Components  \n- Basic\
+    \ Next.js, Git, REST APIs  \n- Jest, Testing Library  \n- Figma (handoff), Storybook\
+    \ (basic)  \n- Awareness of accessibility standards (working towards WCAG 2.1\
+    \ AA)\n\nEDUCATION  \nDiploma in Web Application Development  \nArden Technical\
+    \ College, Baneshire  \n2018 – 2020\n\nOTHER  \nMember, Baneshire Frontend Meetup\
+    \ (2022– )\n"
+- variant_id: sc-project-manager-02+whitespace
+  case_id: sc-project-manager-02
+  perturbation_class: whitespace
+  content_hash: 2b1409dc0a8bbbbf88f0f60df3b627123116c4861ac2f9b3a329415ec053a540
+  cv_text: "Elliot Mason    \nelliot.mason@example.invalid | Moorley-on-Teal\n\n\n\
+    PROFILE    \nPractical and solutions-oriented project professional with over three\
+    \ years’ experience in civil construction, with a focus on small-scale infrastructure\
+    \ upgrades. Known for effective coordination of trades and clear site communication.\
+    \ Seeking to apply developing leadership skills and technical understanding to\
+    \ the Project Manager role at ArdenVale Infrastructure.\n\n\nEXPERIENCE  \nSite\
+    \ Project Coordinator    \nHickson & Bray Civil Solutions, Brentley, UK  \nMay\
+    \ 2021 – Present    \n- Supported the project management of highways resurfacing\
+    \ and drainage works (project values up to £900k), ensuring works met client requirements\
+    \ and program deadlines.    \n- Coordinated daily activities for site teams, including\
+    \ subcontractors (up to 15 workers), and maintained records for site operations,\
+    \ safety, and progress.    \n- Liaised directly with clients and the public regarding\
+    \ works impact and managed minor complaints in collaboration with project leads.\
+    \  \n- Assisted in the preparation of regular status and cost reports for management\
+    \ and clients.  \n- Promoted safe working practices by conducting daily toolbox\
+    \ talks and site inspections.  \n\nAssistant Project Manager (Graduate Scheme)\
+    \  \nNorthern Counties Engineering, Finham, UK  \nSept 2019 – May 2021    \n-\
+    \ Supported project managers on minor bridge repairs, cycle path upgrades, and\
+    \ utilities diversions (project values up to £400k).    \n- Participated in meetings\
+    \ with local council representatives and third-party stakeholders.    \n- Assisted\
+    \ in progress reporting, cost tracking, and risk identification for assigned projects.\
+    \    \n- Helped implement quality checks and follow-up on health and safety non-conformances.\
+    \    \n\nSKILLS    \n- Coordination of small teams and subcontractors    \n- Familiarity\
+    \ with NEC3/NEC4 contracts and CDM 2015    \n- Competence in Microsoft Project,\
+    \ Excel, and basic CAD  \n- Clear written and verbal communication    \n- Early-stage\
+    \ risk identification    \n- Budget tracking and basic cost reporting  \n- Strong\
+    \ organisational skills  \n\n\nEDUCATION    \nBSc (Hons) Civil Engineering (2:1)\
+    \  \nWest Teal University, 2016–2019    \n\nOTHER  \n- CSCS card (Professionally\
+    \ Qualified Person)    \n- Currently undertaking APM Project Management Qualification\
+    \ (APM PMQ) – expected completion August 2024    \n- Full UK driving licence  "
+- variant_id: sc-project-manager-02+bullet_style
+  case_id: sc-project-manager-02
+  perturbation_class: bullet_style
+  content_hash: 8638244a92214a651d0037695fc8e02f72ddaf70b2dc560aa8d7a1ddc9c7c1df
+  cv_text: "Elliot Mason  \nelliot.mason@example.invalid | Moorley-on-Teal\n\nPROFILE\
+    \  \nPractical and solutions-oriented project professional with over three years’\
+    \ experience in civil construction, with a focus on small-scale infrastructure\
+    \ upgrades. Known for effective coordination of trades and clear site communication.\
+    \ Seeking to apply developing leadership skills and technical understanding to\
+    \ the Project Manager role at ArdenVale Infrastructure.\n\nEXPERIENCE  \nSite\
+    \ Project Coordinator  \nHickson & Bray Civil Solutions, Brentley, UK  \nMay 2021\
+    \ – Present  \n– Supported the project management of highways resurfacing and\
+    \ drainage works (project values up to £900k), ensuring works met client requirements\
+    \ and program deadlines.  \n– Coordinated daily activities for site teams, including\
+    \ subcontractors (up to 15 workers), and maintained records for site operations,\
+    \ safety, and progress.  \n– Liaised directly with clients and the public regarding\
+    \ works impact and managed minor complaints in collaboration with project leads.\
+    \  \n– Assisted in the preparation of regular status and cost reports for management\
+    \ and clients.  \n– Promoted safe working practices by conducting daily toolbox\
+    \ talks and site inspections.  \n\nAssistant Project Manager (Graduate Scheme)\
+    \  \nNorthern Counties Engineering, Finham, UK  \nSept 2019 – May 2021  \n– Supported\
+    \ project managers on minor bridge repairs, cycle path upgrades, and utilities\
+    \ diversions (project values up to £400k).  \n– Participated in meetings with\
+    \ local council representatives and third-party stakeholders.  \n– Assisted in\
+    \ progress reporting, cost tracking, and risk identification for assigned projects.\
+    \  \n– Helped implement quality checks and follow-up on health and safety non-conformances.\
+    \  \n\nSKILLS  \n– Coordination of small teams and subcontractors  \n– Familiarity\
+    \ with NEC3/NEC4 contracts and CDM 2015  \n– Competence in Microsoft Project,\
+    \ Excel, and basic CAD  \n– Clear written and verbal communication  \n– Early-stage\
+    \ risk identification  \n– Budget tracking and basic cost reporting  \n– Strong\
+    \ organisational skills  \n\nEDUCATION  \nBSc (Hons) Civil Engineering (2:1) \
+    \ \nWest Teal University, 2016–2019  \n\nOTHER  \n– CSCS card (Professionally\
+    \ Qualified Person)  \n– Currently undertaking APM Project Management Qualification\
+    \ (APM PMQ) – expected completion August 2024  \n– Full UK driving licence\n"
+- variant_id: sc-project-manager-02+date_format
+  case_id: sc-project-manager-02
+  perturbation_class: date_format
+  content_hash: b92d1f2f6f2a0cd484fb717f669356b2070748b564420400ed6a344c78a2aa96
+  cv_text: "Elliot Mason  \nelliot.mason@example.invalid | Moorley-on-Teal\n\nPROFILE\
+    \  \nPractical and solutions-oriented project professional with over three years’\
+    \ experience in civil construction, with a focus on small-scale infrastructure\
+    \ upgrades. Known for effective coordination of trades and clear site communication.\
+    \ Seeking to apply developing leadership skills and technical understanding to\
+    \ the Project Manager role at ArdenVale Infrastructure.\n\nEXPERIENCE  \nSite\
+    \ Project Coordinator  \nHickson & Bray Civil Solutions, Brentley, UK  \nMay 2021\
+    \ – Present  \n- Supported the project management of highways resurfacing and\
+    \ drainage works (project values up to £900k), ensuring works met client requirements\
+    \ and program deadlines.  \n- Coordinated daily activities for site teams, including\
+    \ subcontractors (up to 15 workers), and maintained records for site operations,\
+    \ safety, and progress.  \n- Liaised directly with clients and the public regarding\
+    \ works impact and managed minor complaints in collaboration with project leads.\
+    \  \n- Assisted in the preparation of regular status and cost reports for management\
+    \ and clients.  \n- Promoted safe working practices by conducting daily toolbox\
+    \ talks and site inspections.  \n\nAssistant Project Manager (Graduate Scheme)\
+    \  \nNorthern Counties Engineering, Finham, UK  \nSept 2019 – May 2021  \n- Supported\
+    \ project managers on minor bridge repairs, cycle path upgrades, and utilities\
+    \ diversions (project values up to £400k).  \n- Participated in meetings with\
+    \ local council representatives and third-party stakeholders.  \n- Assisted in\
+    \ progress reporting, cost tracking, and risk identification for assigned projects.\
+    \  \n- Helped implement quality checks and follow-up on health and safety non-conformances.\
+    \  \n\nSKILLS  \n- Coordination of small teams and subcontractors  \n- Familiarity\
+    \ with NEC3/NEC4 contracts and CDM 2015  \n- Competence in Microsoft Project,\
+    \ Excel, and basic CAD  \n- Clear written and verbal communication  \n- Early-stage\
+    \ risk identification  \n- Budget tracking and basic cost reporting  \n- Strong\
+    \ organisational skills  \n\nEDUCATION  \nBSc (Hons) Civil Engineering (2:1) \
+    \ \nWest Teal University, 2016–2019  \n\nOTHER  \n- CSCS card (Professionally\
+    \ Qualified Person)  \n- Currently undertaking APM Project Management Qualification\
+    \ (APM PMQ) – expected completion August 2024  \n- Full UK driving licence\n"
+- variant_id: sc-support-team-lead-02+whitespace
+  case_id: sc-support-team-lead-02
+  perturbation_class: whitespace
+  content_hash: 5e4645df7129be5587b00779bedcc9877730f3c2ffc5c2365a81e4fad67e7c97
+  cv_text: "Olivia Marsh  \nolivia.marsh@example.invalid | Bexwood\n\n\nPROFILE  \n\
+    Motivated customer support professional with three years’ experience in digital\
+    \ services, including 8 months in a supervisory role. Skilled in resolving customer\
+    \ issues, managing small teams, and supporting process improvements. Highly organized,\
+    \ with a keen eye for detail and a commitment to delivering positive customer\
+    \ outcomes. Eager to develop further leadership skills in a fast-paced fintech\
+    \ environment.\n\n\nEXPERIENCE  \nSenior Customer Support Advisor (Acting Team\
+    \ Lead)  \nBrightHive Digital, Bexwood  \nSeptember 2023 – Present  \n- Stepped\
+    \ into an acting team lead position, supervising 4 support agents during the team\
+    \ manager’s parental leave.    \n- Coordinated daily support operations for SME\
+    \ clients using BrightHive’s digital invoicing platform.  \n- Handled high-priority\
+    \ customer escalations and worked with tech staff to resolve platform bugs.  \n\
+    - Conducted weekly training sessions on updated support tools and product features.\
+    \  \n- Assisted in developing a new ticket triage process that reduced first-response\
+    \ times by 12%.  \n- Regularly monitored SLA dashboards and produced monthly performance\
+    \ reports for management review.  \n\n\nCustomer Support Advisor    \nBrightHive\
+    \ Digital, Bexwood    \nMarch 2021 – September 2023    \n- Provided front-line\
+    \ support via chat, email, and phone for digital payment and invoicing queries.\
+    \    \n- Regularly achieved or surpassed team targets for response times and customer\
+    \ satisfaction.  \n- Escalated complex technical problems to IT, documenting root\
+    \ causes and solutions.    \n- Contributed to support documentation updates and\
+    \ new team member onboarding.  \n\nSKILLS  \n- Incident and escalation management\
+    \  \n- Delivering constructive feedback  \n- Customer communications (written\
+    \ and verbal)    \n- Familiar with Zendesk, Intercom, and MS Teams    \n- Basic\
+    \ understanding of digital payments    \n- Process documentation and knowledge\
+    \ sharing\n\n\nEDUCATION  \nLevel 3 Diploma in Customer Service    \nKingsford\
+    \ Adult Learning Centre, 2020  \n\nOTHER  \nVolunteer Tech Buddy, Bexwood Community\
+    \ Library (2022–present): Assisting local residents with digital literacy and\
+    \ online services.    \n\nReferences available on request."
+- variant_id: sc-support-team-lead-02+bullet_style
+  case_id: sc-support-team-lead-02
+  perturbation_class: bullet_style
+  content_hash: 5b8e89f7dac62cf2f879d9e011514c79a038192f2b61563ddee45b0b93288c60
+  cv_text: "Olivia Marsh  \nolivia.marsh@example.invalid | Bexwood\n\nPROFILE  \n\
+    Motivated customer support professional with three years’ experience in digital\
+    \ services, including 8 months in a supervisory role. Skilled in resolving customer\
+    \ issues, managing small teams, and supporting process improvements. Highly organized,\
+    \ with a keen eye for detail and a commitment to delivering positive customer\
+    \ outcomes. Eager to develop further leadership skills in a fast-paced fintech\
+    \ environment.\n\nEXPERIENCE  \nSenior Customer Support Advisor (Acting Team Lead)\
+    \  \nBrightHive Digital, Bexwood  \nSeptember 2023 – Present  \n– Stepped into\
+    \ an acting team lead position, supervising 4 support agents during the team manager’s\
+    \ parental leave.  \n– Coordinated daily support operations for SME clients using\
+    \ BrightHive’s digital invoicing platform.  \n– Handled high-priority customer\
+    \ escalations and worked with tech staff to resolve platform bugs.  \n– Conducted\
+    \ weekly training sessions on updated support tools and product features.  \n\
+    – Assisted in developing a new ticket triage process that reduced first-response\
+    \ times by 12%.  \n– Regularly monitored SLA dashboards and produced monthly performance\
+    \ reports for management review.\n\nCustomer Support Advisor  \nBrightHive Digital,\
+    \ Bexwood  \nMarch 2021 – September 2023  \n– Provided front-line support via\
+    \ chat, email, and phone for digital payment and invoicing queries.  \n– Regularly\
+    \ achieved or surpassed team targets for response times and customer satisfaction.\
+    \  \n– Escalated complex technical problems to IT, documenting root causes and\
+    \ solutions.  \n– Contributed to support documentation updates and new team member\
+    \ onboarding.\n\nSKILLS  \n– Incident and escalation management  \n– Delivering\
+    \ constructive feedback  \n– Customer communications (written and verbal)  \n\
+    – Familiar with Zendesk, Intercom, and MS Teams  \n– Basic understanding of digital\
+    \ payments  \n– Process documentation and knowledge sharing\n\nEDUCATION  \nLevel\
+    \ 3 Diploma in Customer Service  \nKingsford Adult Learning Centre, 2020\n\nOTHER\
+    \  \nVolunteer Tech Buddy, Bexwood Community Library (2022–present): Assisting\
+    \ local residents with digital literacy and online services.  \n\nReferences available\
+    \ on request.\n"
+- variant_id: sc-support-team-lead-02+date_format
+  case_id: sc-support-team-lead-02
+  perturbation_class: date_format
+  content_hash: 47796f8df874c4ecaaffa713163393a6ce4541311ab7441c91548a2005560a0e
+  cv_text: "Olivia Marsh  \nolivia.marsh@example.invalid | Bexwood\n\nPROFILE  \n\
+    Motivated customer support professional with three years’ experience in digital\
+    \ services, including 8 months in a supervisory role. Skilled in resolving customer\
+    \ issues, managing small teams, and supporting process improvements. Highly organized,\
+    \ with a keen eye for detail and a commitment to delivering positive customer\
+    \ outcomes. Eager to develop further leadership skills in a fast-paced fintech\
+    \ environment.\n\nEXPERIENCE  \nSenior Customer Support Advisor (Acting Team Lead)\
+    \  \nBrightHive Digital, Bexwood  \nSeptember 2023 – Present  \n- Stepped into\
+    \ an acting team lead position, supervising 4 support agents during the team manager’s\
+    \ parental leave.  \n- Coordinated daily support operations for SME clients using\
+    \ BrightHive’s digital invoicing platform.  \n- Handled high-priority customer\
+    \ escalations and worked with tech staff to resolve platform bugs.  \n- Conducted\
+    \ weekly training sessions on updated support tools and product features.  \n\
+    - Assisted in developing a new ticket triage process that reduced first-response\
+    \ times by 12%.  \n- Regularly monitored SLA dashboards and produced monthly performance\
+    \ reports for management review.\n\nCustomer Support Advisor  \nBrightHive Digital,\
+    \ Bexwood  \nMarch 2021 – September 2023  \n- Provided front-line support via\
+    \ chat, email, and phone for digital payment and invoicing queries.  \n- Regularly\
+    \ achieved or surpassed team targets for response times and customer satisfaction.\
+    \  \n- Escalated complex technical problems to IT, documenting root causes and\
+    \ solutions.  \n- Contributed to support documentation updates and new team member\
+    \ onboarding.\n\nSKILLS  \n- Incident and escalation management  \n- Delivering\
+    \ constructive feedback  \n- Customer communications (written and verbal)  \n\
+    - Familiar with Zendesk, Intercom, and MS Teams  \n- Basic understanding of digital\
+    \ payments  \n- Process documentation and knowledge sharing\n\nEDUCATION  \nLevel\
+    \ 3 Diploma in Customer Service  \nKingsford Adult Learning Centre, 2020\n\nOTHER\
+    \  \nVolunteer Tech Buddy, Bexwood Community Library (2022–present): Assisting\
+    \ local residents with digital literacy and online services.  \n\nReferences available\
+    \ on request.\n"

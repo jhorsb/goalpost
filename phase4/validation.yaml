@@ -1,0 +1,39 @@
+# Phase 4 validation run: does a reason-recourse gap appear on
+# current-generation models, measured end-to-end by Goalpost?
+# 3 OpenAI SUTs x 25 frozen cases x 5 repeats, structured mode, T=0.
+# Epistemic stance (kickoff Phase 4): the tool's job is measurement,
+# not confirming the dissertation's thesis.
+audit_id: phase4-validation-001
+audit_seed: 42
+max_spend_usd: 1.00
+concurrency: 2
+corpus_path: corpora/starter-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  gpt-4.1-mini-2025-04-14: {input: 0.40, output: 1.60}
+  gpt-4.1-nano-2025-04-14: {input: 0.10, output: 0.40}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: gpt-4o-mini
+    provider: openai
+    model: gpt-4o-mini-2024-07-18
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: gpt-4.1-mini
+    provider: openai
+    model: gpt-4.1-mini-2025-04-14
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
+  - name: gpt-4.1-nano
+    provider: openai
+    model: gpt-4.1-nano-2025-04-14
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
