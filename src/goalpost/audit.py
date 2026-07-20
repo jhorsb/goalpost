@@ -384,6 +384,20 @@ def run_audit(
             sut_entry["extractor_self_agreement"] = _self_agreement(
                 run_result.transcripts, extractor_client
             )
+        if config.perturbations.enabled and config.perturbations.classes:
+            perturbation_cost, perturbation_report = _run_perturbations(
+                config=config,
+                cases=cases,
+                effective_sut=effective_sut,
+                sut=sut,
+                client_factory=client_factory,
+                extractor_client=extractor_client,
+                cache=cache,
+                audit_dir=audit_dir,
+                base_conditions=sut_conditions,
+            )
+            total_cost += perturbation_cost
+            sut_entry["perturbations"] = perturbation_report
         metrics_suts.append(sut_entry)
 
     metrics = {
@@ -406,3 +420,145 @@ def run_audit(
     (metrics_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
     return AuditResult(audit_dir=str(audit_dir), metrics=metrics)
+
+
+def _run_perturbations(
+    *,
+    config,
+    cases,
+    effective_sut,
+    sut,
+    client_factory,
+    extractor_client,
+    cache,
+    audit_dir,
+    base_conditions,
+):
+    """Run immaterial variants for one SUT and report decision flips per
+    perturbation class. Variant results are grouped separately from base
+    repeat-stability — never pooled (DESIGN.md §4)."""
+    from goalpost.perturbations import PERTURBATIONS_VERSION, make_variants
+
+    variants = make_variants(
+        cases, config.perturbations.classes, seed=config.audit_seed
+    )
+    variants_dir = audit_dir / "variants"
+    variants_dir.mkdir(parents=True, exist_ok=True)
+    (variants_dir / "variants.yaml").write_text(
+        __import__("yaml").safe_dump(
+            {
+                "perturbations_version": PERTURBATIONS_VERSION,
+                "seed": config.audit_seed,
+                "variants": [
+                    {
+                        "variant_id": v.variant_id,
+                        "case_id": v.case_id,
+                        "perturbation_class": v.perturbation_class,
+                        "content_hash": v.content_hash,
+                        "cv_text": v.cv_text,
+                    }
+                    for v in variants
+                ],
+            },
+            sort_keys=False,
+            allow_unicode=True,
+        )
+    )
+
+    variant_cases = [
+        Case(
+            case_id=v.variant_id,
+            cv_text=v.cv_text,
+            job_spec_text=v.job_spec_text,
+        )
+        for v in variants
+    ]
+    blocks = plan_blocks([effective_sut], config.conditions, variant_cases)
+    run_result = run_audit_blocks(
+        blocks,
+        client_factory=lambda s: client_factory(s),
+        cache=cache,
+        audit_seed=config.audit_seed,
+        max_spend_usd=config.max_spend_usd,
+    )
+    cost = run_result.total_cost_usd
+
+    for t in run_result.transcripts:
+        t["role"] = "sut_variant"
+    _write_jsonl(
+        audit_dir / "transcripts" / sut.sut_id / "transcripts.jsonl",
+        run_result.transcripts,
+    )
+
+    # Modal decision per (condition, variant)
+    from collections import defaultdict
+
+    decisions = defaultdict(list)
+    for transcript in run_result.transcripts:
+        if sut.elicitation_mode == "freeform":
+            parsed, ext_response = _extract_run(
+                transcript["response_text"], extractor_client
+            )
+            cost += ext_response.get("cost_usd", 0.0)
+        else:
+            parsed = parse_structured_response(transcript["response_text"])
+        decisions[(transcript["condition_id"], transcript["case_id"])].append(
+            parsed.decision
+        )
+
+    base_modal = {
+        (cond["condition_id"], case["case_id"]): case["decision_stability"][
+            "modal_decision"
+        ]
+        for cond in base_conditions
+        for case in cond["cases"]
+    }
+
+    per_class = defaultdict(lambda: {"flips": 0, "n": 0, "details": []})
+    for variant in variants:
+        for condition in config.conditions:
+            key = (condition.condition_id, variant.variant_id)
+            if key not in decisions:
+                continue
+            variant_modal = decision_stability(
+                [d or "__none__" for d in decisions[key]]
+            ).modal_decision
+            base = base_modal.get((condition.condition_id, variant.case_id))
+            flipped = (
+                base is not None
+                and variant_modal is not None
+                and variant_modal != base
+            )
+            bucket = per_class[variant.perturbation_class]
+            bucket["n"] += 1
+            bucket["flips"] += int(flipped)
+            bucket["details"].append(
+                {
+                    "variant_id": variant.variant_id,
+                    "condition_id": condition.condition_id,
+                    "base_decision": base,
+                    "variant_decision": variant_modal,
+                    "flipped": flipped,
+                }
+            )
+
+    classes = [
+        {
+            "perturbation_class": cls,
+            "n_variants": bucket["n"],
+            "decision_flips": bucket["flips"],
+            "decision_flip_rate": bucket["flips"] / bucket["n"] if bucket["n"] else None,
+            "details": bucket["details"],
+        }
+        for cls, bucket in sorted(per_class.items())
+    ]
+    overall_n = sum(c["n_variants"] for c in classes)
+    overall_flips = sum(c["decision_flips"] for c in classes)
+    return cost, {
+        "seed": config.audit_seed,
+        "classes": classes,
+        "overall_decision_flip_rate": (
+            overall_flips / overall_n if overall_n else None
+        ),
+        "missing_blocks": [b.block_id for b in run_result.missing_blocks],
+    }

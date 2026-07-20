@@ -105,6 +105,11 @@ class SUTConfig(BaseModel):
         )
 
 
+class PerturbationConfig(BaseModel):
+    enabled: bool = False
+    classes: list[str] = Field(default_factory=list)
+
+
 class AuditConfig(BaseModel):
     audit_id: str
     suts: list[SUTConfig]
@@ -113,6 +118,7 @@ class AuditConfig(BaseModel):
     extractor: ModelEndpoint
     max_spend_usd: float
     audit_seed: int
+    perturbations: PerturbationConfig = Field(default_factory=PerturbationConfig)
     corpus_path: str | None = None
     output_dir: str = "audits"
     pricing: dict[str, dict[str, float]] = Field(default_factory=dict)

@@ -202,3 +202,101 @@ def test_condition_carries_cross_case_aggregates(tmp_path):
     assert agg["recourse_cluster"]["n_included"] == 1
     assert agg["reason_cluster"]["mean"] == 1.0
     assert agg["min_pairs_floor"] == 3
+
+
+# ── perturbation wire-through (DESIGN.md §1/§4) ──────────────────────
+
+class PerturbationSensitiveClient:
+    """Fake SUT: rejects normally, but accepts when the bullet glyph from
+    the bullet_style perturbation appears in the prompt — a decision flip
+    under an immaterial edit."""
+
+    def complete(self, prompt, temperature, seed):
+        flipped = ("• " in prompt) or ("* " in prompt) or ("– " in prompt)
+        decision = "accept" if flipped else "reject"
+        text = (
+            f'DECISION_JSON: {{"decision": {{"label": "{decision}"}}}}\n'
+            'REASONS_JSON: {"reasons": [{"reason_id": "cloud_experience", '
+            '"direction": "negative", "note": "thin"}]}\n'
+            'RECOURSE_JSON: {"actions": [{"action_id": "aws_certification", '
+            '"description": "do it"}]}\n'
+        )
+        return {
+            "text": text,
+            "usage": {"input_tokens": 10, "output_tokens": 10},
+            "cost_usd": 0.001,
+            "model_fingerprint": "fake-fp",
+        }
+
+
+BULLET_CASE = Case(
+    case_id="c1",
+    cv_text="PROFILE\nA dev.\n\nEXPERIENCE\n- Built things\n- Shipped things\n",
+    job_spec_text="A ROLE\n- Requirement one\n",
+)
+
+
+def run_perturbed(tmp_path):
+    from goalpost.config import PerturbationConfig
+
+    config = make_config()
+    config.perturbations = PerturbationConfig(
+        enabled=True, classes=["whitespace", "bullet_style"]
+    )
+    return run_audit(
+        config=config,
+        cases=[BULLET_CASE],
+        client_factory=lambda sut: PerturbationSensitiveClient(),
+        canonicaliser_client=FakeCanonicaliser(),
+        extractor_client=None,
+        taxonomy_path=TAXONOMY,
+        output_root=tmp_path,
+    )
+
+
+def test_perturbation_variants_run_and_grouped_separately(tmp_path):
+    result = run_perturbed(tmp_path)
+    sut = result.metrics["suts"][0]
+    # base cases untouched by variant data
+    assert len(sut["conditions"][0]["cases"]) == 1
+    perturbation_report = sut["perturbations"]
+    classes = {p["perturbation_class"] for p in perturbation_report["classes"]}
+    assert classes == {"whitespace", "bullet_style"}
+
+
+def test_decision_flip_rates_per_class(tmp_path):
+    result = run_perturbed(tmp_path)
+    per_class = {
+        p["perturbation_class"]: p
+    for p in result.metrics["suts"][0]["perturbations"]["classes"]}
+    # whitespace never flips; bullet_style always flips (fake is sensitive)
+    assert per_class["whitespace"]["decision_flip_rate"] == 0.0
+    assert per_class["bullet_style"]["decision_flip_rate"] == 1.0
+    assert per_class["bullet_style"]["n_variants"] == 1
+
+
+def test_variants_frozen_artifact_written(tmp_path):
+    result = run_perturbed(tmp_path)
+    from pathlib import Path
+    import yaml as yaml_mod
+
+    variants_file = Path(result.audit_dir) / "variants" / "variants.yaml"
+    assert variants_file.exists()
+    data = yaml_mod.safe_load(variants_file.read_text())
+    ids = {v["variant_id"] for v in data["variants"]}
+    assert ids == {"c1+whitespace", "c1+bullet_style"}
+    assert all(v["content_hash"] for v in data["variants"])
+
+
+def test_perturbations_disabled_by_default_no_extra_calls(tmp_path):
+    client = ScriptedClient([structured_response("aws_certification")])
+    run_audit(
+        config=make_config(),
+        cases=[BULLET_CASE],
+        client_factory=lambda sut: client,
+        canonicaliser_client=FakeCanonicaliser(),
+        extractor_client=None,
+        taxonomy_path=TAXONOMY,
+        output_root=tmp_path,
+    )
+    assert client.calls == 4  # repeats only, no variant calls
