@@ -1,35 +1,23 @@
 # STATUS.md
 
 **Project:** Goalpost — CLI audit instrument for decision/reason/recourse stability in LLM-mediated screening.
-**Current phase:** Phase 3 — full build (orchestrator mode).
+**Current phase:** V1 definition-of-done met (kickoff §11). Codex lanes pending vendor credits (25 Jul).
 **Last updated:** 2026-07-06
 
-## Done
-- Phases 0 & 1 signed off (see DECISIONS.md D-001..D-013, METHODOLOGY_EXTRACTION.md, DESIGN.md).
-- Phase 2 slice, strict TDD, 89 tests green offline:
-  - metrics core (honours conventions + property tests)
-  - normaliser stages 1–2 + committed starter taxonomy (`taxonomies/cv-screening-v1.yaml`)
-  - structured-tail parser (refusal detection, no coercion)
-  - config/identity (mode in sut_id; canonicaliser≠SUT hard error; alias warnings)
-  - runner core with named integrity regressions (seed-per-repetition, cache-never-hits-repeats, block-boundary budget, resume)
-  - provider adapters (anthropic + openai SDKs; pricing table; cost computation)
-  - elicitation (output contract, extractor prompt with nonce bypass)
-  - audit orchestration (both modes end-to-end vs fakes; chain-of-custody artifacts; extractor self-agreement k=3 per item type)
-  - reporter (lay page + tech appendix, versioned anchors, lower-bound framing) + CLI (`goalpost audit --dry-run`, `goalpost report`)
-- `example.yaml` dry-run verified: 30 calls, est. $0.245, cap $0.50.
+## V1 definition of done — status
+- `goalpost audit --config example.yaml` → transcripts + JSON + both report formats, starter corpus, 1 SUT: ✓ (dry-run verified; live path proven by phase4 runs)
+- 2+ SUTs → comparison report: ✓ (`audits/phase4-validation-001/report/comparison.md`, 3 SUTs)
+- Full suite green offline: ✓ (145 passed; 14 delegated RED tests quarantined behind `-m codex`)
+- All required docs current: ✓ (METHODOLOGY_EXTRACTION, DESIGN, DECISIONS, DELEGATION, STATUS, VALIDATION_NOTES, README, METHODOLOGY, WRITEUP_TEMPLATE)
+- Stranger-verifiability: extraction + committed audit evidence + provenance tuples ✓
 
-## Phase 3 progress (2026-07-06)
-- Done, test-first: extractor gate enforced in reporter; cross-case aggregation (mean/median/IQR, n_pairs floor, listed exclusions) wired into audit output; perturbation engine (5 immaterial classes, deterministic, CV-only); frozen starter corpus (25 cases, 5 roles, banded, $0.38); multi-SUT comparison report (tie-bands, eligibility floors, cross-mode banner) + comparison.md in CLI.
-- Delegation opened: 3 Codex briefs drafted with committed RED tests (see DELEGATION.md).
-- D-015/D-016 actioned: repo moved to ~/Projects; gpt-4.1 extractor clears the gate (1.00/0.956); thresholds unrevised.
+## Phase 4 headline (VALIDATION_NOTES.md)
+Reason–recourse gap appears on all 3 tested 2026 models at T=0 (gaps +0.12…+0.29); recourse stability 0.57–0.68 (vs dissertation's 0.36 — not like-for-like); decisions themselves flip occasionally at T=0 (0.96–0.98); perturbation smoke: 0/15 flips. 375/375 parsed, 0 refusals. Spend to date ≈ $0.79 of $3.58.
 
-## Next
-- Batch hardening (main thread): perturbation wire-through into audit runs + decision-flip reporting; resume CLI; concurrency.
-- Author: ferry Codex briefs when convenient; returned diffs reviewed per DELEGATION.md rules.
-- Then Phase 4 validation run (fresh corpus, 2-3 SUTs) and Phase 5 docs.
+## Open
+- Codex tasks 01–03 drafted, awaiting credits (DELEGATION.md); dry-run planner undercounts canonicaliser/variant calls (noted in VALIDATION_NOTES).
+- Optional next measurements costed in VALIDATION_NOTES (T=0.7 sweep ~$0.10; full perturbation run ~$0.90; cross-lab SUT via OpenRouter).
+- Taxonomy promotion pass once `taxonomy-review` lands (Codex task 03).
 
-## Environment note
-Python pinned 3.12 (D-013). Editable-install `.pth` files under ~/Documents get macOS UF_HIDDEN flags applied asynchronously (iCloud); breaks imports on Python 3.14, transiently flaky elsewhere. If `goalpost` import fails: `uv sync --reinstall-package goalpost`.
-
-## Delegation
-- See DELEGATION.md: 3 Codex briefs drafted with RED tests (`pytest -m codex`); sub-agent log current.
+## Environment
+Python 3.12; venv at `~/.venvs/goalpost` (outside iCloud); launch via `./goalpost.sh` (D-013/D-015/D-016).
