@@ -13,6 +13,7 @@ Integrity guarantees enforced here:
 
 import hashlib
 import json
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -118,6 +119,7 @@ def run_audit_blocks(
     cache: CallCache,
     audit_seed: int,
     max_spend_usd: float,
+    concurrency: int = 1,
 ) -> RunResult:
     result = RunResult()
 
@@ -139,8 +141,7 @@ def run_audit_blocks(
         prompt = block.sut.prompt_template.replace(
             "{cv}", block.case.cv_text
         ).replace("{job_spec}", block.case.job_spec_text)
-        block_transcripts = []
-        for repetition_index in range(block.condition.repeats):
+        def run_repetition(repetition_index: int):
             seed = derive_seed(
                 audit_seed,
                 block.sut.sut_id,
@@ -168,7 +169,23 @@ def run_audit_blocks(
                 )
                 cache.put(key, response)
                 from_cache = False
+            return repetition_index, seed, key, response, from_cache
 
+        # Bounded concurrency within the block only: block boundaries stay
+        # the budget-enforcement points, and transcript order is restored
+        # by repetition_index (runner core — DESIGN.md §7).
+        if concurrency > 1:
+            with ThreadPoolExecutor(max_workers=concurrency) as pool:
+                outcomes = list(
+                    pool.map(run_repetition, range(block.condition.repeats))
+                )
+        else:
+            outcomes = [
+                run_repetition(i) for i in range(block.condition.repeats)
+            ]
+
+        block_transcripts = []
+        for repetition_index, seed, key, response, from_cache in outcomes:
             block_transcripts.append(
                 {
                     "transcript_id": key[:24],

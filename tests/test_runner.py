@@ -2,6 +2,7 @@
 stops, resume. Never-delegate module; the named regression tests here are
 required by DESIGN.md §7/§8 ("glassware is delegable, protocol isn't")."""
 
+import pytest
 from goalpost.config import Case, Condition, SUTConfig
 from goalpost.runner import (
     Block,
@@ -171,3 +172,50 @@ def test_seed_fits_signed_int64_provider_requirement():
     ]
     assert all(0 <= s <= 2**63 - 1 for s in seeds)
     assert len(set(seeds)) == 200  # still distinct
+
+
+# ── bounded concurrency within blocks ────────────────────────────────
+
+def test_concurrent_block_preserves_order_and_seeds(tmp_path):
+    client = FakeClient()
+    blocks = plan_blocks([sut("a")], [Condition(temperature=0.0, repeats=5)], [CASE])
+    result = run_audit_blocks(
+        blocks, client_factory=lambda s: client, cache=CallCache(tmp_path),
+        audit_seed=42, max_spend_usd=1.0, concurrency=3,
+    )
+    reps = [t["repetition_index"] for t in result.transcripts]
+    assert reps == [0, 1, 2, 3, 4]
+    assert len({t["provider_seed"] for t in result.transcripts}) == 5
+    assert result.total_cost_usd == pytest.approx(0.05)
+
+
+def test_concurrency_actually_overlaps_calls(tmp_path):
+    import threading
+    import time as time_mod
+
+    class SlowClient(FakeClient):
+        def __init__(self):
+            super().__init__()
+            self.lock = threading.Lock()
+            self.active = 0
+            self.max_active = 0
+
+        def complete(self, prompt, temperature, seed):
+            with self.lock:
+                self.active += 1
+                self.max_active = max(self.max_active, self.active)
+            time_mod.sleep(0.05)
+            try:
+                return super().complete(prompt, temperature, seed)
+            finally:
+                with self.lock:
+                    self.active -= 1
+
+    client = SlowClient()
+    blocks = plan_blocks([sut("a")], [Condition(temperature=0.0, repeats=4)], [CASE])
+    run_audit_blocks(
+        blocks, client_factory=lambda s: client, cache=CallCache(tmp_path),
+        audit_seed=42, max_spend_usd=1.0, concurrency=4,
+    )
+    assert client.max_active >= 2
+

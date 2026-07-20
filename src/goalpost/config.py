@@ -119,6 +119,7 @@ class AuditConfig(BaseModel):
     max_spend_usd: float
     audit_seed: int
     perturbations: PerturbationConfig = Field(default_factory=PerturbationConfig)
+    concurrency: int = 2  # bounded within-block parallelism (honours used 2)
     corpus_path: str | None = None
     output_dir: str = "audits"
     pricing: dict[str, dict[str, float]] = Field(default_factory=dict)

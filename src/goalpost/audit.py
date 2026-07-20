@@ -259,6 +259,7 @@ def run_audit(
             cache=cache,
             audit_seed=config.audit_seed,
             max_spend_usd=config.max_spend_usd,
+            concurrency=config.concurrency,
         )
         total_cost += run_result.total_cost_usd
         all_missing.extend(b.block_id for b in run_result.missing_blocks)
@@ -486,6 +487,7 @@ def _run_perturbations(
         cache=cache,
         audit_seed=config.audit_seed,
         max_spend_usd=config.max_spend_usd,
+        concurrency=config.concurrency,
     )
     cost = run_result.total_cost_usd
 
