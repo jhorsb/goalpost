@@ -29,8 +29,12 @@ def _plan(config: AuditConfig, cases: list[Case]) -> dict:
         calls = sum(c.repeats for c in config.conditions) * len(cases)
         extractor_calls = 0
         if sut.elicitation_mode == "freeform":
-            # one extraction per SUT call + k=3 self-agreement per call
-            extractor_calls = calls * 4
+            from goalpost.audit import SELF_AGREEMENT_K, SELF_AGREEMENT_SAMPLE
+
+            # one extraction per SUT call + k x stratified-sample self-agreement
+            extractor_calls = calls + (
+                min(SELF_AGREEMENT_SAMPLE, len(cases)) * SELF_AGREEMENT_K
+            )
         est = calls * compute_cost(
             sut.model,
             input_tokens=EST_INPUT_TOKENS,
@@ -107,6 +111,22 @@ def audit(
     _run_live(audit_config, cases)
 
 
+def make_sut_client(sut, pricing):
+    """Plain endpoint client, or the upstream pipeline chain when the SUT
+    declares one via params (plan: peppy-gliding-steele)."""
+    from goalpost.providers import make_client
+
+    if sut.params.get("pipeline") == "hs-resume-screener":
+        from goalpost import upstream
+        from goalpost.pipeline_client import UpstreamPipelineClient
+
+        prompts = upstream.load_upstream_prompts(upstream.PINNED_HS_SCREENER)
+        return UpstreamPipelineClient(
+            prompts=prompts, inner=make_client(sut, pricing=pricing)
+        )
+    return make_client(sut, pricing=pricing)
+
+
 def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     from goalpost.audit import run_audit
     from goalpost.providers import make_client
@@ -126,7 +146,7 @@ def _run_live(audit_config: AuditConfig, cases: list[Case]) -> None:
     result = run_audit(
         config=audit_config,
         cases=cases,
-        client_factory=lambda sut: make_client(sut, pricing=pricing),
+        client_factory=lambda sut: make_sut_client(sut, pricing),
         canonicaliser_client=canonicaliser,
         extractor_client=extractor,
         taxonomy_path=Path("taxonomies/cv-screening-v1.yaml"),

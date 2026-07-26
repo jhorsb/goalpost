@@ -420,3 +420,24 @@ def test_canonicaliser_mappings_persist_across_runs(tmp_path):
     run_audit(client_factory=lambda s: sut_client,
               canonicaliser_client=canon2, **{k: v for k, v in kwargs.items() if k != "canonicaliser_client"})
     assert canon2.calls == []  # served from the persisted mapping cache
+
+
+def test_self_agreement_samples_capped_and_stratified(tmp_path):
+    """Design: stratified sample, not every transcript (cost + DESIGN §4.4).
+    Cap at SELF_AGREEMENT_SAMPLE cases, first repetition of each."""
+    from goalpost import audit as audit_mod
+
+    counting = FakeExtractor()
+    cases = [
+        Case(case_id=f"c{i:02d}", cv_text=f"cv {i}", job_spec_text="spec")
+        for i in range(15)
+    ]
+    transcripts = [
+        {"case_id": c.case_id, "repetition_index": r,
+         "response_text": FREEFORM_PROSE}
+        for c in cases for r in range(3)
+    ]
+    result = audit_mod._self_agreement(transcripts, counting)
+    # 10 cases x k=3 uncached extractions, first repetition only
+    assert counting.calls == audit_mod.SELF_AGREEMENT_SAMPLE * audit_mod.SELF_AGREEMENT_K
+    assert result["sampled_cases"] == audit_mod.SELF_AGREEMENT_SAMPLE

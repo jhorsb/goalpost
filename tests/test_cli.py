@@ -170,3 +170,15 @@ def test_resume_loads_stored_config_and_replans(tmp_path, monkeypatch):
     result = runner.invoke(app, ["resume", str(audit_dir)])
     assert result.exit_code == 0
     assert seen == {"audit_id": "aud", "n_cases": 1}
+
+
+def test_dry_run_freeform_extractor_estimate_uses_sampling_cap(tmp_path, monkeypatch):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    config = write_slice_config(tmp_path)
+    text = config.read_text().replace(
+        "elicitation_mode: structured", "elicitation_mode: freeform"
+    )
+    config.write_text(text)
+    result = runner.invoke(app, ["audit", "--config", str(config), "--dry-run"])
+    # 1 case x 5 reps: 5 extractions + min(10, 1 case) x k=3 = 8 extractor calls
+    assert "8 extractor calls" in result.output

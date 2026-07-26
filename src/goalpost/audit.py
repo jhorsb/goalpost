@@ -33,6 +33,7 @@ from goalpost.runner import RUNNER_VERSION, CallCache, plan_blocks, run_audit_bl
 
 AUDIT_VERSION = "0.1.0"
 SELF_AGREEMENT_K = 3
+SELF_AGREEMENT_SAMPLE = 10  # stratified cap (DESIGN §4.4; cost)
 MIN_PAIRS_FLOOR = 3  # eligibility floor for cross-case aggregation (S3-3)
 
 
@@ -200,9 +201,17 @@ def _extract_run(response_text, extractor_client, nonce=None):
 
 
 def _self_agreement(sut_transcripts, extractor_client):
-    """k uncached extractions per sampled response; agreement per item type."""
+    """k uncached extractions per sampled response; agreement per item type.
+    Stratified sample: first repetition of each case, first
+    SELF_AGREEMENT_SAMPLE cases in case_id order."""
+    first_reps = [
+        t for t in sut_transcripts if t.get("repetition_index", 0) == 0
+    ]
+    sampled = sorted(first_reps, key=lambda t: t.get("case_id", ""))[
+        :SELF_AGREEMENT_SAMPLE
+    ]
     reason_scores, recourse_scores = [], []
-    for transcript in sut_transcripts:
+    for transcript in sampled:
         extractions = [
             _extract_run(
                 transcript["response_text"], extractor_client,
@@ -227,6 +236,7 @@ def _self_agreement(sut_transcripts, extractor_client):
 
     return {
         "k": SELF_AGREEMENT_K,
+        "sampled_cases": len(sampled),
         "reasons": {"mean_jaccard": mean(reason_scores)},
         "recourse": {"mean_jaccard": mean(recourse_scores)},
     }
