@@ -1,0 +1,27 @@
+# Cross-lab SUT via Groq FREE tier (no card required): Llama family (Meta).
+# Key: https://console.groq.com -> GROQ_API_KEY in .env
+audit_id: phase4-crosslab-groq-001
+audit_seed: 42
+max_spend_usd: 1.00
+concurrency: 1
+corpus_path: corpora/starter-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  llama-3.3-70b-versatile: {input: 0.0, output: 0.0}   # free tier
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: llama-3.3-70b
+    provider: openai_compatible
+    model: llama-3.3-70b-versatile
+    base_url: https://api.groq.com/openai/v1
+    api_key_env: GROQ_API_KEY
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
