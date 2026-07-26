@@ -11,7 +11,11 @@ from pathlib import Path
 import yaml
 
 from goalpost.config import AuditConfig, Case
-from goalpost.elicitation import OUTPUT_CONTRACT, build_extractor_prompt
+from goalpost.elicitation import (
+    ELICITATION_VERSION,
+    OUTPUT_CONTRACT,
+    build_extractor_prompt,
+)
 from goalpost.metrics import (
     METRICS_VERSION,
     aggregate_cases,
@@ -194,9 +198,26 @@ def _coverage(normalised_runs, item_key):
     }
 
 
-def _extract_run(response_text, extractor_client, nonce=None):
+def _extract_run(response_text, extractor_client, nonce=None, store=None):
+    """Extraction goes through the persistent cache so resume passes never
+    re-pay it. Nonce'd self-agreement extractions bypass by design — their
+    whole point is fresh, independent samples."""
+    import hashlib as _hashlib
+
+    key = None
+    if nonce is None and store is not None:
+        key = _hashlib.sha256(
+            f"{ELICITATION_VERSION}|{response_text}".encode("utf-8")
+        ).hexdigest()
+        cached = store.get(key)
+        if cached is not None:
+            return parse_structured_response(cached["text"]), {
+                **cached, "cost_usd": 0.0, "from_cache": True,
+            }
     prompt = build_extractor_prompt(response_text, nonce=nonce)
     response = extractor_client.complete(prompt=prompt, temperature=0.0, seed=0)
+    if key is not None:
+        store.put(key, response)
     return parse_structured_response(response["text"]), response
 
 
@@ -260,6 +281,7 @@ def run_audit(
     )
     cache = CallCache(audit_dir / ".cache")
     canon_store = CallCache(audit_dir / ".cache" / "canonicaliser")
+    extract_store = CallCache(audit_dir / ".cache" / "extractor")
 
     corpus_hash = "|".join(sorted(c.content_hash for c in cases))
 
@@ -303,7 +325,8 @@ def run_audit(
         for transcript in run_result.transcripts:
             if sut.elicitation_mode == "freeform":
                 parsed, ext_response = _extract_run(
-                    transcript["response_text"], extractor_client
+                    transcript["response_text"], extractor_client,
+                    store=extract_store,
                 )
                 sut_transcripts.append({
                     "role": "extractor",
@@ -425,6 +448,7 @@ def run_audit(
                 client_factory=client_factory,
                 extractor_client=extractor_client,
                 cache=cache,
+                extract_store=extract_store,
                 audit_dir=audit_dir,
                 base_conditions=sut_conditions,
             )
@@ -469,6 +493,7 @@ def _run_perturbations(
     client_factory,
     extractor_client,
     cache,
+    extract_store,
     audit_dir,
     base_conditions,
 ):
@@ -532,7 +557,8 @@ def _run_perturbations(
     for transcript in run_result.transcripts:
         if sut.elicitation_mode == "freeform":
             parsed, ext_response = _extract_run(
-                transcript["response_text"], extractor_client
+                transcript["response_text"], extractor_client,
+                store=extract_store,
             )
             cost += ext_response.get("cost_usd", 0.0)
         else:

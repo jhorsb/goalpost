@@ -441,3 +441,25 @@ def test_self_agreement_samples_capped_and_stratified(tmp_path):
     # 10 cases x k=3 uncached extractions, first repetition only
     assert counting.calls == audit_mod.SELF_AGREEMENT_SAMPLE * audit_mod.SELF_AGREEMENT_K
     assert result["sampled_cases"] == audit_mod.SELF_AGREEMENT_SAMPLE
+
+
+def test_extraction_cached_across_runs_but_self_agreement_never(tmp_path):
+    """Extractor calls go through the persistent cache (DESIGN §1) so
+    resume passes never re-pay extraction; nonce'd self-agreement calls
+    must stay uncached by design."""
+    kwargs = dict(
+        config=make_config(mode="freeform"), cases=[CASE],
+        client_factory=lambda sut: ScriptedClient([FREEFORM_PROSE]),
+        canonicaliser_client=FakeCanonicaliser(),
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    ext1 = FakeExtractor()
+    run_audit(extractor_client=ext1, **kwargs)
+    # 4 repeats share one identical response text -> ONE paid extraction
+    # (content-addressed dedupe), plus 1 case x k=3 self-agreement
+    assert ext1.calls == 1 + 3
+
+    ext2 = FakeExtractor()
+    run_audit(extractor_client=ext2, **kwargs)
+    # extractions served from cache; only self-agreement re-runs
+    assert ext2.calls == 3
