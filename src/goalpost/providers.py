@@ -67,12 +67,21 @@ def normalise_openai_response(resp, overrides=None) -> dict:
         "input_tokens": resp.usage.prompt_tokens,
         "output_tokens": resp.usage.completion_tokens,
     }
+    text = getattr(choice.message, "content", None) or ""
+    # Reasoning models (gpt-oss, GLM, ...) stream `reasoning` before the
+    # answer; if the token budget runs out first there is no content at
+    # all. Flag it so it reads as a truncation, not a silent empty answer.
+    truncated = bool(
+        not text
+        and getattr(choice.message, "reasoning", None)
+    )
     return {
-        "text": choice.message.content or "",
+        "text": text,
         "usage": usage,
         "cost_usd": compute_cost(resp.model, **usage, overrides=overrides),
         "model_fingerprint": getattr(resp, "system_fingerprint", None) or resp.model,
         "stop_reason": choice.finish_reason,
+        "truncated_before_content": truncated,
     }
 
 
@@ -93,8 +102,10 @@ def _resolve_key(endpoint, default_env: str) -> str | None:
 class AnthropicClient:
     """Live client. Constructed lazily so offline tests never import creds."""
 
-    def __init__(self, endpoint, max_tokens: int = 2048, pricing=None):
+    def __init__(self, endpoint, max_tokens: int | None = None, pricing=None):
         import anthropic
+
+        max_tokens = max_tokens or getattr(endpoint, "max_tokens", None) or 2048
 
         kwargs = {}
         key = _resolve_key(endpoint, "ANTHROPIC_API_KEY")
@@ -123,9 +134,10 @@ class OpenAICompatibleClient:
     """OpenAI itself, or any endpoint speaking its wire shape: OpenRouter,
     Together, Groq, Mistral, DeepSeek, xAI, Ollama, vLLM, LM Studio, ..."""
 
-    def __init__(self, endpoint, max_tokens: int = 2048, pricing=None):
+    def __init__(self, endpoint, max_tokens: int | None = None, pricing=None):
         import openai
 
+        max_tokens = max_tokens or getattr(endpoint, "max_tokens", None) or 2048
         key = _resolve_key(endpoint, "OPENAI_API_KEY") or "not-needed"
         kwargs = {"api_key": key}
         if getattr(endpoint, "base_url", None):

@@ -48,6 +48,7 @@ class ModelEndpoint(BaseModel):
     base_url: str | None = None
     api_key_env: str | None = None
     send_seed: bool = True  # some OpenAI-compatible shims reject `seed`
+    max_tokens: int = 2048  # reasoning models need headroom for the answer
 
 
 class Case(BaseModel):
@@ -78,6 +79,7 @@ class SUTConfig(BaseModel):
     base_url: str | None = None
     api_key_env: str | None = None
     send_seed: bool = True
+    max_tokens: int = 2048
     params: dict = Field(default_factory=dict)
 
     @property
@@ -105,6 +107,7 @@ class SUTConfig(BaseModel):
             base_url=self.base_url,
             api_key_env=self.api_key_env,
             send_seed=self.send_seed,
+            max_tokens=self.max_tokens,
         )
 
 

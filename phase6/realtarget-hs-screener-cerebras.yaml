@@ -1,10 +1,19 @@
-# REAL-TARGET AUDIT, quota workaround (D-021): identical to
-# realtarget-hs-screener.yaml except the serving endpoint moves from Groq
-# (100k tokens/day free cap -> 21 blocks unrun) to Cerebras free tier
-# (1M tokens/day, no card). SAME served model family and size
-# (llama-3.3-70b), so pipeline fidelity is unchanged; the serving host is
-# recorded per-transcript via model fingerprint and disclosed.
-audit_id: realtarget-hs-screener-002
+# REAL-TARGET AUDIT, quota workaround (D-021).
+# Same audited artifact as realtarget-hs-screener.yaml (the published
+# 4-agent pipeline @ pinned SHA, prompts fetched+verified at runtime);
+# the SERVING MODEL changes and this is a material, disclosed deviation:
+#   upstream pins llama3-70b-8192  -> RETIRED everywhere
+#   Groq run (audit -001)          -> llama-3.3-70b-versatile, 4/25 cases
+#                                     (100k tokens/day free cap)
+#   this run (audit -002)          -> gpt-oss-120b on Cerebras free tier
+#                                     (1M tokens/day; no Llama served on
+#                                      this account)
+# So this audits the pipeline's PROMPT AND CHAIN DESIGN served by a current
+# open-weights model - not the pipeline "as originally deployed", which is
+# no longer runnable at all. Separate audit_id keeps the two measurements
+# distinct (model is part of sut_id). gpt-oss-120b is a reasoning model:
+# max_tokens is raised so the answer is not truncated by reasoning tokens.
+audit_id: realtarget-hs-screener-002-gptoss
 audit_seed: 42
 max_spend_usd: 1.50
 concurrency: 1
@@ -18,16 +27,17 @@ extractor:
   model: gpt-4.1-2025-04-14
 pricing:
   gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
-  llama-3.3-70b: {input: 0.0, output: 0.0}   # Cerebras free tier
+  gpt-oss-120b: {input: 0.0, output: 0.0}   # Cerebras free tier
 conditions:
   - {temperature: 0.7, repeats: 5}
 suts:
   - name: hs-resume-screener
     provider: openai_compatible
-    model: llama-3.3-70b
+    model: gpt-oss-120b
     base_url: https://api.cerebras.ai/v1
     api_key_env: CEREBRAS_API_KEY
-    send_seed: false      # verified on first call; containment covers rejection
+    send_seed: false      # Cerebras shim; containment covers rejection
+    max_tokens: 3000      # reasoning headroom (verified: ~1.1k completion)
     elicitation_mode: freeform
     prompt_template: "<<<CV>>>\n{cv}\n<<<JD>>>\n{job_spec}"
     params:
