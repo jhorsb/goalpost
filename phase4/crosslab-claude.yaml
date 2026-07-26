@@ -1,0 +1,26 @@
+# Cross-lab SUT: Claude (Anthropic native adapter, pinned snapshot).
+# Key: console.anthropic.com -> ANTHROPIC_API_KEY in .env
+# Haiku 4.5 chosen for cost (~$0.45 for the full run at $1/$5 per MTok);
+# swap model for claude-sonnet-4-5-20250929 (~3x) if preferred.
+audit_id: phase4-crosslab-claude-001
+audit_seed: 42
+max_spend_usd: 1.00
+concurrency: 2
+corpus_path: corpora/starter-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14   # OpenAI credit; differs from the SUT model
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+conditions:
+  - {temperature: 0.0, repeats: 5}
+suts:
+  - name: claude-haiku-4.5
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt
