@@ -463,3 +463,52 @@ def test_extraction_cached_across_runs_but_self_agreement_never(tmp_path):
     run_audit(extractor_client=ext2, **kwargs)
     # extractions served from cache; only self-agreement re-runs
     assert ext2.calls == 3
+
+
+def test_self_agreement_reported_at_all_three_ladder_levels(tmp_path):
+    """The gate must be able to compare like with like: reported headlines
+    are cluster-level, so self-agreement is measured at raw, normalised and
+    cluster levels (mirrors the stability ladder)."""
+    from goalpost import audit as audit_mod
+    from goalpost.normaliser import load_taxonomies
+
+    class TwoSlugExtractor:
+        """Alternates between two synonymous slugs that share a cluster."""
+
+        def __init__(self):
+            self.calls = 0
+
+        def complete(self, prompt, temperature, seed):
+            self.calls += 1
+            # synonym pair that genuinely shares a cluster under the
+            # honours first-match-wins rules (both hit "experience"/"cloud")
+            slug = "cloud_experience" if self.calls % 2 else "aws_experience"
+            return {
+                "text": (
+                    'DECISION_JSON: {"decision": {"label": "reject"}}\n'
+                    f'REASONS_JSON: {{"reasons": [{{"reason_id": "{slug}", '
+                    '"direction": "negative", "note": "n"}]}\n'
+                    f'RECOURSE_JSON: {{"actions": [{{"action_id": "{slug}", '
+                    '"description": "d"}]}\n'
+                ),
+                "usage": {"input_tokens": 1, "output_tokens": 1},
+                "cost_usd": 0.0,
+                "model_fingerprint": "fx",
+            }
+
+    taxonomies = load_taxonomies(TAXONOMY)
+    transcripts = [
+        {"case_id": "c1", "repetition_index": 0, "response_text": "prose"}
+    ]
+    result = audit_mod._self_agreement(
+        transcripts, TwoSlugExtractor(), taxonomies=taxonomies
+    )
+    # raw slugs disagree; both map to the same cluster -> cluster agrees.
+    # NB this holds only for synonym pairs the taxonomy actually merges:
+    # first-match-wins ordering sends e.g. cloud_experience -> experience
+    # but cloud_administration -> skills (see D-020).
+    assert result["reasons"]["raw"]["mean_jaccard"] < 1.0
+    assert result["reasons"]["cluster"]["mean_jaccard"] == 1.0
+    assert result["recourse"]["cluster"]["mean_jaccard"] == 1.0
+    # back-compat: the flat key mirrors the raw level (pre-registered basis)
+    assert result["reasons"]["mean_jaccard"] == result["reasons"]["raw"]["mean_jaccard"]

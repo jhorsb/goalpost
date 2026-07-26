@@ -50,3 +50,40 @@ def test_extractor_prompt_nonce_changes_prompt_but_not_payload_position():
     b = build_extractor_prompt("resp", nonce="n2")
     assert a != b  # nonce forces cache bypass for self-agreement sampling
     assert "resp" in a and "resp" in b
+
+
+# ── extractor v2: unit anchoring for long structured prose ───────────
+
+def test_extractor_prompt_is_versioned_and_hashed():
+    from goalpost.elicitation import EXTRACTOR_VERSION, extractor_prompt_hash
+
+    assert EXTRACTOR_VERSION
+    assert len(extractor_prompt_hash()) == 64
+    assert extractor_prompt_hash() == extractor_prompt_hash()
+
+
+def test_extractor_defines_reason_and_action_units_explicitly():
+    prompt = build_extractor_prompt("some response")
+    low = prompt.lower()
+    # deterministic unit rules are what drive self-agreement up
+    assert "one entry per" in low
+    assert "merge" in low or "do not split" in low
+    # slug discipline: same concept -> same slug across independent passes
+    assert "snake_case" in prompt
+    assert "generic" in low or "canonical" in low
+
+
+def test_extractor_instructs_ignoring_scores_and_formatting():
+    prompt = build_extractor_prompt("some response")
+    low = prompt.lower()
+    assert "score" in low  # numeric scores must not become reasons
+    assert "recommend" in low  # the verdict is the decision, not a reason
+
+
+def test_extractor_recourse_covers_implicit_advice():
+    # many real pipelines state gaps rather than actions; the extractor must
+    # capture the remedy implied by an explicitly named gap, and nothing more
+    prompt = build_extractor_prompt("some response")
+    low = prompt.lower()
+    assert "implicit" in low or "implied" in low
+    assert "do not invent" in low or "not invent" in low

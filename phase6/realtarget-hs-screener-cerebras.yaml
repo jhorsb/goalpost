@@ -1,0 +1,35 @@
+# REAL-TARGET AUDIT, quota workaround (D-021): identical to
+# realtarget-hs-screener.yaml except the serving endpoint moves from Groq
+# (100k tokens/day free cap -> 21 blocks unrun) to Cerebras free tier
+# (1M tokens/day, no card). SAME served model family and size
+# (llama-3.3-70b), so pipeline fidelity is unchanged; the serving host is
+# recorded per-transcript via model fingerprint and disclosed.
+audit_id: realtarget-hs-screener-002
+audit_seed: 42
+max_spend_usd: 1.50
+concurrency: 1
+corpus_path: corpora/starter-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  llama-3.3-70b: {input: 0.0, output: 0.0}   # Cerebras free tier
+conditions:
+  - {temperature: 0.7, repeats: 5}
+suts:
+  - name: hs-resume-screener
+    provider: openai_compatible
+    model: llama-3.3-70b
+    base_url: https://api.cerebras.ai/v1
+    api_key_env: CEREBRAS_API_KEY
+    send_seed: false      # verified on first call; containment covers rejection
+    elicitation_mode: freeform
+    prompt_template: "<<<CV>>>\n{cv}\n<<<JD>>>\n{job_spec}"
+    params:
+      pipeline: hs-resume-screener
+      upstream_sha: 49dc41a11b5cd9f5655a43f148cb9cf4e71fa544

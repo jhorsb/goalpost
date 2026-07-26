@@ -15,6 +15,7 @@ from goalpost.elicitation import (
     ELICITATION_VERSION,
     OUTPUT_CONTRACT,
     build_extractor_prompt,
+    extractor_prompt_hash,
 )
 from goalpost.metrics import (
     METRICS_VERSION,
@@ -221,46 +222,95 @@ def _extract_run(response_text, extractor_client, nonce=None, store=None):
     return parse_structured_response(response["text"]), response
 
 
-def _self_agreement(sut_transcripts, extractor_client):
-    """k uncached extractions per sampled response; agreement per item type.
+def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
+    """k uncached extractions per sampled response; agreement per item type,
+    reported at every ladder level (raw / normalised / cluster).
+
+    Why all three: the reported headline is cluster-level, so extractor
+    variance that the taxonomy absorbs (two synonymous slugs for the same
+    concept) never reaches the reported number. Measuring only raw slugs
+    over-penalises. The flat `mean_jaccard` key preserves the raw level as
+    the originally pre-registered basis (D-012) — nothing is replaced,
+    only added (D-020).
+
     Stratified sample: first repetition of each case, first
-    SELF_AGREEMENT_SAMPLE cases in case_id order."""
+    SELF_AGREEMENT_SAMPLE cases in case_id order.
+    """
     first_reps = [
         t for t in sut_transcripts if t.get("repetition_index", 0) == 0
     ]
     sampled = sorted(first_reps, key=lambda t: t.get("case_id", ""))[
         :SELF_AGREEMENT_SAMPLE
     ]
-    reason_scores, recourse_scores = [], []
+
+    levels = ("raw", "normalised", "cluster")
+    scores = {"reasons": {lv: [] for lv in levels},
+              "recourse": {lv: [] for lv in levels}}
+
+    def leveled(items, taxonomy):
+        """Same slug -> the three ladder representations."""
+        out = {lv: set() for lv in levels}
+        for item in items:
+            if not item:
+                continue
+            out["raw"].add(item)
+            if taxonomy is None:
+                out["normalised"].add(item)
+                out["cluster"].add(item)
+            else:
+                record = map_item(item, taxonomy)
+                out["normalised"].add(record.normalised)
+                out["cluster"].add(record.cluster)
+        return out
+
     for transcript in sampled:
         extractions = [
             _extract_run(
-                transcript["response_text"], extractor_client,
-                nonce=f"sa-{i}",
+                transcript["response_text"], extractor_client, nonce=f"sa-{i}",
             )[0]
             for i in range(SELF_AGREEMENT_K)
         ]
         reason_sets = [
-            {r.get("reason_id") for r in e.reasons if r.get("reason_id")}
+            leveled(
+                [r.get("reason_id") for r in e.reasons],
+                taxonomies.reason if taxonomies else None,
+            )
             for e in extractions
         ]
         recourse_sets = [
-            {a.get("action_id") for a in e.recourse if a.get("action_id")}
+            leveled(
+                [a.get("action_id") for a in e.recourse],
+                taxonomies.recourse if taxonomies else None,
+            )
             for e in extractions
         ]
-        reason_scores.append(pairwise_jaccard_stats(reason_sets).mean_jaccard)
-        recourse_scores.append(pairwise_jaccard_stats(recourse_sets).mean_jaccard)
+        for level in levels:
+            scores["reasons"][level].append(
+                pairwise_jaccard_stats([s[level] for s in reason_sets]).mean_jaccard
+            )
+            scores["recourse"][level].append(
+                pairwise_jaccard_stats([s[level] for s in recourse_sets]).mean_jaccard
+            )
 
     def mean(xs):
         xs = [x for x in xs if x is not None]
         return sum(xs) / len(xs) if xs else None
 
-    return {
+    result = {
         "k": SELF_AGREEMENT_K,
         "sampled_cases": len(sampled),
-        "reasons": {"mean_jaccard": mean(reason_scores)},
-        "recourse": {"mean_jaccard": mean(recourse_scores)},
+        "extractor_version": ELICITATION_VERSION,
+        "extractor_prompt_hash": extractor_prompt_hash()[:16],
     }
+    for item_type in ("reasons", "recourse"):
+        levels_out = {
+            level: {"mean_jaccard": mean(scores[item_type][level])}
+            for level in levels
+        }
+        # flat key = raw level: the originally pre-registered basis
+        levels_out["mean_jaccard"] = levels_out["raw"]["mean_jaccard"]
+        result[item_type] = levels_out
+    return result
 
 
 def run_audit(
@@ -437,7 +487,7 @@ def run_audit(
         }
         if sut.elicitation_mode == "freeform":
             sut_entry["extractor_self_agreement"] = _self_agreement(
-                run_result.transcripts, extractor_client
+                run_result.transcripts, extractor_client, taxonomies=taxonomies
             )
         if config.perturbations.enabled and config.perturbations.classes:
             perturbation_cost, perturbation_report, variant_records = _run_perturbations(
