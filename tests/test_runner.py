@@ -219,3 +219,27 @@ def test_concurrency_actually_overlaps_calls(tmp_path):
     )
     assert client.max_active >= 2
 
+
+
+def test_block_level_error_containment(tmp_path):
+    """A provider error mid-block (quota exhaustion, network death) must not
+    crash the audit: the block is recorded as missing with the error, and
+    later blocks still run. Found live: Gemini free-tier RESOURCE_EXHAUSTED
+    killed a whole audit."""
+
+    class DiesOnSecondBlock(FakeClient):
+        def complete(self, prompt, temperature, seed):
+            if "other cv" in prompt:
+                raise RuntimeError("RESOURCE_EXHAUSTED: quota")
+            return super().complete(prompt, temperature, seed)
+
+    blocks = plan_blocks([sut("a")], [COND], [CASE, CASE2])
+    result = run_audit_blocks(
+        blocks, client_factory=lambda s: DiesOnSecondBlock(),
+        cache=CallCache(tmp_path), audit_seed=42, max_spend_usd=1.0,
+    )
+    assert len(result.completed_blocks) == 1
+    assert len(result.missing_blocks) == 1
+    assert result.errors and "RESOURCE_EXHAUSTED" in result.errors[0]["error"]
+    # completed block fully intact
+    assert len(result.transcripts) == COND.repeats

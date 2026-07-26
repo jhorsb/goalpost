@@ -149,3 +149,49 @@ def test_config_carries_pricing_overrides():
         **config_kwargs(pricing={"llama3.1:8b": {"input": 0.0, "output": 0.0}})
     )
     assert config.pricing["llama3.1:8b"]["input"] == 0.0
+
+
+def test_send_seed_false_omits_seed_from_request(monkeypatch):
+    # Some OpenAI-compatible shims (Google AI Studio) reject `seed`.
+    monkeypatch.setenv("X_KEY", "sk-test")
+    endpoint = ModelEndpoint(
+        provider="openai_compatible", model="gemini-2.5-flash",
+        base_url="https://example.invalid/v1", api_key_env="X_KEY",
+        send_seed=False,
+    )
+    client = make_client(endpoint)
+    captured = {}
+
+    class FakeCompletions:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            raise RuntimeError("stop before network")
+
+    client._client.chat.completions = FakeCompletions()
+    try:
+        client.complete(prompt="p", temperature=0.0, seed=123)
+    except RuntimeError:
+        pass
+    assert "seed" not in captured
+    assert captured["model"] == "gemini-2.5-flash"
+
+
+def test_send_seed_defaults_true(monkeypatch):
+    monkeypatch.setenv("X_KEY", "sk-test")
+    endpoint = ModelEndpoint(
+        provider="openai", model="gpt-4o-mini-2024-07-18", api_key_env="X_KEY"
+    )
+    client = make_client(endpoint)
+    captured = {}
+
+    class FakeCompletions:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            raise RuntimeError("stop")
+
+    client._client.chat.completions = FakeCompletions()
+    try:
+        client.complete(prompt="p", temperature=0.0, seed=123)
+    except RuntimeError:
+        pass
+    assert captured.get("seed") == 123

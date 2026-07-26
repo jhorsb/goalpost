@@ -68,3 +68,16 @@ The author rejected any hard dependency on one AI lab or one API key. Resolution
 
 **D-017 · SUT endpoint policy: first-party direct keys preferred over aggregators (2026-07-26).**
 Prompted by OpenRouter payment failure but adopted on merit: aggregators route requests across backend hosts (potentially differing quantisations/deployments run-to-run), which for a *repeat-stability* instrument is a measurement confound — router variance could masquerade as model instability. Policy: SUTs use first-party endpoints (pinned snapshots + provider fingerprints) wherever available; aggregator endpoints are acceptable for long-tail model coverage only, with routing explicitly disclosed in the report. This revises the emphasis of the D-014-era OpenRouter recommendation; the endpoint layer itself is unchanged. Current key set: OpenAI (funded), Google AI Studio + Groq (free tiers, pending), Anthropic (pending small credit).
+
+**D-018 · Cross-lab hardening from live failures (2026-07-26).**
+The Gemini/Claude runs exposed and fixed, test-first: (1) `send_seed`
+endpoint option — Google's OpenAI-compat shim 400s on `seed`; (2)
+block-level error containment in the runner — provider failures (e.g.
+RESOURCE_EXHAUSTED) now yield missing-blocks + recorded errors instead of
+crashing the audit; (3) canonicaliser mappings persist via the on-disk
+cache across resumes (design §3 promise now actually held; the Claude
+resume had re-paid ~$0.1 of mappings). Claude (Haiku 4.5) measured: gap
++0.291, decision 0.984, with 11/125 parse failures — first material
+contract non-compliance observed; queued: contract-tuning pass and a
+cross-audit comparison renderer. Gemini blocked on account billing state
+(prepay, zero credits), not tool capability.

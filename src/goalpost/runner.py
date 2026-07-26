@@ -95,6 +95,7 @@ class RunResult:
     transcripts: list[dict] = field(default_factory=list)
     completed_blocks: list[Block] = field(default_factory=list)
     missing_blocks: list[Block] = field(default_factory=list)
+    errors: list[dict] = field(default_factory=list)
     total_cost_usd: float = 0.0
 
 
@@ -174,15 +175,24 @@ def run_audit_blocks(
         # Bounded concurrency within the block only: block boundaries stay
         # the budget-enforcement points, and transcript order is restored
         # by repetition_index (runner core — DESIGN.md §7).
-        if concurrency > 1:
-            with ThreadPoolExecutor(max_workers=concurrency) as pool:
-                outcomes = list(
-                    pool.map(run_repetition, range(block.condition.repeats))
-                )
-        else:
-            outcomes = [
-                run_repetition(i) for i in range(block.condition.repeats)
-            ]
+        # Provider errors are contained at block level: the block becomes
+        # missing (resumable) and the audit continues.
+        try:
+            if concurrency > 1:
+                with ThreadPoolExecutor(max_workers=concurrency) as pool:
+                    outcomes = list(
+                        pool.map(run_repetition, range(block.condition.repeats))
+                    )
+            else:
+                outcomes = [
+                    run_repetition(i) for i in range(block.condition.repeats)
+                ]
+        except Exception as exc:  # noqa: BLE001 — recorded, never silent
+            result.missing_blocks.append(block)
+            result.errors.append(
+                {"block_id": block.block_id, "error": f"{type(exc).__name__}: {exc}"}
+            )
+            continue
 
         block_transcripts = []
         for repetition_index, seed, key, response, from_cache in outcomes:

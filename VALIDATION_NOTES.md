@@ -89,3 +89,39 @@ multi-model perturbation run is a cheap follow-up (~$0.30/model).
   "structural, not sampling noise" claim end-to-end.
 - Full-corpus perturbation run, 3 models: ~$0.90.
 - A non-OpenAI SUT via OpenRouter (cross-lab claim): needs a key; ~$0.10–0.50.
+
+## Cross-lab addendum (2026-07-26)
+
+**Anthropic joins the table** (`audits/phase4-crosslab-claude-001`, same
+frozen corpus/taxonomy/conditions as the July 6 validation; two passes under
+the $1 cap — block-boundary stop at $0.96, resumed to completion for $0.23):
+
+| SUT | decision stability | reason (cluster) | recourse (cluster) | gap | parse |
+|---|---|---|---|---|---|
+| claude-haiku-4.5 (2025-10-01) | 0.984 | 0.789 (IQR 0.68–0.87) | 0.497 (IQR 0.33–0.56) | **+0.291** | 114/125 |
+
+- The reason–recourse gap appears on a fourth model family, same direction,
+  same order of magnitude as the OpenAI models (+0.12…+0.29).
+- **11/125 parse failures** — Haiku deviated from the output contract more
+  than any OpenAI model (0/375). Denominators carry this; per the method,
+  failed parses never silently join the stability numbers. Worth a
+  contract-tuning pass before any headline use of the Claude column.
+- Raw-level ladder is low (reason 0.279 / recourse 0.140): Haiku phrases
+  factors more variably run-to-run; the committed taxonomy does more work
+  here than for any other SUT — visible, as always, in the ladder.
+
+**Google (Gemini) attempt:** blocked at the account level — the AI Studio
+key's project is on prepay billing with zero credits ("prepayment credits
+are depleted"), i.e. not a free-tier-quota key. Needs either a key from a
+free-tier project or prepay credit. Two tool improvements came out of the
+attempt (both test-first): `send_seed: false` endpoint option (AI Studio's
+OpenAI-compat shim rejects `seed`), and **block-level error containment** —
+a provider failure mid-audit now records missing blocks and continues
+instead of crashing. Canonicaliser mappings now persist across resumes
+(the Claude resume had re-paid them; fixed).
+
+Cross-audit note: the Claude run is a separate audit from the 3-SUT
+validation run (identical corpus hash, taxonomy version, conditions —
+comparable by provenance). A cross-audit comparison renderer is queued;
+until then the combined table lives here with pointers to both metrics
+files.

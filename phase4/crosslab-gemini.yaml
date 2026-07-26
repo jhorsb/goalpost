@@ -26,5 +26,6 @@ suts:
     model: gemini-2.5-flash
     base_url: https://generativelanguage.googleapis.com/v1beta/openai/
     api_key_env: GEMINI_API_KEY
+    send_seed: false   # AI Studio's OpenAI-compat shim rejects `seed`
     elicitation_mode: structured
     prompt_template_path: prompts/example_screener.txt

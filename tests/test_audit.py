@@ -380,3 +380,43 @@ def test_audit_writes_resolved_config(tmp_path):
     stored = yaml_mod.safe_load(config_file.read_text())
     assert stored["audit_id"] == "slice-test"
     assert stored["suts"][0]["model"]
+
+
+def test_runner_errors_surface_in_metrics(tmp_path):
+    class DiesOnC2(ScriptedClient):
+        def complete(self, prompt, temperature, seed):
+            if "other cv" in prompt:
+                raise RuntimeError("RESOURCE_EXHAUSTED")
+            return super().complete(prompt, temperature, seed)
+
+    case2 = Case(case_id="c2", cv_text="other cv", job_spec_text="other spec")
+    result = run_audit(
+        config=make_config(), cases=[CASE, case2],
+        client_factory=lambda sut: DiesOnC2([structured_response("aws_certification")]),
+        canonicaliser_client=FakeCanonicaliser(), extractor_client=None,
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    assert result.metrics["missing_blocks"]
+    assert any("RESOURCE_EXHAUSTED" in e["error"] for e in result.metrics["errors"])
+
+
+def test_canonicaliser_mappings_persist_across_runs(tmp_path):
+    kwargs = dict(
+        config=make_config(), cases=[CASE],
+        canonicaliser_client=None, extractor_client=None,
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    sut_client = ScriptedClient([
+        structured_response("aws_certification"),
+        structured_response("aws_certification"),
+        structured_response("get_certified"),
+        structured_response("build_portfolio"),
+    ])
+    canon1 = FakeCanonicaliser()
+    run_audit(client_factory=lambda s: sut_client,
+              canonicaliser_client=canon1, **{k: v for k, v in kwargs.items() if k != "canonicaliser_client"})
+    assert len(canon1.calls) == 1  # get_certified
+    canon2 = FakeCanonicaliser()
+    run_audit(client_factory=lambda s: sut_client,
+              canonicaliser_client=canon2, **{k: v for k, v in kwargs.items() if k != "canonicaliser_client"})
+    assert canon2.calls == []  # served from the persisted mapping cache

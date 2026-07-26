@@ -51,6 +51,23 @@ def _write_jsonl(path: Path, records: list[dict]) -> None:
             f.write(json.dumps(record, default=str) + "\n")
 
 
+class _PersistentCanonCache:
+    """Dict-shaped adapter over CallCache so canonicaliser mappings survive
+    resumes and re-runs (DESIGN.md §3: canonicaliser calls go through the
+    cache). Keyed on (item, taxonomy content hash)."""
+
+    def __init__(self, store, taxonomies):
+        self._store = store
+        self._prefix = taxonomies.content_hash[:16]
+
+    def get(self, item):
+        record = self._store.get(f"{self._prefix}-{item}")
+        return record["cluster"] if record else None
+
+    def __setitem__(self, item, cluster):
+        self._store.put(f"{self._prefix}-{item}", {"cluster": cluster})
+
+
 def _canonicalise_item(raw_id, taxonomy, canonicaliser_client, mapping_log, cache):
     record = map_item(raw_id, taxonomy)
     if record.source == "passthrough" and canonicaliser_client is not None:
@@ -232,12 +249,14 @@ def run_audit(
         yaml.safe_dump(config.model_dump(mode="json"), sort_keys=False)
     )
     cache = CallCache(audit_dir / ".cache")
+    canon_store = CallCache(audit_dir / ".cache" / "canonicaliser")
 
     corpus_hash = "|".join(sorted(c.content_hash for c in cases))
 
     metrics_suts = []
     total_cost = 0.0
     all_missing = []
+    all_errors = []
 
     for sut in config.suts:
         # Structured mode: the output contract is part of what actually runs,
@@ -263,6 +282,7 @@ def run_audit(
         )
         total_cost += run_result.total_cost_usd
         all_missing.extend(b.block_id for b in run_result.missing_blocks)
+        all_errors.extend(run_result.errors)
 
         for t in run_result.transcripts:
             t["role"] = "sut"
@@ -306,7 +326,7 @@ def run_audit(
 
         # Normalise (version-keyed dir; mapping log)
         mapping_log: list[MappingRecord] = []
-        canon_cache: dict[str, str] = {}
+        canon_cache = _PersistentCanonCache(canon_store, taxonomies)
         for run in runs:
             run["_normalised"] = _normalise_run(
                 run["_parsed"], taxonomies, canonicaliser_client,
@@ -412,6 +432,7 @@ def run_audit(
         "suts": metrics_suts,
         "total_cost_usd": total_cost,
         "missing_blocks": all_missing,
+        "errors": all_errors,
         "provenance": {
             "corpus_hash": corpus_hash,
             "runner_version": RUNNER_VERSION,

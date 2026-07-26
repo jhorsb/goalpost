@@ -47,6 +47,7 @@ class ModelEndpoint(BaseModel):
     model: str
     base_url: str | None = None
     api_key_env: str | None = None
+    send_seed: bool = True  # some OpenAI-compatible shims reject `seed`
 
 
 class Case(BaseModel):
@@ -76,6 +77,7 @@ class SUTConfig(BaseModel):
     prompt_template: str
     base_url: str | None = None
     api_key_env: str | None = None
+    send_seed: bool = True
     params: dict = Field(default_factory=dict)
 
     @property
@@ -102,6 +104,7 @@ class SUTConfig(BaseModel):
             model=self.model,
             base_url=self.base_url,
             api_key_env=self.api_key_env,
+            send_seed=self.send_seed,
         )
 
 

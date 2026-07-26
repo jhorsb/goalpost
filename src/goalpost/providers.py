@@ -134,15 +134,20 @@ class OpenAICompatibleClient:
         self.model = endpoint.model
         self.max_tokens = max_tokens
         self.pricing = pricing
+        self.send_seed = getattr(endpoint, "send_seed", True)
 
     def complete(self, prompt: str, temperature: float, seed: int) -> dict:
-        resp = self._client.chat.completions.create(
+        kwargs = dict(
             model=self.model,
             max_completion_tokens=self.max_tokens,
             temperature=temperature,
-            seed=seed,  # best-effort determinism; recorded, never relied on
             messages=[{"role": "user", "content": prompt}],
         )
+        if self.send_seed:
+            # best-effort determinism; recorded, never relied on. Some
+            # OpenAI-compatible shims (Google AI Studio) reject the field.
+            kwargs["seed"] = seed
+        resp = self._client.chat.completions.create(**kwargs)
         return normalise_openai_response(resp, overrides=self.pricing)
 
 
