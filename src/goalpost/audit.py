@@ -199,16 +199,19 @@ def _coverage(normalised_runs, item_key):
     }
 
 
-def _extract_run(response_text, extractor_client, nonce=None, store=None):
+def _extract_run(response_text, extractor_client, nonce=None, store=None,
+                 extractor_id=""):
     """Extraction goes through the persistent cache so resume passes never
-    re-pay it. Nonce'd self-agreement extractions bypass by design — their
-    whole point is fresh, independent samples."""
+    re-pay it. Cache key includes extractor identity — switching extractor
+    models must never silently serve the previous extractor's outputs.
+    Nonce'd self-agreement extractions bypass by design — their whole
+    point is fresh, independent samples."""
     import hashlib as _hashlib
 
     key = None
     if nonce is None and store is not None:
         key = _hashlib.sha256(
-            f"{ELICITATION_VERSION}|{response_text}".encode("utf-8")
+            f"{ELICITATION_VERSION}|{extractor_id}|{response_text}".encode("utf-8")
         ).hexdigest()
         cached = store.get(key)
         if cached is not None:
@@ -387,6 +390,7 @@ def run_audit(
                 parsed, ext_response = _extract_run(
                     transcript["response_text"], extractor_client,
                     store=extract_store,
+                    extractor_id=config.extractor.model,
                 )
                 sut_transcripts.append({
                     "role": "extractor",
@@ -622,6 +626,7 @@ def _run_perturbations(
             parsed, ext_response = _extract_run(
                 transcript["response_text"], extractor_client,
                 store=extract_store,
+                extractor_id=config.extractor.model,
             )
             cost += ext_response.get("cost_usd", 0.0)
         else:

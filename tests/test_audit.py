@@ -583,3 +583,27 @@ def test_self_agreement_costs_counted_in_audit_total(tmp_path):
     assert sa["measurement_cost_usd"] == pytest.approx(0.03)  # 1 case x k=3
     # total = SUT 4x0.001 + 1 deduped extraction 0.01 + SA 3x0.01
     assert result.metrics["total_cost_usd"] == pytest.approx(0.044)
+
+
+def test_extraction_cache_keyed_by_extractor_identity(tmp_path):
+    """Switching extractor model must never silently serve the previous
+    extractor's cached outputs."""
+    kwargs = dict(
+        cases=[CASE],
+        client_factory=lambda sut: ScriptedClient([FREEFORM_PROSE]),
+        canonicaliser_client=FakeCanonicaliser(),
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    config_a = make_config(mode="freeform")
+    ext1 = FakeExtractor()
+    run_audit(config=config_a, extractor_client=ext1, **kwargs)
+    paid_first = ext1.calls - 3  # minus self-agreement (uncached)
+
+    config_b = make_config(mode="freeform")
+    config_b.extractor = config_b.extractor.model_copy(
+        update={"model": "different-extractor-2026-01-01"}
+    )
+    ext2 = FakeExtractor()
+    run_audit(config=config_b, extractor_client=ext2, **kwargs)
+    # new extractor identity -> extraction re-paid, not served from cache
+    assert ext2.calls - 3 == paid_first == 1
