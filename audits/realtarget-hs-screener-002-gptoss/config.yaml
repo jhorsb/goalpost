@@ -53,3 +53,7 @@ pricing:
 warnings:
 - SUT 'hs-resume-screener' uses floating model alias 'gpt-oss-120b'; use a pinned
   snapshot where the provider offers one
+- SUT 'hs-resume-screener' uses floating model alias 'gpt-oss-120b'; use a pinned
+  snapshot where the provider offers one
+- SUT 'hs-resume-screener' uses floating model alias 'gpt-oss-120b'; use a pinned
+  snapshot where the provider offers one

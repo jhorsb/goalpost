@@ -5,9 +5,9 @@
 
 ## The headline
 
-**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.66, recourse 0.68, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
+**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.74, recourse 0.89, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
 
-The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
+The *decision itself* agreed with its most common answer 97% of the time across repeat runs.
 
 ## Why this matters
 
@@ -17,9 +17,7 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system&#x27;s free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.66, recourse 0.68, k=3); stability numbers are lower bounds.
-
-&gt; **Incomplete audit.** The spending cap stopped this audit before all planned blocks ran. Missing blocks: `998e563a832dd8f9/t0.7_n5/sc-frontend-developer-03`, `998e563a832dd8f9/t0.7_n5/sc-frontend-developer-04`, `998e563a832dd8f9/t0.7_n5/sc-frontend-developer-05`, `998e563a832dd8f9/t0.7_n5/sc-project-manager-01`, `998e563a832dd8f9/t0.7_n5/sc-project-manager-02`, `998e563a832dd8f9/t0.7_n5/sc-project-manager-03`, `998e563a832dd8f9/t0.7_n5/sc-project-manager-04`, `998e563a832dd8f9/t0.7_n5/sc-project-manager-05`, `998e563a832dd8f9/t0.7_n5/sc-support-team-lead-01`, `998e563a832dd8f9/t0.7_n5/sc-support-team-lead-02`, `998e563a832dd8f9/t0.7_n5/sc-support-team-lead-03`, `998e563a832dd8f9/t0.7_n5/sc-support-team-lead-04`, `998e563a832dd8f9/t0.7_n5/sc-support-team-lead-05`
+- This system&#x27;s free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.74, recourse 0.89, k=3); stability numbers are lower bounds.
 
 ---
 
@@ -77,6 +75,58 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 | sc-frontend-developer-02 | normalised | 0.06 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
 | sc-frontend-developer-02 | cluster | 0.78 | 0.54 | 10 | 1.00 | 5/5/5 | 0 |
 | sc-frontend-developer-02 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 3.6 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-03 | raw | 0.09 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | normalised | 0.09 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | cluster | 0.80 | 0.80 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.4 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-04 | raw | 0.17 | 0.24 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | normalised | 0.17 | 0.24 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | cluster | 0.72 | 1.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 2.0 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-05 | raw | 0.16 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | normalised | 0.16 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | cluster | 0.90 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | coverage | emptiness 0.00, size 3.2 | emptiness 0.40, size 1.0 | — | — | discarded pairs 0% | — |
+| sc-project-manager-01 | raw | 0.14 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | normalised | 0.14 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | cluster | 0.72 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
+| sc-project-manager-02 | raw | 0.07 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | normalised | 0.07 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | cluster | 0.88 | 0.75 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 2.6 | — | — | discarded pairs 60% | — |
+| sc-project-manager-03 | raw | 0.05 | 0.07 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | normalised | 0.05 | 0.07 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | cluster | 0.90 | 0.74 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 3.8 | — | — | discarded pairs 0% | — |
+| sc-project-manager-04 | raw | 0.05 | 0.04 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | normalised | 0.05 | 0.04 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | cluster | 0.83 | 0.21 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 2.6 | — | — | discarded pairs 40% | — |
+| sc-project-manager-05 | raw | 0.04 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | normalised | 0.04 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | cluster | 0.85 | 0.32 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | coverage | emptiness 0.00, size 3.4 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-01 | raw | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | normalised | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | cluster | 0.80 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-02 | raw | 0.19 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | normalised | 0.19 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | cluster | 0.80 | 0.43 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.8 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-03 | raw | 0.15 | 0.08 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | normalised | 0.15 | 0.08 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | cluster | 0.85 | 0.65 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 2.6 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-04 | raw | 0.12 | 0.24 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | normalised | 0.12 | 0.24 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | cluster | 0.88 | 0.72 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 3.0 | — | — | discarded pairs 40% | — |
+| sc-support-team-lead-05 | raw | 0.10 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | normalised | 0.10 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | cluster | 0.85 | 0.35 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 1.8 | — | — | discarded pairs 0% | — |
 
 ### Provenance
 
@@ -88,5 +138,5 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 - metrics_version: `0.1.0`
 - audit_version: `0.1.0`
 - report_version: `0.1.0` · anchors: `anchors-1.0.0`
-- total cost: $0.2487
+- total cost: $0.0182
 </pre></body></html>

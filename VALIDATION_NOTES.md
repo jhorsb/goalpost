@@ -125,3 +125,33 @@ validation run (identical corpus hash, taxonomy version, conditions —
 comparable by provenance). A cross-audit comparison renderer is queued;
 until then the combined table lives here with pointers to both metrics
 files.
+
+## Real-target audit (2026-07-27) — first complete result file against a published pipeline
+
+`audits/realtarget-hs-screener-002-gptoss` — the full evidence chain for a
+published open-source 4-agent screening pipeline (pinned SHA 49dc41a,
+prompts runtime-fetched and hash-verified; unlicensed upstream never
+committed), served by gpt-oss-120b on Cerebras (disclosed substitution:
+the upstream's pinned llama3-70b-8192 is retired industry-wide).
+25 cases × 5 repeats at the pipeline's own default T=0.7; 125/125 parsed;
+0 refusals; 3 quota-spanning passes (block containment + resume).
+
+**Reportable now (passes the gate on any basis — decision-level extractor
+self-agreement 1.000):**
+- **The pipeline changed its hiring verdict on 3 of 25 candidates across
+  5 identical runs** (worst case: 60% agreement on sc-project-manager-02).
+  Mean decision stability 0.968. This is the first Goalpost measurement of
+  a real published pipeline's verdict flipping on identical input.
+
+**Gate-withheld (extraction reliability at the boundary — D-022):**
+- Measured but unreported: reason cluster 0.805; recourse cluster 0.456
+  (IQR 0.32–0.57) — face-value far below every first-party model measured
+  in Phase 4, but the pre-registered gate (raw basis) withholds both, and
+  even a cluster-basis gate would withhold the reason side and therefore
+  the gap claim. The honest headline is: *this pipeline's advice stability
+  cannot yet be measured to the instrument's own reliability bar — and the
+  instrument says so rather than printing a shaky number.*
+
+Also notable: the upstream pins a model that no longer exists anywhere —
+published screening tools can silently become unrunnable-as-deployed,
+which is itself a governance observation.
