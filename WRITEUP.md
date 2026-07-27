@@ -149,7 +149,12 @@ can't yet say by how much:
   structure will mechanically flatter that target's topic-stability. The
   gate that governs certification was fixed in advance and I did not touch
   it; the extraction *rule* was not, and I should have held out data to
-  develop it on. Next audit will.
+  develop it on. Next audit will. I then tested this worry directly: I
+  pointed the same extraction rule at the same model's output *without*
+  the pipeline's scaffolding, and the rule's own consistency dropped below
+  the pre-registered bar — the instrument withheld those numbers. The
+  extractor's excellence on the target really is partly the target's
+  structure, and the gate caught it.
 - **My earlier comparisons weren't like-for-like.** The four lab
   configurations I benchmark against were measured in a different mode
   entirely — the model emitted machine-readable output directly, with no
@@ -218,9 +223,18 @@ with no extraction layer in the path — so cross-reading them against the
 target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
-Verdict instability is not unique to this pipeline, which is rather the
-point — it looks like a property of the design pattern, not of one
-developer's project.
+
+Then I ran the control that turns that observation into a claim: the
+*same* model the pipeline runs on, same CVs, same settings, but a plain
+single-prompt screener in place of the four-agent chain. The bare model
+flipped verdicts on **four of twenty-five** candidates — as many as the
+full pipeline. Verdict instability isn't something this pipeline's design
+adds; it comes with the model, and the chain neither causes nor cures it.
+The control also showed nothing like the pipeline's near-perfect topic
+stability: without the recruiter agent's fixed four-heading rubric, the
+same model's stated reasons agree at roughly 0.6, not 0.98 — more evidence
+that the target's headline topic-stability is manufactured by its rubric,
+which is exactly why I've kept it out of the headlines.
 
 ## Why it matters
 

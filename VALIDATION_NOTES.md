@@ -168,3 +168,47 @@ whether they count for or against the candidate between runs.
 Also notable: the upstream pins a model that no longer exists anywhere —
 published screening tools can silently become unrunnable-as-deployed,
 which is itself a governance observation.
+
+## Bare-model control (2026-07-27) — isolating the pipeline's design from its model
+
+Same serving model (gpt-oss-120b, Cerebras), same frozen corpus, same
+T=0.7/N=5, same freeform lens machinery — but a plain one-prompt screener
+(`prompts/example_screener.txt`) instead of the 4-agent chain. Any
+difference from the real target is attributable to the pipeline's design.
+Run twice under two extraction lenses (SUT responses identical — cached):
+
+| lens | gate outcome | decision | flips | reason (cluster) | recourse (cluster) | direction-flip |
+|---|---|---|---|---|---|---|
+| gpt-4.1 v3 (`control-bare-model-gpt41-001`) | **WITHHELD** (SA reasons 0.895 / recourse 0.817 < 0.90) | 0.952 (SA 1.000 — certified) | 5/25 | (0.511) | (0.549) | (0.301) |
+| gemma-4-31b v3 (`control-bare-model-001`) | **certified** (SA reasons 0.991 / recourse 1.000 / decision 1.000) | 0.960 | 4/25 | 0.612 | 0.507 | 0.249 |
+
+Parenthesised numbers are visible-in-evidence but uncertified per the gate.
+
+**What the control certifies (gemma lens), read against the target:**
+
+1. **Verdict instability is the model's, not the pipeline's.** The bare
+   model flipped 4/25 verdicts (0.960) — as many or more than the full
+   4-agent pipeline (3/25, 0.968; gpt-4.1 lens agrees: 5/25, 0.952, decision
+   SA 1.000 on both lenses). The chain neither causes nor cures verdict
+   flipping.
+2. **No reason–recourse gap on the bare model.** Reasons 0.612 vs recourse
+   0.507 — a gap of ~0.1 (the gpt-4.1 lens even shows it slightly negative,
+   uncertified). The target's enormous topic-stability (0.983) is therefore
+   a product of the pipeline's fixed four-heading rubric, not of the model —
+   direct empirical support for the granularity/structure caveat (D-027 pt 1).
+3. **The gate's third "no" is the selection effect made visible (D-027
+   pt 2, now demonstrated).** The very extractor that certified on the
+   target (SA 0.988/0.932) *fails the gate* on the same model's
+   unscaffolded prose (0.895/0.817). v3's category-anchoring rides the
+   target's structure; remove the structure and its consistency drops below
+   the bar. The instrument withheld the numbers, exactly as designed.
+4. **Direction-flip comparison (pending like-for-like lens):** bare model
+   0.249–0.301 vs target 0.508 — suggestive that the chain *amplifies*
+   valence instability while its rubric manufactures topic stability; to be
+   stated comparatively only once `matched-target-gemma-001` (target
+   re-measured under the gemma lens) completes.
+
+Cost: gpt-4.1-lens run $1.42 (paid, post top-up; dry-run gap — extraction/
+canonicaliser calls excluded from the estimate — remains the known planner
+issue); gemma-lens run $0.00 (Cerebras free tier, across 5 quota-spanning
+resumes — normalisation-phase containment gap logged for Codex task-01).
