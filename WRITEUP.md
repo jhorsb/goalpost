@@ -1,6 +1,6 @@
 # I ran an AI hiring tool five times on the same CV. It changed its mind.
 
-*Draft v1 — from the WRITEUP_TEMPLATE skeleton; every number traces to a
+*Draft v3 — from the WRITEUP_TEMPLATE skeleton; every number traces to a
 committed audit transcript. Target identity withheld from the prose per
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
@@ -80,15 +80,18 @@ finding in its own right:
   of the pipeline's design as served by a current open model** — not of
   the artifact as originally deployed, which nobody can run any more.
 
-Total cost of the measurement: **about $0.51** — most of it spent on the
-extraction and checking layers, not the tool itself. Independent
-behavioural validation of a deployed screening pipeline costs less than a
-Freddo.
+Cost of the final certified measurement: **$0.28** — about 22p, and
+nearly all of it spent on the extraction and checking layers rather than
+the tool itself. Independent behavioural validation of a deployed
+screening pipeline costs less than a Freddo. (Cumulatively, including
+every false start, quota wall and the extractor rebuild described below,
+this whole investigation came in under a pound.)
 
 ## What I found
 
-Three findings, at three levels of certification — and the difference
-between those levels is the point of the instrument.
+Three findings. All three are certified — but one of them only after
+the instrument refused to certify it, and that refusal is the part of
+this I'd most want a sceptic to read.
 
 **1. The verdict moved on identical inputs.** (Certified.) Across
 125 runs, the pipeline's accept/reject verdict changed on three of
@@ -101,16 +104,15 @@ occurs — only that a candidate's outcome from this design can depend on
 which run they happened to get.
 
 **2. The advice repeats about half the time.** (Certified, as a lower
-bound.) Recourse stability measured **0.456**: ask this pipeline twice
-and, on average, only around half of its improvement recommendations
+bound.) Recourse stability measured **0.448**: ask this pipeline twice
+and, on average, fewer than half of its improvement recommendations
 appear both times — the least stable advice of anything I have measured
 with this instrument, including four frontier-lab configurations. Because
 the tool's output is free text, this number passes through an extraction
 model, and extraction noise can only make stability look *worse* — so
-0.456 is a floor, not a point estimate. The extractor's measured
-consistency at the level this claim is made was 0.902 against a
-pre-registered bar of 0.90; it clears by 0.002, and I'd rather show you
-that margin than round it away.
+0.448 is a floor, not a point estimate. The extraction layer's measured
+consistency on advice, at the level this claim is made, was 0.932 against
+a pre-registered bar of 0.90.
 
 **3. The finding I was hunting was blocked, fixed, and certified.** The
 reasons the pipeline gave measured **0.983**; against advice at 0.448,
@@ -178,9 +180,13 @@ that I'd call it an evolution, not a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
 0.96–0.98), something my dissertation's design couldn't observe.
 
-Against that backdrop, the real target's numbers are stark: the published
-pipeline was less stable than every lab configuration on decisions and on
-advice — at the settings it ships with.
+Against that backdrop, the real target's advice was the least stable of
+anything measured — below every lab configuration, at the settings it
+ships with. On decisions it was less stable than three of the four, but
+not all: one lab configuration flipped verdicts at a comparable rate.
+Verdict instability is not unique to this pipeline, which is rather the
+point — it is a property of the design pattern, not of one developer's
+project.
 
 ## Why it matters
 
@@ -209,8 +215,8 @@ identification is pinned in the audit evidence, and the professional norm
 I intend to follow is disclosure to the audited party before publication —
 if you're going to measure people's work, you owe them the first read.*
 
-**Next:** a hardened reason-extractor and a re-run, to settle the
-uncertified claim one way or the other — and then more targets, because the
-marginal cost of the question "does your screening tool give the same
-answer twice?" is now roughly fifty pence, and the answer, so far, has
-never been an unqualified yes.
+**Next:** more targets. The marginal cost of asking "does your screening
+tool give the same answer twice?" is now small change, the instrument has
+been through one full cycle of being told no by its own gate, and so far
+— across four lab configurations and one published pipeline — the answer
+has never been an unqualified yes.
