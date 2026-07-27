@@ -87,10 +87,10 @@ Freddo.
 
 ## What I found
 
-Three findings, at three levels of confidence — and the difference between
-those levels is the point of the instrument.
+Three findings, at three levels of certification — and the difference
+between those levels is the point of the instrument.
 
-**1. The verdict moved on identical inputs.** (Full confidence.) Across
+**1. The verdict moved on identical inputs.** (Certified.) Across
 125 runs, the pipeline's accept/reject verdict changed on three of
 twenty-five candidates — including one 3–2 split across five identical
 runs. The extraction layer's agreement on verdicts was perfect (1.000), so
@@ -100,7 +100,7 @@ tool's own default settings.* I make no claim about the rate at which it
 occurs — only that a candidate's outcome from this design can depend on
 which run they happened to get.
 
-**2. The advice repeats about half the time.** (Reported as a lower
+**2. The advice repeats about half the time.** (Certified, as a lower
 bound.) Recourse stability measured **0.456**: ask this pipeline twice
 and, on average, only around half of its improvement recommendations
 appear both times — the least stable advice of anything I have measured
@@ -112,27 +112,32 @@ consistency at the level this claim is made was 0.902 against a
 pre-registered bar of 0.90; it clears by 0.002, and I'd rather show you
 that margin than round it away.
 
-**3. The finding I wanted is the one I'm not printing.** (Withheld.) The
-reasons the pipeline gave measured 0.805 — against advice at 0.456, that
-is exactly the reason–recourse gap my dissertation found, sitting on a
-real target. The instrument declined to certify it. Before any audit ran,
-I pre-registered a rule: no stability claim is reportable unless the
-extraction layer demonstrates sufficient self-consistency — a hard bar,
-plus a margin for claims of instability. On the reason side, the extractor
-scored 0.904: over the bar, but short of the margin by 0.051. So the gap
-stays unpublished.
+**3. The finding I was hunting is measured, but not certified.** The
+reasons the pipeline gave measured **0.805**. Against advice at 0.456,
+that is the reason–recourse gap from my dissertation, sitting on a real
+target — and you can see it, because I'm showing you the raw measurement.
+What I am *not* doing is certifying it as a finding you should rely on.
 
-Be precise about what that means. The gate did not say the gap isn't real.
-It said my reason-extractor isn't yet reliable enough to certify it — an
-engineering problem with known solutions (tighter extraction prompts,
-multiple extractors with adjudication, more repeats). Improving the
-extractor and re-running is not moving the goalposts: the rule was
-pre-registered against extractor quality, not against the finding. If the
-gap survives a better extractor, I get the claim legitimately. If it
-doesn't, that's a finding too.
+Before any audit ran, I pre-registered a rule: no stability claim earns
+certification unless the extraction layer demonstrates sufficient
+self-consistency — a hard bar, plus an extra margin for claims of
+*instability*. On the reason side the extractor scored 0.904: over the
+bar, but short of the margin by 0.051. So the number stands in the
+evidence file, and the claim doesn't get made.
 
-I want the failure mode of this instrument to be *silence*, not false
-alarm. An audit tool that finds what its author is hunting for is a demo.
+Be precise about what that means, because the distinction is the whole
+point. The rule did not say the gap isn't real. It said my
+reason-extractor isn't yet reliable enough for me to stand behind a
+conclusion drawn from it — an engineering problem with known solutions
+(tighter extraction prompts, multiple extractors with adjudication, more
+repeats). Improving the extractor and re-running is not moving the
+goalposts: the rule was pre-registered against extractor quality, not
+against the finding. If the gap survives a better extractor, I get the
+claim legitimately. If it doesn't, that's a finding too.
+
+I want this instrument's failure mode to be a number I decline to stand
+behind — not a confident claim I can't support. An audit tool that
+certifies what its author is hunting for is a demo.
 
 ## What this doesn't tell you
 
@@ -186,7 +191,7 @@ every pipeline stage, and the pinned commit of the audited code. The
 instrument is a small open Python tool: one config file, one command, a
 hard spending cap, and a dry-run that prices the audit before a single
 call is made. Run it against your own configuration for about the price
-of a coffee — or a Freddo, if your models are cheap.
+of a coffee.
 
 *On the target's identity: this piece deliberately describes a design
 category rather than naming a small open-source project. The full
@@ -194,8 +199,8 @@ identification is pinned in the audit evidence, and the professional norm
 I intend to follow is disclosure to the audited party before publication —
 if you're going to measure people's work, you owe them the first read.*
 
-**Next:** a hardened reason-extractor and a re-run, to resolve the
-withheld claim one way or the other — and then more targets, because the
+**Next:** a hardened reason-extractor and a re-run, to settle the
+uncertified claim one way or the other — and then more targets, because the
 marginal cost of the question "does your screening tool give the same
 answer twice?" is now roughly fifty pence, and the answer, so far, has
 never been an unqualified yes.
