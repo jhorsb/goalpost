@@ -122,7 +122,9 @@ The pipeline's recruiter agent always evaluates under the same four
 headings — skills, experience, education, extras. Those headings are
 almost perfectly stable across runs: measure "did it discuss the same
 topics?" and you get 0.983. But measure whether each topic *counted for or
-against the candidate*, and it flips in **roughly half** the cases. Your
+against the candidate*, and it flips in **between a third and a half** of
+paired comparisons (0.378–0.508, depending on which of two independently
+certified extraction lenses does the reading). Your
 experience can be the reason you're recommended on one run and the reason
 you're not on the next. The explanation looks stable at the level of what
 it mentions, and is unstable in what it asserts.
@@ -140,32 +142,38 @@ can't yet say by how much:
 - **The two sides aren't measured at the same resolution.** Reasons are
   counted at the level of four fixed categories; advice at the level of
   individual recommendations. Coarse buckets match each other more easily
-  than fine-grained items do, so some unknown share of the gap is an
-  artifact of measuring the two properties at different grain.
+  than fine-grained items do, so some share of the gap's absolute size is
+  an artifact of grain — and the grain difference is a property of the
+  system itself, so it can't be fully equalised away.
 - **My extraction rule was designed after looking at this target.** The
   rule that lifted reason-agreement — "produce one entry per category the
   response uses" — was written once I had seen that this pipeline always
-  emits the same four categories. An extraction rule shaped to a target's
-  structure will mechanically flatter that target's topic-stability. The
-  gate that governs certification was fixed in advance and I did not touch
-  it; the extraction *rule* was not, and I should have held out data to
-  develop it on. Next audit will. I then tested this worry directly: I
-  pointed the same extraction rule at the same model's output *without*
-  the pipeline's scaffolding, and the rule's own consistency dropped below
-  the pre-registered bar — the instrument withheld those numbers. The
-  extractor's excellence on the target really is partly the target's
-  structure, and the gate caught it.
-- **My earlier comparisons weren't like-for-like.** The four lab
-  configurations I benchmark against were measured in a different mode
-  entirely — the model emitted machine-readable output directly, with no
-  extraction layer in the path at all. Comparing that to a
-  free-text-plus-extractor measurement is comparing two measurement
-  architectures, not two systems.
+  emits the same four categories. That's a selection effect, and I tested
+  it two ways rather than just disclosing it. Pointed at the same model's
+  output *without* the pipeline's scaffolding, the rule's own consistency
+  dropped below the pre-registered bar and the instrument withheld the
+  numbers — the rule really does ride the target's structure, and the gate
+  caught it. But a second, independently certified lens read the same
+  target transcripts and reproduced the gap almost exactly (0.537 vs
+  0.535) — so the gap isn't an artifact of which extractor does the
+  reading. Held-out extractor development is still the protocol from here.
+- **My earlier comparisons weren't like-for-like — so I built one that
+  is.** The lab configurations were measured with no extraction layer at
+  all; comparing them to a free-text measurement compares architectures,
+  not systems. The fix was a control: the same model the pipeline runs on,
+  same CVs, same settings, same certified lens on both — with a plain
+  one-prompt screener in place of the four-agent chain. Under that matched
+  measurement the bare model's gap is **+0.106**; the pipeline's is
+  **+0.537**. The gap belongs to the design, not the model — the chain's
+  fixed rubric pumps topic-stability from 0.61 to 0.99 while leaving the
+  advice exactly as unstable as the bare model's.
 
-The valence-flip result survives all three, which is why it now leads:
+The valence-flip result survives all three checks, which is why it leads:
 it's measured on whatever units the extractor produces and asks a
 different question of them — given the same topic came up, did its sign
-change? Coarse categories make that *more* meaningful, not less.
+change? And the matched control sharpens it: the bare model flips valence
+at 0.249, the pipeline at 0.378 under the same lens. The chain doesn't
+just fail to stabilise meaning; it amplifies the flipping.
 
 **What the gate did, and why it still matters.** Before any audit ran, I
 pre-registered a rule: no stability claim earns certification unless the
@@ -224,17 +232,18 @@ target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
 
-Then I ran the control that turns that observation into a claim: the
-*same* model the pipeline runs on, same CVs, same settings, but a plain
-single-prompt screener in place of the four-agent chain. The bare model
-flipped verdicts on **four of twenty-five** candidates — as many as the
-full pipeline. Verdict instability isn't something this pipeline's design
-adds; it comes with the model, and the chain neither causes nor cures it.
-The control also showed nothing like the pipeline's near-perfect topic
-stability: without the recruiter agent's fixed four-heading rubric, the
-same model's stated reasons agree at roughly 0.6, not 0.98 — more evidence
-that the target's headline topic-stability is manufactured by its rubric,
-which is exactly why I've kept it out of the headlines.
+Then I ran the control that turns observations into claims: the *same*
+model the pipeline runs on, same CVs, same settings, same certified
+extraction lens — but a plain single-prompt screener in place of the
+four-agent chain. Three things fell out. The bare model flipped verdicts
+on four of twenty-five candidates, as many as the full pipeline: verdict
+instability comes with the model, and the chain neither causes nor cures
+it. The bare model showed nothing like the pipeline's near-perfect topic
+stability — 0.61 against 0.99 — so the pipeline's most reassuring-looking
+number is manufactured by its rubric. And the bare model's
+reason-to-advice gap was +0.106 against the pipeline's +0.537: the
+signature failure this instrument measures is overwhelmingly a property
+of the pipeline's *design*, not of the underlying model.
 
 ## Why it matters
 

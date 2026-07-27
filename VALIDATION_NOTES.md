@@ -202,13 +202,56 @@ Parenthesised numbers are visible-in-evidence but uncertified per the gate.
    unscaffolded prose (0.895/0.817). v3's category-anchoring rides the
    target's structure; remove the structure and its consistency drops below
    the bar. The instrument withheld the numbers, exactly as designed.
-4. **Direction-flip comparison (pending like-for-like lens):** bare model
-   0.249–0.301 vs target 0.508 — suggestive that the chain *amplifies*
-   valence instability while its rubric manufactures topic stability; to be
-   stated comparatively only once `matched-target-gemma-001` (target
-   re-measured under the gemma lens) completes.
+4. **Direction-flip comparison — now like-for-like (see below):** the
+   chain amplifies valence instability (target 0.378 vs control 0.249,
+   identical certified lens).
 
 Cost: gpt-4.1-lens run $1.42 (paid, post top-up; dry-run gap — extraction/
 canonicaliser calls excluded from the estimate — remains the known planner
 issue); gemma-lens run $0.00 (Cerebras free tier, across 5 quota-spanning
 resumes — normalisation-phase containment gap logged for Codex task-01).
+
+## Matched-lens pair (2026-07-27) — target vs bare model, one certified lens
+
+`matched-target-gemma-001`: the real target re-measured under the gemma
+lens (identical cached SUT responses as `realtarget-hs-screener-002-gptoss`;
+extraction, SA and canonicalisation all gemma-4-31b). Both sides of the
+comparison now share one extraction lens, certified on both (SA ≥ 0.99 on
+every basis). Cluster level, 25 cases, T=0.7, N=5:
+
+| (gemma lens, both certified) | target (4-agent chain) | bare-model control | Δ |
+|---|---|---|---|
+| decision stability | 0.968 (3/25 flips) | 0.960 (4/25 flips) | ≈0 |
+| reason (cluster) | 0.993 (raw 0.931) | 0.612 (raw 0.168) | **+0.381** |
+| recourse (cluster) | 0.456 (raw 0.112) | 0.507 (raw 0.129) | −0.051 |
+| reason–recourse gap | **+0.537** | +0.106 | **+0.431** |
+| direction-flip rate | **0.378** | 0.249 | **+0.129** |
+
+Readings:
+
+1. **The gap replicates under the matched lens** (+0.537 gemma vs +0.535
+   gpt-4.1 on the same transcripts) — it is not an artifact of which
+   certified extractor reads the text.
+2. **The pipeline's design owns the gap.** Same model, same corpus, same
+   lens: chain +0.537, bare model +0.106. The chain's fixed rubric pumps
+   topic stability (0.612 → 0.993) while leaving advice as unstable as the
+   bare model's (0.456 vs 0.507). The design manufactures consistent-looking
+   *explanations* without manufacturing consistent *guidance*.
+3. **The chain amplifies valence flipping**: 0.378 vs 0.249 under one lens.
+   Lens variance disclosed: the target's direction-flip reads 0.508 under
+   the gpt-4.1 lens and 0.378 under gemma (both certified) — public claims
+   say "between a third and a half", not a point estimate.
+4. **Selection-effect bound (D-027 pt 2, closing the loop):** the v3
+   category rule does *not* mechanically produce high topic agreement — on
+   unscaffolded prose from the same model it yields 0.612 (and the gpt-4.1
+   variant fails the gate outright). The target's 0.99 therefore tracks a
+   real structural property of the pipeline (rubric-fixed headings), while
+   remaining a coarse-grain measurement; grain differences between the two
+   systems are properties of the systems, not equalisable by the lens.
+   Held-out extractor development remains the protocol change going forward.
+
+Cost note: Cerebras-side runs are pinned at $0.00 in tool pricing (set
+during the free-tier period), so `total_cost_usd` under-reports them; the
+author's Cerebras dashboard is the source of truth for that spend
+(account moved to paid tier mid-day; hourly caps lifted from ~10² to
+3×10⁴ requests, which is what finally let these runs complete).
