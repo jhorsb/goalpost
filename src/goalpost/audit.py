@@ -38,7 +38,7 @@ from goalpost.runner import RUNNER_VERSION, CallCache, plan_blocks, run_audit_bl
 
 AUDIT_VERSION = "0.1.0"
 SELF_AGREEMENT_K = 3
-SELF_AGREEMENT_SAMPLE = 10  # stratified cap (DESIGN §4.4; cost)
+SELF_AGREEMENT_SAMPLE = 25  # stratified cap; widened 10->25 for the D-023 gate decision
 MIN_PAIRS_FLOOR = 3  # eligibility floor for cross-case aggregation (S3-3)
 
 

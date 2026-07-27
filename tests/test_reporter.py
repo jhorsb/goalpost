@@ -250,3 +250,57 @@ def test_comparison_single_mode_no_banner():
     fixture["suts"] = [s for s in fixture["suts"] if s["elicitation_mode"] == "structured"]
     md = render_comparison(fixture)
     assert "cross-mode" not in md.lower()
+
+
+# ── gate basis: cluster level (D-023, author decision) ───────────────
+
+def leveled_sa(reasons_cluster, recourse_cluster, reasons_raw=0.5, recourse_raw=0.5):
+    def item(raw, cluster):
+        return {
+            "raw": {"mean_jaccard": raw},
+            "normalised": {"mean_jaccard": raw},
+            "cluster": {"mean_jaccard": cluster},
+            "mean_jaccard": raw,  # flat key mirrors raw (pre-registered basis)
+        }
+    return {
+        "k": 3, "sampled_cases": 25,
+        "decision": {"mean_modal_agreement": 1.0},
+        "reasons": item(reasons_raw, reasons_cluster),
+        "recourse": item(recourse_raw, recourse_cluster),
+    }
+
+
+def test_gate_uses_cluster_level_when_leveled_data_present():
+    # raw fails (0.5) but cluster clears bar+margin -> reportable
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = leveled_sa(0.95, 0.93)
+    md = render_report(metrics)
+    assert "withheld" not in md.lower()
+    assert "recourse stability 0.36" in md
+
+
+def test_gate_cluster_below_bar_still_withholds():
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = leveled_sa(0.88, 0.85)
+    md = render_report(metrics)
+    assert "withheld" in md.lower()
+
+
+def test_gate_falls_back_to_flat_for_old_metrics():
+    # pre-leveled metrics files: flat keys only -> old behaviour preserved
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    md = render_report(metrics)
+    assert "withheld" not in md.lower()
+
+
+def test_report_discloses_both_bases_when_leveled():
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = leveled_sa(0.95, 0.93, reasons_raw=0.74, recourse_raw=0.89)
+    md = render_report(metrics)
+    # D-023 disclosure: raw-basis numbers stay visible next to the gate call
+    assert "0.89" in md and "0.93" in md

@@ -86,6 +86,19 @@ GATE_MARGIN = 0.15
 HIGH_STABILITY_BAND = 0.85
 
 
+def _gate_agreement_value(sa_item: dict) -> float | None:
+    """Gate basis (D-023, author decision): the claim is made at cluster
+    level, so the gate reads cluster-level agreement where the metrics
+    provide it; older flat-only metrics fall back to the flat (raw) key.
+    Raw numbers remain published beside the gate call in every report."""
+    if not isinstance(sa_item, dict):
+        return None
+    cluster = sa_item.get("cluster")
+    if isinstance(cluster, dict) and cluster.get("mean_jaccard") is not None:
+        return cluster["mean_jaccard"]
+    return sa_item.get("mean_jaccard")
+
+
 def _reportable(stability: float | None, agreement: float | None) -> bool:
     """Asymmetric gate (DESIGN.md §4.4): extractor noise only attenuates,
     so high stability survives as a lower bound at agreement ≥ 0.90;
@@ -110,10 +123,10 @@ def render_report(metrics: dict) -> str:
         extracted = sut.get("extracted", False)
         sa = sut.get("extractor_self_agreement", {})
         recourse_ok = (not extracted) or _reportable(
-            heads["recourse"], sa.get("recourse", {}).get("mean_jaccard")
+            heads["recourse"], _gate_agreement_value(sa.get("recourse", {}))
         )
         reasons_ok = (not extracted) or _reportable(
-            heads["reasons"], sa.get("reasons", {}).get("mean_jaccard")
+            heads["reasons"], _gate_agreement_value(sa.get("reasons", {}))
         )
 
         lines.append(f"# Goalpost audit — {sut['name']}")
@@ -129,8 +142,8 @@ def render_report(metrics: dict) -> str:
         lines.append("## The headline")
         lines.append("")
         if not recourse_ok:
-            sa_recourse = sa.get("recourse", {}).get("mean_jaccard")
-            sa_reasons = sa.get("reasons", {}).get("mean_jaccard")
+            sa_recourse = _gate_agreement_value(sa.get("recourse", {}))
+            sa_reasons = _gate_agreement_value(sa.get("reasons", {}))
             lines.append(
                 "**Stability numbers for this system are withheld.** It was "
                 "measured through an extraction model whose measured "
@@ -185,12 +198,20 @@ def render_report(metrics: dict) -> str:
         ]
         if extracted:
             sa = sut.get("extractor_self_agreement", {})
+
+            def _fmt_sa(item):
+                cluster = _gate_agreement_value(sa.get(item, {})) or 0
+                raw = sa.get(item, {}).get("mean_jaccard") or 0
+                if isinstance(sa.get(item, {}).get("cluster"), dict):
+                    return f"{cluster:.2f} at the reported grouping ({raw:.2f} raw)"
+                return f"{raw:.2f}"
+
             caveats.append(
                 "This system's free-text output was converted to comparable "
                 "form by a separate extraction model (self-agreement: reasons "
-                f"{sa.get('reasons', {}).get('mean_jaccard', 0):.2f}, recourse "
-                f"{sa.get('recourse', {}).get('mean_jaccard', 0):.2f}, "
-                f"k={sa.get('k')}); stability numbers are lower bounds."
+                f"{_fmt_sa('reasons')}, recourse {_fmt_sa('recourse')}, "
+                f"k={sa.get('k')}, {sa.get('sampled_cases', '?')} sampled "
+                "cases); stability numbers are lower bounds."
             )
         for caveat in caveats:
             lines.append(f"- {caveat}")

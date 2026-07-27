@@ -438,9 +438,10 @@ def test_self_agreement_samples_capped_and_stratified(tmp_path):
         for c in cases for r in range(3)
     ]
     result = audit_mod._self_agreement(transcripts, counting)
-    # 10 cases x k=3 uncached extractions, first repetition only
-    assert counting.calls == audit_mod.SELF_AGREEMENT_SAMPLE * audit_mod.SELF_AGREEMENT_K
-    assert result["sampled_cases"] == audit_mod.SELF_AGREEMENT_SAMPLE
+    # sample = min(cap, n_cases), first repetition of each, k extractions
+    expected = min(audit_mod.SELF_AGREEMENT_SAMPLE, 15)
+    assert counting.calls == expected * audit_mod.SELF_AGREEMENT_K
+    assert result["sampled_cases"] == expected
 
 
 def test_extraction_cached_across_runs_but_self_agreement_never(tmp_path):
