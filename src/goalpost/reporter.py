@@ -203,7 +203,9 @@ def render_report(metrics: dict) -> str:
                 cluster = _gate_agreement_value(sa.get(item, {})) or 0
                 raw = sa.get(item, {}).get("mean_jaccard") or 0
                 if isinstance(sa.get(item, {}).get("cluster"), dict):
-                    return f"{cluster:.2f} at the reported grouping ({raw:.2f} raw)"
+                    # 3 decimals: 0.902 must be distinguishable from the
+                    # 0.90 gate bar it is being judged against
+                    return f"{cluster:.3f} at the reported grouping ({raw:.3f} raw)"
                 return f"{raw:.2f}"
 
             caveats.append(

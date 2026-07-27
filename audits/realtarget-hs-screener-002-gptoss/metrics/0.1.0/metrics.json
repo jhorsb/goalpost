@@ -1365,32 +1365,32 @@
       ],
       "extractor_self_agreement": {
         "k": 3,
-        "sampled_cases": 10,
+        "sampled_cases": 25,
         "extractor_version": "0.2.0",
         "extractor_prompt_hash": "a34dc69178064b6b",
         "reasons": {
           "raw": {
-            "mean_jaccard": 0.7399817774817775
+            "mean_jaccard": 0.7868969918969918
           },
           "normalised": {
-            "mean_jaccard": 0.7399817774817775
+            "mean_jaccard": 0.7868969918969918
           },
           "cluster": {
-            "mean_jaccard": 0.881065416065416
+            "mean_jaccard": 0.9038518518518518
           },
-          "mean_jaccard": 0.7399817774817775
+          "mean_jaccard": 0.7868969918969918
         },
         "recourse": {
           "raw": {
-            "mean_jaccard": 0.8874074074074073
+            "mean_jaccard": 0.7853333333333333
           },
           "normalised": {
-            "mean_jaccard": 0.8874074074074073
+            "mean_jaccard": 0.7853333333333333
           },
           "cluster": {
-            "mean_jaccard": 0.9201719576719576
+            "mean_jaccard": 0.9022222222222223
           },
-          "mean_jaccard": 0.8874074074074073
+          "mean_jaccard": 0.7853333333333333
         },
         "decision": {
           "mean_modal_agreement": 1.0
@@ -1398,7 +1398,7 @@
       }
     }
   ],
-  "total_cost_usd": 0.01822,
+  "total_cost_usd": 0.0,
   "missing_blocks": [],
   "errors": [],
   "provenance": {

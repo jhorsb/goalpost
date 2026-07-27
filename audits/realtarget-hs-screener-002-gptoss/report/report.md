@@ -4,7 +4,7 @@
 
 ## The headline
 
-**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.74, recourse 0.89, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
+**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.46 on a 0–1 scale). Because this system was measured through an extractor, treat this as a **lower bound** on its instability being worse — the true stability is at least this good.
 
 The *decision itself* agreed with its most common answer 97% of the time across repeat runs.
 
@@ -16,7 +16,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.74, recourse 0.89, k=3); stability numbers are lower bounds.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.904 at the reported grouping (0.787 raw), recourse 0.902 at the reported grouping (0.785 raw), k=3, 25 sampled cases); stability numbers are lower bounds.
 
 ---
 
@@ -137,4 +137,4 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 - metrics_version: `0.1.0`
 - audit_version: `0.1.0`
 - report_version: `0.1.0` · anchors: `anchors-1.0.0`
-- total cost: $0.0182
+- total cost: $0.0000

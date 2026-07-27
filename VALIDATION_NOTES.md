@@ -143,14 +143,20 @@ self-agreement 1.000):**
   Mean decision stability 0.968. This is the first Goalpost measurement of
   a real published pipeline's verdict flipping on identical input.
 
-**Gate-withheld (extraction reliability at the boundary — D-022):**
-- Measured but unreported: reason cluster 0.805; recourse cluster 0.456
-  (IQR 0.32–0.57) — face-value far below every first-party model measured
-  in Phase 4, but the pre-registered gate (raw basis) withholds both, and
-  even a cluster-basis gate would withhold the reason side and therefore
-  the gap claim. The honest headline is: *this pipeline's advice stability
-  cannot yet be measured to the instrument's own reliability bar — and the
-  instrument says so rather than printing a shaky number.*
+**Reportable under the D-023 cluster-basis gate (decided on a widened
+25-case, k=3 sample — 75 measurements):**
+- **Recourse stability 0.456** (IQR 0.32–0.57): ask this published pipeline
+  twice and, on average, only about half its recommendations appear both
+  times — the least stable advice of anything measured in this project.
+  Extractor agreement at the reported grouping: 0.902, clearing the 0.90
+  bar by 0.002 — boundary proximity disclosed in the report, and the claim
+  is a lower bound (extractor noise can only make it look worse).
+
+**Still gate-withheld:**
+- Reason stability (measured 0.805): agreement 0.904 clears the bar but
+  fails the +0.15 instability margin (0.099) — so the reason-side claim,
+  and therefore the reason–recourse *gap* claim, remain unreportable for
+  this target. The instrument declines the headline it cannot support.
 
 Also notable: the upstream pins a model that no longer exists anywhere —
 published screening tools can silently become unrunnable-as-deployed,
