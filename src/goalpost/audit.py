@@ -247,6 +247,7 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
     scores = {"reasons": {lv: [] for lv in levels},
               "recourse": {lv: [] for lv in levels}}
     decision_scores = []
+    measurement_cost = 0.0
 
     def leveled(items, taxonomy):
         """Same slug -> the three ladder representations."""
@@ -265,12 +266,13 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
         return out
 
     for transcript in sampled:
-        extractions = [
-            _extract_run(
+        extractions = []
+        for i in range(SELF_AGREEMENT_K):
+            parsed, response = _extract_run(
                 transcript["response_text"], extractor_client, nonce=f"sa-{i}",
-            )[0]
-            for i in range(SELF_AGREEMENT_K)
-        ]
+            )
+            extractions.append(parsed)
+            measurement_cost += response.get("cost_usd", 0.0)
         reason_sets = [
             leveled(
                 [r.get("reason_id") for r in e.reasons],
@@ -307,6 +309,7 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
         "sampled_cases": len(sampled),
         "extractor_version": ELICITATION_VERSION,
         "extractor_prompt_hash": extractor_prompt_hash()[:16],
+        "measurement_cost_usd": measurement_cost,
     }
     for item_type in ("reasons", "recourse"):
         levels_out = {
@@ -496,6 +499,9 @@ def run_audit(
             sut_entry["extractor_self_agreement"] = _self_agreement(
                 run_result.transcripts, extractor_client, taxonomies=taxonomies
             )
+            total_cost += sut_entry["extractor_self_agreement"][
+                "measurement_cost_usd"
+            ]
         if config.perturbations.enabled and config.perturbations.classes:
             perturbation_cost, perturbation_report, variant_records = _run_perturbations(
                 config=config,

@@ -87,3 +87,22 @@ def test_extractor_recourse_covers_implicit_advice():
     low = prompt.lower()
     assert "implicit" in low or "implied" in low
     assert "do not invent" in low or "not invent" in low
+
+
+# ── extractor v3: category anchoring for structured evaluations ──────
+
+def test_extractor_v3_anchors_on_response_categories():
+    prompt = build_extractor_prompt("some response")
+    low = prompt.lower()
+    # one reason entry per named category when the response has structure
+    assert "one entry per category" in low or "exactly one entry per categ" in low
+    assert "category's own name" in low or "category name" in low
+    # explicit fallback when no structure exists (stays generic)
+    assert "no category structure" in low or "not organis" in low
+
+
+def test_extractor_v3_recourse_rules_unchanged_properties():
+    prompt = build_extractor_prompt("some response")
+    low = prompt.lower()
+    assert "implicit" in low or "implied" in low
+    assert "do not invent" in low or "not invent" in low

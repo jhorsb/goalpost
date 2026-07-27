@@ -560,3 +560,26 @@ def test_self_agreement_includes_decision_level(tmp_path):
 
     steady = audit_mod._self_agreement(transcripts, SteadyExtractor())
     assert steady["decision"]["mean_modal_agreement"] == 1.0
+
+
+def test_self_agreement_costs_counted_in_audit_total(tmp_path):
+    """Queued gap from D-023: SA measurement calls are real spend and must
+    appear in the audit's total_cost_usd."""
+
+    class CostlyExtractor(FakeExtractor):
+        def complete(self, prompt, temperature, seed):
+            out = super().complete(prompt, temperature, seed)
+            out["cost_usd"] = 0.01
+            return out
+
+    result = run_audit(
+        config=make_config(mode="freeform"), cases=[CASE],
+        client_factory=lambda sut: ScriptedClient([FREEFORM_PROSE]),
+        canonicaliser_client=FakeCanonicaliser(),
+        extractor_client=CostlyExtractor(),
+        taxonomy_path=TAXONOMY, output_root=tmp_path,
+    )
+    sa = result.metrics["suts"][0]["extractor_self_agreement"]
+    assert sa["measurement_cost_usd"] == pytest.approx(0.03)  # 1 case x k=3
+    # total = SUT 4x0.001 + 1 deduped extraction 0.01 + SA 3x0.01
+    assert result.metrics["total_cost_usd"] == pytest.approx(0.044)
