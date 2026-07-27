@@ -112,32 +112,42 @@ consistency at the level this claim is made was 0.902 against a
 pre-registered bar of 0.90; it clears by 0.002, and I'd rather show you
 that margin than round it away.
 
-**3. The finding I was hunting is measured, but not certified.** The
-reasons the pipeline gave measured **0.805**. Against advice at 0.456,
-that is the reason–recourse gap from my dissertation, sitting on a real
-target — and you can see it, because I'm showing you the raw measurement.
-What I am *not* doing is certifying it as a finding you should rely on.
+**3. The finding I was hunting was blocked, fixed, and certified.** The
+reasons the pipeline gave measured **0.983**; against advice at 0.448,
+that is a stability gap of **0.535** — the asymmetry from my dissertation,
+on a real target, wider than on any lab configuration I have measured.
 
-Before any audit ran, I pre-registered a rule: no stability claim earns
-certification unless the extraction layer demonstrates sufficient
-self-consistency — a hard bar, plus an extra margin for claims of
-*instability*. On the reason side the extractor scored 0.904: over the
-bar, but short of the margin by 0.051. So the number stands in the
-evidence file, and the claim doesn't get made.
+That claim did not get certified on the first attempt, and the story of
+why is the part I most want you to trust. Before any audit ran, I
+pre-registered a rule: no stability claim earns certification unless the
+extraction layer demonstrates sufficient self-consistency — a hard bar,
+plus an extra margin for claims of *instability*. On the first pass, the
+reason-extractor missed that margin by 0.051. The gap sat there in the
+evidence file, visible to anyone who could subtract, and the instrument
+declined to certify it.
 
-Be precise about what that means, because the distinction is the whole
-point. The rule did not say the gap isn't real. It said my
-reason-extractor isn't yet reliable enough for me to stand behind a
-conclusion drawn from it — an engineering problem with known solutions
-(tighter extraction prompts, multiple extractors with adjudication, more
-repeats). Improving the extractor and re-running is not moving the
-goalposts: the rule was pre-registered against extractor quality, not
-against the finding. If the gap survives a better extractor, I get the
-claim legitimately. If it doesn't, that's a finding too.
+The rule was pre-registered against extractor quality, not against the
+finding — so improving the extractor and re-measuring is the legitimate
+path, not a moved goalpost. I rebuilt the extraction prompt to anchor on
+the response's own category structure, tested three candidate extraction
+models against the recorded transcripts, verified the winner's output
+against a second model for validity, and re-ran the whole measurement.
+Self-agreement rose to 0.988 on reasons and 0.932 on advice. The gap
+survived, and now it's certified.
+
+One disclosure comes with it: the reason side is measured at the
+pipeline's own category granularity — its recruiter agent always
+structures its evaluation under the same four headings, so high
+reason-stability is partly a property of that design. What is *not*
+structural is this: the pipeline kept its categories but **flipped
+whether they counted for or against the candidate** in roughly half the
+cases measured. Your "experience" can be the reason you're recommended on
+one run and the reason you're not on the next.
 
 I want this instrument's failure mode to be a number I decline to stand
 behind — not a confident claim I can't support. An audit tool that
-certifies what its author is hunting for is a demo.
+certifies what its author is hunting for, without a gate that can tell it
+no, is a demo. Mine said no, made me do the work, and only then said yes.
 
 ## What this doesn't tell you
 

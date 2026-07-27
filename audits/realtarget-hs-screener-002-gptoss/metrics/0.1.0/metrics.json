@@ -26,15 +26,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.08738566988566988,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.08738566988566988,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.75,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -48,15 +48,15 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.33333333333333337,
+                  "mean_jaccard": 0.38333333333333336,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.4,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -79,42 +79,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.08193181818181819,
+                  "mean_jaccard": 0.7178571428571429,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.08193181818181819,
+                  "mean_jaccard": 0.7178571428571429,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.06000000000000001,
+                  "mean_jaccard": 0.18,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.06000000000000001,
+                  "mean_jaccard": 0.18,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.42833333333333334,
+                  "mean_jaccard": 0.425,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.6666666666666666,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 2.4,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -132,42 +132,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.166835315097699,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.166835315097699,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.20691058941058943,
+                  "mean_jaccard": 0.4208333333333333,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.20691058941058943,
+                  "mean_jaccard": 0.4208333333333333,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.49000000000000005,
+                  "mean_jaccard": 0.7166666666666666,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.0,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.2,
+                "mean_set_size": 2.8,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -185,42 +185,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.1382528011204482,
+                  "mean_jaccard": 0.8285714285714285,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.1382528011204482,
+                  "mean_jaccard": 0.8285714285714285,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.7,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.16999999999999998,
+                  "mean_jaccard": 0.2683333333333333,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.16999999999999998,
+                  "mean_jaccard": 0.2683333333333333,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5083333333333333,
+                  "mean_jaccard": 0.625,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.25,
+              "direction_flip_rate_cluster": 0.75,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 2.2,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -238,42 +238,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.16355311355311355,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.16355311355311355,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.5,
+                  "mean_jaccard": 0.45,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.5,
+                  "mean_jaccard": 0.45,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5,
+                  "mean_jaccard": 0.45,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.6666666666666666,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 1.6,
+                "mean_set_size": 1.8,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -291,11 +291,11 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.14999712705595059,
+                  "mean_jaccard": 0.6571428571428571,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.14999712705595059,
+                  "mean_jaccard": 0.6571428571428571,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -313,15 +313,15 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.16666666666666666,
+                  "mean_jaccard": 0.21666666666666665,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.6666666666666666,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -344,37 +344,37 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.19377289377289378,
+                  "mean_jaccard": 0.7,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.19377289377289378,
+                  "mean_jaccard": 0.7,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 0.85,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.21071428571428572,
+                  "mean_jaccard": 0.1380952380952381,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.21071428571428572,
+                  "mean_jaccard": 0.1380952380952381,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5700000000000001,
+                  "mean_jaccard": 0.49333333333333335,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.0,
+              "direction_flip_rate_cluster": 0.75,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 3.6,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -397,42 +397,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.046825396825396826,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.046825396825396826,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.775,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.04162087912087912,
+                  "mean_jaccard": 0.06217032967032967,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.04162087912087912,
+                  "mean_jaccard": 0.06217032967032967,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5316666666666666,
+                  "mean_jaccard": 0.575,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.25,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 4.2,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -450,25 +450,25 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.19943223443223443,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.19943223443223443,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.9,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.13472222222222222,
+                  "mean_jaccard": 0.12142857142857141,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.13472222222222222,
+                  "mean_jaccard": 0.12142857142857141,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -480,7 +480,7 @@
               "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.2,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -503,15 +503,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.05935245310245311,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.05935245310245311,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5633333333333332,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -525,15 +525,15 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.1,
+                  "mean_jaccard": 0.08333333333333333,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.4,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -556,37 +556,37 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.05444444444444444,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.05444444444444444,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.6833333333333333,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.03333333333333333,
+                  "mean_jaccard": 0.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.03333333333333333,
+                  "mean_jaccard": 0.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.4,
+                  "mean_jaccard": 0.16666666666666666,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -609,42 +609,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.06158496732026144,
+                  "mean_jaccard": 0.825,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.06158496732026144,
+                  "mean_jaccard": 0.825,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.775,
+                  "mean_jaccard": 0.9,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.10005050505050506,
+                  "mean_jaccard": 0.043333333333333335,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.10005050505050506,
+                  "mean_jaccard": 0.043333333333333335,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.5433333333333333,
+                  "mean_jaccard": 0.5583333333333333,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 1.0,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 3.8,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.6,
+                "mean_set_size": 3.4,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -662,42 +662,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.09232466063348416,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.09232466063348416,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.09161838161838162,
+                  "mean_jaccard": 0.048095238095238094,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.09161838161838162,
+                  "mean_jaccard": 0.048095238095238094,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 0.725,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.3333333333333333,
+              "direction_flip_rate_cluster": 1.0,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.4,
+                "mean_set_size": 2.6,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -715,25 +715,11 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.1664105541001826,
+                  "mean_jaccard": 0.8,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.1664105541001826,
-                  "n_pairs": 10
-                },
-                "cluster": {
-                  "mean_jaccard": 0.7166666666666666,
-                  "n_pairs": 10
-                }
-              },
-              "recourse_stability": {
-                "raw": {
-                  "mean_jaccard": 0.24007936507936506,
-                  "n_pairs": 10
-                },
-                "normalised": {
-                  "mean_jaccard": 0.24007936507936506,
+                  "mean_jaccard": 0.8,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -741,16 +727,30 @@
                   "n_pairs": 10
                 }
               },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19365079365079366,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19365079365079366,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 10
+                }
+              },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.25,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.8,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.0,
+                "mean_set_size": 2.4,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -768,15 +768,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.1597222222222222,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.1597222222222222,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.9,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -790,20 +790,20 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.13333333333333333,
+                  "mean_jaccard": 0.15,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.0,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.2,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.4,
-                "mean_set_size": 1.0,
+                "mean_set_size": 0.8,
                 "empty_empty_pair_fraction": 0.1
               }
             },
@@ -821,15 +821,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.14012626262626263,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.14012626262626263,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.7166666666666666,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -843,20 +843,20 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.15,
+                  "mean_jaccard": 0.11666666666666665,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.8,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 1.4,
+                "mean_set_size": 1.6,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -874,15 +874,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.06856060606060606,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 4
                 },
                 "normalised": {
-                  "mean_jaccard": 0.06856060606060606,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 4
                 },
                 "cluster": {
-                  "mean_jaccard": 0.875,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 4
                 }
               },
@@ -896,20 +896,20 @@
                   "n_pairs": 4
                 },
                 "cluster": {
-                  "mean_jaccard": 0.75,
+                  "mean_jaccard": 0.8333333333333333,
                   "n_pairs": 4
                 }
               },
               "discarded_pair_fraction": 0.6,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.2,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 2.2,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -927,11 +927,11 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.05071428571428571,
+                  "mean_jaccard": 0.825,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.05071428571428571,
+                  "mean_jaccard": 0.825,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -941,28 +941,28 @@
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.06646825396825397,
+                  "mean_jaccard": 0.08968253968253967,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.06646825396825397,
+                  "mean_jaccard": 0.08968253968253967,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.74,
+                  "mean_jaccard": 0.525,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.25,
+              "direction_flip_rate_cluster": 0.75,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.2,
+                "mean_set_size": 3.8,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.8,
+                "mean_set_size": 3.6,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -980,29 +980,29 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.04722222222222222,
+                  "mean_jaccard": 0.8333333333333334,
                   "n_pairs": 6
                 },
                 "normalised": {
-                  "mean_jaccard": 0.04722222222222222,
+                  "mean_jaccard": 0.8333333333333334,
                   "n_pairs": 6
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8333333333333334,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 6
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.041666666666666664,
+                  "mean_jaccard": 0.13888888888888887,
                   "n_pairs": 6
                 },
                 "normalised": {
-                  "mean_jaccard": 0.041666666666666664,
+                  "mean_jaccard": 0.13888888888888887,
                   "n_pairs": 6
                 },
                 "cluster": {
-                  "mean_jaccard": 0.20833333333333334,
+                  "mean_jaccard": 0.3055555555555555,
                   "n_pairs": 6
                 }
               },
@@ -1010,7 +1010,7 @@
               "direction_flip_rate_cluster": 1.0,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.8,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -1033,25 +1033,25 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.039924242424242425,
+                  "mean_jaccard": 0.9199999999999999,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.039924242424242425,
+                  "mean_jaccard": 0.9199999999999999,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.85,
+                  "mean_jaccard": 0.9199999999999999,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.03333333333333333,
+                  "mean_jaccard": 0.05,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.03333333333333333,
+                  "mean_jaccard": 0.05,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -1060,10 +1060,10 @@
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.75,
+              "direction_flip_rate_cluster": 0.2,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.4,
+                "mean_set_size": 4.2,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -1086,15 +1086,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.06285936285936286,
+                  "mean_jaccard": 0.6571428571428571,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.06285936285936286,
+                  "mean_jaccard": 0.6571428571428571,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -1108,15 +1108,15 @@
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.13333333333333333,
+                  "mean_jaccard": 0.23333333333333334,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.5,
+              "direction_flip_rate_cluster": 0.75,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -1139,42 +1139,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.18795537795537795,
+                  "mean_jaccard": 0.8666666666666666,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.18795537795537795,
+                  "mean_jaccard": 0.8666666666666666,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.8,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.1542857142857143,
+                  "mean_jaccard": 0.13428571428571429,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.1542857142857143,
+                  "mean_jaccard": 0.13428571428571429,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.43499999999999994,
+                  "mean_jaccard": 0.4766666666666667,
                   "n_pairs": 10
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.0,
+              "direction_flip_rate_cluster": 0.75,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.8,
+                "mean_set_size": 3.0,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -1192,25 +1192,25 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.14858516483516485,
+                  "mean_jaccard": 0.8466666666666667,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.14858516483516485,
+                  "mean_jaccard": 0.8466666666666667,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.85,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.0819047619047619,
+                  "mean_jaccard": 0.09952380952380953,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.0819047619047619,
+                  "mean_jaccard": 0.09952380952380953,
                   "n_pairs": 10
                 },
                 "cluster": {
@@ -1219,15 +1219,15 @@
                 }
               },
               "discarded_pair_fraction": 0.0,
-              "direction_flip_rate_cluster": 0.0,
+              "direction_flip_rate_cluster": 0.25,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 2.6,
+                "mean_set_size": 3.0,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -1245,42 +1245,42 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.1223961223961224,
+                  "mean_jaccard": 0.9,
                   "n_pairs": 6
                 },
                 "normalised": {
-                  "mean_jaccard": 0.1223961223961224,
+                  "mean_jaccard": 0.9,
                   "n_pairs": 6
                 },
                 "cluster": {
-                  "mean_jaccard": 0.875,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 6
                 }
               },
               "recourse_stability": {
                 "raw": {
-                  "mean_jaccard": 0.24087301587301588,
+                  "mean_jaccard": 0.18908730158730158,
                   "n_pairs": 6
                 },
                 "normalised": {
-                  "mean_jaccard": 0.24087301587301588,
+                  "mean_jaccard": 0.18908730158730158,
                   "n_pairs": 6
                 },
                 "cluster": {
-                  "mean_jaccard": 0.7222222222222222,
+                  "mean_jaccard": 0.6388888888888888,
                   "n_pairs": 6
                 }
               },
               "discarded_pair_fraction": 0.4,
-              "direction_flip_rate_cluster": 0.25,
+              "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.0,
+                "mean_set_size": 3.2,
                 "empty_empty_pair_fraction": 0.0
               }
             },
@@ -1298,15 +1298,15 @@
               },
               "reason_stability": {
                 "raw": {
-                  "mean_jaccard": 0.09727272727272727,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "normalised": {
-                  "mean_jaccard": 0.09727272727272727,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 },
                 "cluster": {
-                  "mean_jaccard": 0.85,
+                  "mean_jaccard": 1.0,
                   "n_pairs": 10
                 }
               },
@@ -1328,7 +1328,7 @@
               "direction_flip_rate_cluster": 0.5,
               "reason_coverage": {
                 "emptiness_rate": 0.0,
-                "mean_set_size": 3.6,
+                "mean_set_size": 4.0,
                 "empty_empty_pair_fraction": 0.0
               },
               "recourse_coverage": {
@@ -1340,21 +1340,21 @@
           ],
           "aggregates": {
             "reason_cluster": {
-              "mean": 0.8045333333333333,
-              "median": 0.8,
+              "mean": 0.9828,
+              "median": 1.0,
               "iqr": [
-                0.775,
-                0.85
+                1.0,
+                1.0
               ],
               "n_included": 25,
               "excluded": []
             },
             "recourse_cluster": {
-              "mean": 0.4562222222222222,
-              "median": 0.445,
+              "mean": 0.44837777777777776,
+              "median": 0.45,
               "iqr": [
-                0.31666666666666665,
-                0.5700000000000001
+                0.3055555555555555,
+                0.625
               ],
               "n_included": 25,
               "excluded": []
@@ -1366,31 +1366,32 @@
       "extractor_self_agreement": {
         "k": 3,
         "sampled_cases": 25,
-        "extractor_version": "0.2.0",
-        "extractor_prompt_hash": "a34dc69178064b6b",
+        "extractor_version": "0.3.0",
+        "extractor_prompt_hash": "34e17dd4d1bf71fb",
+        "measurement_cost_usd": 0.28275799999999995,
         "reasons": {
           "raw": {
-            "mean_jaccard": 0.7868969918969918
+            "mean_jaccard": 0.9826666666666667
           },
           "normalised": {
-            "mean_jaccard": 0.7868969918969918
+            "mean_jaccard": 0.9826666666666667
           },
           "cluster": {
-            "mean_jaccard": 0.9038518518518518
+            "mean_jaccard": 0.988
           },
-          "mean_jaccard": 0.7868969918969918
+          "mean_jaccard": 0.9826666666666667
         },
         "recourse": {
           "raw": {
-            "mean_jaccard": 0.7853333333333333
+            "mean_jaccard": 0.8194603174603174
           },
           "normalised": {
-            "mean_jaccard": 0.7853333333333333
+            "mean_jaccard": 0.8194603174603174
           },
           "cluster": {
-            "mean_jaccard": 0.9022222222222223
+            "mean_jaccard": 0.9316507936507936
           },
-          "mean_jaccard": 0.7853333333333333
+          "mean_jaccard": 0.8194603174603174
         },
         "decision": {
           "mean_modal_agreement": 1.0
@@ -1398,7 +1399,7 @@
       }
     }
   ],
-  "total_cost_usd": 0.0,
+  "total_cost_usd": 0.28275799999999995,
   "missing_blocks": [],
   "errors": [],
   "provenance": {

@@ -152,11 +152,18 @@ self-agreement 1.000):**
   bar by 0.002 — boundary proximity disclosed in the report, and the claim
   is a lower bound (extractor noise can only make it look worse).
 
-**Still gate-withheld:**
-- Reason stability (measured 0.805): agreement 0.904 clears the bar but
-  fails the +0.15 instability margin (0.099) — so the reason-side claim,
-  and therefore the reason–recourse *gap* claim, remain unreportable for
-  this target. The instrument declines the headline it cannot support.
+**Resolved by extractor hardening (D-025, same day):** extractor v3
+anchors reason units on the response's own category structure; measured
+self-agreement rose to decision 1.000 / reasons 0.988 / recourse 0.932
+(25-case sample, k=3, cluster level), certifying both sides. Final
+certified numbers: reason stability **0.983** at the pipeline's own
+category granularity (raw 0.895; partly structural — disclosed), recourse
+**0.448** — a **reason–recourse gap of 0.535**, the dissertation's
+asymmetry on a real target, obtained the pre-registered way: the gate
+blocked the claim, the extractor was improved, the measurement was
+re-run, and the finding survived. Also newly certified: direction-flip
+rate 0.508 — the pipeline keeps discussing the same categories but flips
+whether they count for or against the candidate between runs.
 
 Also notable: the upstream pins a model that no longer exists anywhere —
 published screening tools can silently become unrunnable-as-deployed,

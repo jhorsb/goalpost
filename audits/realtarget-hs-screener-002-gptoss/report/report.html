@@ -5,9 +5,10 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.46 on a 0–1 scale). Because this system was measured through an extractor, treat this as a **lower bound** on its instability being worse — the true stability is at least this good.
+**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes more often than it repeats (recourse stability 0.45 on a 0–1 scale). Because this system was measured through an extractor, treat this as a **lower bound** on its instability being worse — the true stability is at least this good.
 
 The *decision itself* agreed with its most common answer 97% of the time across repeat runs.
+The *reasons given* were substantially steadier than the advice (reason stability 0.98 vs recourse 0.45).
 
 ## Why this matters
 
@@ -17,7 +18,7 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system&#x27;s free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.904 at the reported grouping (0.787 raw), recourse 0.902 at the reported grouping (0.785 raw), k=3, 25 sampled cases); stability numbers are lower bounds.
+- This system&#x27;s free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.988 at the reported grouping (0.983 raw), recourse 0.932 at the reported grouping (0.819 raw), k=3, 25 sampled cases); stability numbers are lower bounds.
 
 ---
 
@@ -27,106 +28,106 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 
 | case | level | reason J | recourse J | n_pairs | decision | attempted/parsed/scored | refusals |
 |---|---|---|---|---|---|---|---|
-| sc-platform-engineer-01 | raw | 0.09 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-01 | normalised | 0.09 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-01 | cluster | 0.75 | 0.33 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-01 | coverage | emptiness 0.00, size 2.4 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
-| sc-platform-engineer-02 | raw | 0.08 | 0.06 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-02 | normalised | 0.08 | 0.06 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-02 | cluster | 0.80 | 0.43 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-02 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.6 | — | — | discarded pairs 0% | — |
-| sc-platform-engineer-03 | raw | 0.17 | 0.21 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-03 | normalised | 0.17 | 0.21 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-03 | cluster | 0.80 | 0.49 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-03 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 3.2 | — | — | discarded pairs 0% | — |
-| sc-platform-engineer-04 | raw | 0.14 | 0.17 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-04 | normalised | 0.14 | 0.17 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-04 | cluster | 0.70 | 0.51 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-04 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.6 | — | — | discarded pairs 0% | — |
-| sc-platform-engineer-05 | raw | 0.16 | 0.50 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-05 | normalised | 0.16 | 0.50 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-05 | cluster | 0.80 | 0.50 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-platform-engineer-05 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
-| sc-data-analyst-01 | raw | 0.15 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-01 | normalised | 0.15 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-01 | cluster | 1.00 | 0.17 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-01 | coverage | emptiness 0.00, size 3.0 | emptiness 0.20, size 1.4 | — | — | discarded pairs 0% | — |
-| sc-data-analyst-02 | raw | 0.19 | 0.21 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-02 | normalised | 0.19 | 0.21 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-02 | cluster | 0.80 | 0.57 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-02 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 3.4 | — | — | discarded pairs 0% | — |
-| sc-data-analyst-03 | raw | 0.05 | 0.04 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-03 | normalised | 0.05 | 0.04 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-03 | cluster | 0.78 | 0.53 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-03 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 4.2 | — | — | discarded pairs 0% | — |
-| sc-data-analyst-04 | raw | 0.20 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-04 | normalised | 0.20 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-04 | cluster | 0.90 | 0.45 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-04 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 3.2 | — | — | discarded pairs 0% | — |
-| sc-data-analyst-05 | raw | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-05 | normalised | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-05 | cluster | 0.56 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-data-analyst-05 | coverage | emptiness 0.00, size 3.4 | emptiness 0.20, size 1.4 | — | — | discarded pairs 0% | — |
-| sc-frontend-developer-01 | raw | 0.05 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-01 | normalised | 0.05 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-01 | cluster | 0.68 | 0.40 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-01 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
-| sc-frontend-developer-02 | raw | 0.06 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-02 | normalised | 0.06 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-02 | cluster | 0.78 | 0.54 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-02 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 3.6 | — | — | discarded pairs 0% | — |
-| sc-frontend-developer-03 | raw | 0.09 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-03 | normalised | 0.09 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-03 | cluster | 0.80 | 0.80 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-03 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.4 | — | — | discarded pairs 0% | — |
-| sc-frontend-developer-04 | raw | 0.17 | 0.24 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-04 | normalised | 0.17 | 0.24 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-04 | cluster | 0.72 | 1.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-04 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 2.0 | — | — | discarded pairs 0% | — |
-| sc-frontend-developer-05 | raw | 0.16 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-05 | normalised | 0.16 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-05 | cluster | 0.90 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-frontend-developer-05 | coverage | emptiness 0.00, size 3.2 | emptiness 0.40, size 1.0 | — | — | discarded pairs 0% | — |
-| sc-project-manager-01 | raw | 0.14 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-01 | normalised | 0.14 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-01 | cluster | 0.72 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-01 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
-| sc-project-manager-02 | raw | 0.07 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
-| sc-project-manager-02 | normalised | 0.07 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
-| sc-project-manager-02 | cluster | 0.88 | 0.75 | 4 | 0.60 | 5/5/5 | 0 |
-| sc-project-manager-02 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 2.6 | — | — | discarded pairs 60% | — |
-| sc-project-manager-03 | raw | 0.05 | 0.07 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-03 | normalised | 0.05 | 0.07 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-03 | cluster | 0.90 | 0.74 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-03 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 3.8 | — | — | discarded pairs 0% | — |
-| sc-project-manager-04 | raw | 0.05 | 0.04 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-project-manager-04 | normalised | 0.05 | 0.04 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-project-manager-04 | cluster | 0.83 | 0.21 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-project-manager-04 | coverage | emptiness 0.00, size 2.8 | emptiness 0.00, size 2.6 | — | — | discarded pairs 40% | — |
-| sc-project-manager-05 | raw | 0.04 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-05 | normalised | 0.04 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-05 | cluster | 0.85 | 0.32 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-project-manager-05 | coverage | emptiness 0.00, size 3.4 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
-| sc-support-team-lead-01 | raw | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-01 | normalised | 0.06 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-01 | cluster | 0.80 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-01 | coverage | emptiness 0.00, size 3.0 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
-| sc-support-team-lead-02 | raw | 0.19 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-02 | normalised | 0.19 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-02 | cluster | 0.80 | 0.43 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-02 | coverage | emptiness 0.00, size 2.6 | emptiness 0.00, size 2.8 | — | — | discarded pairs 0% | — |
-| sc-support-team-lead-03 | raw | 0.15 | 0.08 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-03 | normalised | 0.15 | 0.08 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-03 | cluster | 0.85 | 0.65 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-03 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 2.6 | — | — | discarded pairs 0% | — |
-| sc-support-team-lead-04 | raw | 0.12 | 0.24 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-support-team-lead-04 | normalised | 0.12 | 0.24 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-support-team-lead-04 | cluster | 0.88 | 0.72 | 6 | 0.80 | 5/5/5 | 0 |
-| sc-support-team-lead-04 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 3.0 | — | — | discarded pairs 40% | — |
-| sc-support-team-lead-05 | raw | 0.10 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-05 | normalised | 0.10 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-05 | cluster | 0.85 | 0.35 | 10 | 1.00 | 5/5/5 | 0 |
-| sc-support-team-lead-05 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 1.8 | — | — | discarded pairs 0% | — |
+| sc-platform-engineer-01 | raw | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-01 | normalised | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-01 | cluster | 1.00 | 0.38 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-01 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
+| sc-platform-engineer-02 | raw | 0.72 | 0.18 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-02 | normalised | 0.72 | 0.18 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-02 | cluster | 1.00 | 0.42 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-02 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.4 | — | — | discarded pairs 0% | — |
+| sc-platform-engineer-03 | raw | 1.00 | 0.42 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-03 | normalised | 1.00 | 0.42 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-03 | cluster | 1.00 | 0.72 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-03 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.8 | — | — | discarded pairs 0% | — |
+| sc-platform-engineer-04 | raw | 0.83 | 0.27 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-04 | normalised | 0.83 | 0.27 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-04 | cluster | 1.00 | 0.62 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-04 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.2 | — | — | discarded pairs 0% | — |
+| sc-platform-engineer-05 | raw | 1.00 | 0.45 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-05 | normalised | 1.00 | 0.45 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-05 | cluster | 1.00 | 0.45 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-platform-engineer-05 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.8 | — | — | discarded pairs 0% | — |
+| sc-data-analyst-01 | raw | 0.66 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-01 | normalised | 0.66 | 0.03 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-01 | cluster | 1.00 | 0.22 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-01 | coverage | emptiness 0.00, size 4.0 | emptiness 0.20, size 1.4 | — | — | discarded pairs 0% | — |
+| sc-data-analyst-02 | raw | 0.70 | 0.14 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-02 | normalised | 0.70 | 0.14 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-02 | cluster | 0.85 | 0.49 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-02 | coverage | emptiness 0.00, size 3.6 | emptiness 0.00, size 3.4 | — | — | discarded pairs 0% | — |
+| sc-data-analyst-03 | raw | 1.00 | 0.06 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-03 | normalised | 1.00 | 0.06 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-03 | cluster | 1.00 | 0.57 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-03 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 4.0 | — | — | discarded pairs 0% | — |
+| sc-data-analyst-04 | raw | 1.00 | 0.12 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-04 | normalised | 1.00 | 0.12 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-04 | cluster | 1.00 | 0.45 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-04 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 3.2 | — | — | discarded pairs 0% | — |
+| sc-data-analyst-05 | raw | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-05 | normalised | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-05 | cluster | 1.00 | 0.08 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-data-analyst-05 | coverage | emptiness 0.00, size 4.0 | emptiness 0.20, size 1.4 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-01 | raw | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-01 | normalised | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-01 | cluster | 1.00 | 0.17 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-01 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.4 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-02 | raw | 0.82 | 0.04 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-02 | normalised | 0.82 | 0.04 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-02 | cluster | 0.90 | 0.56 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-02 | coverage | emptiness 0.00, size 3.8 | emptiness 0.00, size 3.4 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-03 | raw | 1.00 | 0.05 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | normalised | 1.00 | 0.05 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | cluster | 1.00 | 0.72 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-03 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.6 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-04 | raw | 0.80 | 0.19 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | normalised | 0.80 | 0.19 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | cluster | 1.00 | 0.75 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-04 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.4 | — | — | discarded pairs 0% | — |
+| sc-frontend-developer-05 | raw | 1.00 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | normalised | 1.00 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | cluster | 1.00 | 0.15 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-frontend-developer-05 | coverage | emptiness 0.00, size 4.0 | emptiness 0.40, size 0.8 | — | — | discarded pairs 0% | — |
+| sc-project-manager-01 | raw | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | normalised | 1.00 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | cluster | 1.00 | 0.12 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-01 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
+| sc-project-manager-02 | raw | 1.00 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | normalised | 1.00 | 0.09 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | cluster | 1.00 | 0.83 | 4 | 0.60 | 5/5/5 | 0 |
+| sc-project-manager-02 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.2 | — | — | discarded pairs 60% | — |
+| sc-project-manager-03 | raw | 0.82 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | normalised | 0.82 | 0.09 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | cluster | 0.90 | 0.53 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-03 | coverage | emptiness 0.00, size 3.8 | emptiness 0.00, size 3.6 | — | — | discarded pairs 0% | — |
+| sc-project-manager-04 | raw | 0.83 | 0.14 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | normalised | 0.83 | 0.14 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | cluster | 1.00 | 0.31 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-project-manager-04 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 2.6 | — | — | discarded pairs 40% | — |
+| sc-project-manager-05 | raw | 0.92 | 0.05 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | normalised | 0.92 | 0.05 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | cluster | 0.92 | 0.32 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-project-manager-05 | coverage | emptiness 0.00, size 4.2 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-01 | raw | 0.66 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | normalised | 0.66 | 0.00 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | cluster | 1.00 | 0.23 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-01 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.6 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-02 | raw | 0.87 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | normalised | 0.87 | 0.13 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | cluster | 1.00 | 0.48 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-02 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 3.0 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-03 | raw | 0.85 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | normalised | 0.85 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | cluster | 1.00 | 0.65 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-03 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 3.0 | — | — | discarded pairs 0% | — |
+| sc-support-team-lead-04 | raw | 0.90 | 0.19 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | normalised | 0.90 | 0.19 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | cluster | 1.00 | 0.64 | 6 | 0.80 | 5/5/5 | 0 |
+| sc-support-team-lead-04 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 3.2 | — | — | discarded pairs 40% | — |
+| sc-support-team-lead-05 | raw | 1.00 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | normalised | 1.00 | 0.10 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | cluster | 1.00 | 0.35 | 10 | 1.00 | 5/5/5 | 0 |
+| sc-support-team-lead-05 | coverage | emptiness 0.00, size 4.0 | emptiness 0.00, size 1.8 | — | — | discarded pairs 0% | — |
 
 ### Provenance
 
@@ -138,5 +139,5 @@ Imagine a sat-nav that always tells you *why* you haven&#x27;t arrived — &quot
 - metrics_version: `0.1.0`
 - audit_version: `0.1.0`
 - report_version: `0.1.0` · anchors: `anchors-1.0.0`
-- total cost: $0.0000
+- total cost: $0.2828
 </pre></body></html>

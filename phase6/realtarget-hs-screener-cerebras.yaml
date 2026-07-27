@@ -23,16 +23,13 @@ canonicaliser:
   provider: openai
   model: gpt-4.1-2025-04-14
 extractor:
-  # gemma-4-31b selected empirically (D-025): v3 self-agreement
-  # 1.000/0.993 vs gpt-4.1's 0.904/0.902 and GLM's 0.811/0.732;
-  # validity checked against gpt-4.1 (convergent decisions/sets).
-  # Differs from the SUT model as hard-required; free on Cerebras.
-  provider: openai_compatible
-  model: gemma-4-31b
-  base_url: https://api.cerebras.ai/v1
-  api_key_env: CEREBRAS_API_KEY
-  send_seed: false
-  max_tokens: 3000
+  # v3 prompt + gpt-4.1: certified in the final audit (SA decision 1.000,
+  # reasons 0.988, recourse 0.932 at cluster level, 25-case sample).
+  # gemma-4-31b on Cerebras measured 1.000/0.993 under v3 and is the
+  # validated free-tier alternative (D-025); the completed audit used
+  # gpt-4.1 via the stored config, so this file matches what ran.
+  provider: openai
+  model: gpt-4.1-2025-04-14
 pricing:
   gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
   gpt-oss-120b: {input: 0.0, output: 0.0}   # Cerebras free tier
