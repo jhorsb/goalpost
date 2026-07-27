@@ -512,3 +512,50 @@ def test_self_agreement_reported_at_all_three_ladder_levels(tmp_path):
     assert result["recourse"]["cluster"]["mean_jaccard"] == 1.0
     # back-compat: the flat key mirrors the raw level (pre-registered basis)
     assert result["reasons"]["mean_jaccard"] == result["reasons"]["raw"]["mean_jaccard"]
+
+
+def test_self_agreement_includes_decision_level(tmp_path):
+    """The decision verdict is an extraction output too: its agreement is
+    measured so decision-stability claims can pass or fail the gate
+    independently of reason/recourse slug extraction."""
+    from goalpost import audit as audit_mod
+
+    class FlipFlopDecisionExtractor:
+        def __init__(self):
+            self.calls = 0
+
+        def complete(self, prompt, temperature, seed):
+            self.calls += 1
+            label = "accept" if self.calls % 3 else "reject"
+            return {
+                "text": (
+                    f'DECISION_JSON: {{"decision": {{"label": "{label}"}}}}\n'
+                    'REASONS_JSON: {"reasons": []}\n'
+                    'RECOURSE_JSON: {"actions": []}\n'
+                ),
+                "usage": {"input_tokens": 1, "output_tokens": 1},
+                "cost_usd": 0.0, "model_fingerprint": "f",
+            }
+
+    transcripts = [
+        {"case_id": "c1", "repetition_index": 0, "response_text": "prose"}
+    ]
+    result = audit_mod._self_agreement(transcripts, FlipFlopDecisionExtractor())
+    # 3 extractions: accept, accept, reject -> modal agreement 2/3
+    assert result["decision"]["mean_modal_agreement"] == pytest.approx(2 / 3)
+
+    class SteadyExtractor(FlipFlopDecisionExtractor):
+        def complete(self, prompt, temperature, seed):
+            self.calls += 1
+            return {
+                "text": (
+                    'DECISION_JSON: {"decision": {"label": "reject"}}\n'
+                    'REASONS_JSON: {"reasons": []}\n'
+                    'RECOURSE_JSON: {"actions": []}\n'
+                ),
+                "usage": {"input_tokens": 1, "output_tokens": 1},
+                "cost_usd": 0.0, "model_fingerprint": "f",
+            }
+
+    steady = audit_mod._self_agreement(transcripts, SteadyExtractor())
+    assert steady["decision"]["mean_modal_agreement"] == 1.0

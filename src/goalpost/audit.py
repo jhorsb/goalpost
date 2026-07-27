@@ -246,6 +246,7 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
     levels = ("raw", "normalised", "cluster")
     scores = {"reasons": {lv: [] for lv in levels},
               "recourse": {lv: [] for lv in levels}}
+    decision_scores = []
 
     def leveled(items, taxonomy):
         """Same slug -> the three ladder representations."""
@@ -291,6 +292,11 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
             scores["recourse"][level].append(
                 pairwise_jaccard_stats([s[level] for s in recourse_sets]).mean_jaccard
             )
+        decision_scores.append(
+            decision_stability(
+                [e.decision or "__none__" for e in extractions]
+            ).modal_agreement
+        )
 
     def mean(xs):
         xs = [x for x in xs if x is not None]
@@ -310,6 +316,7 @@ def _self_agreement(sut_transcripts, extractor_client, taxonomies=None):
         # flat key = raw level: the originally pre-registered basis
         levels_out["mean_jaccard"] = levels_out["raw"]["mean_jaccard"]
         result[item_type] = levels_out
+    result["decision"] = {"mean_modal_agreement": mean(decision_scores)}
     return result
 
 
