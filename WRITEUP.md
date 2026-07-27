@@ -89,9 +89,9 @@ this whole investigation came in under a pound.)
 
 ## What I found
 
-Three findings. All three are certified — but one of them only after
-the instrument refused to certify it, and that refusal is the part of
-this I'd most want a sceptic to read.
+Three findings, in ascending order of how much I want a sceptic to
+read the small print — and one of them the instrument refused to certify
+until I rebuilt the thing doing the measuring.
 
 **1. The verdict moved on identical inputs.** (Certified.) Across
 125 runs, the pipeline's accept/reject verdict changed on three of
@@ -114,42 +114,70 @@ model, and extraction noise can only make stability look *worse* — so
 consistency on advice, at the level this claim is made, was 0.932 against
 a pre-registered bar of 0.90.
 
-**3. The finding I was hunting was blocked, fixed, and certified.** The
-reasons the pipeline gave measured **0.983**; against advice at 0.448,
-that is a stability gap of **0.535** — the asymmetry from my dissertation,
-on a real target, wider than on any lab configuration I have measured.
+**3. The explanations kept their topics and flipped their meaning.** This
+is the finding I did not go looking for, and it is the one I now think is
+the real result.
 
-That claim did not get certified on the first attempt, and the story of
-why is the part I most want you to trust. Before any audit ran, I
+The pipeline's recruiter agent always evaluates under the same four
+headings — skills, experience, education, extras. Those headings are
+almost perfectly stable across runs: measure "did it discuss the same
+topics?" and you get 0.983. But measure whether each topic *counted for or
+against the candidate*, and it flips in **roughly half** the cases. Your
+experience can be the reason you're recommended on one run and the reason
+you're not on the next. The explanation looks stable at the level of what
+it mentions, and is unstable in what it asserts.
+
+That is my dissertation's thesis in a sharper form than my dissertation
+managed to state it. And it is robust to the measurement worry I have to
+raise about the number next to it.
+
+**About the gap — and why I'm not leading with it.** Reasons measured
+0.983 and advice 0.448, which is a stability gap of 0.535, wider than
+anything I measured on lab configurations. I am reporting it as an
+observation rather than a headline, because three things inflate it and I
+can't yet say by how much:
+
+- **The two sides aren't measured at the same resolution.** Reasons are
+  counted at the level of four fixed categories; advice at the level of
+  individual recommendations. Coarse buckets match each other more easily
+  than fine-grained items do, so some unknown share of the gap is an
+  artifact of measuring the two properties at different grain.
+- **My extraction rule was designed after looking at this target.** The
+  rule that lifted reason-agreement — "produce one entry per category the
+  response uses" — was written once I had seen that this pipeline always
+  emits the same four categories. An extraction rule shaped to a target's
+  structure will mechanically flatter that target's topic-stability. The
+  gate that governs certification was fixed in advance and I did not touch
+  it; the extraction *rule* was not, and I should have held out data to
+  develop it on. Next audit will.
+- **My earlier comparisons weren't like-for-like.** The four lab
+  configurations I benchmark against were measured in a different mode
+  entirely — the model emitted machine-readable output directly, with no
+  extraction layer in the path at all. Comparing that to a
+  free-text-plus-extractor measurement is comparing two measurement
+  architectures, not two systems.
+
+The valence-flip result survives all three, which is why it now leads:
+it's measured on whatever units the extractor produces and asks a
+different question of them — given the same topic came up, did its sign
+change? Coarse categories make that *more* meaningful, not less.
+
+**What the gate did, and why it still matters.** Before any audit ran, I
 pre-registered a rule: no stability claim earns certification unless the
 extraction layer demonstrates sufficient self-consistency — a hard bar,
-plus an extra margin for claims of *instability*. On the first pass, the
-reason-extractor missed that margin by 0.051. The gap sat there in the
-evidence file, visible to anyone who could subtract, and the instrument
-declined to certify it.
-
-The rule was pre-registered against extractor quality, not against the
-finding — so improving the extractor and re-measuring is the legitimate
-path, not a moved goalpost. I rebuilt the extraction prompt to anchor on
-the response's own category structure, tested three candidate extraction
-models against the recorded transcripts, verified the winner's output
-against a second model for validity, and re-ran the whole measurement.
-Self-agreement rose to 0.988 on reasons and 0.932 on advice. The gap
-survived, and now it's certified.
-
-One disclosure comes with it: the reason side is measured at the
-pipeline's own category granularity — its recruiter agent always
-structures its evaluation under the same four headings, so high
-reason-stability is partly a property of that design. What is *not*
-structural is this: the pipeline kept its categories but **flipped
-whether they counted for or against the candidate** in roughly half the
-cases measured. Your "experience" can be the reason you're recommended on
-one run and the reason you're not on the next.
+plus an extra margin for claims of instability. On the first pass, the
+reason-extractor missed that margin by 0.051, and the instrument refused
+to certify a gap that was sitting in the evidence file, visible to anyone
+who could subtract. I rebuilt the extraction layer, re-validated it
+against a second model, and re-ran. That refusal is why I trust the
+decision and valence findings above — and why I'm being this careful about
+the one number the rebuild also happened to inflate.
 
 I want this instrument's failure mode to be a number I decline to stand
 behind — not a confident claim I can't support. An audit tool that
 certifies what its author is hunting for, without a gate that can tell it
-no, is a demo. Mine said no, made me do the work, and only then said yes.
+no, is a demo. Mine said no. It also, on the gap, isn't yet saying an
+unqualified yes.
 
 ## What this doesn't tell you
 
@@ -161,7 +189,11 @@ no, is a demo. Mine said no, made me do the work, and only then said yes.
 > numbers depend on a published synonym-grouping step, and I report the
 > ungrouped numbers alongside (they are lower for every system measured).
 > The 25-case sample supports the existence claims made above and no rate
-> claims. And everything here describes one configuration of one published
+> claims. The reason-side numbers are measured at the target's own
+> category granularity, using an extraction rule I developed after seeing
+> that target's output — a selection effect I disclose rather than
+> discount, and one I'll design out with held-out data next time. And
+> everything here describes one configuration of one published
 > design, run by me, on stated dates, with full transcripts retained — it
 > is not a claim about any commercial product, or about the tool's author,
 > whose project simply happens to be a publicly runnable example of a
@@ -180,13 +212,15 @@ that I'd call it an evolution, not a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
 0.96–0.98), something my dissertation's design couldn't observe.
 
-Against that backdrop, the real target's advice was the least stable of
-anything measured — below every lab configuration, at the settings it
-ships with. On decisions it was less stable than three of the four, but
+Two honest caveats on that comparison. Those lab configurations were
+measured in a different mode — emitting machine-readable output directly,
+with no extraction layer in the path — so cross-reading them against the
+target's free-text measurement compares architectures as much as systems.
+And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
 Verdict instability is not unique to this pipeline, which is rather the
-point — it is a property of the design pattern, not of one developer's
-project.
+point — it looks like a property of the design pattern, not of one
+developer's project.
 
 ## Why it matters
 
