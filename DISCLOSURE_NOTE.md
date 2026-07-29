@@ -1,10 +1,20 @@
 # Draft disclosure note to the upstream author (D-024 norm)
 
-*Draft — not sent. Channel: GitHub issue on the audited repo (public) or
-email if listed. Author review required before anything is sent.*
+*Draft — NOT SENT. **Send channel: email, by the author personally.***
 
-**Before sending, fill `<<SUBSTACK_URL>>`.** Publication target date in the
-note is **12 August 2026**; if that slips, the note's stated date must move
+**Recipient:** Haroon Sajid — `haroonsajid016@gmail.com` (listed publicly
+in the repo's own README "Contact" section, i.e. the address the author
+invites contact on; not harvested from commit metadata).
+
+**Do NOT send this as a GitHub issue.** The repo's issue tracker is public
+and currently empty (0 open). Posting there would permanently and publicly
+attach "independent stability audit found verdict instability" to the
+author's project *before* they have had any chance to respond — which
+contradicts option (b) in the note below (the offer to keep them
+anonymous) and inverts the disclosure norm the note exists to honour:
+private first, public later, at their option.
+
+Publication target date in the note is **12 August 2026**; if that slips, the note's stated date must move
 with it — a missed self-imposed deadline is worse than a later one.
 
 **Pre-decided answer if they reply asking to be named (D-030):** the prose
@@ -20,8 +30,9 @@ your resume-screening project
 
 Hi — I'm Jamie Horsburgh, an AI-governance researcher (this is personal
 research, done in my own time and not for any employer). The write-up will
-appear at <<SUBSTACK_URL>>. I built an open-source audit instrument that measures
-whether LLM screening systems give the same answer twice, and I chose your
+appear at https://jamiehorsburgh.substack.com. I built an open-source audit
+instrument that measures whether LLM screening systems give the same answer
+twice, and I chose your
 resume-screening project as its first real-world target — because it's one
 of the few complete, runnable, published examples of the multi-agent
 screening pattern. That's a compliment to the openness of your work, not a
