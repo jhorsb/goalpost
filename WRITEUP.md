@@ -1,6 +1,6 @@
 # I ran an AI hiring tool five times on the same CV. It changed its mind.
 
-*Draft v3 — from the WRITEUP_TEMPLATE skeleton; every number traces to a
+*Draft v4 — from the WRITEUP_TEMPLATE skeleton; every number traces to a
 committed audit transcript. Target identity withheld from the prose per
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
@@ -45,10 +45,11 @@ contest a decision, or plan their way past it, if the guidance moves every
 time they look.
 
 A dissertation proves something once, under lab conditions. So I spent
-this summer turning it into **Goalpost**: an open instrument that can
-audit any screening configuration its operator controls, and produce two
-things — a machine-readable evidence file, and a one-page report a
-non-specialist can act on.
+this summer turning it into **Goalpost**: an open instrument for auditing
+decision, reason and recourse stability in LLM-mediated screening
+configurations — any configuration its operator controls. It measures one
+property, repeat-consistency, and produces two things: a machine-readable
+evidence file, and a one-page report a non-specialist can act on.
 
 ## What I did
 
@@ -82,8 +83,8 @@ finding in its own right:
 
 Cost of the final certified measurement: **$0.28** — about 22p, and
 nearly all of it spent on the extraction and checking layers rather than
-the tool itself. Independent behavioural validation of a deployed
-screening pipeline costs less than a Freddo. (Cumulatively — every false
+the tool itself. An independent stability check on a deployed screening
+pipeline costs less than a Freddo. (Cumulatively — every false
 start, quota wall, the extractor rebuild and the control run described
 below — the whole investigation ran to about five dollars of paid API
 spend, plus free-tier usage on an open-weights host.)
@@ -181,12 +182,15 @@ separation is the most useful thing in this piece.
 **What belongs to the model, not the pipeline.** Verdict flipping. The bare
 model changed its accept/reject answer on four of twenty-five candidates;
 the full pipeline on three. The chain neither causes this nor cures it, and
-it would be unfair to the developer to imply otherwise. If you are running
-*any* current LLM as a screening gate, this is your problem too.
+it would be unfair to the developer to imply otherwise. Every configuration
+I have measured — six now, across three model families — flips at least
+some verdicts. If you are running an LLM as a screening gate, the odds are
+this is your problem too, not this developer's.
 
 **What belongs to the design.** The gap, and the valence flipping. The
 chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while leaving
-advice exactly as unstable as the bare model's (0.456 against 0.507) — it
+advice no more stable than the bare model's (0.456 against 0.507 — if
+anything slightly worse) — it
 manufactures consistent-looking *explanations* without manufacturing
 consistent *guidance*. And it makes the meaning-flipping worse, not better:
 0.378 against the bare model's 0.249. The architecture that was presumably
