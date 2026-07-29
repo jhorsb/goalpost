@@ -3,13 +3,24 @@
 *Draft — not sent. Channel: GitHub issue on the audited repo (public) or
 email if listed. Author review required before anything is sent.*
 
+**Before sending, fill `<<SUBSTACK_URL>>`.** Publication target date in the
+note is **12 August 2026**; if that slips, the note's stated date must move
+with it — a missed self-imposed deadline is worse than a later one.
+
+**Pre-decided answer if they reply asking to be named (D-030):** the prose
+still describes the design category; the name and link go in a footnote and
+the evidence appendix. The argument is about a pattern deployed everywhere,
+and a named target in the body invites readers to make it about one
+developer. Say yes to attribution, not to headlining them.
+
 ---
 
 Subject: Heads-up before I publish: an independent stability audit of
 your resume-screening project
 
-Hi — I'm an AI-governance researcher (this is personal research, not done
-for any employer). I built an open-source audit instrument that measures
+Hi — I'm Jamie Horsburgh, an AI-governance researcher (this is personal
+research, done in my own time and not for any employer). The write-up will
+appear at <<SUBSTACK_URL>>. I built an open-source audit instrument that measures
 whether LLM screening systems give the same answer twice, and I chose your
 resume-screening project as its first real-world target — because it's one
 of the few complete, runnable, published examples of the multi-agent
@@ -40,10 +51,18 @@ model and disclosed that in the audit.
 In the write-up I describe the project as "a published open-source
 screening pipeline" without naming it or you. I'm happy to (a) name the
 project with a link, (b) keep it anonymous, or (c) hold publication for a
-reasonable window while you look at the full evidence — every transcript,
-config and metric is available to you. If you think I've made an error, I
-want to know before I publish, and I'll print your response alongside if
-you'd like.
+reasonable window while you look at the full evidence. If you think I've
+made an error, I want to know before I publish, and I'll print your
+response alongside if you'd like.
+
+The evidence is yours on request: reply and I'll send the complete bundle
+within a day — every transcript, config, metric file and the audit
+instrument itself, enough to re-run the whole thing yourself.
+
+Timeline, so this isn't an open loop: I'm planning to publish on or around
+12 August 2026. If I don't hear from you I'll go ahead with the anonymous
+version (option b), and the offer to correct or respond stays open after
+publication.
 
 No action is needed from you; this is a courtesy note, not a demand.
 Thanks for publishing your work openly — audits like this are only

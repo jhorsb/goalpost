@@ -83,9 +83,10 @@ finding in its own right:
 Cost of the final certified measurement: **$0.28** — about 22p, and
 nearly all of it spent on the extraction and checking layers rather than
 the tool itself. Independent behavioural validation of a deployed
-screening pipeline costs less than a Freddo. (Cumulatively, including
-every false start, quota wall and the extractor rebuild described below,
-this whole investigation came in under a pound.)
+screening pipeline costs less than a Freddo. (Cumulatively — every false
+start, quota wall, the extractor rebuild and the control run described
+below — the whole investigation ran to about five dollars of paid API
+spend, plus free-tier usage on an open-weights host.)
 
 ## What I found
 
@@ -107,7 +108,8 @@ which run they happened to get.
 bound.) Recourse stability measured **0.448**: ask this pipeline twice
 and, on average, fewer than half of its improvement recommendations
 appear both times — the least stable advice of anything I have measured
-with this instrument, including four frontier-lab configurations. Because
+with this instrument, including four frontier-lab configurations and a
+bare-model control on the pipeline's own model. Because
 the tool's output is free text, this number passes through an extraction
 model, and extraction noise can only make stability look *worse* — so
 0.448 is a floor, not a point estimate. The extraction layer's measured
@@ -130,50 +132,25 @@ you're not on the next. The explanation looks stable at the level of what
 it mentions, and is unstable in what it asserts.
 
 That is my dissertation's thesis in a sharper form than my dissertation
-managed to state it. And it is robust to the measurement worry I have to
-raise about the number next to it.
+managed to state it — and, unlike the number beside it, it never needed a
+control run to rescue it.
 
-**About the gap — and why I'm not leading with it.** Reasons measured
-0.983 and advice 0.448, which is a stability gap of 0.535, wider than
-anything I measured on lab configurations. I am reporting it as an
-observation rather than a headline, because three things inflate it and I
-can't yet say by how much:
+**About the gap.** Reasons measured 0.983 and advice 0.448 — a stability
+gap of 0.535, wider than anything I have measured on a lab configuration.
+An earlier draft of this piece reported that number and then spent three
+paragraphs explaining why I couldn't fully stand behind it. What changed is
+the control described in the next section: measured the same way, with the
+same model and the same lens, a plain one-prompt screener's gap is
+**0.106**. Whatever share of 0.535 is measurement artifact applies to both
+sides equally — so the *difference*, roughly 0.43, is the part attributable
+to the pipeline's design.
 
-- **The two sides aren't measured at the same resolution.** Reasons are
-  counted at the level of four fixed categories; advice at the level of
-  individual recommendations. Coarse buckets match each other more easily
-  than fine-grained items do, so some share of the gap's absolute size is
-  an artifact of grain — and the grain difference is a property of the
-  system itself, so it can't be fully equalised away.
-- **My extraction rule was designed after looking at this target.** The
-  rule that lifted reason-agreement — "produce one entry per category the
-  response uses" — was written once I had seen that this pipeline always
-  emits the same four categories. That's a selection effect, and I tested
-  it two ways rather than just disclosing it. Pointed at the same model's
-  output *without* the pipeline's scaffolding, the rule's own consistency
-  dropped below the pre-registered bar and the instrument withheld the
-  numbers — the rule really does ride the target's structure, and the gate
-  caught it. But a second, independently certified lens read the same
-  target transcripts and reproduced the gap almost exactly (0.537 vs
-  0.535) — so the gap isn't an artifact of which extractor does the
-  reading. Held-out extractor development is still the protocol from here.
-- **My earlier comparisons weren't like-for-like — so I built one that
-  is.** The lab configurations were measured with no extraction layer at
-  all; comparing them to a free-text measurement compares architectures,
-  not systems. The fix was a control: the same model the pipeline runs on,
-  same CVs, same settings, same certified lens on both — with a plain
-  one-prompt screener in place of the four-agent chain. Under that matched
-  measurement the bare model's gap is **+0.106**; the pipeline's is
-  **+0.537**. The gap belongs to the design, not the model — the chain's
-  fixed rubric pumps topic-stability from 0.61 to 0.99 while leaving the
-  advice exactly as unstable as the bare model's.
-
-The valence-flip result survives all three checks, which is why it leads:
-it's measured on whatever units the extractor produces and asks a
-different question of them — given the same topic came up, did its sign
-change? And the matched control sharpens it: the bare model flips valence
-at 0.249, the pipeline at 0.378 under the same lens. The chain doesn't
-just fail to stabilise meaning; it amplifies the flipping.
+One caveat survives, and I'm keeping it in the open: the two sides aren't
+measured at the same resolution. Reasons are counted at the level of four
+fixed rubric headings, advice at the level of individual recommendations,
+and coarse buckets match each other more easily than fine-grained items do.
+That inflates the absolute gap on both sides. It does not explain the
+distance between them.
 
 **What the gate did, and why it still matters.** Before any audit ran, I
 pre-registered a rule: no stability claim earns certification unless the
@@ -188,9 +165,45 @@ the one number the rebuild also happened to inflate.
 
 I want this instrument's failure mode to be a number I decline to stand
 behind — not a confident claim I can't support. An audit tool that
-certifies what its author is hunting for, without a gate that can tell it
-no, is a demo. Mine said no. It also, on the gap, isn't yet saying an
-unqualified yes.
+certifies whatever its author is hunting for, with no gate that can tell it
+no, is a demo. Mine said no twice: once to the finding I was chasing, and
+once, later, to an extraction lens I had grown attached to.
+
+## The control, and what it rules out
+
+An audit of one system tells you about one system. To say anything about a
+*design*, you have to know what the same model does without it. So I ran
+the pipeline's own model — same twenty-five CVs, same settings, same
+certified measurement lens — behind a plain one-prompt screener instead of
+the four-agent chain. Three things then separate cleanly, and the
+separation is the most useful thing in this piece.
+
+**What belongs to the model, not the pipeline.** Verdict flipping. The bare
+model changed its accept/reject answer on four of twenty-five candidates;
+the full pipeline on three. The chain neither causes this nor cures it, and
+it would be unfair to the developer to imply otherwise. If you are running
+*any* current LLM as a screening gate, this is your problem too.
+
+**What belongs to the design.** The gap, and the valence flipping. The
+chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while leaving
+advice exactly as unstable as the bare model's (0.456 against 0.507) — it
+manufactures consistent-looking *explanations* without manufacturing
+consistent *guidance*. And it makes the meaning-flipping worse, not better:
+0.378 against the bare model's 0.249. The architecture that was presumably
+added to make the system more rigorous made its explanations more
+authoritative-looking and no more stable.
+
+**What belongs to my instrument, and had to be caught.** The extraction
+rule that reads reasons out of free text was written after I'd seen this
+pipeline's four-heading structure — a selection effect that would flatter
+exactly the number it produced. So I pointed it at the bare model's
+unscaffolded prose, where that structure doesn't exist. Its self-consistency
+fell below the pre-registered bar and the instrument withheld the numbers.
+The worry was real, the gate caught it, and a second independently
+certified lens then reproduced the target's gap almost exactly (0.537
+against 0.535) — so the finding survives, but the rule doesn't get to
+travel unexamined. Extraction rules get developed on held-out data from
+here on.
 
 ## What this doesn't tell you
 
@@ -204,8 +217,9 @@ unqualified yes.
 > The 25-case sample supports the existence claims made above and no rate
 > claims. The reason-side numbers are measured at the target's own
 > category granularity, using an extraction rule I developed after seeing
-> that target's output — a selection effect I disclose rather than
-> discount, and one I'll design out with held-out data next time. And
+> that target's output — a selection effect I tested rather than merely
+> disclosed (see the control), and one I'll design out with held-out data
+> next time. And
 > everything here describes one configuration of one published
 > design, run by me, on stated dates, with full transcripts retained — it
 > is not a claim about any commercial product, or about the tool's author,
@@ -232,18 +246,10 @@ target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
 
-Then I ran the control that turns observations into claims: the *same*
-model the pipeline runs on, same CVs, same settings, same certified
-extraction lens — but a plain single-prompt screener in place of the
-four-agent chain. Three things fell out. The bare model flipped verdicts
-on four of twenty-five candidates, as many as the full pipeline: verdict
-instability comes with the model, and the chain neither causes nor cures
-it. The bare model showed nothing like the pipeline's near-perfect topic
-stability — 0.61 against 0.99 — so the pipeline's most reassuring-looking
-number is manufactured by its rubric. And the bare model's
-reason-to-advice gap was +0.106 against the pipeline's +0.537: the
-signature failure this instrument measures is overwhelmingly a property
-of the pipeline's *design*, not of the underlying model.
+Set against the control above, the reading is that verdict instability is
+a property of this generation of models, while the explanation/advice
+pattern is a property of the chained design — which is why the piece is
+about a pattern rather than a project.
 
 ## Why it matters
 
