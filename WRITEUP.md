@@ -263,8 +263,9 @@ long enough to be challenged. A rejection that would have been an
 acceptance on a different run is hard to contest not because the reasoning
 is opaque, but because there is no stable reasoning to contest. And advice
 that changes on every query isn't guidance; it's noise wearing guidance's
-clothes. Regulation increasingly demands that screening systems be
-explainable. Almost none of it asks whether the explanations *stay put*.
+clothes. Regulation increasingly demands that automated screening give
+reasons and a route to challenge. Almost none of it asks whether either
+survives the same case being run twice.
 
 ## Kick the tyres
 
