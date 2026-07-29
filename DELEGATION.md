@@ -15,8 +15,8 @@ runs them.
 
 | task | brief | RED tests | status | quality notes |
 |---|---|---|---|---|
-| 01 retry/backoff | `delegation/codex/task-01-retry-backoff.md` | `tests/codex/test_task01_retry.py` (5 tests) | **drafted** | — |
-| 02 HTML report | `delegation/codex/task-02-html-report.md` | `tests/codex/test_task02_html.py` (5 tests; some pre-green as guardrails) | **drafted** | — |
+| 01 retry/backoff | `delegation/codex/task-01-retry-backoff.md` | `tests/codex/test_task01_retry.py` (5 tests) | **merged** 2026-07-29 | reviewed: allowlist clean, module-import form correct so monkeypatch binds, attempts=4, no runner changes |
+| 02 HTML report | `delegation/codex/task-02-html-report.md` | `tests/codex/test_task02_html.py` (5 tests; some pre-green as guardrails) | **merged** 2026-07-29 | reviewed: gate reused via `_reportable` not re-derived; verified on 4 real audits that HTML gate outcome matches markdown and leaks no number markdown withholds |
 | 03 taxonomy-review CLI | `delegation/codex/task-03-taxonomy-review.md` | `tests/codex/test_task03_taxonomy_review.py` (4 tests) | **drafted** | — |
 
 Planned future lanes (briefs not yet cut): packaging polish, fixtures
@@ -37,3 +37,18 @@ rendering because resume is runner core.
 Incoming diffs are untrusted: line-by-line review (or fresh-context review
 sub-agent) for allowlist violations, surprise dependencies, network in
 tests; full suite before merge; lifecycle + notes updated here.
+
+## Vendor note (2026-07-29)
+
+Both tasks ran via the Codex CLI after a broken install was repaired
+(npm wrapper 0.122.0 present but its `codex-darwin-arm64` vendor directory
+was empty → every invocation died with ENOENT, surfacing as "not installed
+or missing required runtime support"; author reinstalled to 0.146.0).
+
+**Process deviation to correct next time:** both briefs specified working
+branches (`codex/task-01-…`, `codex/task-02-…`); the runner instead wrote
+directly into the working tree on `main`. No harm here — the two tasks'
+file sets are disjoint (`retry.py` + `providers.py` vs `reporter.py`) and
+both were reviewed before commit — but concurrent tasks with overlapping
+files would have collided silently. Future briefs should assert the branch
+in the *first* instruction, or the tasks should be run sequentially.

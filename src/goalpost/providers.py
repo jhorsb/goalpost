@@ -8,6 +8,8 @@ Unit tests never touch the network (kickoff §8).
 
 import os
 
+from goalpost import retry
+
 PROVIDERS_VERSION = "0.1.0"
 
 # USD per 1M tokens. Committed and versioned; verified against provider
@@ -119,15 +121,28 @@ class AnthropicClient:
         self.pricing = pricing
 
     def complete(self, prompt: str, temperature: float, seed: int) -> dict:
+        import anthropic
+
         # The Messages API has no sampling-seed parameter; the derived seed
         # is recorded in the transcript for provenance but cannot be passed.
-        resp = self._client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            temperature=temperature,
-            messages=[{"role": "user", "content": prompt}],
+        return retry.retry_call(
+            lambda: normalise_anthropic_response(
+                self._client.messages.create(
+                    model=self.model,
+                    max_tokens=self.max_tokens,
+                    temperature=temperature,
+                    messages=[{"role": "user", "content": prompt}],
+                ),
+                overrides=self.pricing,
+            ),
+            attempts=4,
+            retryable=(
+                anthropic.RateLimitError,
+                anthropic.APIConnectionError,
+                anthropic.APITimeoutError,
+                anthropic.InternalServerError,
+            ),
         )
-        return normalise_anthropic_response(resp, overrides=self.pricing)
 
 
 class OpenAICompatibleClient:
@@ -149,6 +164,8 @@ class OpenAICompatibleClient:
         self.send_seed = getattr(endpoint, "send_seed", True)
 
     def complete(self, prompt: str, temperature: float, seed: int) -> dict:
+        import openai
+
         kwargs = dict(
             model=self.model,
             max_completion_tokens=self.max_tokens,
@@ -159,8 +176,19 @@ class OpenAICompatibleClient:
             # best-effort determinism; recorded, never relied on. Some
             # OpenAI-compatible shims (Google AI Studio) reject the field.
             kwargs["seed"] = seed
-        resp = self._client.chat.completions.create(**kwargs)
-        return normalise_openai_response(resp, overrides=self.pricing)
+        return retry.retry_call(
+            lambda: normalise_openai_response(
+                self._client.chat.completions.create(**kwargs),
+                overrides=self.pricing,
+            ),
+            attempts=4,
+            retryable=(
+                openai.RateLimitError,
+                openai.APIConnectionError,
+                openai.APITimeoutError,
+                openai.InternalServerError,
+            ),
+        )
 
 
 def make_client(endpoint, pricing=None):
