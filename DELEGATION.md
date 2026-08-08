@@ -17,7 +17,7 @@ runs them.
 |---|---|---|---|---|
 | 01 retry/backoff | `delegation/codex/task-01-retry-backoff.md` | `tests/codex/test_task01_retry.py` (5 tests) | **merged** 2026-07-29 | reviewed: allowlist clean, module-import form correct so monkeypatch binds, attempts=4, no runner changes |
 | 02 HTML report | `delegation/codex/task-02-html-report.md` | `tests/codex/test_task02_html.py` (5 tests; some pre-green as guardrails) | **merged** 2026-07-29 | reviewed: gate reused via `_reportable` not re-derived; verified on 4 real audits that HTML gate outcome matches markdown and leaks no number markdown withholds |
-| 03 taxonomy-review CLI | `delegation/codex/task-03-taxonomy-review.md` | `tests/codex/test_task03_taxonomy_review.py` (4 tests) | **drafted** | — |
+| 03 taxonomy-review CLI | `delegation/codex/task-03-taxonomy-review.md` | `tests/codex/test_task03_taxonomy_review.py` (4 tests) | **merged** 2026-08-08 | reviewed: cli.py only, protected commands untouched, read-only verified by grep + smoke on a real audit (110 rows) |
 
 Planned future lanes (briefs not yet cut): packaging polish, fixtures
 tooling, corpus-generator productisation (schemas/invariants already specced
@@ -52,3 +52,10 @@ file sets are disjoint (`retry.py` + `providers.py` vs `reporter.py`) and
 both were reviewed before commit — but concurrent tasks with overlapping
 files would have collided silently. Future briefs should assert the branch
 in the *first* instruction, or the tasks should be run sequentially.
+
+**Update (2026-08-08, task 03):** the branch-first instruction FAILS — the
+Codex sandbox has working-tree write but no `.git` write (`cannot lock ref`),
+which also retroactively explains why tasks 01/02 ignored their branch
+instructions. Working protocol now: the delegator creates/checks out the
+branch before launching, the brief forbids all git commands, and the
+delegator commits on the branch after review. Task 03 ran this way cleanly.
