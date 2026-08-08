@@ -1,0 +1,53 @@
+audit_id: target2-csa-001
+suts:
+- name: csa-screening-agent
+  provider: anthropic
+  model: claude-sonnet-4-5-20250929
+  elicitation_mode: freeform
+  prompt_template: '<<<CV>>>
+
+    {cv}
+
+    <<<JD>>>
+
+    {job_spec}'
+  base_url: null
+  api_key_env: null
+  send_seed: true
+  max_tokens: 2000
+  params:
+    pipeline: csa-screening-agent
+    upstream_sha: 707e6abeb2c63d35323b772e68c4a824c59197b2
+conditions:
+- temperature: 0.3
+  repeats: 5
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+  base_url: null
+  api_key_env: null
+  send_seed: true
+  max_tokens: 2048
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+  base_url: null
+  api_key_env: null
+  send_seed: true
+  max_tokens: 2048
+max_spend_usd: 10.0
+audit_seed: 42
+perturbations:
+  enabled: false
+  classes: []
+concurrency: 4
+corpus_path: corpora/starter-v1-csa/cases.yaml
+output_dir: audits
+pricing:
+  gpt-4.1-2025-04-14:
+    input: 2.0
+    output: 8.0
+  claude-sonnet-4-5-20250929:
+    input: 3.0
+    output: 15.0
+warnings: []

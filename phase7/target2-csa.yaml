@@ -18,7 +18,7 @@
 audit_id: target2-csa-001
 audit_seed: 42
 max_spend_usd: 10.00
-concurrency: 1
+concurrency: 4
 corpus_path: corpora/starter-v1-csa/cases.yaml
 output_dir: audits
 canonicaliser:

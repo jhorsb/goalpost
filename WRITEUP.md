@@ -68,6 +68,30 @@ pulled from the tool's free-text output by a separate extraction model,
 whose own consistency is *measured, not assumed* — more on why that
 matters below.
 
+**Where the calls went, and why it matters.** Every measurement here went
+to a single named provider endpoint, fixed in advance and recorded in the
+audit config — never through a routing layer that picks a backend on your
+behalf. That sounds like fussiness. It isn't. The same model served by
+different backends can disagree substantially: one analysis found the
+choice of backend alone shifting benchmark scores by [up to 16.6
+percentage points](https://www.lesswrong.com/posts/KsyoSAyBRXtwzSugg/not-pinning-your-openrouter-provider-might-invalidate-your),
+and a peer-reviewed study of five APIs configured for determinism still
+measured [accuracy swings of up to 15% between
+runs](https://aclanthology.org/2025.eval4nlp-1.12/). The mechanism is
+mundane — reduction kernels split their work differently at different
+batch sizes, so identical prompts drift with server load.
+
+For a leaderboard, that's a footnote. For this audit it would be fatal,
+because the quantity I am measuring *is* variation between identical runs
+— precisely what a router silently manufactures. An auditor working
+through one cannot say whether the instability belongs to the system or to
+the serving layer, and the audited party has a complete rebuttal: *you
+didn't measure us, you measured your router.* So: where a model's own lab
+serves it, I used the lab; where it doesn't — open-weights models — I
+pinned one named host and disclosed which. I'd suggest this is a
+requirement, not a nicety, for any audit whose findings are meant to
+attach to a named system.
+
 Two substitutions have to be disclosed up front, and one of them is a
 finding in its own right:
 
