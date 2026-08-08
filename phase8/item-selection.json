@@ -1,0 +1,116 @@
+{
+  "sc-data-analyst-02": {
+    "consensus": "EXPERIENCE_GAIN",
+    "consensus_n": 5,
+    "singleton": "CLOUD_SKILL",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 2,
+      "CLOUD_SKILL": 1,
+      "EDUCATION": 2,
+      "EXPERIENCE_GAIN": 5,
+      "PROGRAMMING_PRACTICE": 5,
+      "education": 1,
+      "skills": 1
+    }
+  },
+  "sc-data-analyst-04": {
+    "consensus": "EDUCATION",
+    "consensus_n": 4,
+    "singleton": "CERTIFICATION",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 1,
+      "CLOUD_SKILL": 1,
+      "EDUCATION": 4,
+      "EXPERIENCE_GAIN": 4,
+      "PROGRAMMING_PRACTICE": 4,
+      "skills": 2
+    }
+  },
+  "sc-frontend-developer-02": {
+    "consensus": "EXPERIENCE_GAIN",
+    "consensus_n": 5,
+    "singleton": "SOFT_SKILL_DEVELOPMENT",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "EDUCATION": 3,
+      "EXPERIENCE_GAIN": 5,
+      "SOFT_SKILL_DEVELOPMENT": 1,
+      "education": 1,
+      "experience": 2,
+      "skills": 5
+    }
+  },
+  "sc-frontend-developer-04": {
+    "consensus": "EXPERIENCE_GAIN",
+    "consensus_n": 5,
+    "singleton": "CERTIFICATION",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 1,
+      "EXPERIENCE_GAIN": 5,
+      "PROGRAMMING_PRACTICE": 1,
+      "skills": 5
+    }
+  },
+  "sc-project-manager-02": {
+    "consensus": "CERTIFICATION",
+    "consensus_n": 5,
+    "singleton": "experience",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 5,
+      "EXPERIENCE_GAIN": 5,
+      "experience": 1
+    }
+  },
+  "sc-project-manager-04": {
+    "consensus": "CERTIFICATION",
+    "consensus_n": 4,
+    "singleton": "EXPERIENCE_GAIN",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 4,
+      "EDUCATION": 2,
+      "EXPERIENCE_GAIN": 1,
+      "education": 1,
+      "experience": 1,
+      "skills": 4
+    }
+  },
+  "sc-support-team-lead-02": {
+    "consensus": "EXPERIENCE_GAIN",
+    "consensus_n": 5,
+    "singleton": "PROGRAMMING_PRACTICE",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 3,
+      "EDUCATION": 3,
+      "EXPERIENCE_GAIN": 5,
+      "PROGRAMMING_PRACTICE": 1,
+      "skills": 3
+    }
+  },
+  "sc-support-team-lead-04": {
+    "consensus": "EDUCATION",
+    "consensus_n": 5,
+    "singleton": "CERTIFICATION",
+    "singleton_n": 1,
+    "n_runs": 5,
+    "all_clusters": {
+      "CERTIFICATION": 1,
+      "EDUCATION": 5,
+      "EXPERIENCE_GAIN": 5,
+      "experience": 3,
+      "skills": 2
+    }
+  }
+}
