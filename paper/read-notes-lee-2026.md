@@ -70,3 +70,47 @@ Reading: Lee's constraint-gradient (bounded inputs → stable outputs)
 replicates in hiring on the decision axis. Combined with Lee's clinical
 domain, the constrained-stable / open-ended-unstable asymmetry now has
 two independent domains converging.
+
+## Second-pass tightenings (GPT 5.6 Pro, author-supplied, 2026-08-08)
+
+Adopted into the write-up immediately:
+- **"Structural" downgraded** to "not ordinary sampling randomness" — T=0
+  removes one mechanism; it does not identify the remaining one.
+- **"Replication" downgraded to "corroboration"** — Lee measures
+  whole-output similarity, not a reason/recourse split; the convergent
+  claim is semantic-vs-operational divergence across domains, stated with
+  the measurement difference named.
+
+Recorded for the paper (no Goalpost change needed now):
+- **"Pre-registered" survives for Goalpost but not the dissertation.**
+  The dissertation's gates were explicit but iterative; Goalpost's are
+  dated commits that predate the runs (D-012, D-037). The paper must not
+  let the former borrow the latter's word.
+- **Recourse equivalence gap:** cluster equality is not material
+  equivalence — "gain experience" meaning three months vs two years scores
+  as stable. Magnitude/burden instability is an unmeasured axis; Lee's
+  intensity-unclassifiable finding is the cross-domain instance. Candidate
+  taxonomy axis for v2.
+- **Causal recourse validity is the real next step:** apply the advised
+  change to the case and re-run — does the verdict actually move? Turns
+  "the advice changes" into "the system alternates between effective and
+  ineffective routes on identical inputs." Feasible with Goalpost's
+  perturbation machinery; expensive; audit #3+ candidate, pre-registered
+  or not at all.
+- **Action-space entropy hypothesis:** instability may scale with the
+  number of approximately-defensible actions available. Unifies the
+  borderline-flip concentration, Lee's constraint inference, and the
+  dissertation's top-K result. Needs a designed manipulation, not a
+  post-hoc cut.
+- **N=5 characterises the headline, not the tails.** 20+ repeats would
+  support modal-action, rare-outcome and entropy questions. Config
+  already supports it; cost, not code.
+- **Design principle worth stating as such:** deterministic measurement
+  where the ontology is closed; semantic adjudication only where
+  equivalence cannot be specified mechanically — and then independently
+  validated. Goalpost already implements this (structured parse /
+  gated reader / committed taxonomy with logged mappings); the sentence
+  is now the canonical statement of why.
+- **Constraint-gradient caution:** neither Lee's scenarios nor our bands
+  manipulate constraint experimentally; both stratifications are
+  observational. Ours stays labelled exploratory.

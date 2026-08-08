@@ -36,7 +36,7 @@ it gives are far more stable across repeated identical queries than its
 *advice* — what the candidate should change to succeed. Reasons scored
 0.89 on a 0-to-1 similarity measure; advice scored 0.36. The gap survived
 turning the model's randomness setting to zero, which means you can't fix
-it with a dial. It's structural.
+it with a dial: whatever drives it is not ordinary sampling randomness.
 
 That mattered to me because advice is the part that's supposed to be
 *actionable*. The people on the receiving end of these systems — job
@@ -281,10 +281,12 @@ about a pattern rather than a project.
 
 The pattern also has company outside hiring. A 2026 clinical study
 ([Lee](https://arxiv.org/abs/2604.11287)) generated the same exercise
-prescription twenty times over and found the same shape: high surface
-consistency, unstable actionable content. Different domain, different
-method, same asymmetry — what a system identifies stays put; what it
-tells you to *do* does not. And one exploratory cut of my own data points
+prescription twenty times over and found high whole-output similarity
+alongside unstable actionable parameters. That is not my measurement —
+Lee scores whole outputs, not a reason/advice split — so I'll claim
+corroboration, not replication: in two unrelated domains, the part of the
+output that identifies the situation holds still while the part that
+prescribes action moves. And one exploratory cut of my own data points
 the same way: my corpus was built with deliberately strong, weak and
 borderline candidates, and **every verdict flip in this project — thirteen,
 across three systems — landed on a borderline candidate.** Strong and weak
