@@ -1,0 +1,34 @@
+# AUDIT #3 block A — causal recourse validity (PREREGISTRATION-AUDIT3.md,
+# amended D-052). Block independence via audit_seed (42). System, serving,
+# lens and settings identical to the certified audit-#1 measurement.
+audit_id: target3-causal-blockA-001
+audit_seed: 42
+max_spend_usd: 10.00
+concurrency: 4
+corpus_path: corpora/causal-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  # frozen lens #1 (v3 + gpt-4.1); declared fallback v3 + gemma (D-051)
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  gpt-oss-120b: {input: 0.0, output: 0.0}
+conditions:
+  - {temperature: 0.7, repeats: 5}
+suts:
+  - name: hs-resume-screener
+    provider: openai_compatible
+    model: gpt-oss-120b
+    base_url: https://api.cerebras.ai/v1
+    api_key_env: CEREBRAS_API_KEY
+    send_seed: false
+    max_tokens: 3000
+    elicitation_mode: freeform
+    prompt_template: "<<<CV>>>\n{cv}\n<<<JD>>>\n{job_spec}"
+    params:
+      pipeline: hs-resume-screener
+      upstream_sha: 49dc41a11b5cd9f5655a43f148cb9cf4e71fa544

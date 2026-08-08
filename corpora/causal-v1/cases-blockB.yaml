@@ -1,35 +1,5 @@
 # Derived by phase8/derive_causal_corpus.py per PREREGISTRATION-AUDIT3.md (amended). Do not edit by hand.
 cases:
-- case_id: sc-data-analyst-02__editC
-  role: data-analyst
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nEleanor Broadley  \neleanor.broadley@example.invalid | Wrenthorpe\n\nPROFILE  \nDetail-oriented data professional with two years of experience working in analytics roles across financial services and retail. Adept in SQL and Python for data extraction and cleaning, and experienced in producing reports and visualizations for business users. Familiar with statistical analysis techniques and enthusiastic about applying data-driven solutions to real-world business challenges. Strong communicator with a track record of effective collaboration across departments. Keen to further develop expertise in insurance analytics within a dynamic and supportive environment.\n\nEXPERIENCE  \nHarborough Credit Limited, Data Analyst  \nApril 2021 – Present  \n- Developed and maintained SQL queries to extract customer and transaction data for monthly finance reports, improving reporting efficiency by 15%.  \n- Built automated Python scripts to clean data feeds,\
-    \ reducing manual processing for the risk team.  \n- Created dashboards in Power BI to track loan application trends, enabling management to identify key market segments.  \n- Worked with risk analysts to support credit risk modelling projects, providing data summaries and basic statistical analyses.  \n- Delivered findings to business users in regular meetings, translating technical results into actionable insights.\n\nLindley Homewares, Junior BI Analyst  \nJuly 2021 – March 2021  \n- Assisted in transforming point-of-sale and inventory data into actionable sales reports using SQL.  \n- Supported migration of legacy Excel reports to Tableau dashboards under supervision.  \n- Produced simple ad hoc analyses to answer sales management queries, presenting findings in clear, accessible summaries.  \n- Coordinated with IT and sales teams to validate data integrity and resolve discrepancies.\n\nSKILLS  \n- Proficient in SQL (data extraction, transformation, joins, reporting)  \n- Working\
-    \ knowledge of Python (Pandas, data cleansing, basic scripting)  \n- Experience with Power BI and introductory Tableau (dashboard building and maintenance)  \n- Competent in Excel for analysis and reporting  \n- Foundational knowledge of statistics and data validation  \n- Strong verbal and written communication  \n- Stakeholder engagement across technical and non-technical teams\n\nEDUCATION  \nWestcroft University, BSc (Hons) Mathematics  \n2017 – 2021\n\nOTHER  \n- Currently undertaking online course in insurance analytics  \n- Volunteered as data steward for Wrenthorpe Community Fundraiser 2023\n"
-  job_spec_text: 'Holbrooke Mutual Insurance – Data Analyst
-
-
-    Holbrooke Mutual Insurance is a respected regional provider of personal and commercial insurance, headquartered in the town of Ashfordley. We are seeking a Data Analyst to support our actuarial and claims teams by building robust analytics and reporting solutions. The successful candidate will develop and maintain data pipelines in SQL and Python, create insightful dashboards using Tableau (or similar tools), and play a key role in data-driven decision making across the business.
-
-
-    You will work closely with actuarial colleagues to model risk and with claims managers to identify emerging trends. The ideal candidate will have a solid analytical background, keen attention to detail, and the ability to communicate technical findings clearly to non-technical audiences. This is an excellent opportunity for someone looking to broaden their experience in the insurance sector and contribute to a close-knit, friendly team.
-
-
-    Requirements:
-
-    - Minimum 2 years’ proven experience in a data analysis or business intelligence role
-
-    - Advanced SQL skills and strong proficiency in Python for data analysis
-
-    - Experience developing and maintaining dashboards in Tableau or a similar BI tool
-
-    - Sound grasp of statistics and analytical methodologies
-
-    - Excellent communication and stakeholder engagement skills
-
-    - Prior exposure to insurance data or domain knowledge is advantageous
-
-    '
 - case_id: sc-data-analyst-02__editS
   role: data-analyst
   strength_band: borderline
@@ -95,7 +65,7 @@ cases:
   strength_band: borderline
   cv_text: "CV last updated: 1 September 2024.\n\nEleanor Waddington  \neleanor.waddington@example.invalid | West Bromleigh\n\nPROFILE  \nDetail-oriented data analyst with over 1.5 years’ experience working with diverse datasets in the financial services sector. Skilled at interpreting data, producing clear reports, and collaborating with business teams to inform strategic decisions. Proficient in SQL queries and data cleaning with Python. Eager to expand expertise in insurance analytics and contribute to effective data-driven solutions at Holbrooke Mutual Insurance.\n\nEXPERIENCE  \nData Analyst  \nHargrave Commercial Finance, West Bromleigh  \nMarch 2023 – Present  \n- Developed and maintained regular sales and risk reports for lending products, partnering closely with risk analysts and business managers.  \n- Constructed SQL queries to extract data for ad-hoc requests and monthly dashboards.  \n- Automated parts of the quarterly portfolio review using Python (Pandas, NumPy), reducing\
     \ manual processing time by 18%.  \n- Helped create interactive dashboards in Power BI to monitor customer churn and escalate key trends to decision makers.  \n- Supported compliance projects by analysing loan performance and generating datasets in line with regulatory standards.\n\nJunior Data Analyst (Internship)  \nKenswick Accountancy Solutions, Kenswick  \nJune 2022 – February 2023  \n- Assisted in compiling quarterly financial reports for private clients; validated data accuracy from multiple sources.  \n- Wrote basic SQL scripts to identify discrepancies and reconcile client accounts.  \n- Produced summary statistics for inclusion in client-facing presentations.  \n- Shadowed senior analysts on audit and fraud detection projects, learning core statistical concepts and Excel-based data visualisation.\n\nSKILLS  \n- SQL: building queries and data extractions (intermediate)  \n- Python: data cleaning and basic automation (Pandas, NumPy)  \n- BI Tools: Power BI (working knowledge),\
-    \ limited exposure to Tableau during online coursework  \n- Data Visualisation: charts, dashboards, executive summaries  \n- Communication and presentation of analytical findings to non-technical teams  \n- Solid grasp of statistical measures (descriptive stats, distributions, correlation)\n\nEDUCATION  \nBSc Economics (2:1), South Shropshire University, 2022  \nRelevant coursework: Data Analysis, Applied Statistics, Introduction to Risk Management\n\nOTHER  \n- Currently undertaking an online Tableau fundamentals course  \n- Volunteer data assistant at West Bromleigh Library (ad hoc)\n\nCERTIFICATIONS: relevant degree or certification certificate, completed August 2024.\n"
+    \ limited exposure to Tableau during online coursework  \n- Data Visualisation: charts, dashboards, executive summaries  \n- Communication and presentation of analytical findings to non-technical teams  \n- Solid grasp of statistical measures (descriptive stats, distributions, correlation)\n\nEDUCATION  \nBSc Economics (2:1), South Shropshire University, 2022  \nRelevant coursework: Data Analysis, Applied Statistics, Introduction to Risk Management\n\nOTHER  \n- Currently undertaking an online Tableau fundamentals course  \n- Volunteer data assistant at West Bromleigh Library (ad hoc)\n\nCERTIFICATIONS: Tableau Desktop Specialist certificate, completed August 2024.\n"
   job_spec_text: 'Holbrooke Mutual Insurance – Data Analyst
 
 
@@ -120,90 +90,12 @@ cases:
     - Prior exposure to insurance data or domain knowledge is advantageous
 
     '
-- case_id: sc-frontend-developer-02__editC
-  role: frontend-developer
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nRuby Finlay  \nruby.finlay@example.invalid | Newridge-on-Thames\n\nPROFILE  \nFront-end developer with just over three years’ experience building web applications with React and TypeScript. Committed to creating performant, visually consistent interfaces and improving developer workflows. Hands-on experience with component libraries and collaborative projects, with a growing focus on accessibility and testing. Eager to contribute to ambitious teams making digital experiences more inclusive and responsive.\n\nEXPERIENCE  \nJunior Frontend Developer  \nAutumnArc Solutions, Baneshire  \nMarch 2020 – Present  \n- Developed and maintained user-facing features for a property search platform using React (v17+) and TypeScript, collaborating closely with UI/UX designers.  \n- Contributed to a small design system: created a reusable button set and helped document component usage, but have not led a full design system effort.  \n- Participated in accessibility\
-    \ reviews for major product releases; implemented semantic HTML and basic ARIA attributes, but limited experience with advanced WCAG criteria.  \n- Wrote and maintained unit tests with Jest; integrated Testing Library for several new features, and fixed test failures in existing codebase.  \n- Worked with backend engineers to integrate REST APIs; familiar with code reviews and using git in a collaborative team setting, primarily via GitLab.  \n- Monitored performance using Lighthouse; made some improvements to resource loading, but limited experience with formal performance budgeting.  \n- Assisted with migration of selected pages to Next.js (v12), though have not set up server-side rendering independently.  \n- Supported basic CI integration with GitLab pipelines; limited exposure to full CI/CD workflows and GitHub Actions.\n\nFrontend Intern  \nGreenleaf Digital, Porthurst  \nJuly 2020 – Feb 2021  \n- Built simple React components for a not-for-profit events app.  \n- Shadowed senior\
-    \ developers in feature planning and code review sessions.  \n- Gained initial experience with TypeScript and basic accessibility practices.\n\nSKILLS  \n- React (3 years), TypeScript (2 years), JavaScript (ES6+)  \n- CSS Modules, Styled Components  \n- Basic Next.js, Git, REST APIs  \n- Jest, Testing Library  \n- Figma (handoff), Storybook (basic)  \n- Awareness of accessibility standards (working towards WCAG 2.1 AA)\n\nEDUCATION  \nDiploma in Web Application Development  \nArden Technical College, Baneshire  \n2018 – 2020\n\nOTHER  \nMember, Baneshire Frontend Meetup (2022– )\n"
-  job_spec_text: 'WanderNest – Frontend Developer
-
-
-    WanderNest is a rapidly growing travel-booking scale-up based in Harwell, Oxfordshire. We’re on a mission to simplify travel planning with a seamless, accessible booking experience. We are looking for a Frontend Developer to join our team and help build fast, reliable, and inclusive web applications.
-
-
-    You’ll collaborate with designers and backend engineers to deliver high quality user interfaces using React and TypeScript. You’ll help maintain and evolve our design system, uphold accessibility best practices, and meet strict performance budgets. We value a strong testing culture and use modern CI/CD workflows to ensure reliable releases.
-
-
-    Requirements:
-
-    - Minimum 3 years’ experience in frontend development
-
-    - Advanced proficiency in React and TypeScript
-
-    - Experience implementing and maintaining design systems
-
-    - Strong understanding of web accessibility standards (WCAG 2.1 or above)
-
-    - Demonstrable experience with frontend testing frameworks (e.g. Jest, Testing Library)
-
-    - Comfortable working to performance budgets and measuring web performance
-
-    - Familiarity with code reviews and collaborative git workflows
-
-    - Experience with Next.js and CI pipelines (e.g. GitHub Actions) is highly desirable
-
-    - Excellent communication skills and collaborative mindset
-
-
-    Join WanderNest as we redefine travel booking for everyone.
-
-    '
 - case_id: sc-frontend-developer-02__editS
   role: frontend-developer
   strength_band: borderline
   cv_text: "CV last updated: 1 September 2024.\n\nRuby Finlay  \nruby.finlay@example.invalid | Newridge-on-Thames\n\nPROFILE  \nFront-end developer with just over three years’ experience building web applications with React and TypeScript. Committed to creating performant, visually consistent interfaces and improving developer workflows. Hands-on experience with component libraries and collaborative projects, with a growing focus on accessibility and testing. Eager to contribute to ambitious teams making digital experiences more inclusive and responsive.\n\nEXPERIENCE  \nJunior Frontend Developer  \nAutumnArc Solutions, Baneshire  \nMarch 2021 – Present  \n- Developed and maintained user-facing features for a property search platform using React (v17+) and TypeScript, collaborating closely with UI/UX designers.  \n- Contributed to a small design system: created a reusable button set and helped document component usage, but have not led a full design system effort.  \n- Participated in accessibility\
     \ reviews for major product releases; implemented semantic HTML and basic ARIA attributes, but limited experience with advanced WCAG criteria.  \n- Wrote and maintained unit tests with Jest; integrated Testing Library for several new features, and fixed test failures in existing codebase.  \n- Worked with backend engineers to integrate REST APIs; familiar with code reviews and using git in a collaborative team setting, primarily via GitLab.  \n- Monitored performance using Lighthouse; made some improvements to resource loading, but limited experience with formal performance budgeting.  \n- Assisted with migration of selected pages to Next.js (v12), though have not set up server-side rendering independently.  \n- Supported basic CI integration with GitLab pipelines; limited exposure to full CI/CD workflows and GitHub Actions.\n\nFrontend Intern  \nGreenleaf Digital, Porthurst  \nJuly 2020 – Feb 2021  \n- Built simple React components for a not-for-profit events app.  \n- Shadowed senior\
     \ developers in feature planning and code review sessions.  \n- Gained initial experience with TypeScript and basic accessibility practices.\n\nSKILLS  \n- React (3 years), TypeScript (2 years), JavaScript (ES6+)  \n- CSS Modules, Styled Components  \n- Basic Next.js, Git, REST APIs  \n- Jest, Testing Library  \n- Figma (handoff), Storybook (basic)  \n- Awareness of accessibility standards (working towards WCAG 2.1 AA)\n\nEDUCATION  \nDiploma in Web Application Development  \nArden Technical College, Baneshire  \n2018 – 2020\n\nOTHER  \nMember, Baneshire Frontend Meetup (2022– )\n\nDelivered monthly findings presentations to non-technical stakeholders.\n"
-  job_spec_text: 'WanderNest – Frontend Developer
-
-
-    WanderNest is a rapidly growing travel-booking scale-up based in Harwell, Oxfordshire. We’re on a mission to simplify travel planning with a seamless, accessible booking experience. We are looking for a Frontend Developer to join our team and help build fast, reliable, and inclusive web applications.
-
-
-    You’ll collaborate with designers and backend engineers to deliver high quality user interfaces using React and TypeScript. You’ll help maintain and evolve our design system, uphold accessibility best practices, and meet strict performance budgets. We value a strong testing culture and use modern CI/CD workflows to ensure reliable releases.
-
-
-    Requirements:
-
-    - Minimum 3 years’ experience in frontend development
-
-    - Advanced proficiency in React and TypeScript
-
-    - Experience implementing and maintaining design systems
-
-    - Strong understanding of web accessibility standards (WCAG 2.1 or above)
-
-    - Demonstrable experience with frontend testing frameworks (e.g. Jest, Testing Library)
-
-    - Comfortable working to performance budgets and measuring web performance
-
-    - Familiarity with code reviews and collaborative git workflows
-
-    - Experience with Next.js and CI pipelines (e.g. GitHub Actions) is highly desirable
-
-    - Excellent communication skills and collaborative mindset
-
-
-    Join WanderNest as we redefine travel booking for everyone.
-
-    '
-- case_id: sc-frontend-developer-04__editC
-  role: frontend-developer
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nMiriam Bexley  \nmiriam.bexley@example.invalid | Ridgeholm, Oxfordshire\n\nPROFILE  \nDetail-oriented Frontend Developer with three years’ experience building web applications using modern JavaScript frameworks. Passionate about delivering intuitive, accessible interfaces and improving user experience. Comfortable collaborating with designers and backend engineers, and eager to deepen expertise in advanced TypeScript and design system maintenance in a scale-up environment.\n\nEXPERIENCE\n\nFrontend Developer  \nRed Willow Digital, Milton Vale  \nMay 2021 – Present  \n- Developed and maintained client-facing features for a SaaS booking platform using React and JavaScript (in transition to TypeScript).  \n- Participated in UI design discussions and collaborated with backend engineers to implement RESTful API integrations.  \n- Improved page load times by refactoring images and reducing third-party dependencies.  \n- Contributed to the company’s\
-    \ design component library, though not a full-scale design system.  \n- Introduced basic accessibility checks (alt attributes, keyboard navigation), but limited experience with full WCAG 2.1 guidelines.  \n- Wrote unit tests using Jest; some exposure to Testing Library for component integration.\n\nJunior Frontend Developer  \nElmora Tech, Larkfield  \nJune 2021 – April 2021  \n- Supported senior developers in launching three major single-page applications in React.  \n- Migrated legacy UI components from plain JavaScript to React and basic TypeScript.  \n- Participated in code reviews using git and GitLab; contributed bug fixes and minor features.  \n- Assisted with basic CI/CD tasks, but little ownership of the pipeline.\n\nSKILLS  \nJavaScript (ES6+), React, TypeScript (intermediate), HTML5, CSS3, SASS  \nJest, React Testing Library  \nBasic Next.js (personal projects only)  \nGit, GitLab; some GitHub experience  \nFamiliar with accessibility concepts; learning WCAG 2.1  \nCollaborative\
-    \ and proactive communicator\n\nEDUCATION  \nBSc (Hons) Computing & Media  \nHawkston University, Hawkston  \n2018 – 2021\n\nOTHER  \nActive member, Ridgeholm Web Society  \nPersonal project: Designed a small travel-planner site with React and Next.js for portfolio use\n"
   job_spec_text: 'WanderNest – Frontend Developer
 
 
@@ -281,41 +173,7 @@ cases:
   strength_band: borderline
   cv_text: "CV last updated: 1 September 2024.\n\nElliot Mason  \nelliot.mason@example.invalid | Moorley-on-Teal\n\nPROFILE  \nPractical and solutions-oriented project professional with over three years’ experience in civil construction, with a focus on small-scale infrastructure upgrades. Known for effective coordination of trades and clear site communication. Seeking to apply developing leadership skills and technical understanding to the Project Manager role at ArdenVale Infrastructure.\n\nEXPERIENCE  \nSite Project Coordinator  \nHickson & Bray Civil Solutions, Brentley, UK  \nMay 2021 – Present  \n- Supported the project management of highways resurfacing and drainage works (project values up to £900k), ensuring works met client requirements and program deadlines.  \n- Coordinated daily activities for site teams, including subcontractors (up to 15 workers), and maintained records for site operations, safety, and progress.  \n- Liaised directly with clients and the public regarding works\
     \ impact and managed minor complaints in collaboration with project leads.  \n- Assisted in the preparation of regular status and cost reports for management and clients.  \n- Promoted safe working practices by conducting daily toolbox talks and site inspections.  \n\nAssistant Project Manager (Graduate Scheme)  \nNorthern Counties Engineering, Finham, UK  \nSept 2019 – May 2021  \n- Supported project managers on minor bridge repairs, cycle path upgrades, and utilities diversions (project values up to £400k).  \n- Participated in meetings with local council representatives and third-party stakeholders.  \n- Assisted in progress reporting, cost tracking, and risk identification for assigned projects.  \n- Helped implement quality checks and follow-up on health and safety non-conformances.  \n\nSKILLS  \n- Coordination of small teams and subcontractors  \n- Familiarity with NEC3/NEC4 contracts and CDM 2015  \n- Competence in Microsoft Project, Excel, and basic CAD  \n- Clear written and\
-    \ verbal communication  \n- Early-stage risk identification  \n- Budget tracking and basic cost reporting  \n- Strong organisational skills  \n\nEDUCATION  \nBSc (Hons) Civil Engineering (2:1)  \nWest Teal University, 2016–2019  \n\nOTHER  \n- CSCS card (Professionally Qualified Person)  \n- Currently undertaking APM Project Management Qualification (APM PMQ) – expected completion August 2024  \n- Full UK driving licence\n\nCERTIFICATIONS: project management certification certificate, completed August 2024.\n"
-  job_spec_text: 'ArdenVale Infrastructure – Project Manager
-
-
-    ArdenVale Infrastructure is a well-established civil engineering consultancy based in the market town of Red Willow, specialising in delivering innovative infrastructure solutions for public and private sector clients. We are seeking an experienced Project Manager to oversee a range of infrastructure projects, from early planning through to completion.
-
-
-    In this role, you will manage the full project lifecycle, including coordinating multidisciplinary teams, overseeing subcontractors, and ensuring all work is completed safely, on time, and within budget (up to £2m per project). You will be responsible for clear client communication, stakeholder management, and regular project reporting. The ability to foresee risks, resolve issues promptly, and maintain effective working relationships is essential.
-
-
-    Requirements:
-
-    - Minimum 4 years’ experience managing civil engineering or construction projects
-
-    - Proven track record of successful project delivery with direct budget ownership
-
-    - Skilled at coordinating subcontractors and internal teams to achieve project milestones
-
-    - Strong communication and stakeholder management abilities with a client-focused approach
-
-    - Experience producing accurate project reports and progress updates
-
-    - Familiarity with industry standards and best practices for health and safety
-
-    - PRINCE2 Practitioner or APM qualifications (desirable)
-
-    - Excellent organisational and problem-solving skills
-
-    '
-- case_id: sc-project-manager-02__editS
-  role: project-manager
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nElliot Mason  \nelliot.mason@example.invalid | Moorley-on-Teal\n\nPROFILE  \nPractical and solutions-oriented project professional with over three years’ experience in civil construction, with a focus on small-scale infrastructure upgrades. Known for effective coordination of trades and clear site communication. Seeking to apply developing leadership skills and technical understanding to the Project Manager role at ArdenVale Infrastructure.\n\nEXPERIENCE  \nSite Project Coordinator  \nHickson & Bray Civil Solutions, Brentley, UK  \nMay 2020 – Present  \n- Supported the project management of highways resurfacing and drainage works (project values up to £900k), ensuring works met client requirements and program deadlines.  \n- Coordinated daily activities for site teams, including subcontractors (up to 15 workers), and maintained records for site operations, safety, and progress.  \n- Liaised directly with clients and the public regarding works\
-    \ impact and managed minor complaints in collaboration with project leads.  \n- Assisted in the preparation of regular status and cost reports for management and clients.  \n- Promoted safe working practices by conducting daily toolbox talks and site inspections.  \n\nAssistant Project Manager (Graduate Scheme)  \nNorthern Counties Engineering, Finham, UK  \nSept 2019 – April 2020  \n- Supported project managers on minor bridge repairs, cycle path upgrades, and utilities diversions (project values up to £400k).  \n- Participated in meetings with local council representatives and third-party stakeholders.  \n- Assisted in progress reporting, cost tracking, and risk identification for assigned projects.  \n- Helped implement quality checks and follow-up on health and safety non-conformances.  \n\nSKILLS  \n- Coordination of small teams and subcontractors  \n- Familiarity with NEC3/NEC4 contracts and CDM 2015  \n- Competence in Microsoft Project, Excel, and basic CAD  \n- Clear written\
-    \ and verbal communication  \n- Early-stage risk identification  \n- Budget tracking and basic cost reporting  \n- Strong organisational skills  \n\nEDUCATION  \nBSc (Hons) Civil Engineering (2:1)  \nWest Teal University, 2016–2019  \n\nOTHER  \n- CSCS card (Professionally Qualified Person)  \n- Currently undertaking APM Project Management Qualification (APM PMQ) – expected completion August 2024  \n- Full UK driving licence\n"
+    \ verbal communication  \n- Early-stage risk identification  \n- Budget tracking and basic cost reporting  \n- Strong organisational skills  \n\nEDUCATION  \nBSc (Hons) Civil Engineering (2:1)  \nWest Teal University, 2016–2019  \n\nOTHER  \n- CSCS card (Professionally Qualified Person)  \n- Currently undertaking APM Project Management Qualification (APM PMQ) – expected completion August 2024  \n- Full UK driving licence\n\nCERTIFICATIONS: project management certificate, completed August 2024.\n"
   job_spec_text: 'ArdenVale Infrastructure – Project Manager
 
 
@@ -349,7 +207,7 @@ cases:
   strength_band: borderline
   cv_text: "CV last updated: 1 September 2024.\n\nSamuel Pritchard  \nsamuel.pritchard@example.invalid | West Bromleigh\n\nPROFILE  \nResourceful project coordinator with over 3 years of hands-on experience in supporting and leading sections of civil engineering works. Proven ability to coordinate subcontractors and multidisciplinary teams across highways resurfacing, utility upgrades, and small bridge projects with contract values up to £800k. Skilled in maintaining client communication and documentation, with a practical, safety-conscious approach. Looking to progress into a full project management role overseeing larger schemes.\n\nEXPERIENCE  \nAssistant Project Manager  \nAshcroft Engineering Solutions, West Bromleigh  \nJune 2021 – Present  \n- Supported the planning and delivery of road widening and drainage upgrade projects (£250k–£700k), coordinating surveyors, subcontractors, and utility companies  \n- Acted as main site point-of-contact for clients on three projects, leading regular\
     \ coordination meetings and producing weekly progress reports  \n- Assisted in developing risk registers and method statements in line with industry health and safety standards (CDM 2015)  \n- Monitored site costs and supported project manager in preparing monthly financial summaries; direct budget responsibility on minor works only  \n- Implemented issue-tracking log, reducing late responses to client queries by 30%  \n- Contributed to successful completion of the Red Willow South bypass resurfacing ahead of schedule\n\nProject Coordinator  \nMinster Row Construction, Red Willow  \nMarch 2019 – May 2021  \n- Coordinated works for footpath and cycle route improvements, managing teams of up to 6 operatives and liaising with subcontractors (landscaping, traffic management)  \n- Prepared health and safety paperwork, toolbox talks, and maintained daily site records  \n- Collated information for client update reports and attended public drop-in sessions as company representative  \n- Supported\
-    \ adoption of new site reporting system, improving accuracy of documentation\n\nSKILLS  \n- Coordination of multidisciplinary teams and subcontractors  \n- Project documentation and reporting  \n- Familiarity with NEC and JCT minor works contracts  \n- Stakeholder and client liaison  \n- Awareness of CDM and health/safety best practice  \n- Working knowledge of MS Project, Excel, and AutoCAD\n\nEDUCATION  \nFoundation Degree (FdSc), Construction Management  \nWest Shire College of Technology, 2016 – 2018\n\nOTHER  \nAPM Project Fundamentals Qualification (PFQ), 2022  \nFull UK Driving Licence\n\nCERTIFICATIONS: advanced project management certification certificate, completed August 2024.\n"
+    \ adoption of new site reporting system, improving accuracy of documentation\n\nSKILLS  \n- Coordination of multidisciplinary teams and subcontractors  \n- Project documentation and reporting  \n- Familiarity with NEC and JCT minor works contracts  \n- Stakeholder and client liaison  \n- Awareness of CDM and health/safety best practice  \n- Working knowledge of MS Project, Excel, and AutoCAD\n\nEDUCATION  \nFoundation Degree (FdSc), Construction Management  \nWest Shire College of Technology, 2016 – 2018\n\nOTHER  \nAPM Project Fundamentals Qualification (PFQ), 2022  \nFull UK Driving Licence\n\nCERTIFICATIONS: advanced project management certificate, completed August 2024.\n"
   job_spec_text: 'ArdenVale Infrastructure – Project Manager
 
 
@@ -376,74 +234,6 @@ cases:
     - PRINCE2 Practitioner or APM qualifications (desirable)
 
     - Excellent organisational and problem-solving skills
-
-    '
-- case_id: sc-project-manager-04__editS
-  role: project-manager
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nSamuel Pritchard  \nsamuel.pritchard@example.invalid | West Bromleigh\n\nPROFILE  \nResourceful project coordinator with over 3 years of hands-on experience in supporting and leading sections of civil engineering works. Proven ability to coordinate subcontractors and multidisciplinary teams across highways resurfacing, utility upgrades, and small bridge projects with contract values up to £800k. Skilled in maintaining client communication and documentation, with a practical, safety-conscious approach. Looking to progress into a full project management role overseeing larger schemes.\n\nEXPERIENCE  \nAssistant Project Manager  \nAshcroft Engineering Solutions, West Bromleigh  \nJune 2020 – Present  \n- Supported the planning and delivery of road widening and drainage upgrade projects (£250k–£700k), coordinating surveyors, subcontractors, and utility companies  \n- Acted as main site point-of-contact for clients on three projects, leading regular\
-    \ coordination meetings and producing weekly progress reports  \n- Assisted in developing risk registers and method statements in line with industry health and safety standards (CDM 2015)  \n- Monitored site costs and supported project manager in preparing monthly financial summaries; direct budget responsibility on minor works only  \n- Implemented issue-tracking log, reducing late responses to client queries by 30%  \n- Contributed to successful completion of the Red Willow South bypass resurfacing ahead of schedule\n\nProject Coordinator  \nMinster Row Construction, Red Willow  \nMarch 2019 – May 2020  \n- Coordinated works for footpath and cycle route improvements, managing teams of up to 6 operatives and liaising with subcontractors (landscaping, traffic management)  \n- Prepared health and safety paperwork, toolbox talks, and maintained daily site records  \n- Collated information for client update reports and attended public drop-in sessions as company representative  \n- Supported\
-    \ adoption of new site reporting system, improving accuracy of documentation\n\nSKILLS  \n- Coordination of multidisciplinary teams and subcontractors  \n- Project documentation and reporting  \n- Familiarity with NEC and JCT minor works contracts  \n- Stakeholder and client liaison  \n- Awareness of CDM and health/safety best practice  \n- Working knowledge of MS Project, Excel, and AutoCAD\n\nEDUCATION  \nFoundation Degree (FdSc), Construction Management  \nWest Shire College of Technology, 2016 – 2018\n\nOTHER  \nAPM Project Fundamentals Qualification (PFQ), 2022  \nFull UK Driving Licence\n"
-  job_spec_text: 'ArdenVale Infrastructure – Project Manager
-
-
-    ArdenVale Infrastructure is a well-established civil engineering consultancy based in the market town of Red Willow, specialising in delivering innovative infrastructure solutions for public and private sector clients. We are seeking an experienced Project Manager to oversee a range of infrastructure projects, from early planning through to completion.
-
-
-    In this role, you will manage the full project lifecycle, including coordinating multidisciplinary teams, overseeing subcontractors, and ensuring all work is completed safely, on time, and within budget (up to £2m per project). You will be responsible for clear client communication, stakeholder management, and regular project reporting. The ability to foresee risks, resolve issues promptly, and maintain effective working relationships is essential.
-
-
-    Requirements:
-
-    - Minimum 4 years’ experience managing civil engineering or construction projects
-
-    - Proven track record of successful project delivery with direct budget ownership
-
-    - Skilled at coordinating subcontractors and internal teams to achieve project milestones
-
-    - Strong communication and stakeholder management abilities with a client-focused approach
-
-    - Experience producing accurate project reports and progress updates
-
-    - Familiarity with industry standards and best practices for health and safety
-
-    - PRINCE2 Practitioner or APM qualifications (desirable)
-
-    - Excellent organisational and problem-solving skills
-
-    '
-- case_id: sc-support-team-lead-02__editC
-  role: support-team-lead
-  strength_band: borderline
-  cv_text: "CV last updated: 1 September 2024.\n\nOlivia Marsh  \nolivia.marsh@example.invalid | Bexwood\n\nPROFILE  \nMotivated customer support professional with three years’ experience in digital services, including 8 months in a supervisory role. Skilled in resolving customer issues, managing small teams, and supporting process improvements. Highly organized, with a keen eye for detail and a commitment to delivering positive customer outcomes. Eager to develop further leadership skills in a fast-paced fintech environment.\n\nEXPERIENCE  \nSenior Customer Support Advisor (Acting Team Lead)  \nBrightHive Digital, Bexwood  \nSeptember 2022 – Present  \n- Stepped into an acting team lead position, supervising 4 support agents during the team manager’s parental leave.  \n- Coordinated daily support operations for SME clients using BrightHive’s digital invoicing platform.  \n- Handled high-priority customer escalations and worked with tech staff to resolve platform bugs.  \n- Conducted weekly\
-    \ training sessions on updated support tools and product features.  \n- Assisted in developing a new ticket triage process that reduced first-response times by 12%.  \n- Regularly monitored SLA dashboards and produced monthly performance reports for management review.\n\nCustomer Support Advisor  \nBrightHive Digital, Bexwood  \nMarch 2021 – August 2022  \n- Provided front-line support via chat, email, and phone for digital payment and invoicing queries.  \n- Regularly achieved or surpassed team targets for response times and customer satisfaction.  \n- Escalated complex technical problems to IT, documenting root causes and solutions.  \n- Contributed to support documentation updates and new team member onboarding.\n\nSKILLS  \n- Incident and escalation management  \n- Delivering constructive feedback  \n- Customer communications (written and verbal)  \n- Familiar with Zendesk, Intercom, and MS Teams  \n- Basic understanding of digital payments  \n- Process documentation and knowledge\
-    \ sharing\n\nEDUCATION  \nLevel 3 Diploma in Customer Service  \nKingsford Adult Learning Centre, 2020\n\nOTHER  \nVolunteer Tech Buddy, Bexwood Community Library (2022–present): Assisting local residents with digital literacy and online services.  \n\nReferences available on request.\n"
-  job_spec_text: 'GlobePay Solutions – Customer Support Team Lead
-
-
-    GlobePay Solutions is a fast-growing payments provider based in Kingsford, offering a reliable suite of digital payment services to SMEs across the UK. We are seeking a Customer Support Team Lead to manage and inspire our frontline support team of 8 agents. Reporting to the Head of Operations, you will own customer escalations, ensure we hit SLAs, and act as a key point of contact for complex queries. You will coach and develop your team, deliver regular feedback, and support ongoing training needs.
-
-
-    This role also partners closely with Product and IT to suggest and implement tooling improvements, enhancing support efficiency and customer experience. As a people-focused leader, you’ll foster a collaborative team culture and drive continuous improvement.
-
-
-    Requirements:
-
-    - Minimum 3 years’ experience in customer support, with at least 1 year managing or leading people
-
-    - Exposure to payments, fintech, or a fast-paced digital services environment highly preferred
-
-    - Proven ability to handle escalations and complex customer issues
-
-    - Strong track record of meeting SLAs and quality metrics
-
-    - Confident coaching and developing team members
-
-    - Excellent written and verbal communication skills
-
-    - Proactive, solutions-driven approach and attention to detail
-
-    - Comfortable working cross-functionally with technical and non-technical teams
 
     '
 - case_id: sc-support-team-lead-02__editS

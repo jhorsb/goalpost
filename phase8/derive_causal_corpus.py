@@ -34,8 +34,31 @@ SELECTED = json.load(open("phase8/item-selection.json"))
 AUDIT = "audits/realtarget-hs-screener-002-gptoss"
 
 
+GENERIC = ("relevant", "additional", "certification", "qualification",
+           "education", "experience_gain", "certifications")
+
+
+def is_generic(slug: str, cluster: str) -> bool:
+    s = slug.lower()
+    return (s == cluster.lower() or "relevant" in s or "additional" in s
+            or s in ("certification", "qualification", "education"))
+
+
 def humanise(slug: str) -> str:
-    return slug.replace("_", " ")
+    out = slug.replace("_", " ")
+    for tail in (" certification", " qualification"):
+        if out.endswith(tail):
+            out = out[: -len(tail)]
+    return out
+
+
+DESIRABLE = {  # job spec's own "(desirable)" credential per role
+    "data-analyst": "Tableau Desktop Specialist",
+    "frontend-developer": "Next.js",
+    "project-manager": "PRINCE2 Practitioner",
+    "support-team-lead": "payments industry fundamentals",
+    "platform-engineer": "AWS Certified Solutions Architect",
+}
 
 
 def per_case_named_artifacts() -> dict:
@@ -65,9 +88,17 @@ def per_case_named_artifacts() -> dict:
                         counts[raw] += 1
             if not counts:
                 counts[cluster] = 1  # cluster slug itself as fallback
-            top = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+            ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+            concrete = [s for s, _ in ranked if not is_generic(s, cluster)]
+            if concrete:
+                top = concrete[0]
+                artifact = humanise(top)
+            else:
+                top = ranked[0][0]
+                role_name = cid.rsplit("-", 1)[0].replace("sc-", "")
+                artifact = DESIRABLE[role_name]  # A2 fallback, mechanical
             named[cid][role] = {"cluster": cluster, "raw": top,
-                                "artifact": humanise(top)}
+                                "artifact": artifact}
     return dict(named)
 
 
@@ -112,25 +143,68 @@ def build_experience_edit(cv: str, case_id: str) -> tuple[str, str] | None:
     and the nearest preceding role's end date."""
     months = ["January","February","March","April","May","June","July",
               "August","September","October","November","December"]
-    m = re.search(r"(" + "|".join(months) + r")\s+(\d{4})\s*[–-]\s*Present", cv)
+    abbrev = {m[:3]: m for m in months}
+    abbrev["Sept"] = "September"
+    MONTH_RX = "|".join(months + list(abbrev))
+
+    def month_index(name):
+        return months.index(abbrev.get(name, name))
+    m = re.search(r"(" + MONTH_RX + r")\s+(\d{4})\s*[–-]\s*Present", cv)
     if not m:
         return None
-    mi, yr = months.index(m.group(1)), int(m.group(2))
+    mi, yr = month_index(m.group(1)), int(m.group(2))
     nmi, nyr = mi, yr - 1  # 12 months earlier
     new_start = f"{months[nmi]} {nyr}"
     prev_mi, prev_yr = (nmi - 1) % 12, nyr - (1 if nmi == 0 else 0)
     prev_end_new = f"{months[prev_mi]} {prev_yr}"
     cv2 = cv[:m.start()] + f"{new_start} – Present" + cv[m.end():]
     # previous role end: the other '– Month YYYY' occurrence
-    m2 = re.search(r"[–-]\s*(" + "|".join(months) + r")\s+(\d{4})", cv2[m.start()+20:])
+    # A2 exclusion checks — collect every date range in the ORIGINAL cv
+    def ords(mo, y): return y * 12 + month_index(mo)
+    new_start_ord = ords(months[nmi], nyr)
+    ranges = []
+    for rm in re.finditer(r"(" + MONTH_RX + r")\s+(\d{4})\s*[–-]\s*"
+                          r"(?:(" + MONTH_RX + r")\s+(\d{4})|Present)", cv):
+        s_ord = ords(rm.group(1), int(rm.group(2)))
+        e_ord = ords(rm.group(3), int(rm.group(4))) if rm.group(3) else 10**9
+        ranges.append((s_ord, e_ord, rm.start()))
+    # education years, e.g. "2017–2021" or graduation year
+    edu = [int(y) for y in re.findall(r"(?:University|BSc|BA|MSc|degree)[^\n]*?(\d{4})", cv)]
+    # year-only education ranges like "2018 – 2020" count too
+    edu += [int(y2) for _, y2 in re.findall(r"(\d{4})\s*[–-]\s*(\d{4})", cv)]
+    # exclusion 1: the extension window [new_start, old_start] must not
+    # touch any other role's range — neither containing its start nor
+    # landing inside it (A2, tightened after the fd-02 finding)
+    own = next((r for r in ranges if r[1] == 10**9), None)
+    old_start_ord = ords(m.group(1), yr)
+    for (s_ord, e_ord, pos) in ranges:
+        if own and pos == own[2]:
+            continue
+        if s_ord <= new_start_ord <= e_ord:
+            return None  # new start inside another role
+        if new_start_ord <= s_ord < old_start_ord:
+            return None  # extension swallows another role
+    # exclusion 2: new start inside education period (any edu year >= new start year)
+    if edu and any(y >= nyr for y in edu if y <= yr):
+        return None
+    # contiguity: previous role = latest-ending non-current role
+    prev = max((r for r in ranges if r[1] != 10**9), key=lambda r: r[1], default=None)
     desc = f"current role start {m.group(1)} {yr} -> {new_start} (+12 months)"
-    if m2:
-        off = m.start() + 20
-        s, e = off + m2.start(), off + m2.end()
-        old_end = cv2[s:e]
-        cv2 = cv2[:s] + f"– {prev_end_new}" + cv2[e:]
-        desc += f"; previous role end {old_end.strip('– ')} -> {prev_end_new} (contiguity rule)"
-    return cv2, desc
+    cv_new = cv2
+    if prev is not None:
+        prev_start, prev_end, _ = prev
+        new_prev_end = ords(months[prev_mi], prev_yr)
+        if new_prev_end <= prev_start:
+            return None  # non-positive previous-role duration -> exclude
+        seg = cv2[m.end():]
+        m2 = re.search(r"[–-]\s*(" + MONTH_RX + r")\s+(\d{4})", seg)
+        if m2:
+            s, e = m.end() + m2.start(), m.end() + m2.end()
+            old_end = cv2[s:e]
+            cv_new = cv2[:s] + f"– {prev_end_new}" + cv2[e:]
+            desc += (f"; previous role end {old_end.strip('– ')} -> "
+                     f"{prev_end_new} (contiguity rule)")
+    return cv_new, desc
 
 
 def main() -> None:
@@ -138,6 +212,7 @@ def main() -> None:
            yaml.safe_load(open("corpora/starter-v1/cases.yaml"))["cases"]}
     named = per_case_named_artifacts()
     arms_a, arms_b, diffs = [], [], []
+    exclusions = []
 
     def add(case, arm, cv, block_b=False):
         rec = dict(case)
@@ -159,8 +234,9 @@ def main() -> None:
             if "EXPERIENCE" in cl:
                 r = build_experience_edit(base_cv, cid)
                 if r is None:
-                    raise SystemExit(f"{cid}: experience dose inapplicable — "
-                                     "record rule-based exclusion")
+                    exclusions.append(f"{cid}/{arm} ({info['cluster']}): "
+                                      "excluded by A2 chronology rule")
+                    continue
                 cv2, desc = r
             else:
                 cv2, desc = dose_edit(base_cv, info["cluster"],
@@ -186,8 +262,12 @@ def main() -> None:
         "Named artifacts chosen mechanically: the case's own most frequent "
         "raw slug within the selected cluster (tie → alphabetical), "
         "humanised.\n\n" + "\n".join(diffs))
+    if exclusions:
+        Path("phase8/EXCLUSIONS.md").write_text(
+            "# Rule-based exclusions (A2)\n\n" +
+            "\n".join(f"- {e}" for e in exclusions) + "\n")
     print(f"block A: {len(arms_a)} arm-cases; block B: {len(arms_b)}; "
-          f"{len(diffs)} diffs written")
+          f"{len(diffs)} diffs; exclusions: {len(exclusions)}")
 
 
 if __name__ == "__main__":

@@ -152,6 +152,25 @@ the response window and D-024 apply unchanged).
 
 ## Amendment log
 
+**A2 (2026-08-08, D-053, still pre-first-call; triggered by the mandated
+independent diff check, which FAILED 8 diffs).** No measurement exists;
+the first derivation was defective, not the design. (1) **Exclusion rule
+implemented as specified:** an experience-dose edit is invalid if the
+adjusted previous-role duration becomes non-positive, or the new
+current-role start falls inside any other role's dates or the education
+period. Cases failing this are excluded from experience-dose edits by
+rule and recorded; H1's family is the cases retaining BOTH valid edits
+(family shrinkage only lowers the false-positive rate). (2) **Naming
+rule tightened, still mechanical:** if the most frequent raw slug is
+generic (contains "relevant"/"additional", equals the cluster name, or
+names no concrete artifact), fall back to the most frequent concrete slug
+in that case+cluster; if none exists, use the job spec's own
+"(desirable)" credential line for the role. Trailing
+"certification/qualification" is stripped before templating (no
+"certification certificate"). (3) Diffs regenerated and the FULL 16-diff
+independent check re-run before any live call — the gate that caught
+this stays in force.
+
 **A1 (2026-08-08, D-052, pre-first-call; external review, author-relayed).**
 (1) H1 gained a same-sign replication requirement across two independent
 blocks — the original single-block ≥3/5 criterion had a ≈60% family-wise
