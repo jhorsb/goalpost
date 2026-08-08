@@ -396,6 +396,16 @@
   .gp-section--evidence { background: var(--gp-surface); }
   .gp-section--additional { padding-top: clamp(2.8rem, 7vw, 5rem); }
   .gp-section--record { background: var(--gp-ink-soft); }
+  .gp-satnav {
+    max-width: 60ch;
+    margin: 1.5rem 0 0;
+    padding: 1rem 0 1rem 1.15rem;
+    border-left: 3px solid var(--gp-accent, currentColor);
+  }
+  .gp-satnav p { margin: 0; font-size: 1.02rem; }
+  .gp-satnav p + p { margin-top: 0.6rem; }
+  .gp-satnav .gp-satnav-turn { color: var(--gp-muted); }
+
   .gp-section-intro {
     max-width: 60ch;
     margin: 1rem 0 0;
@@ -908,6 +918,11 @@
       <div class="gp-narrow">
         <h2 id="gp-measures-title">Three questions, asked of identical runs</h2>
         <p class="gp-section-intro">Goalpost measures whether the same input gets the same output. Accuracy and fairness are outside this audit.</p>
+
+        <div class="gp-satnav">
+          <p>Picture a sat-nav that is always right about where you are — “you are 40 miles out” — but gives you different directions every time you ask how to get there. The position is reliable. The route is noise.</p>
+          <p class="gp-satnav-turn">Three questions, not one, because a screening tool can behave the same way: steady about the verdict and its headings, unreliable about what the candidate should actually do. The last question is the one a rejected applicant depends on.</p>
+        </div>
       </div>
 
       <div class="gp-three-tests">
