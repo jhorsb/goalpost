@@ -1,0 +1,45 @@
+# Model metadata for the scatter panels. Facts only; each field's source
+# is named. Prices are USD per 1M OUTPUT tokens and come from THIS REPO'S
+# committed pricing (providers.PRICING / audit configs) — the same numbers
+# budget enforcement used, so the chart cannot disagree with the evidence.
+# Release dates are the providers' published snapshot/release dates.
+#
+# board_name: how the system appears in phase7/board.json.
+models:
+  - board_name: gpt-4o-mini
+    label: gpt-4o-mini
+    released: 2024-07-18            # OpenAI snapshot date in the model id
+    output_price_per_m: 0.60        # providers.PRICING
+    architecture: structured
+  - board_name: gpt-4.1-mini
+    label: gpt-4.1-mini
+    released: 2025-04-14
+    output_price_per_m: 1.60        # phase4/validation.yaml pricing block
+    architecture: structured
+  - board_name: gpt-4.1-nano
+    label: gpt-4.1-nano
+    released: 2025-04-14
+    output_price_per_m: 0.40        # phase4/validation.yaml pricing block
+    architecture: structured
+  - board_name: claude-haiku-4.5
+    label: claude-haiku-4.5
+    released: 2025-10-01            # Anthropic snapshot date in the model id
+    output_price_per_m: 5.00        # providers.PRICING
+    architecture: structured
+  - board_name: bare-model-control
+    label: gpt-oss-120b
+    released: 2025-08-05            # OpenAI open-weights release
+    output_price_per_m: null        # open weights: price is host-dependent,
+                                    # and our runs used a free tier — plotting
+                                    # a price would be an invention. Date
+                                    # panel only.
+    architecture: freeform
+
+# Deliberately excluded:
+# - the two audited pipelines: configurations, not models. A pipeline's
+#   recourse stability is a property of its design + model; putting it on
+#   a model axis would attribute the design to the model.
+# - claude-sonnet-4-5 (audit #2's serving model): measured only INSIDE a
+#   pipeline, never bare. No model-level number exists for it.
+# - an "intelligence" axis: no agreed measure exists whose provenance
+#   could live in this repo's evidence chain.

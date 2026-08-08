@@ -19,3 +19,12 @@ Rules the board enforces on its own, so they need no policing by hand:
 withheld measures never print as numbers; systems only share a table when
 corpus, reader and taxonomy match; ordering is band-then-alphabetical, so
 no ranking is implied within a tier.
+
+After the board refresh, regenerate the scatter (reads board.json):
+
+```bash
+uv run python phase7/render_scatter.py
+```
+
+New models need a `phase7/model-metadata.yaml` entry (facts with named
+sources) before they appear on the panels.
