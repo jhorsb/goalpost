@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goalpost audit</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #20201e;
+  --muted: #626057;
+  --rule: #d8d3c7;
+  --paper: #fffefa;
+  --soft: #f5f1e8;
+  --accent: #234f45;
+  --warning: #8a4b14;
+  --warning-bg: #fff4df;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0 auto;
+  max-width: 65ch;
+  padding: 3rem 1.25rem 5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+article + article {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 3px double var(--rule);
+}
+h1, h2, h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 7vw, 3.35rem);
+  letter-spacing: -0.035em;
+}
+h2 {
+  margin: 2.8rem 0 0.8rem;
+  font-size: 1.45rem;
+  color: var(--accent);
+}
+h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.08rem;
+}
+p, ul { margin: 0.75rem 0; }
+.stamp {
+  margin-bottom: 2.4rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+.headline {
+  margin: 1rem 0 1.4rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent);
+  font-size: 1.15rem;
+}
+.headline.withheld {
+  border-left-color: var(--warning);
+}
+.caveats { padding-left: 1.25rem; }
+.caveats li + li, .provenance li + li { margin-top: 0.4rem; }
+.incomplete {
+  display: block;
+  margin: 2.25rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid #e7bf84;
+  border-left: 5px solid var(--warning);
+  border-radius: 3px;
+  background: var(--warning-bg);
+}
+hr {
+  margin: 3.5rem 0 2.5rem;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+.appendix { font-size: 0.9rem; }
+.table-wrap {
+  margin: 1rem 0 2.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+th, td {
+  padding: 0.58rem 0.68rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+thead th {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+tbody tr:nth-child(even) { background: var(--soft); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+.coverage-row td { white-space: normal; }
+code {
+  padding: 0.08em 0.28em;
+  border-radius: 3px;
+  background: var(--soft);
+  font-size: 0.86em;
+}
+.provenance {
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+@media print {
+  body { max-width: none; padding: 0; font-size: 11pt; }
+  .table-wrap { overflow: visible; }
+  table { font-size: 7pt; }
+  article { break-after: page; }
+}
+</style>
+</head>
+<body>
+<main><article><h1>Goalpost audit <span aria-hidden='true'>&mdash;</span> hs-resume-screener</h1><p class='stamp'>Audit <code>target3-causal-blockB-001</code> <span aria-hidden='true'>&middot;</span> goalpost 0.1.0 <span aria-hidden='true'>&middot;</span> anchors-1.0.0 <span aria-hidden='true'>&middot;</span> sut <code>998e563a</code> (freeform mode)</p><section aria-labelledby='headline'><h2 id='headline'>The headline</h2><p class='headline'><strong>If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.</strong> In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.54 on a 0&ndash;1 scale). Because this system was measured through an extractor, treat this as a <strong>lower bound</strong> on its instability being worse &mdash; the true stability is at least this good.</p><p>The <em>decision itself</em> agreed with its most common answer 82% of the time across repeat runs.</p><p>The <em>reasons given</em> were substantially steadier than the advice (reason stability 0.96 vs recourse 0.54).</p></section><section aria-labelledby='why-this-matters'><h2 id='why-this-matters'>Why this matters</h2><p>Imagine a sat-nav that always tells you <em>why</em> you haven&#x27;t arrived — &quot;you&#x27;re 40 miles out&quot; — but gives you contradictory directions every time you ask how to get there. The explanation is consistent; the route is noise. This report measures whether an automated screening system is that sat-nav: whether its &quot;here&#x27;s what you&#x27;d need to change&quot; advice stays put, or whether the goalposts move every time you look.</p></section><section aria-labelledby='caveats'><h2 id='caveats'>What this doesn&rsquo;t tell you</h2><ul class='caveats'><li>Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.</li><li>This audit says nothing about fairness or bias &mdash; that is a different measurement.</li><li>This system&#x27;s free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 1.000 at the reported grouping (1.000 raw), recourse 0.901 at the reported grouping (0.846 raw), k=3, 10 sampled cases); stability numbers are lower bounds.</li></ul></section><hr><section class='appendix' aria-labelledby='technical-appendix'><h2 id='technical-appendix'>Technical appendix</h2><h3>Condition <code>t0.7_n5</code> (T=0.7, N=5)</h3><div class='table-wrap'><table><thead><tr><th scope='col'>case</th><th scope='col'>level</th><th scope='col'>reason J</th><th scope='col'>recourse J</th><th scope='col'>n_pairs</th><th scope='col'>decision</th><th scope='col'>attempted/parsed/scored</th><th scope='col'>refusals</th></tr></thead><tbody><tr><th scope='row'>sc-data-analyst-02__editS</th><td>raw</td><td>0.83</td><td>0.25</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-02__editS</th><td>normalised</td><td>0.83</td><td>0.25</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-02__editS</th><td>cluster</td><td>1.00</td><td>0.67</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-02__editS</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 2.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-04__editC</th><td>raw</td><td>1.00</td><td>0.15</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04__editC</th><td>normalised</td><td>1.00</td><td>0.15</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04__editC</th><td>cluster</td><td>1.00</td><td>0.70</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-04__editC</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 3.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-04__editS</th><td>raw</td><td>0.90</td><td>0.05</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04__editS</th><td>normalised</td><td>0.90</td><td>0.05</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04__editS</th><td>cluster</td><td>0.90</td><td>0.75</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-04__editS</th><td>coverage</td><td>emptiness 0.00, size 3.8</td><td>emptiness 0.00, size 3.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-02__editS</th><td>raw</td><td>1.00</td><td>0.19</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-02__editS</th><td>normalised</td><td>1.00</td><td>0.19</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-02__editS</th><td>cluster</td><td>1.00</td><td>0.54</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-02__editS</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 3.2</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-04__editS</th><td>raw</td><td>1.00</td><td>0.22</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-04__editS</th><td>normalised</td><td>1.00</td><td>0.22</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-04__editS</th><td>cluster</td><td>1.00</td><td>0.51</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-04__editS</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 3.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-02__editC</th><td>raw</td><td>0.79</td><td>0.14</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-02__editC</th><td>normalised</td><td>0.79</td><td>0.14</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-02__editC</th><td>cluster</td><td>0.90</td><td>0.23</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-02__editC</th><td>coverage</td><td>emptiness 0.00, size 4.2</td><td>emptiness 0.00, size 2.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-04__editC</th><td>raw</td><td>0.75</td><td>0.12</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-04__editC</th><td>normalised</td><td>0.75</td><td>0.12</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-04__editC</th><td>cluster</td><td>0.90</td><td>0.29</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-04__editC</th><td>coverage</td><td>emptiness 0.00, size 4.2</td><td>emptiness 0.20, size 1.6</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-02__editS</th><td>raw</td><td>1.00</td><td>0.09</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-02__editS</th><td>normalised</td><td>1.00</td><td>0.09</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-02__editS</th><td>cluster</td><td>1.00</td><td>0.62</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-02__editS</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 3.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-04__editC</th><td>raw</td><td>0.83</td><td>0.16</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04__editC</th><td>normalised</td><td>0.83</td><td>0.16</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04__editC</th><td>cluster</td><td>1.00</td><td>0.51</td><td>4</td><td>0.60</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-04__editC</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.00, size 3.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-04__editS</th><td>raw</td><td>0.79</td><td>0.19</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04__editS</th><td>normalised</td><td>0.79</td><td>0.19</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04__editS</th><td>cluster</td><td>0.90</td><td>0.59</td><td>6</td><td>0.80</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-04__editS</th><td>coverage</td><td>emptiness 0.00, size 4.2</td><td>emptiness 0.00, size 3.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr></tbody></table></div><h3>Provenance</h3><ul class='provenance'><li>corpus_hash: <code>005ef975bc1debc36cda60dd120459032c074f79dd6ef40e409b72b8ed804523|03fa6e1caf38b0dbd8c238c16d651d6a47b0b0890aeadd01b328d2fc6bb1ae74|1873e494e05fa2881a0348587c4ad6d78ddb11f6f608ba3faa6cf3921110419d|5357af416a469660d7c26b37b07fa718e47111f02e0c261531e4f5a1f689a322|888f79e88695d6f83d043cb5dac51ec9c53d7f01864f23c766dd134ba6ca5002|8d208a1dad38c8bc82e9fd3167a457f289ed742527b670ecda2396b59a14dd46|9609965eee72eb5a122233a8f21fe0f6420bab93d4f91ad15679fcd7c6671249|d9b674e079db8947a60678903587e3e826cc19920a1c8bfc04a7cbce10269de8|da9b9b37113856035b32542c5ed410a829783de0b15ff4beb18e727ff378b882|e31ac776817f14f8ee4445ba306fe8054a66b74761027171e673e6c2d278bd6d</code></li><li>runner_version: <code>0.1.0</code></li><li>parser_version: <code>0.1.0</code></li><li>normaliser_version: <code>0.1.0</code></li><li>taxonomy_version: <code>1.0.0+1dfd20707ff9</code></li><li>metrics_version: <code>0.1.0</code></li><li>audit_version: <code>0.1.0</code></li><li>extractor_model: <code>gpt-4.1-2025-04-14</code></li><li>canonicaliser_model: <code>gpt-4.1-2025-04-14</code></li><li>report_version: <code>0.1.0</code> <span aria-hidden='true'>&middot;</span> anchors: <code>anchors-1.0.0</code></li><li>total cost: $0.3067</li></ul></section></article></main>
+</body>
+</html>

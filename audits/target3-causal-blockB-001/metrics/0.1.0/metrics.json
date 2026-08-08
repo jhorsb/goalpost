@@ -1,0 +1,621 @@
+{
+  "audit_id": "target3-causal-blockB-001",
+  "suts": [
+    {
+      "name": "hs-resume-screener",
+      "sut_id": "998e563a832dd8f9",
+      "elicitation_mode": "freeform",
+      "extracted": true,
+      "conditions": [
+        {
+          "condition_id": "t0.7_n5",
+          "temperature": 0.7,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "sc-data-analyst-02__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.6
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.8333333333333333,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.8333333333333333,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2464285714285714,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2464285714285714,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6666666666666666,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.75,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-04__editC",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.15257936507936506,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.15257936507936506,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.705,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 1.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-04__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.05277777777777778,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.05277777777777778,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-02__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.18952741702741702,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.18952741702741702,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5433333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 1.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-04__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.21972222222222224,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.21972222222222224,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5066666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.75,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-02__editC",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.7857142857142857,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.7857142857142857,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1416666666666667,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1416666666666667,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.22777777777777777,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.6,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-04__editC",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 0.6
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.11904761904761904,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.11904761904761904,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.29166666666666663,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.6,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 1.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-02__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.08888888888888889,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.08888888888888889,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.625,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-04__editC",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.6
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.8333333333333333,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.8333333333333333,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1607142857142857,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1607142857142857,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5125,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.75,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-04__editS",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.7857142857142857,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.7857142857142857,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19444444444444442,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19444444444444442,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5916666666666667,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.4,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 0.96,
+              "median": 1.0,
+              "iqr": [
+                0.9,
+                1.0
+              ],
+              "n_included": 10,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 0.5420277777777778,
+              "median": 0.5675,
+              "iqr": [
+                0.5081249999999999,
+                0.65625
+              ],
+              "n_included": 10,
+              "excluded": []
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ],
+      "extractor_self_agreement": {
+        "k": 3,
+        "sampled_cases": 10,
+        "extractor_version": "0.3.0",
+        "extractor_prompt_hash": "34e17dd4d1bf71fb",
+        "measurement_cost_usd": 0.11411799999999997,
+        "reasons": {
+          "raw": {
+            "mean_jaccard": 1.0
+          },
+          "normalised": {
+            "mean_jaccard": 1.0
+          },
+          "cluster": {
+            "mean_jaccard": 1.0
+          },
+          "mean_jaccard": 1.0
+        },
+        "recourse": {
+          "raw": {
+            "mean_jaccard": 0.8463492063492064
+          },
+          "normalised": {
+            "mean_jaccard": 0.8463492063492064
+          },
+          "cluster": {
+            "mean_jaccard": 0.9011111111111111
+          },
+          "mean_jaccard": 0.8463492063492064
+        },
+        "decision": {
+          "mean_modal_agreement": 1.0
+        }
+      }
+    }
+  ],
+  "total_cost_usd": 0.30674599999999996,
+  "missing_blocks": [],
+  "errors": [],
+  "provenance": {
+    "corpus_hash": "005ef975bc1debc36cda60dd120459032c074f79dd6ef40e409b72b8ed804523|03fa6e1caf38b0dbd8c238c16d651d6a47b0b0890aeadd01b328d2fc6bb1ae74|1873e494e05fa2881a0348587c4ad6d78ddb11f6f608ba3faa6cf3921110419d|5357af416a469660d7c26b37b07fa718e47111f02e0c261531e4f5a1f689a322|888f79e88695d6f83d043cb5dac51ec9c53d7f01864f23c766dd134ba6ca5002|8d208a1dad38c8bc82e9fd3167a457f289ed742527b670ecda2396b59a14dd46|9609965eee72eb5a122233a8f21fe0f6420bab93d4f91ad15679fcd7c6671249|d9b674e079db8947a60678903587e3e826cc19920a1c8bfc04a7cbce10269de8|da9b9b37113856035b32542c5ed410a829783de0b15ff4beb18e727ff378b882|e31ac776817f14f8ee4445ba306fe8054a66b74761027171e673e6c2d278bd6d",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.1.0",
+    "audit_version": "0.1.0",
+    "extractor_model": "gpt-4.1-2025-04-14",
+    "canonicaliser_model": "gpt-4.1-2025-04-14"
+  }
+}

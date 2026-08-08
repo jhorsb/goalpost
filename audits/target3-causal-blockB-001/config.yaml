@@ -1,0 +1,55 @@
+audit_id: target3-causal-blockB-001
+suts:
+- name: hs-resume-screener
+  provider: openai_compatible
+  model: gpt-oss-120b
+  elicitation_mode: freeform
+  prompt_template: '<<<CV>>>
+
+    {cv}
+
+    <<<JD>>>
+
+    {job_spec}'
+  base_url: https://api.cerebras.ai/v1
+  api_key_env: CEREBRAS_API_KEY
+  send_seed: false
+  max_tokens: 3000
+  params:
+    pipeline: hs-resume-screener
+    upstream_sha: 49dc41a11b5cd9f5655a43f148cb9cf4e71fa544
+conditions:
+- temperature: 0.7
+  repeats: 5
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+  base_url: null
+  api_key_env: null
+  send_seed: true
+  max_tokens: 2048
+extractor:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+  base_url: null
+  api_key_env: null
+  send_seed: true
+  max_tokens: 2048
+max_spend_usd: 10.0
+audit_seed: 43
+perturbations:
+  enabled: false
+  classes: []
+concurrency: 4
+corpus_path: corpora/causal-v1/cases-blockB.yaml
+output_dir: audits
+pricing:
+  gpt-4.1-2025-04-14:
+    input: 2.0
+    output: 8.0
+  gpt-oss-120b:
+    input: 0.0
+    output: 0.0
+warnings:
+- SUT 'hs-resume-screener' uses floating model alias 'gpt-oss-120b'; use a pinned
+  snapshot where the provider offers one

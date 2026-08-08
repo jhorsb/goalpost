@@ -1,0 +1,98 @@
+{
+  "sc-data-analyst-02": {
+    "baseline_A": "1/5",
+    "baseline_B": "\u2014",
+    "placN_A": "2/5",
+    "placN_B": "\u2014",
+    "placC_A": "1/5",
+    "placC_B": "\u2014",
+    "editC_A": "\u2014",
+    "editC_B": "\u2014",
+    "editS_A": "2/5",
+    "editS_B": "2/5"
+  },
+  "sc-data-analyst-04": {
+    "baseline_A": "0/5",
+    "baseline_B": "\u2014",
+    "placN_A": "0/5",
+    "placN_B": "\u2014",
+    "placC_A": "0/5",
+    "placC_B": "\u2014",
+    "editC_A": "0/5",
+    "editC_B": "0/5",
+    "editS_A": "0/5",
+    "editS_B": "0/5"
+  },
+  "sc-frontend-developer-02": {
+    "baseline_A": "0/5",
+    "baseline_B": "\u2014",
+    "placN_A": "0/5",
+    "placN_B": "\u2014",
+    "placC_A": "0/5",
+    "placC_B": "\u2014",
+    "editC_A": "\u2014",
+    "editC_B": "\u2014",
+    "editS_A": "0/5",
+    "editS_B": "0/5"
+  },
+  "sc-frontend-developer-04": {
+    "baseline_A": "0/5",
+    "baseline_B": "\u2014",
+    "placN_A": "0/5",
+    "placN_B": "\u2014",
+    "placC_A": "0/5",
+    "placC_B": "\u2014",
+    "editC_A": "\u2014",
+    "editC_B": "\u2014",
+    "editS_A": "1/5",
+    "editS_B": "0/5"
+  },
+  "sc-project-manager-02": {
+    "baseline_A": "1/5",
+    "baseline_B": "\u2014",
+    "placN_A": "2/5",
+    "placN_B": "\u2014",
+    "placC_A": "2/5",
+    "placC_B": "\u2014",
+    "editC_A": "2/5",
+    "editC_B": "4/5",
+    "editS_A": "\u2014",
+    "editS_B": "\u2014"
+  },
+  "sc-project-manager-04": {
+    "baseline_A": "2/5",
+    "baseline_B": "\u2014",
+    "placN_A": "4/5",
+    "placN_B": "\u2014",
+    "placC_A": "4/5",
+    "placC_B": "\u2014",
+    "editC_A": "2/5",
+    "editC_B": "3/5",
+    "editS_A": "\u2014",
+    "editS_B": "\u2014"
+  },
+  "sc-support-team-lead-02": {
+    "baseline_A": "1/5",
+    "baseline_B": "\u2014",
+    "placN_A": "0/5",
+    "placN_B": "\u2014",
+    "placC_A": "1/5",
+    "placC_B": "\u2014",
+    "editC_A": "\u2014",
+    "editC_B": "\u2014",
+    "editS_A": "0/5",
+    "editS_B": "1/5"
+  },
+  "sc-support-team-lead-04": {
+    "baseline_A": "2/5",
+    "baseline_B": "\u2014",
+    "placN_A": "2/5",
+    "placN_B": "\u2014",
+    "placC_A": "1/5",
+    "placC_B": "\u2014",
+    "editC_A": "0/5",
+    "editC_B": "2/5",
+    "editS_A": "1/5",
+    "editS_B": "1/5"
+  }
+}
