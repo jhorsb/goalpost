@@ -64,9 +64,10 @@ audit touched anyone's hosted service.
 The protocol was frozen before any measurement: twenty-five fictional CVs
 against five job specs, five identical runs each, at the pipeline's own
 default settings. Every API call recorded. Decision, reasons, and advice
-pulled from the tool's free-text output by a separate extraction model,
-whose own consistency is *measured, not assumed*. More on why that
-matters below.
+pulled from the tool's free-text output by a separate extraction model —
+a different model family from the one being audited, following the
+cross-model practice the LLM-as-judge literature recommends — whose own
+consistency is *measured, not assumed*. More on why that matters below.
 
 **Where the calls went, and why it matters.** Every measurement here went
 to a single named provider endpoint, fixed in advance and recorded in the
@@ -277,6 +278,21 @@ Set against the control above, the reading is that verdict instability is
 a property of this generation of models, while the explanation/advice
 pattern is a property of the chained design, which is why the piece is
 about a pattern rather than a project.
+
+The pattern also has company outside hiring. A 2026 clinical study
+([Lee](https://arxiv.org/abs/2604.11287)) generated the same exercise
+prescription twenty times over and found the same shape: high surface
+consistency, unstable actionable content. Different domain, different
+method, same asymmetry — what a system identifies stays put; what it
+tells you to *do* does not. And one exploratory cut of my own data points
+the same way: my corpus was built with deliberately strong, weak and
+borderline candidates, and **every verdict flip in this project — thirteen,
+across three systems — landed on a borderline candidate.** Strong and weak
+candidates never flipped. Instability is not spread evenly; it
+concentrates exactly where the decision is genuinely contestable, which is
+also exactly where a candidate most needs the system to hold still. (That
+cut was made after seeing the data, so it is an observation for the next
+audit to test, not a certified finding of this one.)
 
 ## Why it matters
 
