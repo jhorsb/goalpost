@@ -217,5 +217,68 @@ def report(audit_dir: Path = typer.Argument(...)):
     typer.echo(f"Report: {report_dir / 'report.md'}")
 
 
+def _mapping_review_rows(log_files: list[Path]) -> list[dict]:
+    """Read and deduplicate mapping rows in deterministic file order."""
+    rows = []
+    seen = set()
+    for log_file in log_files:
+        with log_file.open() as stream:
+            for line in stream:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                key = (row["normalised"], row["cluster"], row["source"])
+                if key not in seen:
+                    seen.add(key)
+                    rows.append(row)
+    return rows
+
+
+def _review_cell(value: object) -> str:
+    """Render a value safely inside a one-line Markdown table cell."""
+    return str(value).replace("|", "\\|").replace("\r", " ").replace("\n", " ")
+
+
+@app.command()
+def taxonomy_review(
+    audit_dir: Path = typer.Argument(...),
+    rule_sample: int = typer.Option(20, "--rule-sample", min=0),
+):
+    """Render mappings that need taxonomy review; never modify the audit."""
+    log_files = sorted((audit_dir / "normalised").rglob("mapping_log.jsonl"))
+    if not log_files:
+        typer.echo("No mapping_log.jsonl files found", err=True)
+        raise typer.Exit(2)
+
+    rows = _mapping_review_rows(log_files)
+    review_rows = sorted(
+        (row for row in rows if row["source"] in {"llm", "passthrough_novel"}),
+        key=lambda row: (
+            0 if row["source"] == "llm" else 1,
+            row["normalised"],
+            row["cluster"],
+        ),
+    )
+    rule_rows = sorted(
+        (row for row in rows if row["source"] == "rule"),
+        key=lambda row: (row["normalised"], row["cluster"]),
+    )[:rule_sample]
+
+    typer.echo("| source | raw | normalised | cluster | remaining all_hits |")
+    typer.echo("| --- | --- | --- | --- | --- |")
+    for row in review_rows + rule_rows:
+        remaining_hits = ", ".join(
+            _review_cell(hit) for hit in row.get("all_hits", [])[1:]
+        )
+        cells = (
+            row["source"],
+            row["raw"],
+            row["normalised"],
+            row["cluster"],
+            remaining_hits,
+        )
+        typer.echo("| " + " | ".join(_review_cell(cell) for cell in cells) + " |")
+
+
 if __name__ == "__main__":
     app()
