@@ -46,7 +46,7 @@ Dose: append certification line (Tableau Desktop Specialist)
 +CERTIFICATIONS: Tableau Desktop Specialist certificate, completed August 2024.
 ```
 
-## sc-frontend-developer-02 — editS (SOFT_SKILL_DEVELOPMENT: communication skills)
+## sc-frontend-developer-02 — editS (SOFT_SKILL_DEVELOPMENT: Next.js)
 Dose: append soft-skill evidence line
 
 ```diff
@@ -74,8 +74,8 @@ Dose: append certification line (accessibility standards)
 +CERTIFICATIONS: accessibility standards certificate, completed August 2024.
 ```
 
-## sc-project-manager-02 — editC (CERTIFICATION: project management)
-Dose: append certification line (project management)
+## sc-project-manager-02 — editC (CERTIFICATION: PRINCE2 Practitioner)
+Dose: append certification line (PRINCE2 Practitioner)
 
 ```diff
 --- sc-project-manager-02/baseline
@@ -85,11 +85,11 @@ Dose: append certification line (project management)
  - Currently undertaking APM Project Management Qualification (APM PMQ) – expected completion August 2024  
  - Full UK driving licence
 +
-+CERTIFICATIONS: project management certificate, completed August 2024.
++CERTIFICATIONS: PRINCE2 Practitioner certificate, completed August 2024.
 ```
 
-## sc-project-manager-04 — editC (CERTIFICATION: advanced project management)
-Dose: append certification line (advanced project management)
+## sc-project-manager-04 — editC (CERTIFICATION: prince2)
+Dose: append certification line (prince2)
 
 ```diff
 --- sc-project-manager-04/baseline
@@ -99,11 +99,11 @@ Dose: append certification line (advanced project management)
  APM Project Fundamentals Qualification (PFQ), 2022  
  Full UK Driving Licence
 +
-+CERTIFICATIONS: advanced project management certificate, completed August 2024.
++CERTIFICATIONS: prince2 certificate, completed August 2024.
 ```
 
-## sc-support-team-lead-02 — editS (PROGRAMMING_PRACTICE: technical depth)
-Dose: add SKILLS bullet (technical depth)
+## sc-support-team-lead-02 — editS (PROGRAMMING_PRACTICE: payments industry fundamentals)
+Dose: add SKILLS bullet (payments industry fundamentals)
 
 ```diff
 --- sc-support-team-lead-02/baseline
@@ -112,14 +112,14 @@ Dose: add SKILLS bullet (technical depth)
  - Contributed to support documentation updates and new team member onboarding.
  
  SKILLS  
-+- technical depth — working proficiency, used in production since 2023.
++- payments industry fundamentals — working proficiency, used in production since 2023.
  - Incident and escalation management  
  - Delivering constructive feedback  
  - Customer communications (written and verbal)  
 ```
 
-## sc-support-team-lead-04 — editC (EDUCATION: education alignment)
-Dose: append education line (education alignment)
+## sc-support-team-lead-04 — editC (EDUCATION: payments industry fundamentals)
+Dose: append education line (payments industry fundamentals)
 
 ```diff
 --- sc-support-team-lead-04/baseline
@@ -129,11 +129,11 @@ Dose: append education line (education alignment)
  - Volunteered as a digital skills tutor at Westridge Library, 2022  
  - Currently completing an online course in UK payments compliance
 +
-+Currently enrolled: education alignment course, part-time, completing 2025.
++Currently enrolled: payments industry fundamentals course, part-time, completing 2025.
 ```
 
-## sc-support-team-lead-04 — editS (CERTIFICATION: formal certifications)
-Dose: append certification line (formal certifications)
+## sc-support-team-lead-04 — editS (CERTIFICATION: payments industry fundamentals)
+Dose: append certification line (payments industry fundamentals)
 
 ```diff
 --- sc-support-team-lead-04/baseline
@@ -143,5 +143,5 @@ Dose: append certification line (formal certifications)
  - Volunteered as a digital skills tutor at Westridge Library, 2022  
  - Currently completing an online course in UK payments compliance
 +
-+CERTIFICATIONS: formal certifications certificate, completed August 2024.
++CERTIFICATIONS: payments industry fundamentals certificate, completed August 2024.
 ```

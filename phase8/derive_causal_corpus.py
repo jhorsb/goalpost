@@ -38,10 +38,23 @@ GENERIC = ("relevant", "additional", "certification", "qualification",
            "education", "experience_gain", "certifications")
 
 
+# A2 "names no concrete artifact" implemented mechanically: a slug is
+# concrete iff it mentions a term the job specs themselves use for a
+# tool/standard/credential (vocabulary drawn from corpora/starter-v1 specs).
+CONCRETE_TOKENS = (
+    "tableau", "power_bi", "powerbi", "sql", "python", "react", "typescript",
+    "next", "wcag", "accessibility", "aws", "gcp", "kubernetes", "terraform",
+    "ci_cd", "cicd", "jenkins", "github", "prince2", "apm", "prometheus",
+    "grafana", "jest", "pandas", "numpy", "fintech", "payments", "cloud", "analytics",
+    "statistics", "statistical",
+)
+
+
 def is_generic(slug: str, cluster: str) -> bool:
     s = slug.lower()
-    return (s == cluster.lower() or "relevant" in s or "additional" in s
-            or s in ("certification", "qualification", "education"))
+    if s == cluster.lower() or "relevant" in s or "additional" in s:
+        return True
+    return not any(tok in s for tok in CONCRETE_TOKENS)
 
 
 def humanise(slug: str) -> str:
@@ -75,6 +88,9 @@ def per_case_named_artifacts() -> dict:
         raw2cluster[m["raw"]] = m["cluster"]
     runs = [json.loads(line) for line in
             open(glob.glob(f"{AUDIT}/normalised/*/*/normalised_runs.jsonl")[0])]
+    global SRC_CV
+    SRC_CV = {c["case_id"]: c["cv_text"] for c in
+              yaml.safe_load(open("corpora/starter-v1/cases.yaml"))["cases"]}
     named = defaultdict(dict)
     for cid, sel in SELECTED.items():
         for role in ("consensus", "singleton"):
@@ -90,12 +106,26 @@ def per_case_named_artifacts() -> dict:
                 counts[cluster] = 1  # cluster slug itself as fallback
             ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
             concrete = [s for s, _ in ranked if not is_generic(s, cluster)]
+            role_name = cid.rsplit("-", 1)[0].replace("sc-", "")
+            cv_lower = SRC_CV[cid].lower()
+            # already-in-CV conflict rule (A2 coherence), NARROW: only a
+            # credential the CV marks as in-progress may not be claimed
+            # completed (e.g. "currently undertaking APM PMQ"). A CV merely
+            # mentioning a term — often as the gap the advice addresses —
+            # is not a conflict.
+            def in_progress_conflict(slug):
+                term = humanise(slug).split()[0].lower()
+                for mm in re.finditer(re.escape(term), cv_lower):
+                    ctx = cv_lower[max(0, mm.start()-90):mm.start()]
+                    if re.search(r"undertaking|in progress|currently|expected completion|studying", ctx):
+                        return True
+                return False
+            concrete = [s for s in concrete if not in_progress_conflict(s)]
             if concrete:
                 top = concrete[0]
                 artifact = humanise(top)
             else:
                 top = ranked[0][0]
-                role_name = cid.rsplit("-", 1)[0].replace("sc-", "")
                 artifact = DESIRABLE[role_name]  # A2 fallback, mechanical
             named[cid][role] = {"cluster": cluster, "raw": top,
                                 "artifact": artifact}
