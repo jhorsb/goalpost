@@ -24,17 +24,18 @@ consensus and singleton advice was not demonstrated at these doses.
 ## Per-item effectiveness (descriptive; no registered success margin exists
 for per-item claims — H1's ≥3/5 margin applies only to the C−S differential)
 
-With comparators assigned per the registration (credential-section doses
-vs the credential placebo; skills/soft-skill doses vs the neutral
-placebo), all 20 edit-block effects span **−2/5 to +2/5**, and 13 of 20
-are exactly 0. The largest positive effect (pm-02 editC, PRINCE2, block
-B: +2/5) is matched by a negative one (pm-04 editC, block A: −2/5) and
-by a placebo:
+Comparators, strict reading of the registration: the credential placebo is
+a CERTIFICATIONS line, so only certification-line doses compare to it
+(da-04 editS, fd-04 editS, pm-02 editC, pm-04 editC, stl-04 editS);
+education, skills-bullet and soft-skill doses compare to the neutral
+placebo. Disclosure: placebo arms were measured once, in block A, per the
+registered design — block-B edit effects therefore subtract a block-A
+placebo count across seeds.
 
-- **pm-04's placebo arms (+2/5 each)** — appending either a hobbies line
-  or an irrelevant First-Aid certificate raised acceptance from 2/5 to
-  4/5, equalling the best advised edit measured anywhere in this audit.
-  (Exploratory; n=5.)
+All 20 edit-block effects span **−2/5 to +2/5**; **14 of 20 are exactly
+0**. The largest positive effect (pm-02 editC, PRINCE2, block B: +2/5)
+is matched by negatives (pm-04 editC −2/5; stl-04 editC −2/5) and by a
+placebo:
 
 ## The sharpest single result: Eleanor, 0 for 35
 
@@ -59,20 +60,24 @@ from the system that issued it.
    comparator by more than 2/5 in any block, and 13 of 20 effects were
    exactly zero."
 
-**Cost, stated fully:** tool-metered $1.26 (extraction, self-agreement,
-canonicalisation — OpenAI). The 880 pipeline-stage calls ran on the
-author's PAID Cerebras account, where gpt-oss pricing is pinned at $0.00
-in-tool from the free-tier era; that spend is metered on the Cerebras
-dashboard, not here. "$1.26 total" was wrong.
+**Cost, stated fully:** tool-metered $1.26 covers the OpenAI side
+(extraction, self-agreement, canonicalisation). The pipeline side ran on
+the author's paid Cerebras account at in-tool pricing pinned to $0.00
+from the free-tier era: nominally 880 stage-calls (220 runs × 4 stages),
+in practice at least that — the retry layer re-issues failed calls and
+those retries are not metered either. The Cerebras dashboard is the sole
+source of truth for that spend. "$1.26 total" was wrong.
 3. Combined with the D-053 exclusion finding (the modal advice cluster —
    gain experience — cannot be implemented by edit at all), the recourse
    picture for this pipeline: its most frequent advice is unimplementable,
    and its implementable advice performed no better than a hobbies line.
 4. A negative result under a pre-registered test — distinct from the
    gate's three withholdings, which are measurement-layer refusals; this
-   is the hypothesis simply not being supported. On the A2 amendment's
-   value, stated correctly: the observed data (max |differential| = 1/5)
-   would not have satisfied even the original criterion, so the amendment
-   did not change this audit's outcome. Its value was ex ante — the
-   original design carried a ~60% chance of certifying noise; that we
-   drew data clean enough not to trigger it was luck, not protection.
+   is the hypothesis simply not being supported. On the A2 amendment:
+   whether the original criterion would have fired is UNEVALUABLE, not
+   merely false — the original design would have run different arms (the
+   six chronology-corrupting experience edits A2 excluded), whose
+   differentials were never measured. What can be said: among the arms
+   actually run, no differential exceeded 1/5; and the amendment's value
+   was ex ante (it removed a ~60% family-wise chance of certifying
+   noise under the worst-case null).
