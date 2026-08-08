@@ -14,7 +14,7 @@ contradicts option (b) in the note below (the offer to keep them
 anonymous) and inverts the disclosure norm the note exists to honour:
 private first, public later, at their option.
 
-Publication target date in the note is **12 August 2026**; if that slips, the note's stated date must move
+Publication target date in the note is **22 August 2026**; if that slips, the note's stated date must move
 with it — a missed self-imposed deadline is worse than a later one.
 
 **Pre-decided answer if they reply asking to be named (D-030):** the prose
@@ -71,7 +71,7 @@ within a day — every transcript, config, metric file and the audit
 instrument itself, enough to re-run the whole thing yourself.
 
 Timeline, so this isn't an open loop: I'm planning to publish on or around
-12 August 2026. If I don't hear from you I'll go ahead with the anonymous
+22 August 2026. If I don't hear from you I'll go ahead with the anonymous
 version (option b), and the offer to correct or respond stays open after
 publication.
 
