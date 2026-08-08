@@ -18,6 +18,7 @@ runs them.
 | 01 retry/backoff | `delegation/codex/task-01-retry-backoff.md` | `tests/codex/test_task01_retry.py` (5 tests) | **merged** 2026-07-29 | reviewed: allowlist clean, module-import form correct so monkeypatch binds, attempts=4, no runner changes |
 | 02 HTML report | `delegation/codex/task-02-html-report.md` | `tests/codex/test_task02_html.py` (5 tests; some pre-green as guardrails) | **merged** 2026-07-29 | reviewed: gate reused via `_reportable` not re-derived; verified on 4 real audits that HTML gate outcome matches markdown and leaks no number markdown withholds |
 | 03 taxonomy-review CLI | `delegation/codex/task-03-taxonomy-review.md` | `tests/codex/test_task03_taxonomy_review.py` (4 tests) | **merged** 2026-08-08 | reviewed: cli.py only, protected commands untouched, read-only verified by grep + smoke on a real audit (110 rows) |
+| 04 stability board | `delegation/codex/task-04-stability-board.md` | `tests/codex/test_task04_board.py` (9 tests) | **merged** 2026-08-08 (d076cd1) | reviewed: allowlist clean, gate reused via `_reportable` not re-derived, reporter untouched; smoke on real evidence crashed on a spec error of OURS (provenance lacked extractor_model — fixed test-first, D-044); board injected into explainer, refresh runbook `phase7/REFRESH_BOARD.md` |
 
 Planned future lanes (briefs not yet cut): packaging polish, fixtures
 tooling, corpus-generator productisation (schemas/invariants already specced
