@@ -1,0 +1,382 @@
+<title>Goalpost — the audit instrument, explained</title>
+<style>
+  :root {
+    --paper: #f6f5f1;
+    --card: #fdfcf9;
+    --ink: #1e2421;
+    --muted: #626b64;
+    --rule: #d9d7ce;
+    --accent: #14606b;
+    --accent-soft: #14606b1a;
+    --cert: #23763f;
+    --cert-soft: #23763f14;
+    --withheld: #b3401e;
+    --withheld-soft: #b3401e12;
+    --dim: #9aa29b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171a; --card: #1b1f23; --ink: #e7e5dd; --muted: #969e97;
+      --rule: #32383c; --accent: #4fb3bf; --accent-soft: #4fb3bf1f;
+      --cert: #5cc281; --cert-soft: #5cc2811a;
+      --withheld: #e07a50; --withheld-soft: #e07a5019; --dim: #5c645e;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #f6f5f1; --card: #fdfcf9; --ink: #1e2421; --muted: #626b64;
+    --rule: #d9d7ce; --accent: #14606b; --accent-soft: #14606b1a;
+    --cert: #23763f; --cert-soft: #23763f14;
+    --withheld: #b3401e; --withheld-soft: #b3401e12; --dim: #9aa29b;
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171a; --card: #1b1f23; --ink: #e7e5dd; --muted: #969e97;
+    --rule: #32383c; --accent: #4fb3bf; --accent-soft: #4fb3bf1f;
+    --cert: #5cc281; --cert-soft: #5cc2811a;
+    --withheld: #e07a50; --withheld-soft: #e07a5019; --dim: #5c645e;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Charter", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    font-size: 17px; line-height: 1.62;
+  }
+  .wrap { max-width: 76ch; margin: 0 auto; padding: 0 1.25rem 6rem; }
+  h1, h2, h3, .disp {
+    font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.12; text-wrap: balance; margin: 0;
+  }
+  .mono, td.num, .chip, .stamp, .lensname {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  p { margin: 0.8rem 0; max-width: 68ch; }
+  a { color: var(--accent); }
+
+  /* ── hero ── */
+  header { padding: 4.5rem 0 2.5rem; }
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.1rem;
+  }
+  .brand { position: relative; display: inline-block; }
+  .brand h1 {
+    font-size: clamp(2.6rem, 9vw, 4.6rem); font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .brand .ghost {
+    position: absolute; left: 0.18em; top: 0.13em; z-index: -1;
+    font-size: clamp(2.6rem, 9vw, 4.6rem); font-weight: 800;
+    letter-spacing: -0.03em; color: transparent;
+    -webkit-text-stroke: 1px var(--rule);
+    user-select: none; pointer-events: none;
+  }
+  .thesis {
+    font-size: 1.28rem; margin-top: 1.4rem; max-width: 30ch;
+    font-weight: 500; font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  }
+
+  /* five-run demo */
+  .demo { margin-top: 2.2rem; padding: 1.4rem 1.5rem 1.2rem;
+    background: var(--card); border: 1px solid var(--rule); border-radius: 6px; }
+  .demo-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    margin-bottom: 0.9rem; }
+  .runs { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .run { flex: 1 1 90px; text-align: center; padding: 0.75rem 0.4rem;
+    border-radius: 5px; border: 1px solid var(--rule);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.82rem;
+    opacity: 0; transform: translateY(6px);
+    animation: landin 0.45s ease forwards; }
+  .run small { display: block; color: var(--muted); font-size: 0.66rem; margin-bottom: 0.35rem; }
+  .run.reject { background: var(--withheld-soft); color: var(--withheld); border-color: color-mix(in srgb, var(--withheld) 35%, var(--rule)); }
+  .run.accept { background: var(--cert-soft); color: var(--cert); border-color: color-mix(in srgb, var(--cert) 35%, var(--rule)); }
+  .run:nth-child(1){animation-delay:.15s}.run:nth-child(2){animation-delay:.5s}
+  .run:nth-child(3){animation-delay:.85s}.run:nth-child(4){animation-delay:1.2s}
+  .run:nth-child(5){animation-delay:1.55s}
+  @keyframes landin { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .run { animation: none; opacity: 1; transform: none; }
+  }
+  .demo-note { font-size: 0.85rem; color: var(--muted); margin: 0.9rem 0 0; }
+
+  /* ── sections ── */
+  section { margin-top: 4rem; }
+  h2 { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.6rem 0 0.4rem; }
+  .kicker { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    display: block; margin-bottom: 0.5rem; }
+
+  /* pipeline */
+  .pipe-scroll { overflow-x: auto; margin: 1.4rem -1.25rem 0; padding: 0 1.25rem; }
+  .pipe { display: flex; align-items: stretch; gap: 0; min-width: 720px; }
+  .stage { flex: 1; background: var(--card); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 0.8rem 0.9rem; position: relative; }
+  .stage + .stage { margin-left: 1.6rem; }
+  .stage + .stage::before { content: "→"; position: absolute; left: -1.25rem; top: 42%;
+    color: var(--dim); font-family: ui-monospace, monospace; }
+  .stage b { display: block; font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.86rem; margin-bottom: 0.25rem; }
+  .stage span { font-size: 0.78rem; color: var(--muted); line-height: 1.45; display: block; }
+  .stage.gatecell { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+
+  /* gate chart */
+  .gatechart { margin-top: 1.6rem; background: var(--card); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 1.3rem 1.4rem 1rem; overflow-x: auto; }
+  .gc-inner { min-width: 560px; }
+  .gc-row { display: grid; grid-template-columns: 15rem 1fr; align-items: center;
+    gap: 1rem; padding: 0.42rem 0; }
+  .gc-row + .gc-row { border-top: 1px dashed var(--rule); }
+  .lensname { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+  .lensname b { color: var(--ink); display: block; font-size: 0.78rem; }
+  .track { position: relative; height: 26px; }
+  .track .bar-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--rule); }
+  .track .gate-line { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--accent); }
+  .dot { position: absolute; top: 50%; width: 11px; height: 11px; border-radius: 50%;
+    transform: translate(-50%, -50%); border: 2px solid; }
+  .dot.reasons { background: currentColor; }
+  .dot.recourse { background: var(--card); }
+  .pass { color: var(--cert); } .fail { color: var(--withheld); }
+  .gc-axis { display: grid; grid-template-columns: 15rem 1fr; gap: 1rem; margin-top: 0.5rem; }
+  .gc-axis .ticks { position: relative; height: 1.1rem;
+    font-family: ui-monospace, monospace; font-size: 0.66rem; color: var(--muted); }
+  .gc-axis .ticks i { position: absolute; transform: translateX(-50%); font-style: normal; }
+  .legend { display: flex; gap: 1.4rem; margin-top: 0.9rem; font-size: 0.72rem;
+    color: var(--muted); font-family: ui-monospace, monospace; flex-wrap: wrap; }
+  .legend .dot { position: static; display: inline-block; transform: none;
+    vertical-align: -1px; margin-right: 0.35rem; }
+
+  /* stamps + ledger */
+  .stamp { display: inline-block; padding: 0.14rem 0.5rem; border-radius: 3px;
+    font-size: 0.66rem; letter-spacing: 0.1em; font-weight: 700; border: 1.5px solid; }
+  .stamp.cert { color: var(--cert); border-color: var(--cert); background: var(--cert-soft); }
+  .stamp.withheld { color: var(--withheld); border-color: var(--withheld); background: var(--withheld-soft); }
+  .stamp.info { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+  .ledger { margin-top: 1.4rem; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .entry { display: grid; grid-template-columns: 6.4rem 1fr; gap: 1rem;
+    padding: 1rem 1.2rem; background: var(--card); }
+  .entry + .entry { border-top: 1px solid var(--rule); }
+  .entry time { font-family: ui-monospace, monospace; font-size: 0.72rem; color: var(--muted); padding-top: 0.2rem; }
+  .entry .body { font-size: 0.92rem; }
+  .entry .body b { font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: 0.92rem; }
+  .entry p { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--muted); }
+
+  /* scoreboard */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1rem; margin-top: 1.5rem; }
+  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 1.15rem 1.25rem; }
+  .card header { padding: 0; display: flex; justify-content: space-between;
+    align-items: baseline; gap: 0.6rem; margin-bottom: 0.75rem; }
+  .card h3 { margin: 0; font-size: 0.98rem; }
+  .card .sub { font-size: 0.76rem; color: var(--muted); margin: -0.4rem 0 0.8rem; }
+  .stat { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem;
+    padding: 0.32rem 0; border-top: 1px dashed var(--rule);
+    font-size: 0.87rem; align-items: baseline; }
+  .stat .v { font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums; font-size: 0.86rem; }
+  .stat .v.good { color: var(--cert); } .stat .v.bad { color: var(--withheld); }
+  .stat.dim { color: var(--dim); } .stat.dim .v { color: var(--dim); }
+  .foot { font-size: 0.74rem; color: var(--muted); margin-top: 0.7rem; }
+
+  /* findings */
+  .finding { margin-top: 1.6rem; padding-left: 1.1rem; border-left: 3px solid var(--accent); }
+  .finding h3 { margin-top: 0; }
+  .finding p { font-size: 0.95rem; }
+
+  /* timeline */
+  .tl { display: flex; gap: 0; overflow-x: auto; margin: 1.5rem -1.25rem 0; padding: 0 1.25rem; }
+  .tl div { min-width: 8.5rem; padding: 0 0.9rem 0 0; }
+  .tl time { font-family: ui-monospace, monospace; font-size: 0.7rem; color: var(--accent); display: block; }
+  .tl span { font-size: 0.78rem; color: var(--muted); display: block; margin-top: 0.2rem; line-height: 1.4; }
+  .tl div { border-top: 2px solid var(--rule); padding-top: 0.6rem; }
+  .tl div.now { border-top-color: var(--accent); }
+
+  footer.colophon { margin-top: 5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: 0.78rem; color: var(--muted); }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">An audit instrument · evidence-first · target identities withheld pending disclosure</div>
+  <div class="brand">
+    <span class="ghost disp" aria-hidden="true">GOALPOST</span>
+    <h1>GOALPOST</h1>
+  </div>
+  <p class="thesis">Does an AI hiring tool give the same answer twice? Usually. And that's the problem with "usually."</p>
+
+  <div class="demo">
+    <div class="demo-label">One real measurement — same CV, same settings, five runs</div>
+    <div class="runs">
+      <div class="run reject"><small>run 1</small>REJECT</div>
+      <div class="run accept"><small>run 2</small>ACCEPT</div>
+      <div class="run reject"><small>run 3</small>REJECT</div>
+      <div class="run accept"><small>run 4</small>ACCEPT</div>
+      <div class="run reject"><small>run 5</small>REJECT</div>
+    </div>
+    <p class="demo-note">Worst case from audit #1: a published screening pipeline, run exactly as shipped, split 3–2 on the same candidate. On 3 of 25 candidates the verdict changed across identical runs.</p>
+  </div>
+</header>
+
+<section>
+  <span class="kicker">What this is</span>
+  <h2>An instrument, not an opinion</h2>
+  <p>Goalpost points at any LLM-based screening system its operator controls and measures one property: <b>repeat-stability</b>. Run the same CV through it five times — do the <b>decision</b>, the <b>reasons</b>, and the <b>advice</b> (what the candidate should change) come back the same?</p>
+  <p>Why that matters: the right to contest an automated decision assumes the decision and its explanation hold still long enough to be contested. Advice that reshuffles on every run isn't guidance — and regulation that demands "reasons and a route to challenge" almost never asks whether either survives the same case being run twice.</p>
+  <p>It grew out of a 2026 undergraduate dissertation that found reasons far more stable than advice (0.89 vs 0.36). Goalpost generalises that one lab result into a tool anyone can point at a real system — for about the price of a coffee per audit.</p>
+</section>
+
+<section>
+  <span class="kicker">How one audit works</span>
+  <h2>From CV to certified number</h2>
+  <div class="pipe-scroll"><div class="pipe">
+    <div class="stage"><b>Frozen corpus</b><span>25 fictional CVs × 5 job specs. No real people. Hash-pinned before any run.</span></div>
+    <div class="stage"><b>Their system, our keys</b><span>The target's own prompts &amp; wiring, mirrored quirks-and-all at a pinned commit. 5 identical runs per CV.</span></div>
+    <div class="stage"><b>The reader</b><span>A separate model converts each prose reply into verdict + reason list + advice list.</span></div>
+    <div class="stage"><b>Normaliser</b><span>Synonyms grouped by a committed, versioned taxonomy. Raw numbers always reported alongside.</span></div>
+    <div class="stage gatecell"><b>The gate</b><span>The reader re-reads the same replies 3×. Agreement below the pre-set bar ⇒ numbers <b>withheld</b>.</span></div>
+    <div class="stage"><b>Evidence file</b><span>Every call, hash, version and cost — plus a one-page report a non-specialist can act on.</span></div>
+  </div></div>
+</section>
+
+<section>
+  <span class="kicker">The integrity mechanism</span>
+  <h2>The gate: measurements that can refuse</h2>
+  <p>The obvious attack on this method: <i>maybe your reader is the unstable one.</i> A sloppy reader would read the same reply twice and produce two different lists — manufacturing "instability" out of nothing. So before any claim is certified, the reader must agree with itself at <b>≥ 0.90</b> on re-reads of the very same responses. Below the bar, the instrument prints <span class="stamp withheld">WITHHELD</span> instead of a number. The bar was fixed before the first audit and has never moved.</p>
+
+  <div class="gatechart"><div class="gc-inner">
+    <div class="gc-row">
+      <div class="lensname"><b>Audit #1 · first lens (v2)</b>gpt-4.1 · 27 Jul</div>
+      <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
+        <span class="dot reasons fail" style="left:69.8%" title="reasons 0.899"></span>
+        <span class="dot recourse pass" style="left:80.4%" title="recourse 0.902"></span></div>
+    </div>
+    <div class="gc-row">
+      <div class="lensname"><b>Audit #1 · rebuilt lens (v3)</b>gpt-4.1 · 27 Jul — certified</div>
+      <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
+        <span class="dot reasons pass" style="left:97.6%" title="reasons 0.988"></span>
+        <span class="dot recourse pass" style="left:86.4%" title="recourse 0.932"></span></div>
+    </div>
+    <div class="gc-row">
+      <div class="lensname"><b>Bare-model control</b>same v3 lens, no pipeline scaffold · 8 Aug</div>
+      <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
+        <span class="dot reasons fail" style="left:79%" title="reasons 0.895"></span>
+        <span class="dot recourse fail" style="left:63.4%" title="recourse 0.817"></span></div>
+    </div>
+    <div class="gc-row">
+      <div class="lensname"><b>Audit #2 · primary lens</b>v3 + gpt-4.1, frozen in advance · 8 Aug</div>
+      <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
+        <span class="dot reasons fail" style="left:75.2%" title="reasons 0.876"></span>
+        <span class="dot recourse fail" style="left:62.8%" title="recourse 0.814"></span></div>
+    </div>
+    <div class="gc-axis"><div></div><div class="ticks">
+      <i style="left:0%">0.50</i><i style="left:40%">0.70</i><i style="left:80%">0.90 ← the bar</i><i style="left:100%">1.00</i>
+    </div></div>
+    <div class="legend">
+      <span><span class="dot reasons pass"></span>reasons</span>
+      <span><span class="dot recourse pass"></span>advice</span>
+      <span style="color:var(--cert)">● passes</span>
+      <span style="color:var(--withheld)">● fails → withheld</span>
+    </div>
+  </div></div>
+
+  <div class="ledger">
+    <div class="entry"><time>27 Jul</time><div class="body">
+      <b>No #1 — and a rescue that taught us something.</b>
+      <p>The gate refused to certify the project's own headline finding. We rebuilt the reader and passed — but the rebuild studied the target's transcripts to do it. A reader tailored to a target reads that target suspiciously well. The author caught this selection effect in draft review.</p>
+    </div></div>
+    <div class="entry"><time>08 Aug</time><div class="body">
+      <b>No #2 — the selection effect, proven.</b>
+      <p>Point the same rebuilt reader at prose <i>without</i> the target's structure and its self-agreement collapses below the bar. The tailoring was real. The gate caught the consequence automatically.</p>
+    </div></div>
+    <div class="entry"><time>08 Aug</time><div class="body">
+      <b>No #3 — and this time, no rescue allowed.</b>
+      <p>Audit #2 ran under a pre-registration that froze the reader <i>before any data existed</i>. Its primary lens failed the gate — and rebuilding is now forbidden. One pre-declared fallback lens remains; if that fails too, "withheld" is the published answer.</p>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <span class="kicker">The evidence so far</span>
+  <h2>Scoreboard</h2>
+  <p>Cluster-level numbers (synonyms grouped; ungrouped always lower, always reported). 25 cases × 5 runs each. Grey struck-through figures exist in the evidence files but are <b>uncertified</b> — the gate withheld them.</p>
+
+  <div class="cards">
+    <div class="card">
+      <header><h3>Audit #1 — published 4-agent pipeline</h3><span class="stamp cert">CERTIFIED</span></header>
+      <div class="sub">open-weights model, as-shipped settings · $0.28 final measurement</div>
+      <div class="stat"><span>Verdict flips</span><span class="v bad">3 / 25</span></div>
+      <div class="stat"><span>Decision stability</span><span class="v">0.968</span></div>
+      <div class="stat"><span>Reasons (topic) stability</span><span class="v">0.983</span></div>
+      <div class="stat"><span>Advice stability</span><span class="v bad">0.448</span></div>
+      <div class="stat"><span>Meaning flips (same topic, sign changed)</span><span class="v bad">⅓ – ½</span></div>
+      <div class="foot">Both certified lenses agree on the reason–advice gap: 0.535 / 0.537.</div>
+    </div>
+
+    <div class="card">
+      <header><h3>Control — same model, no pipeline</h3><span class="stamp cert">CERTIFIED</span></header>
+      <div class="sub">plain one-prompt screener · isolates the design from the model</div>
+      <div class="stat"><span>Verdict flips</span><span class="v bad">4 / 25</span></div>
+      <div class="stat"><span>Reasons stability</span><span class="v">0.612</span></div>
+      <div class="stat"><span>Advice stability</span><span class="v">0.507</span></div>
+      <div class="stat"><span>Reason–advice gap</span><span class="v">+0.106 <i style="font-style:normal;color:var(--muted)">(vs pipeline +0.537)</i></span></div>
+      <div class="foot">Verdict: verdict-flipping belongs to the <b>model</b>; the explanation pattern belongs to the <b>design</b>.</div>
+    </div>
+
+    <div class="card">
+      <header><h3>Audit #2 — published 3-stage screener</h3><span class="stamp info">DECISIONS CERTIFIED</span></header>
+      <div class="sub">frontier model (declared substitute), as-shipped settings · $4.00</div>
+      <div class="stat"><span>Verdict flips</span><span class="v bad">5 / 25</span></div>
+      <div class="stat"><span>Decision stability</span><span class="v">0.944</span></div>
+      <div class="stat"><span>Cases with no clear verdict ("Maybe")</span><span class="v bad">7 / 25</span></div>
+      <div class="stat dim"><span>Reasons stability</span><span class="v"><s>0.719</s> withheld</span></div>
+      <div class="stat dim"><span>Advice stability</span><span class="v"><s>0.567</s> withheld</span></div>
+      <div class="foot">Every flipped case sits in the "no clear verdict" group. Explanation numbers await the pre-declared fallback lens — or stay withheld.</div>
+    </div>
+
+    <div class="card">
+      <header><h3>Lab backdrop — 4 frontier configs</h3><span class="stamp cert">CERTIFIED</span></header>
+      <div class="sub">screeners we built ourselves · 3 OpenAI + 1 Anthropic · T = 0</div>
+      <div class="stat"><span>Reason–advice gap, every config</span><span class="v">+0.12 … +0.29</span></div>
+      <div class="stat"><span>Advice stability range</span><span class="v">0.50 – 0.68</span></div>
+      <div class="stat"><span>Verdict flips at temperature zero</span><span class="v bad">every model</span></div>
+      <div class="foot">Measured in structured mode (no reader in the path) — noted wherever cross-compared.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="kicker">What it adds up to</span>
+  <h2>Five things we now know</h2>
+  <div class="finding"><h3>The verdict lottery comes with the model.</h3>
+    <p>Bare models flip verdicts about as often as full pipelines built on them — at temperature zero too. If an LLM sits at a screening gate, some candidates' outcomes depend on which run they happened to get.</p></div>
+  <div class="finding"><h3>Pipelines manufacture consistent-<i>looking</i> explanations.</h3>
+    <p>The 4-agent chain lifted topic-stability from 0.61 to 0.99 while leaving advice exactly as unstable as the bare model's. The architecture makes explanations more authoritative-looking, not more stable.</p></div>
+  <div class="finding"><h3>Explanations keep their topics and flip their meaning.</h3>
+    <p>The same heading — "experience", say — counts <i>for</i> you on one run and <i>against</i> you on the next, in a third to a half of paired comparisons. The chain amplifies this (0.378 vs the bare model's 0.249).</p></div>
+  <div class="finding"><h3>Published hiring tools quietly stop existing.</h3>
+    <p>2 of 2 audited tools pin an AI model that has since been retired by every provider. Both are unrunnable exactly as shipped, and nothing in either tool would tell a deployer.</p></div>
+  <div class="finding"><h3>Sometimes the system doesn't decide at all.</h3>
+    <p>Audit #2's tool left 7 of 25 candidates without a clear verdict — and every verdict flip happened in that group. You can't appeal a decision that was never quite made. (Its prose was also the hardest for our reader to read consistently — possibly a finding about the tool, not the reader.)</p></div>
+</section>
+
+<section>
+  <span class="kicker">Where things stand</span>
+  <h2>Timeline</h2>
+  <div class="tl">
+    <div><time>APR 2026</time><span>Dissertation: reasons 0.89 vs advice 0.36</span></div>
+    <div><time>05 JUL</time><span>Goalpost build begins; gate thresholds pre-registered</span></div>
+    <div><time>26 JUL</time><span>Four lab configs measured; gap replicates on every one</span></div>
+    <div><time>27 JUL</time><span>Audit #1 complete — after the gate's first refusal</span></div>
+    <div><time>08 AUG</time><span>Controls + matched lenses; audit #2; disclosure email sent to target #1's author</span></div>
+    <div class="now"><time>NOW</time><span>Response window open; write-up v4 finished</span></div>
+    <div><time>~22 AUG</time><span>Publication — anonymous by default</span></div>
+  </div>
+</section>
+
+<footer class="colophon">
+  Every number on this page traces to a committed transcript with corpus hash, config identity, pinned versions of every pipeline stage, and the audited code's commit. Target identities are deliberately withheld here — the professional norm this project follows is disclosure to the audited party before publication. Total paid API spend across the entire investigation: under $12.
+</footer>
+</div>
