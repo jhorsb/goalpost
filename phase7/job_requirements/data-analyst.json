@@ -1,0 +1,25 @@
+{
+  "title": "Data Analyst",
+  "required_skills": [
+    "Advanced SQL",
+    "Strong Python for data analysis",
+    "Dashboard development in Tableau or a similar BI tool",
+    "Sound grasp of statistics and analytical methodologies",
+    "Excellent communication and stakeholder engagement"
+  ],
+  "preferred_skills": [
+    "Insurance data exposure or domain knowledge"
+  ],
+  "min_experience_years": 2,
+  "responsibilities": [
+    "Develop and maintain data pipelines in SQL and Python",
+    "Create dashboards using Tableau or similar tools",
+    "Model risk with actuarial colleagues",
+    "Identify emerging trends with claims managers",
+    "Communicate technical findings to non-technical audiences"
+  ],
+  "company_culture": [
+    "Respected regional insurance provider",
+    "Close-knit, friendly team"
+  ]
+}

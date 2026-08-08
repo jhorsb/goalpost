@@ -31,10 +31,12 @@ class RecordingInner:
     def __init__(self, replies):
         self.replies = list(replies)
         self.calls = []
+        self.max_tokens = 9999
 
     def complete(self, prompt, temperature, seed):
         self.calls.append(
-            {"prompt": prompt, "temperature": temperature, "seed": seed}
+            {"prompt": prompt, "temperature": temperature, "seed": seed,
+             "max_tokens": self.max_tokens}
         )
         n = len(self.calls)
         return {
@@ -128,6 +130,8 @@ def test_chain_runs_three_calls_with_faithful_wiring():
     assert json.dumps(json.loads(SCORES_JSON), indent=2) in inner.calls[2]["prompt"]
     # upstream hardcodes per-stage temperatures; condition T is not forwarded
     assert [c["temperature"] for c in inner.calls] == [0.0, 0.0, 0.3]
+    # and per-stage max_tokens are forwarded onto the inner client
+    assert [c["max_tokens"] for c in inner.calls] == [2000, 2000, 1000]
 
     assert result["text"] == FINAL_TEXT
     assert result["usage"]["input_tokens"] == 60

@@ -46,6 +46,10 @@ class CSAPipelineClient:
         prompt = template
         for name, value in slots.items():
             prompt = prompt.replace("{" + name + "}", value)
+        # upstream hardcodes per-stage max_tokens (2000/2000/1000); forward
+        # them onto the inner client where it exposes the attribute
+        if hasattr(self.inner, "max_tokens"):
+            self.inner.max_tokens = stage.max_tokens
         return self.inner.complete(
             prompt=prompt, temperature=stage.temperature, seed=seed
         )

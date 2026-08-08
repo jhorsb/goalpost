@@ -1,0 +1,29 @@
+{
+  "title": "Frontend Developer",
+  "required_skills": [
+    "Advanced React",
+    "Advanced TypeScript",
+    "Implementing and maintaining design systems",
+    "Web accessibility standards (WCAG 2.1 or above)",
+    "Frontend testing frameworks (e.g. Jest, Testing Library)",
+    "Working to performance budgets and measuring web performance",
+    "Code reviews and collaborative git workflows",
+    "Excellent communication and collaborative mindset"
+  ],
+  "preferred_skills": [
+    "Next.js",
+    "CI pipelines (e.g. GitHub Actions)"
+  ],
+  "min_experience_years": 3,
+  "responsibilities": [
+    "Deliver high quality user interfaces using React and TypeScript",
+    "Collaborate with designers and backend engineers",
+    "Maintain and evolve the design system",
+    "Uphold accessibility best practices",
+    "Meet strict performance budgets"
+  ],
+  "company_culture": [
+    "Rapidly growing travel-booking scale-up",
+    "Strong testing culture with modern CI/CD workflows"
+  ]
+}

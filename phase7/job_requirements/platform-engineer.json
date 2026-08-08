@@ -1,0 +1,28 @@
+{
+  "title": "Platform Engineer",
+  "required_skills": [
+    "Kubernetes cluster management in production",
+    "At least one major public cloud (preferably AWS)",
+    "Python or Go for scripting and automation",
+    "Terraform / infrastructure as code",
+    "CI/CD pipelines (GitHub Actions or Jenkins)",
+    "Observability tooling (Prometheus, Grafana, ELK)",
+    "Effective communication and collaborative teamwork"
+  ],
+  "preferred_skills": [
+    "AWS or CKA certification",
+    "Multi-cloud environment experience"
+  ],
+  "min_experience_years": 3,
+  "responsibilities": [
+    "Design and implement infrastructure as code using Terraform",
+    "Maintain and improve CI/CD pipelines",
+    "Contribute to scalable solutions for microservices",
+    "Participate in an on-call rotation and support production systems",
+    "Work with developers to enhance platform reliability and observability"
+  ],
+  "company_culture": [
+    "Fast-growing online grocery marketplace",
+    "Small, collaborative team"
+  ]
+}

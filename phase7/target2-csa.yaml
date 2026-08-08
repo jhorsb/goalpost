@@ -1,0 +1,45 @@
+# AUDIT #2 — csa-screening-agent (phase7/PREREGISTRATION.md governs).
+# Target: MIT-licensed 3-stage LangGraph screener, pinned sha 707e6ab,
+# prompts vendored in goalpost.upstream_csa, chain mirrored in
+# goalpost.csa_client (D-036).
+#
+# Disclosed substitution: upstream pins claude-3-5-sonnet-20241022, which
+# no provider serves (no claude-3.x in /v1/models, 2026-08-08). Served
+# substitute is claude-sonnet-4-5-20250929 — same model class (Sonnet),
+# the only Sonnet-class snapshot-pinned id currently served. This audits
+# the pipeline's prompt-and-chain design served by a current same-class
+# model, not the artifact as originally deployed (unrunnable anywhere).
+#
+# The pipeline hardcodes per-stage temperatures (0.0/0.0/0.3) and
+# max_tokens (2000/2000/1000); the condition temperature below is recorded
+# as the verdict-carrying stage's value and is NOT forwarded (as-shipped).
+# The extraction lens is FROZEN per the pre-registration: no extractor
+# changes after the first live call, whatever the gate says.
+audit_id: target2-csa-001
+audit_seed: 42
+max_spend_usd: 10.00
+concurrency: 1
+corpus_path: corpora/starter-v1-csa/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  # frozen lens #1 (pre-registered); fallback lens is v3 + gemma-4-31b
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  claude-sonnet-4-5-20250929: {input: 3.00, output: 15.00}
+conditions:
+  - {temperature: 0.3, repeats: 5}
+suts:
+  - name: csa-screening-agent
+    provider: anthropic
+    model: claude-sonnet-4-5-20250929
+    max_tokens: 2000        # per-stage values are set by the chain itself
+    elicitation_mode: freeform
+    prompt_template: "<<<CV>>>\n{cv}\n<<<JD>>>\n{job_spec}"
+    params:
+      pipeline: csa-screening-agent
+      upstream_sha: 707e6abeb2c63d35323b772e68c4a824c59197b2
