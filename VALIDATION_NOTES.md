@@ -255,3 +255,57 @@ during the free-tier period), so `total_cost_usd` under-reports them; the
 author's Cerebras dashboard is the source of truth for that spend
 (account moved to paid tier mid-day; hourly caps lifted from ~10² to
 3×10⁴ requests, which is what finally let these runs complete).
+
+## Audit #2 (2026-08-08) — published 3-stage LangGraph screener, both lenses
+
+`audits/target2-csa-001` (lens 1) and `audits/target2-csa-002-fallback`
+(lens 2). Identical SUT responses (cache-seeded, byte-identical), 25 cases
+x 5 repeats, 125/125 parsed, 0 refusals, 0 missing blocks. Governed by
+`phase7/PREREGISTRATION.md`, committed before the first transcript existed.
+Per D-039 **both pre-declared lenses are reported, not just the passing one.**
+
+| | lens 1 — v3 + gpt-4.1 | lens 2 — v3 + gemma (declared fallback) |
+|---|---|---|
+| extractor SA reasons | **0.876 — FAILS gate** | **0.989 — passes** |
+| extractor SA recourse | **0.814 — FAILS gate** | **0.975 — passes** |
+| extractor SA decision | 1.000 | 1.000 |
+| decision stability | 0.944 (5/25 flips) | 0.936 (6/25 flips) |
+| reasons (cluster) | *0.719 (withheld)* | **0.729** |
+| recourse (cluster) | *0.567 (withheld)* | **0.556** |
+| reason-recourse gap | *+0.152 (withheld)* | **+0.173** |
+
+**The two lenses disagree about themselves and agree about the target.**
+Lens 1 could not read this target's prose consistently enough to clear the
+bar; lens 2 could. But where both produced numbers they differ by ~0.01-0.02
+— reasons 0.719 vs 0.729, recourse 0.567 vs 0.556. So the failure of lens 1
+was a property of *that reader*, not evidence that the target's numbers are
+unstable under measurement. This is the strongest available answer to the
+obvious objection ("you rolled twice and printed the good roll"): the roll
+that failed and the roll that passed say materially the same thing about the
+system under audit.
+
+**Certified (lens 2):**
+1. **Verdict flips on 6 of 25 candidates** (decision stability 0.936) — more
+   than target #1's 3/25, on a frontier model, at the tool's own settings.
+   Extractor decision agreement 1.000 on both lenses, so this carries no
+   measurement caveat under either.
+2. **7 of 25 candidates receive no clear verdict at all.** The tool's own
+   vocabulary is Strong Yes / Yes / Maybe / No; "Maybe" maps to `unclear`
+   per the pre-registration. **Every flipped case sits in this group.** A
+   system that declines to decide, and is least stable exactly where it
+   declines, is a contestability problem distinct from instability: there is
+   no decision to appeal.
+3. **Reason-recourse gap +0.173** — same direction as every other system
+   measured, but far narrower than target #1's +0.537. Target #2 does not
+   exhibit the rubric-manufactured topic stability (reasons 0.729 here vs
+   0.983 there): it has no fixed four-heading rubric to pump the reason side.
+   This supports the audit-#1 reading that the large gap was a property of
+   *that* design, not of chained screeners generally.
+
+**Protocol note.** Audit #1 answered a gate failure by rebuilding the
+extractor (creating the selection effect later disclosed in D-027). Audit #2
+could not: the pre-registration froze both lenses in advance and forbade
+rule development on target transcripts. The gate failure was resolved by a
+pre-declared alternative, not by engineering — which is the difference
+between a protocol and an intention. Cost: $4.00 (lens 1, incl. all SUT
+calls) + $0.00 (lens 2, Cerebras free tier).
