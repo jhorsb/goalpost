@@ -133,6 +133,7 @@
   .track { position: relative; height: 26px; }
   .track .bar-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--rule); }
   .track .gate-line { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--accent); }
+  .track .gate-line.margin { background: none; border-left: 2px dashed var(--withheld); }
   .dot { position: absolute; top: 50%; width: 11px; height: 11px; border-radius: 50%;
     transform: translate(-50%, -50%); border: 2px solid; }
   .dot.reasons { background: currentColor; }
@@ -232,7 +233,7 @@
   <span class="kicker">How one audit works</span>
   <h2>From CV to certified number</h2>
   <div class="pipe-scroll"><div class="pipe">
-    <div class="stage"><b>Frozen corpus</b><span>25 fictional CVs × 5 job specs. No real people. Hash-pinned before any run.</span></div>
+    <div class="stage"><b>Frozen corpus</b><span>25 fictional CVs — five per each of five roles, one job spec per role. No real people. Hash-pinned before any run.</span></div>
     <div class="stage"><b>Their system, our keys</b><span>The target's own prompts &amp; wiring, mirrored quirks-and-all at a pinned commit. 5 identical runs per CV.</span></div>
     <div class="stage"><b>The reader</b><span>A separate model converts each prose reply into verdict + reason list + advice list.</span></div>
     <div class="stage"><b>Normaliser</b><span>Synonyms grouped by a committed, versioned taxonomy. Raw numbers always reported alongside.</span></div>
@@ -244,13 +245,14 @@
 <section>
   <span class="kicker">The integrity mechanism</span>
   <h2>The gate: measurements that can refuse</h2>
-  <p>The obvious attack on this method: <i>maybe your reader is the unstable one.</i> A sloppy reader would read the same reply twice and produce two different lists — manufacturing "instability" out of nothing. So before any claim is certified, the reader must agree with itself at <b>≥ 0.90</b> on re-reads of the very same responses. Below the bar, the instrument prints <span class="stamp withheld">WITHHELD</span> instead of a number. The bar was fixed before the first audit and has never moved.</p>
+  <p>The obvious attack on this method: <i>maybe your reader is the unstable one.</i> A sloppy reader would read the same reply twice and produce two different lists — manufacturing "instability" out of nothing. So before any claim is certified, the reader must agree with itself at <b>≥ 0.90</b> on re-reads of the very same responses — and to certify a claim of <i>instability</i>, it must clear a stricter margin still. Below either threshold, the instrument prints <span class="stamp withheld">WITHHELD</span> instead of a number. The bar was fixed before the first audit and has never moved.</p>
 
   <div class="gatechart"><div class="gc-inner">
     <div class="gc-row">
-      <div class="lensname"><b>Audit #1 · first lens (v2)</b>gpt-4.1 · 27 Jul</div>
+      <div class="lensname"><b>Audit #1 · first lens (v2)</b>gpt-4.1 · 27 Jul — passed the bar, failed the stricter margin for instability claims</div>
       <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
-        <span class="dot reasons fail" style="left:69.8%" title="reasons 0.899"></span>
+        <div class="gate-line margin" style="left:91%" title="margin for instability claims: 0.955"></div>
+        <span class="dot reasons fail" style="left:80.8%" title="reasons 0.904 — above 0.90, below the 0.955 margin"></span>
         <span class="dot recourse pass" style="left:80.4%" title="recourse 0.902"></span></div>
     </div>
     <div class="gc-row">
@@ -271,6 +273,12 @@
         <span class="dot reasons fail" style="left:75.2%" title="reasons 0.876"></span>
         <span class="dot recourse fail" style="left:62.8%" title="recourse 0.814"></span></div>
     </div>
+    <div class="gc-row">
+      <div class="lensname"><b>Audit #2 · declared fallback</b>v3 + gemma, also frozen in advance · 8 Aug — certified</div>
+      <div class="track"><div class="bar-line"></div><div class="gate-line" style="left:80%"></div>
+        <span class="dot reasons pass" style="left:97.8%" title="reasons 0.989"></span>
+        <span class="dot recourse pass" style="left:95%" title="recourse 0.975"></span></div>
+    </div>
     <div class="gc-axis"><div></div><div class="ticks">
       <i style="left:0%">0.50</i><i style="left:40%">0.70</i><i style="left:80%">0.90 ← the bar</i><i style="left:100%">1.00</i>
     </div></div>
@@ -284,8 +292,8 @@
 
   <div class="ledger">
     <div class="entry"><time>27 Jul</time><div class="body">
-      <b>No #1 — and a rescue that taught us something.</b>
-      <p>The gate refused to certify the project's own headline finding. We rebuilt the reader and passed — but the rebuild studied the target's transcripts to do it. A reader tailored to a target reads that target suspiciously well. The author caught this selection effect in draft review.</p>
+      <b>No #1 — the strictest rule fired on the favourite finding.</b>
+      <p>The reader passed the 0.90 bar (0.904) but fell 0.051 short of the stricter margin required to certify a claim of <i>instability</i> — so the gate refused the project's own headline finding specifically. We rebuilt the reader and passed — but the rebuild studied the target's transcripts to do it. A reader tailored to a target reads that target suspiciously well. The author caught this selection effect in draft review.</p>
     </div></div>
     <div class="entry"><time>08 Aug</time><div class="body">
       <b>No #2 — the selection effect, proven.</b>
@@ -293,7 +301,7 @@
     </div></div>
     <div class="entry"><time>08 Aug</time><div class="body">
       <b>No #3 — and this time, no rescue allowed.</b>
-      <p>Audit #2 ran under a pre-registration that froze the reader <i>before any data existed</i>. Its primary lens failed the gate — and rebuilding is now forbidden. One pre-declared fallback lens remains; if that fails too, "withheld" is the published answer.</p>
+      <p>Audit #2 ran under a pre-registration that froze the reader <i>before any data existed</i>. Its primary lens failed the gate — and rebuilding is now forbidden. The pre-declared fallback lens then passed (0.989 / 0.975) — and its numbers agree with the failed lens's to about ±0.01. Both results are published together. The refusal was a fact about that reader, not about the system being measured.</p>
     </div></div>
   </div>
 </section>
@@ -326,14 +334,14 @@
     </div>
 
     <div class="card">
-      <header><h3>Audit #2 — published 3-stage screener</h3><span class="stamp info">DECISIONS CERTIFIED</span></header>
-      <div class="sub">frontier model (declared substitute), as-shipped settings · $4.00</div>
-      <div class="stat"><span>Verdict flips</span><span class="v bad">5 / 25</span></div>
-      <div class="stat"><span>Decision stability</span><span class="v">0.944</span></div>
+      <header><h3>Audit #2 — published 3-stage screener</h3><span class="stamp cert">CERTIFIED</span></header>
+      <div class="sub">frontier model (declared substitute), as-shipped settings · $4.00 · certified under the pre-declared fallback lens</div>
+      <div class="stat"><span>Verdict flips</span><span class="v bad">6 / 25</span></div>
+      <div class="stat"><span>Decision stability</span><span class="v">0.936</span></div>
       <div class="stat"><span>Cases with no clear verdict ("Maybe")</span><span class="v bad">7 / 25</span></div>
-      <div class="stat dim"><span>Reasons stability</span><span class="v"><s>0.719</s> withheld</span></div>
-      <div class="stat dim"><span>Advice stability</span><span class="v"><s>0.567</s> withheld</span></div>
-      <div class="foot">Every flipped case sits in the "no clear verdict" group. Explanation numbers await the pre-declared fallback lens — or stay withheld.</div>
+      <div class="stat"><span>Reasons stability</span><span class="v">0.729</span></div>
+      <div class="stat"><span>Advice stability</span><span class="v bad">0.556</span></div>
+      <div class="foot">Primary lens failed the gate (0.876 / 0.814); the fallback passed (0.989 / 0.975). Both reported — and they agree on these numbers to ±0.01. Every flipped case sits in the "no clear verdict" group.</div>
     </div>
 
     <div class="card">
@@ -359,7 +367,7 @@
   <div class="finding"><h3>Published hiring tools quietly stop existing.</h3>
     <p>2 of 2 audited tools pin an AI model that has since been retired by every provider. Both are unrunnable exactly as shipped, and nothing in either tool would tell a deployer.</p></div>
   <div class="finding"><h3>Sometimes the system doesn't decide at all.</h3>
-    <p>Audit #2's tool left 7 of 25 candidates without a clear verdict — and every verdict flip happened in that group. You can't appeal a decision that was never quite made. (Its prose was also the hardest for our reader to read consistently — possibly a finding about the tool, not the reader.)</p></div>
+    <p>Audit #2's tool left 7 of 25 candidates without a clear verdict — and every verdict flip happened in that group. You can't appeal a decision that was never quite made. (Its prose was also the hardest for our primary reader to parse consistently — the gate withheld that lens entirely; the fallback lens confirmed its numbers anyway.)</p></div>
 </section>
 
 <section>
@@ -371,7 +379,7 @@
     <div><time>26 JUL</time><span>Four lab configs measured; gap replicates on every one</span></div>
     <div><time>27 JUL</time><span>Audit #1 complete — after the gate's first refusal</span></div>
     <div><time>08 AUG</time><span>Controls + matched lenses; audit #2; disclosure email sent to target #1's author</span></div>
-    <div class="now"><time>NOW</time><span>Response window open; write-up v4 finished</span></div>
+    <div class="now"><time>NOW</time><span>Audit #2 certified via fallback lens; response window open; write-up v4 finished</span></div>
     <div><time>~22 AUG</time><span>Publication — anonymous by default</span></div>
   </div>
 </section>
