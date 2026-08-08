@@ -98,7 +98,9 @@ finding in its own right:
   model that has since been retired by every provider that served it.
   A published, deployable hiring tool has silently become impossible to
   run as its author shipped it, and nothing in the tool itself would tell
-  a deployer that. The model was retired, not deprecated in place.
+  a deployer that. This is a harder failure than the familiar problem of
+  model drift, where a name keeps working while the behaviour underneath
+  it shifts. Here the name stops resolving at all.
 - I therefore ran its prompt-and-chain design on a current open-weights
   model of comparable scale. The precise claim is therefore narrow.
   **This audits the pipeline's design as served by a current open model**,
