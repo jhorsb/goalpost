@@ -1,0 +1,1382 @@
+{
+  "audit_id": "kimi-k3-lab-001",
+  "suts": [
+    {
+      "name": "kimi-k3",
+      "sut_id": "dde05ae9aa41871e",
+      "elicitation_mode": "structured",
+      "extracted": false,
+      "conditions": [
+        {
+          "condition_id": "t1.0_n5",
+          "temperature": 1.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "sc-platform-engineer-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1374655388471178,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1374655388471178,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.15206859059413239,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.15206859059413239,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2045238095238095,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2045238095238095,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8800000000000001,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.25,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0749116569704805,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0749116569704805,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.4666666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.33666666666666667,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.3333333333333333,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 2,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.32857142857142857,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.32857142857142857,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.35,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3125,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3125,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.375,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.6,
+                "mean_set_size": 1.2,
+                "empty_empty_pair_fraction": 0.3
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.6,
+                "mean_set_size": 1.4,
+                "empty_empty_pair_fraction": 0.3
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0837719298245614,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0837719298245614,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7166666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.03333333333333333,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.03333333333333333,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5528571428571428,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.25,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.10642857142857143,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.10642857142857143,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5033333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.13490779645191409,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.13490779645191409,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.505,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1382936507936508,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1382936507936508,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.42000000000000004,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.2857142857142857,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.18180708180708183,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.18180708180708183,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.611111111111111,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2590909090909091,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2590909090909091,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7027777777777778,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.4,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 0,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 0.5
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 3
+                }
+              },
+              "discarded_pair_fraction": 0.7,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.8,
+                "mean_set_size": 0.8,
+                "empty_empty_pair_fraction": 0.6
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 1.0,
+                "mean_set_size": 0.0,
+                "empty_empty_pair_fraction": 1.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.07364468864468865,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.07364468864468865,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.74,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.025,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.38333333333333336,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.2,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.14043816649466806,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.14043816649466806,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.02222222222222222,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.02222222222222222,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7150000000000001,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 3,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.12735042735042734,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.12735042735042734,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0537037037037037,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0537037037037037,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.22142857142857142,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 1.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.1
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 3,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3680555555555556,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3680555555555556,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6625,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2857142857142857,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2857142857142857,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8166666666666667,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.1
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.1
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 0,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 1.0,
+                "mean_set_size": 0.0,
+                "empty_empty_pair_fraction": 1.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 1.0,
+                "mean_set_size": 0.0,
+                "empty_empty_pair_fraction": 1.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.08341321217482209,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.08341321217482209,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.665,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.014285714285714285,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.014285714285714285,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.51,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.5,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.13033195734434125,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.13033195734434125,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.62,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.06468253968253967,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.06468253968253967,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.45499999999999996,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.3333333333333333,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 2,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.20134680134680136,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.20134680134680136,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.35833333333333334,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2222222222222222,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2222222222222222,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.2916666666666667,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.2,
+              "reason_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.1
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.6,
+                "mean_set_size": 1.4,
+                "empty_empty_pair_fraction": 0.3
+              }
+            },
+            {
+              "case_id": "sc-project-manager-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.35158008658008655,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.35158008658008655,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.825,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.09818181818181819,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.09818181818181819,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.30666666666666664,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.4,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 3,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2418040293040293,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2418040293040293,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7833333333333333,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.03518518518518519,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.03518518518518519,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.35000000000000003,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.4,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.2,
+                "empty_empty_pair_fraction": 0.1
+              }
+            },
+            {
+              "case_id": "sc-project-manager-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.027884615384615386,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.027884615384615386,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.34833333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.04861111111111111,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.04861111111111111,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.31666666666666665,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.2,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.24053613053613052,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.24053613053613052,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.525,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.06468253968253967,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.06468253968253967,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.24,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.25,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 0,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": null,
+                "modal_agreement": null
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.0,
+              "reason_coverage": {
+                "emptiness_rate": 1.0,
+                "mean_set_size": 0.0,
+                "empty_empty_pair_fraction": 1.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 1.0,
+                "mean_set_size": 0.0,
+                "empty_empty_pair_fraction": 1.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 4,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.13186813186813187,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.13186813186813187,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.28425925925925927,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.28425925925925927,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_flip_rate_cluster": 0.6666666666666666,
+              "reason_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.2,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 3,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.39520038784744665,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.39520038784744665,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.725,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2777777777777778,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2777777777777778,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_flip_rate_cluster": 0.16666666666666666,
+              "reason_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.1
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.4,
+                "mean_set_size": 1.8,
+                "empty_empty_pair_fraction": 0.1
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.28406426906426907,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.28406426906426907,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.06428571428571428,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.06428571428571428,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_flip_rate_cluster": 0.25,
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 0.7360777777777778,
+              "median": 0.74,
+              "iqr": [
+                0.611111111111111,
+                0.9
+              ],
+              "n_included": 25,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 0.5790825396825396,
+              "median": 0.5033333333333333,
+              "iqr": [
+                0.35000000000000003,
+                0.8166666666666667
+              ],
+              "n_included": 25,
+              "excluded": []
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ]
+    }
+  ],
+  "total_cost_usd": 0.38256,
+  "missing_blocks": [],
+  "errors": [],
+  "provenance": {
+    "corpus_hash": "057d16c29db96901632d5875da92ae644dc96c46368c7ae4bde6dd72444e2c1b|06fa8b354cb1af2be90bfb8d23eb8a08eb39f3fc89e7de8b5000ba6e4e2ed362|19c4784a46690211bc4403d41fa0dc7788df12a2f493dfb67a4f0fca977144d0|20f1fe676436005dff51633fa069ab021ff4b1ff67216f6e3b09421907b8343d|266cf613476ddd89e4522816bd2a0ccb39292fccf772cd6f18c674c09640a198|26f04be0a5694c0b5998336f812e0074d6d994a81e8228413ec16849660eb9a5|36e8740ef5d895ac9d9e759312651b9ab2c18b802d26ad9ab75e34137eac909e|3ca138ee5e66a03055f4cf4296ff6b2625c2c3df7522c7876d3ac4388a1cecce|47796f8df874c4ecaaffa713163393a6ce4541311ab7441c91548a2005560a0e|5464d00c887459bb1bccca2723644c5e0b5ab518ecc1de25989926f53908e1b6|718beacc25018492f15eddfc0cb7ac20ab3a585a49e54ffff72dd4d248fd25ae|7b9d10d11f311c8887670a5d75fd45503d799aa994e1f7f915f886b351df93e9|7be96b4d9dd06f39ecb90e0654fd4e23eb0676126aba44cea4657ca643f16925|8afdeedfcc62925992dcf9053e221d253f8a814bd03a800c7063aade003eac1f|8ed4d925aa484e0f16c626b57c0fec049350e1ebfa05459d187ad0b8376c7e7b|a66da7c1d8260f1da1aa8ff2d9f22e544ae296904965f755eb025c04af07557b|a8723f439e0e5c08db9ab5bef0c4c105d6c0ad9b3f282fc48469285ad4e9e3f3|b018c87ecce61bbf7ca4124e6366ac1ecfcda7fc15372c31e1b5ab569c4bcc9d|b888577308019f19857a6120c84e504c65e91254e2e65b474974db1a9109efbb|b92d1f2f6f2a0cd484fb717f669356b2070748b564420400ed6a344c78a2aa96|c298261a865990b4724bd44b3c21740775f31f831d5ffd81c0366e8ba1e6772c|c576a1851166c191b8d00924b6520bd5115bd1c097e4e17407aa679fce83958b|c84f2cfebb2e0dbc4ae35477ec6653f004f081c24364cd24849e9987b1413bc8|cf8b33302d692778ee6082102d6c3827853d602d08a655139d0fad18e1321269|ebf8cf890c0ac9b9fb9602fa69d5c32e1ce78e845e862d8a0fd6f7be515850f2",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.1.0",
+    "audit_version": "0.1.0",
+    "extractor_model": "gpt-4.1-2025-04-14",
+    "canonicaliser_model": "gpt-4.1-2025-04-14"
+  }
+}

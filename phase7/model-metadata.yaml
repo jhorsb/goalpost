@@ -35,6 +35,19 @@ models:
                                     # panel only.
     architecture: freeform
 
+  - board_name: kimi-k3
+    label: kimi-k3
+    released: 2026-07-16            # Moonshot announcement 2026-07-16
+                                    # (open weights followed 2026-07-27)
+    output_price_per_m: 15.00       # phase7/kimi-k3-lab.yaml pricing block
+                                    # (Moonshot first-party list, cache-miss;
+                                    # open weights, but measured on the
+                                    # first-party API at its own price —
+                                    # unlike gpt-oss, no invention involved)
+    architecture: structured
+    note: "T=1.0 mandated by the API (T=0 refused); 89/125 runs parsed — the
+      rest broke the output contract"
+
 # Deliberately excluded:
 # - the two audited pipelines: configurations, not models. A pipeline's
 #   recourse stability is a property of its design + model; putting it on

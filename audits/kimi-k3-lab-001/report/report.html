@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goalpost audit</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #20201e;
+  --muted: #626057;
+  --rule: #d8d3c7;
+  --paper: #fffefa;
+  --soft: #f5f1e8;
+  --accent: #234f45;
+  --warning: #8a4b14;
+  --warning-bg: #fff4df;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0 auto;
+  max-width: 65ch;
+  padding: 3rem 1.25rem 5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+article + article {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 3px double var(--rule);
+}
+h1, h2, h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 7vw, 3.35rem);
+  letter-spacing: -0.035em;
+}
+h2 {
+  margin: 2.8rem 0 0.8rem;
+  font-size: 1.45rem;
+  color: var(--accent);
+}
+h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.08rem;
+}
+p, ul { margin: 0.75rem 0; }
+.stamp {
+  margin-bottom: 2.4rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+.headline {
+  margin: 1rem 0 1.4rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent);
+  font-size: 1.15rem;
+}
+.headline.withheld {
+  border-left-color: var(--warning);
+}
+.caveats { padding-left: 1.25rem; }
+.caveats li + li, .provenance li + li { margin-top: 0.4rem; }
+.incomplete {
+  display: block;
+  margin: 2.25rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid #e7bf84;
+  border-left: 5px solid var(--warning);
+  border-radius: 3px;
+  background: var(--warning-bg);
+}
+hr {
+  margin: 3.5rem 0 2.5rem;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+.appendix { font-size: 0.9rem; }
+.table-wrap {
+  margin: 1rem 0 2.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+th, td {
+  padding: 0.58rem 0.68rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+thead th {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+tbody tr:nth-child(even) { background: var(--soft); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+.coverage-row td { white-space: normal; }
+code {
+  padding: 0.08em 0.28em;
+  border-radius: 3px;
+  background: var(--soft);
+  font-size: 0.86em;
+}
+.provenance {
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+@media print {
+  body { max-width: none; padding: 0; font-size: 11pt; }
+  .table-wrap { overflow: visible; }
+  table { font-size: 7pt; }
+  article { break-after: page; }
+}
+</style>
+</head>
+<body>
+<main><article><h1>Goalpost audit <span aria-hidden='true'>&mdash;</span> kimi-k3</h1><p class='stamp'>Audit <code>kimi-k3-lab-001</code> <span aria-hidden='true'>&middot;</span> goalpost 0.1.0 <span aria-hidden='true'>&middot;</span> anchors-1.0.0 <span aria-hidden='true'>&middot;</span> sut <code>dde05ae9</code> (structured mode)</p><section aria-labelledby='headline'><h2 id='headline'>The headline</h2><p class='headline'><strong>If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.</strong> In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.58 on a 0&ndash;1 scale).</p><p>The <em>decision itself</em> agreed with its most common answer 98% of the time across repeat runs.</p><p>The <em>reasons given</em> were substantially steadier than the advice (reason stability 0.74 vs recourse 0.58).</p></section><section aria-labelledby='why-this-matters'><h2 id='why-this-matters'>Why this matters</h2><p>Imagine a sat-nav that always tells you <em>why</em> you haven&#x27;t arrived — &quot;you&#x27;re 40 miles out&quot; — but gives you contradictory directions every time you ask how to get there. The explanation is consistent; the route is noise. This report measures whether an automated screening system is that sat-nav: whether its &quot;here&#x27;s what you&#x27;d need to change&quot; advice stays put, or whether the goalposts move every time you look.</p></section><section aria-labelledby='caveats'><h2 id='caveats'>What this doesn&rsquo;t tell you</h2><ul class='caveats'><li>Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.</li><li>This audit says nothing about fairness or bias &mdash; that is a different measurement.</li></ul></section><hr><section class='appendix' aria-labelledby='technical-appendix'><h2 id='technical-appendix'>Technical appendix</h2><h3>Condition <code>t1.0_n5</code> (T=1.0, N=5)</h3><div class='table-wrap'><table><thead><tr><th scope='col'>case</th><th scope='col'>level</th><th scope='col'>reason J</th><th scope='col'>recourse J</th><th scope='col'>n_pairs</th><th scope='col'>decision</th><th scope='col'>attempted/parsed/scored</th><th scope='col'>refusals</th></tr></thead><tbody><tr><th scope='row'>sc-platform-engineer-01</th><td>raw</td><td>0.14</td><td>0.00</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-01</th><td>normalised</td><td>0.14</td><td>0.00</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-01</th><td>cluster</td><td>1.00</td><td>0.70</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-platform-engineer-01</th><td>coverage</td><td>emptiness 0.00, size 2.0</td><td>emptiness 0.00, size 3.2</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-platform-engineer-02</th><td>raw</td><td>0.15</td><td>0.20</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-02</th><td>normalised</td><td>0.15</td><td>0.20</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-02</th><td>cluster</td><td>0.90</td><td>0.88</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-platform-engineer-02</th><td>coverage</td><td>emptiness 0.00, size 3.2</td><td>emptiness 0.00, size 4.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-platform-engineer-03</th><td>raw</td><td>0.07</td><td>0.03</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-03</th><td>normalised</td><td>0.07</td><td>0.03</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-03</th><td>cluster</td><td>0.47</td><td>0.34</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-platform-engineer-03</th><td>coverage</td><td>emptiness 0.20, size 2.0</td><td>emptiness 0.20, size 2.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-platform-engineer-04</th><td>raw</td><td>0.33</td><td>0.31</td><td>10</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-04</th><td>normalised</td><td>0.33</td><td>0.31</td><td>10</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-04</th><td>cluster</td><td>0.35</td><td>0.38</td><td>10</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-platform-engineer-04</th><td>coverage</td><td>emptiness 0.60, size 1.2</td><td>emptiness 0.60, size 1.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-platform-engineer-05</th><td>raw</td><td>0.08</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-05</th><td>normalised</td><td>0.08</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-platform-engineer-05</th><td>cluster</td><td>0.72</td><td>0.55</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-platform-engineer-05</th><td>coverage</td><td>emptiness 0.00, size 2.8</td><td>emptiness 0.00, size 4.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-01</th><td>raw</td><td>0.11</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-01</th><td>normalised</td><td>0.11</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-01</th><td>cluster</td><td>0.90</td><td>0.50</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-01</th><td>coverage</td><td>emptiness 0.00, size 3.8</td><td>emptiness 0.00, size 3.6</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-02</th><td>raw</td><td>0.13</td><td>0.14</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-02</th><td>normalised</td><td>0.13</td><td>0.14</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-02</th><td>cluster</td><td>0.51</td><td>0.42</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-02</th><td>coverage</td><td>emptiness 0.00, size 3.6</td><td>emptiness 0.20, size 2.6</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-03</th><td>raw</td><td>0.18</td><td>0.26</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-03</th><td>normalised</td><td>0.18</td><td>0.26</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-03</th><td>cluster</td><td>0.61</td><td>0.70</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-03</th><td>coverage</td><td>emptiness 0.20, size 3.0</td><td>emptiness 0.20, size 3.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-04</th><td>raw</td><td>1.00</td><td>1.00</td><td>3</td><td>0.50</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04</th><td>normalised</td><td>1.00</td><td>1.00</td><td>3</td><td>0.50</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-04</th><td>cluster</td><td>1.00</td><td>1.00</td><td>3</td><td>0.50</td><td>5/0/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-04</th><td>coverage</td><td>emptiness 0.80, size 0.8</td><td>emptiness 1.00, size 0.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 70%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-data-analyst-05</th><td>raw</td><td>0.07</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-05</th><td>normalised</td><td>0.07</td><td>0.03</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-data-analyst-05</th><td>cluster</td><td>0.74</td><td>0.38</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-data-analyst-05</th><td>coverage</td><td>emptiness 0.00, size 3.8</td><td>emptiness 0.00, size 2.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-01</th><td>raw</td><td>0.14</td><td>0.02</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-01</th><td>normalised</td><td>0.14</td><td>0.02</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-01</th><td>cluster</td><td>0.90</td><td>0.72</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-01</th><td>coverage</td><td>emptiness 0.00, size 3.2</td><td>emptiness 0.00, size 4.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-02</th><td>raw</td><td>0.13</td><td>0.05</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-02</th><td>normalised</td><td>0.13</td><td>0.05</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-02</th><td>cluster</td><td>1.00</td><td>0.22</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-02</th><td>coverage</td><td>emptiness 0.20, size 1.6</td><td>emptiness 0.40, size 2.6</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-03</th><td>raw</td><td>0.37</td><td>0.29</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-03</th><td>normalised</td><td>0.37</td><td>0.29</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-03</th><td>cluster</td><td>0.66</td><td>0.82</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-03</th><td>coverage</td><td>emptiness 0.40, size 2.0</td><td>emptiness 0.40, size 2.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-04</th><td>raw</td><td>1.00</td><td>1.00</td><td>4</td><td>1.00</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-04</th><td>normalised</td><td>1.00</td><td>1.00</td><td>4</td><td>1.00</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-04</th><td>cluster</td><td>1.00</td><td>1.00</td><td>4</td><td>1.00</td><td>5/0/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-04</th><td>coverage</td><td>emptiness 1.00, size 0.0</td><td>emptiness 1.00, size 0.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-frontend-developer-05</th><td>raw</td><td>0.08</td><td>0.01</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-05</th><td>normalised</td><td>0.08</td><td>0.01</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-frontend-developer-05</th><td>cluster</td><td>0.67</td><td>0.51</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-frontend-developer-05</th><td>coverage</td><td>emptiness 0.00, size 3.8</td><td>emptiness 0.00, size 3.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-01</th><td>raw</td><td>0.13</td><td>0.06</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-01</th><td>normalised</td><td>0.13</td><td>0.06</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-01</th><td>cluster</td><td>0.62</td><td>0.45</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-01</th><td>coverage</td><td>emptiness 0.00, size 3.6</td><td>emptiness 0.00, size 3.2</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-02</th><td>raw</td><td>0.20</td><td>0.22</td><td>6</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-02</th><td>normalised</td><td>0.20</td><td>0.22</td><td>6</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-02</th><td>cluster</td><td>0.36</td><td>0.29</td><td>6</td><td>1.00</td><td>5/2/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-02</th><td>coverage</td><td>emptiness 0.40, size 2.4</td><td>emptiness 0.60, size 1.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-03</th><td>raw</td><td>0.35</td><td>0.10</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-03</th><td>normalised</td><td>0.35</td><td>0.10</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-03</th><td>cluster</td><td>0.82</td><td>0.31</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-03</th><td>coverage</td><td>emptiness 0.00, size 4.0</td><td>emptiness 0.20, size 3.2</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-04</th><td>raw</td><td>0.24</td><td>0.04</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-04</th><td>normalised</td><td>0.24</td><td>0.04</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-04</th><td>cluster</td><td>0.78</td><td>0.35</td><td>6</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-04</th><td>coverage</td><td>emptiness 0.20, size 3.2</td><td>emptiness 0.40, size 2.2</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-project-manager-05</th><td>raw</td><td>0.03</td><td>0.05</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-05</th><td>normalised</td><td>0.03</td><td>0.05</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-project-manager-05</th><td>cluster</td><td>0.35</td><td>0.32</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-project-manager-05</th><td>coverage</td><td>emptiness 0.20, size 2.4</td><td>emptiness 0.20, size 3.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-01</th><td>raw</td><td>0.24</td><td>0.06</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-01</th><td>normalised</td><td>0.24</td><td>0.06</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-01</th><td>cluster</td><td>0.53</td><td>0.24</td><td>10</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-01</th><td>coverage</td><td>emptiness 0.20, size 2.6</td><td>emptiness 0.20, size 2.4</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-02</th><td>raw</td><td>1.00</td><td>1.00</td><td>10</td><td>n/a</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-02</th><td>normalised</td><td>1.00</td><td>1.00</td><td>10</td><td>n/a</td><td>5/0/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-02</th><td>cluster</td><td>1.00</td><td>1.00</td><td>10</td><td>n/a</td><td>5/0/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-02</th><td>coverage</td><td>emptiness 1.00, size 0.0</td><td>emptiness 1.00, size 0.0</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-03</th><td>raw</td><td>0.13</td><td>0.28</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-03</th><td>normalised</td><td>0.13</td><td>0.28</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-03</th><td>cluster</td><td>1.00</td><td>0.90</td><td>6</td><td>1.00</td><td>5/4/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-03</th><td>coverage</td><td>emptiness 0.20, size 2.4</td><td>emptiness 0.20, size 3.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 40%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-04</th><td>raw</td><td>0.40</td><td>0.28</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04</th><td>normalised</td><td>0.40</td><td>0.28</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-04</th><td>cluster</td><td>0.72</td><td>1.00</td><td>4</td><td>1.00</td><td>5/3/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-04</th><td>coverage</td><td>emptiness 0.40, size 2.6</td><td>emptiness 0.40, size 1.8</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 60%</td><td>&mdash;</td></tr><tr><th scope='row'>sc-support-team-lead-05</th><td>raw</td><td>0.28</td><td>0.06</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-05</th><td>normalised</td><td>0.28</td><td>0.06</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr><th scope='row'>sc-support-team-lead-05</th><td>cluster</td><td>0.80</td><td>0.50</td><td>10</td><td>1.00</td><td>5/5/5</td><td>0</td></tr><tr class='coverage-row'><th scope='row'>sc-support-team-lead-05</th><td>coverage</td><td>emptiness 0.00, size 3.0</td><td>emptiness 0.00, size 2.6</td><td>&mdash;</td><td>&mdash;</td><td>discarded pairs 0%</td><td>&mdash;</td></tr></tbody></table></div><h3>Provenance</h3><ul class='provenance'><li>corpus_hash: <code>057d16c29db96901632d5875da92ae644dc96c46368c7ae4bde6dd72444e2c1b|06fa8b354cb1af2be90bfb8d23eb8a08eb39f3fc89e7de8b5000ba6e4e2ed362|19c4784a46690211bc4403d41fa0dc7788df12a2f493dfb67a4f0fca977144d0|20f1fe676436005dff51633fa069ab021ff4b1ff67216f6e3b09421907b8343d|266cf613476ddd89e4522816bd2a0ccb39292fccf772cd6f18c674c09640a198|26f04be0a5694c0b5998336f812e0074d6d994a81e8228413ec16849660eb9a5|36e8740ef5d895ac9d9e759312651b9ab2c18b802d26ad9ab75e34137eac909e|3ca138ee5e66a03055f4cf4296ff6b2625c2c3df7522c7876d3ac4388a1cecce|47796f8df874c4ecaaffa713163393a6ce4541311ab7441c91548a2005560a0e|5464d00c887459bb1bccca2723644c5e0b5ab518ecc1de25989926f53908e1b6|718beacc25018492f15eddfc0cb7ac20ab3a585a49e54ffff72dd4d248fd25ae|7b9d10d11f311c8887670a5d75fd45503d799aa994e1f7f915f886b351df93e9|7be96b4d9dd06f39ecb90e0654fd4e23eb0676126aba44cea4657ca643f16925|8afdeedfcc62925992dcf9053e221d253f8a814bd03a800c7063aade003eac1f|8ed4d925aa484e0f16c626b57c0fec049350e1ebfa05459d187ad0b8376c7e7b|a66da7c1d8260f1da1aa8ff2d9f22e544ae296904965f755eb025c04af07557b|a8723f439e0e5c08db9ab5bef0c4c105d6c0ad9b3f282fc48469285ad4e9e3f3|b018c87ecce61bbf7ca4124e6366ac1ecfcda7fc15372c31e1b5ab569c4bcc9d|b888577308019f19857a6120c84e504c65e91254e2e65b474974db1a9109efbb|b92d1f2f6f2a0cd484fb717f669356b2070748b564420400ed6a344c78a2aa96|c298261a865990b4724bd44b3c21740775f31f831d5ffd81c0366e8ba1e6772c|c576a1851166c191b8d00924b6520bd5115bd1c097e4e17407aa679fce83958b|c84f2cfebb2e0dbc4ae35477ec6653f004f081c24364cd24849e9987b1413bc8|cf8b33302d692778ee6082102d6c3827853d602d08a655139d0fad18e1321269|ebf8cf890c0ac9b9fb9602fa69d5c32e1ce78e845e862d8a0fd6f7be515850f2</code></li><li>runner_version: <code>0.1.0</code></li><li>parser_version: <code>0.1.0</code></li><li>normaliser_version: <code>0.1.0</code></li><li>taxonomy_version: <code>1.0.0+1dfd20707ff9</code></li><li>metrics_version: <code>0.1.0</code></li><li>audit_version: <code>0.1.0</code></li><li>extractor_model: <code>gpt-4.1-2025-04-14</code></li><li>canonicaliser_model: <code>gpt-4.1-2025-04-14</code></li><li>report_version: <code>0.1.0</code> <span aria-hidden='true'>&middot;</span> anchors: <code>anchors-1.0.0</code></li><li>total cost: $0.3826</li></ul></section></article></main>
+</body>
+</html>

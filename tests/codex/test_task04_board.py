@@ -23,7 +23,8 @@ from goalpost.reporter import ANCHORS
 def _metrics(sut_name="alpha", corpus="ch1", mode="freeform",
              extractor_model="gemma-4-31b", taxonomy="cv-screening-1.0.0",
              decision=0.96, reasons=0.72, recourse=0.55,
-             sa_reasons=0.98, sa_recourse=0.97, sa_decision=1.0):
+             sa_reasons=0.98, sa_recourse=0.97, sa_decision=1.0,
+             temperature=0.0):
     sa = None
     if mode == "freeform":
         sa = {
@@ -46,7 +47,7 @@ def _metrics(sut_name="alpha", corpus="ch1", mode="freeform",
     sut = {
         "name": sut_name, "sut_id": sut_name + "-id",
         "elicitation_mode": mode, "extracted": mode == "freeform",
-        "conditions": [{"condition_id": "t0_n5", "temperature": 0.0,
+        "conditions": [{"condition_id": "t0_n5", "temperature": temperature,
                         "repeats": 5, "cases": [case]}],
     }
     if sa:
@@ -124,8 +125,9 @@ def test_different_architecture_never_shares_a_group(tmp_path):
     c = _write(tmp_path, _metrics(sut_name="charlie", mode="freeform",
                                   extractor_model="gpt-4.1-2025-04-14"))
     d = _write(tmp_path, _metrics(sut_name="delta", corpus="ch2"))
-    board = build_board([a, b, c, d])
-    assert len(board["groups"]) == 4  # mode, reader, and corpus all split
+    e = _write(tmp_path, _metrics(sut_name="echo2", temperature=1.0))
+    board = build_board([a, b, c, d, e])
+    assert len(board["groups"]) == 5  # mode, reader, corpus AND temperature split
 
 
 def test_same_architecture_shares_a_group_ordered_by_band_then_name(tmp_path):

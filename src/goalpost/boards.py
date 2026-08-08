@@ -151,10 +151,15 @@ def build_board(audit_dirs: list[Path]) -> dict:
                         f"recovered from {audit_dir}/config.yaml"
                     )
             architecture = "structured" if mode == "structured" else f"freeform:{reader}"
+            # temperature is part of comparability: T=0 and T=1 runs of
+            # the same architecture are different experiments (some models
+            # mandate a single temperature — e.g. kimi-k3 allows only 1.0)
+            condition_temperature = sut["conditions"][0].get("temperature")
             group_key = (
                 provenance["corpus_hash"],
                 architecture,
                 provenance["taxonomy_version"],
+                condition_temperature,
             )
             n_cases, values = _measure_values(sut)
             grouped.setdefault(group_key, []).append(
@@ -169,8 +174,12 @@ def build_board(audit_dirs: list[Path]) -> dict:
             )
 
     groups = []
-    for corpus_hash, architecture, taxonomy_version in sorted(grouped):
-        systems = grouped[(corpus_hash, architecture, taxonomy_version)]
+    for corpus_hash, architecture, taxonomy_version, temperature in sorted(
+        grouped, key=lambda k: (k[0], k[1], k[2], str(k[3]))
+    ):
+        systems = grouped[
+            (corpus_hash, architecture, taxonomy_version, temperature)
+        ]
         systems.sort(key=_system_sort_key)
         groups.append(
             {
@@ -178,6 +187,7 @@ def build_board(audit_dirs: list[Path]) -> dict:
                     "corpus_hash": corpus_hash,
                     "architecture": architecture,
                     "taxonomy_version": taxonomy_version,
+                    "temperature": temperature,
                 },
                 "systems": systems,
             }

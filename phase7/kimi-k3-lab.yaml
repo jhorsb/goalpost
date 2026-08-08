@@ -1,0 +1,41 @@
+# Lab configuration on Kimi K3 (Moonshot, first-party endpoint — D-017/D-038).
+#
+# DISCLOSED CONSTRAINT: the kimi-k3 API rejects any temperature except 1.0
+# ("invalid temperature: only 1 is allowed for this model", verified
+# 2026-08-08). The T=0 robustness check run on every other lab config is
+# therefore IMPOSSIBLE on this model by provider policy — itself a
+# governance observation: determinism cannot even be requested. The run is
+# recorded at the model's mandated T=1.0 and the board/scatter wall it off
+# from the T=0 lab group (temperature is part of the comparability key).
+#
+# Reasoning model: max_tokens raised for reasoning-token headroom
+# (verified: 'ready' probe spent 22 reasoning tokens; contract output needs
+# ~400). Seed accepted (recorded as always; determinism never assumed).
+audit_id: kimi-k3-lab-001
+audit_seed: 42
+max_spend_usd: 5.00
+concurrency: 4
+corpus_path: corpora/starter-v1/cases.yaml
+output_dir: audits
+canonicaliser:
+  provider: openai
+  model: gpt-4.1-2025-04-14
+extractor:
+  # structured mode: no extractor calls; kept for config validity
+  provider: openai
+  model: gpt-4.1-2025-04-14
+pricing:
+  gpt-4.1-2025-04-14: {input: 2.00, output: 8.00}
+  kimi-k3: {input: 3.00, output: 15.00}   # platform.kimi.ai pricing, cache-miss
+conditions:
+  - {temperature: 1.0, repeats: 5}
+suts:
+  - name: kimi-k3
+    provider: openai_compatible
+    model: kimi-k3
+    base_url: https://api.moonshot.ai/v1
+    api_key_env: MOONSHOT_API_KEY
+    send_seed: true
+    max_tokens: 3000
+    elicitation_mode: structured
+    prompt_template_path: prompts/example_screener.txt

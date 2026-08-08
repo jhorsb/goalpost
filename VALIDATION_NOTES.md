@@ -322,3 +322,38 @@ candidates also receive the fewest recommendations (mean set 1.48 vs 2.80
 in audit #1) and small sets mechanically depress Jaccard — observation
 with confound attached. Not pre-registered; labelled exploratory wherever
 cited. Full table: paper/read-notes-lee-2026.md.
+
+## Kimi K3 lab configuration (2026-08-08) — first non-US-lab point
+
+`audits/kimi-k3-lab-001`: structured mode, starter-v1 corpus, N=5, on
+Moonshot's first-party API (D-017/D-038). Total spend ~$5.24 (budget-stop
+at $4.86 + $0.38 resume; metrics total_cost_usd shows the resume pass only
+— cached calls re-cost at $0, known resume artifact).
+
+**Three constraints/findings before any stability number:**
+1. **T=0 is impossible by provider policy** — the API rejects any
+   temperature but 1.0 ("only 1 is allowed for this model"). Every other
+   lab config ran T=0; the board/scatter therefore wall Kimi off
+   (temperature now part of the comparability key, test-first amendment).
+   Governance observation: on this model, determinism cannot even be
+   requested.
+2. **36/125 runs broke the structured output contract** (89 parsed, 0
+   refusals) — worst contract compliance measured (Haiku 11/125; OpenAI
+   models 0/375). Denominators carry it; failed parses never join the
+   stability numbers.
+3. **Contract failures concentrate in the borderline band: 28/36** (strong
+   2, weak 6). The constraint gradient appears in *compliance*, not just
+   stability — hard cases don't merely wobble, they break format.
+   Exploratory, same label as the D-046 stratification.
+
+**Measured (on parsed runs, denominators disclosed):** decision 0.979 —
+1 flip among 24 measurable cases, and it is `sc-data-analyst-04`,
+**the same borderline case audit #2's pipeline refused to decide on
+unanimously**; reasons 0.736 / recourse 0.579 (cluster; raw 0.280/0.222),
+gap +0.157 — the dissertation's asymmetry direction on a Chinese-lab
+model. Cross-family count: the reason–recourse gap has now appeared on
+every model family measured (OpenAI ×3, Anthropic, gpt-oss, Moonshot).
+
+Scatter updated (6 models): Kimi at $15/M sits mid-pack on recourse —
+the "newer/pricier = less stable" impression from the first five points
+does not survive the sixth; caption rewritten to the weaker true claim.
