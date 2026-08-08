@@ -607,3 +607,22 @@ def test_extraction_cache_keyed_by_extractor_identity(tmp_path):
     run_audit(config=config_b, extractor_client=ext2, **kwargs)
     # new extractor identity -> extraction re-paid, not served from cache
     assert ext2.calls - 3 == paid_first == 1
+
+
+def test_provenance_records_reader_and_canonicaliser_models():
+    """The measuring instruments are part of the measurement's identity.
+
+    Two audits can share extractor_version and prompt_hash yet be read by
+    different models — exactly the D-039/D-040 situation, where one reader
+    failed the gate and another passed on identical responses. Without the
+    model in provenance, the evidence file cannot distinguish them.
+    """
+    import inspect
+
+    from goalpost import audit as audit_mod
+
+    src = inspect.getsource(audit_mod.run_audit)
+    prov_start = src.index('"provenance"')
+    prov_block = src[prov_start:prov_start + 900]
+    assert '"extractor_model"' in prov_block
+    assert '"canonicaliser_model"' in prov_block

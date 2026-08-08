@@ -542,6 +542,12 @@ def run_audit(
             "taxonomy_version": f"{taxonomies.reason.version}+{taxonomies.content_hash[:12]}",
             "metrics_version": METRICS_VERSION,
             "audit_version": AUDIT_VERSION,
+            # The measuring instruments are part of the measurement's
+            # identity: two audits can share extractor_version and prompt
+            # hash yet be read by different models (D-039/D-040), and the
+            # evidence file must be able to tell them apart.
+            "extractor_model": getattr(config.extractor, "model", None),
+            "canonicaliser_model": getattr(config.canonicaliser, "model", None),
         },
     }
     metrics_dir = audit_dir / "metrics" / METRICS_VERSION

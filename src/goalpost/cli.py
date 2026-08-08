@@ -284,5 +284,28 @@ def taxonomy_review(
         typer.echo("| " + " | ".join(_review_cell(cell) for cell in cells) + " |")
 
 
+@app.command()
+def board(
+    audit_dirs: list[Path] = typer.Argument(...),
+    page: Path | None = typer.Option(None, "--page"),
+    json_out: Path | None = typer.Option(None, "--json-out"),
+):
+    """Build a cross-audit stability board without modifying the audits."""
+    from goalpost.boards import build_board, inject_board, render_board_html
+
+    board_data = build_board(audit_dirs)
+    board_json = json.dumps(board_data, indent=2)
+
+    if json_out is None:
+        typer.echo(board_json)
+    else:
+        json_out.write_text(board_json + "\n")
+
+    if page is not None:
+        page.write_text(
+            inject_board(page.read_text(), render_board_html(board_data))
+        )
+
+
 if __name__ == "__main__":
     app()
