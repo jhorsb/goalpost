@@ -357,3 +357,50 @@ every model family measured (OpenAI ×3, Anthropic, gpt-oss, Moonshot).
 Scatter updated (6 models): Kimi at $15/M sits mid-pack on recourse —
 the "newer/pricier = less stable" impression from the first five points
 does not survive the sixth; caption rewritten to the weaker true claim.
+
+## Case study: sc-data-analyst-04, "the Eleanor problem" (2026-08-08)
+
+The one fictional CV that has now tripped every class of system. Anatomy,
+from the corpus and transcripts (all quotes verbatim from committed runs).
+
+**The CV is a conjunction of underdetermined predicates.** Designed
+borderline, it sits on several requirement boundaries at once, each
+resolvable either way by defensible judgement:
+- "Minimum 2 years' proven experience" vs 1.5 years stated + an 8–9-month
+  internship → *does an internship count?*
+- "Advanced SQL" vs self-labelled "intermediate" backed by production
+  work → *labels or evidence?*
+- "Tableau or a similar BI tool" vs Power BI working knowledge + a
+  Tableau course in progress → *how similar is similar?*
+- Insurance domain "advantageous" vs adjacent financial-services work.
+
+**Each system metabolises the same ambiguity into a different failure
+mode:**
+- **Kimi K3** re-litigates the internship rule per run — rep 0 "Not met",
+  rep 1 "meets the minimum only if internship experience counts", rep 3
+  "met, if narrowly", rep 4 "NOT MET (borderline)" — splits ~50/50 on the
+  verdict, and breaks the output contract on all 5 runs of this case (its
+  only 0/5-parsed case; ambiguity derails format discipline too).
+- **Audit #2's Claude pipeline** maps the ambiguity to its "Maybe" tier
+  unanimously (5/5) — the only system with an abstention category, used
+  consistently. Arguably the most honest behaviour observed, and invisible
+  to any binary-verdict system.
+- **Audit #1's 4-agent pipeline** shows a stable verdict (reject 5/5)
+  hiding unstable assessment: scores 54/100 → 74/100 across runs
+  (threshold 75 — one point from a flip), with attributed experience
+  swinging from "over two years" to "≈4 years" — different fabricated
+  arithmetic per run.
+- **gpt-oss and Haiku** flip it outright (0.8 agreement); OpenAI T=0
+  labs hold reject at 1.0.
+- **Cross-system**: firm reject vs unanimous maybe vs 50/50 accept-lean —
+  identical input.
+
+**Reading.** The instability here is not sampling noise around a signal;
+it is *unresolved policy* being decided fresh on every query. A human
+hiring process fixes "do internships count?" once, in a rulebook. An LLM
+screener re-litigates it per request, and the answer varies. This makes
+Eleanor the cleanest single exhibit of the project's thesis — and of the
+D-046 action-space observation: instability concentrates precisely where
+several defensible readings coexist. Candidate sidebar for the write-up;
+candidate seed-case for the audit-#3 causal-recourse design (her advice
+sets should differ materially depending on which reading the run took).
