@@ -124,6 +124,10 @@ def make_sut_client(sut, pricing):
         return UpstreamPipelineClient(
             prompts=prompts, inner=make_client(sut, pricing=pricing)
         )
+    if sut.params.get("pipeline") == "csa-screening-agent":
+        from goalpost.csa_client import CSAPipelineClient
+
+        return CSAPipelineClient(inner=make_client(sut, pricing=pricing))
     return make_client(sut, pricing=pricing)
 
 
