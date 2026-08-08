@@ -1,0 +1,1243 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goalpost | When the same CV gets a different answer</title>
+<style>
+  :root {
+    color-scheme: light;
+    --gp-canvas: #f4f1e8;
+    --gp-surface: #fffefa;
+    --gp-ink: #171a20;
+    --gp-muted: #5b6570;
+    --gp-verify: #155eef;
+    --gp-refuse: #b42318;
+    --gp-line: color-mix(in srgb, var(--gp-ink) 18%, var(--gp-canvas));
+    --gp-line-strong: color-mix(in srgb, var(--gp-ink) 42%, var(--gp-canvas));
+    --gp-verify-soft: color-mix(in srgb, var(--gp-verify) 10%, var(--gp-surface));
+    --gp-refuse-soft: color-mix(in srgb, var(--gp-refuse) 9%, var(--gp-surface));
+    --gp-ink-soft: color-mix(in srgb, var(--gp-ink) 7%, var(--gp-surface));
+    --gp-shadow: color-mix(in srgb, var(--gp-ink) 14%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --gp-canvas: #0f141b;
+      --gp-surface: #171e27;
+      --gp-ink: #f5f3eb;
+      --gp-muted: #aab4c0;
+      --gp-verify: #8eb4ff;
+      --gp-refuse: #ff988d;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --gp-canvas: #0f141b;
+    --gp-surface: #171e27;
+    --gp-ink: #f5f3eb;
+    --gp-muted: #aab4c0;
+    --gp-verify: #8eb4ff;
+    --gp-refuse: #ff988d;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --gp-canvas: #f4f1e8;
+    --gp-surface: #fffefa;
+    --gp-ink: #171a20;
+    --gp-muted: #5b6570;
+    --gp-verify: #155eef;
+    --gp-refuse: #b42318;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  body {
+    margin: 0;
+    background: var(--gp-canvas);
+    color: var(--gp-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .gp {
+    min-height: 100vh;
+    overflow: clip;
+    background:
+      linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--gp-line) calc(100% - 1px)) 0 0 / min(100%, 76rem) 100% no-repeat,
+      var(--gp-canvas);
+  }
+
+  .gp a { color: var(--gp-verify); }
+  .gp :where(a, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--gp-verify);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  .gp-skip {
+    position: fixed;
+    z-index: 100;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--gp-surface);
+    color: var(--gp-ink);
+    border: 2px solid var(--gp-verify);
+    transform: translateY(-180%);
+  }
+  .gp-skip:focus { transform: none; }
+
+  .gp-shell {
+    width: min(100% - 2rem, 72rem);
+    margin-inline: auto;
+  }
+  .gp-narrow { width: min(100%, 48rem); }
+  .gp-mast {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--gp-line-strong);
+  }
+  .gp-wordmark {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .gp-mast p {
+    max-width: 38ch;
+    margin: 0;
+    color: var(--gp-muted);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    text-align: right;
+  }
+
+  .gp-hero {
+    display: grid;
+    gap: 2.25rem;
+    padding-block: clamp(3rem, 8vw, 6.5rem) clamp(2.75rem, 7vw, 5rem);
+  }
+  .gp-context {
+    margin: 0 0 0.7rem;
+    color: var(--gp-muted);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .gp-role-note {
+    margin: 0 0 0.55rem;
+    color: var(--gp-muted);
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+  .gp h1,
+  .gp h2,
+  .gp h3,
+  .gp p { text-wrap: pretty; }
+  .gp h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(2.65rem, 12vw, 5.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    font-weight: 880;
+  }
+  .gp-deck {
+    max-width: 38ch;
+    margin: 1.35rem 0 0;
+    font-size: clamp(1.15rem, 3vw, 1.45rem);
+    line-height: 1.38;
+  }
+  .gp-deck strong { font-weight: 800; }
+  .gp-plain-thesis {
+    max-width: 56ch;
+    margin: 1.2rem 0 0;
+    padding-left: 1rem;
+    border-left: 4px solid var(--gp-refuse);
+    color: var(--gp-muted);
+  }
+
+  .gp-run-proof {
+    align-self: end;
+    margin: 0;
+    padding-top: 0.85rem;
+    border-top: 4px solid var(--gp-ink);
+  }
+  .gp-run-proof figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--gp-muted);
+    font-size: 0.8rem;
+  }
+  .gp-run-proof figcaption strong { color: var(--gp-ink); }
+  .gp-runs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(3.3rem, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--gp-line-strong);
+  }
+  .gp-run {
+    min-width: 0;
+    padding: 0.8rem 0.25rem;
+    text-align: center;
+    background: var(--gp-surface);
+  }
+  .gp-run + .gp-run { border-left: 1px solid var(--gp-line-strong); }
+  .gp-run span {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--gp-muted);
+    font-size: 0.68rem;
+    font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
+  }
+  .gp-run strong {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(0.66rem, 2.6vw, 0.82rem);
+    letter-spacing: -0.02em;
+  }
+  .gp-run--reject {
+    background: var(--gp-ink);
+    color: var(--gp-surface);
+  }
+  .gp-run--reject span { color: var(--gp-canvas); }
+  .gp-run--accept {
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--gp-surface),
+      var(--gp-surface) 7px,
+      var(--gp-ink-soft) 7px,
+      var(--gp-ink-soft) 14px
+    );
+  }
+  .gp-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--gp-line-strong);
+    border-top: 0;
+  }
+  .gp-split p {
+    margin: 0;
+    padding: 0.65rem;
+    color: var(--gp-muted);
+    font-size: 0.76rem;
+    text-align: center;
+  }
+  .gp-split p + p { border-left: 1px solid var(--gp-line-strong); }
+  .gp-split b {
+    display: block;
+    color: var(--gp-ink);
+    font-size: 1.45rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .gp-proof-note {
+    margin: 0.85rem 0 0;
+    color: var(--gp-muted);
+    font-size: 0.88rem;
+  }
+
+  .gp-gate {
+    padding-block: clamp(3.5rem, 9vw, 7rem);
+    border-block: 1px solid var(--gp-line-strong);
+    background: var(--gp-surface);
+  }
+  .gp-gate-head {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .gp-gate h2,
+  .gp-section h2 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.9rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+  .gp-gate-copy {
+    max-width: 58ch;
+    margin: 1rem 0 0;
+    color: var(--gp-muted);
+    font-size: 1.06rem;
+  }
+  .gp-refusal-count {
+    align-self: start;
+    padding: 1rem 0 0.2rem;
+    border-top: 8px solid var(--gp-refuse);
+  }
+  .gp-refusal-count strong {
+    display: block;
+    color: var(--gp-refuse);
+    font-size: clamp(3.2rem, 12vw, 6.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+  .gp-refusal-count span {
+    display: block;
+    margin-top: 0.65rem;
+    font-weight: 750;
+  }
+  .gp-gate-rule {
+    margin: 0 0 2.5rem;
+    padding: 1.15rem 1.2rem;
+    border: 2px solid var(--gp-refuse);
+    background: var(--gp-refuse-soft);
+  }
+  .gp-gate-rule b {
+    display: block;
+    color: var(--gp-refuse);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .gp-gate-rule p { margin: 0.35rem 0 0; font-size: 1.05rem; }
+
+  .gp-gate-flow {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+  .gp-flow-step {
+    position: relative;
+    padding: 1rem 0;
+    border-top: 1px solid var(--gp-line-strong);
+  }
+  .gp-flow-step h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .gp-flow-step p {
+    margin: 0.45rem 0 0;
+    color: var(--gp-muted);
+    font-size: 0.9rem;
+  }
+  .gp-read-list {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .gp-read-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid var(--gp-line);
+    background: var(--gp-canvas);
+    font-size: 0.78rem;
+  }
+  .gp-read-list code {
+    color: var(--gp-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .gp-branch {
+    display: grid;
+    gap: 0.7rem;
+  }
+  .gp-rule-stack {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.8rem 0;
+  }
+  .gp-rule-stack p {
+    margin: 0;
+    padding: 0.55rem 0.65rem;
+    border-left: 3px solid var(--gp-line-strong);
+    background: var(--gp-canvas);
+    color: var(--gp-muted);
+    font-size: 0.78rem;
+  }
+  .gp-rule-stack strong { color: var(--gp-ink); }
+  .gp-outcome {
+    min-height: 100%;
+    padding: 0.9rem;
+    border: 2px solid var(--gp-line-strong);
+  }
+  .gp-outcome b {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .gp-outcome p { margin: 0.35rem 0 0; font-size: 0.88rem; }
+  .gp-outcome--pass {
+    border-color: var(--gp-verify);
+    background: var(--gp-verify-soft);
+  }
+  .gp-outcome--pass b { color: var(--gp-verify); }
+  .gp-outcome--stop {
+    border-color: var(--gp-refuse);
+    background: var(--gp-refuse-soft);
+  }
+  .gp-outcome--stop b { color: var(--gp-refuse); }
+  .gp-limit {
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gp-line-strong);
+    color: var(--gp-muted);
+    font-size: 0.9rem;
+  }
+  .gp-limit strong { color: var(--gp-ink); }
+
+  .gp-section { padding-block: clamp(3.5rem, 9vw, 7rem); }
+  .gp-section + .gp-section { border-top: 1px solid var(--gp-line-strong); }
+  .gp-section--evidence { background: var(--gp-surface); }
+  .gp-section--additional { padding-top: clamp(2.8rem, 7vw, 5rem); }
+  .gp-section--record { background: var(--gp-ink-soft); }
+  .gp-section-intro {
+    max-width: 60ch;
+    margin: 1rem 0 0;
+    color: var(--gp-muted);
+    font-size: 1.02rem;
+  }
+
+  .gp-three-tests {
+    margin-top: 2.2rem;
+    border-top: 3px solid var(--gp-ink);
+  }
+  .gp-test-row {
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 1.15rem;
+    border-bottom: 1px solid var(--gp-line-strong);
+  }
+  .gp-test-row h3 { margin: 0; font-size: 1.15rem; }
+  .gp-test-row p { margin: 0; color: var(--gp-muted); }
+  .gp-test-row strong { color: var(--gp-ink); }
+
+  .gp-method-line {
+    display: grid;
+    gap: 0;
+    margin-top: 2.5rem;
+    border-block: 1px solid var(--gp-line-strong);
+  }
+  .gp-method-step {
+    padding: 1rem 0;
+  }
+  .gp-method-step + .gp-method-step { border-top: 1px solid var(--gp-line); }
+  .gp-method-step b { display: block; font-size: 0.92rem; }
+  .gp-method-step p {
+    margin: 0.3rem 0 0;
+    color: var(--gp-muted);
+    font-size: 0.86rem;
+  }
+
+  .gp-compare-head {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 2.5rem;
+    padding: 0.8rem 1rem;
+    background: var(--gp-ink);
+    color: var(--gp-surface);
+  }
+  .gp-compare-head b { font-size: 0.9rem; }
+  .gp-compare-head span { font-size: 0.8rem; }
+  .gp-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--gp-line-strong) var(--gp-canvas);
+  }
+  .gp-scroll-hint {
+    margin: 0.55rem 0 0;
+    color: var(--gp-muted);
+    font-size: 0.76rem;
+  }
+  .gp-compare {
+    width: 100%;
+    min-width: 43rem;
+    border-collapse: collapse;
+    background: var(--gp-surface);
+    font-variant-numeric: tabular-nums;
+  }
+  .gp-compare caption {
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--gp-line);
+    border-bottom: 0;
+    color: var(--gp-muted);
+    text-align: left;
+    font-size: 0.78rem;
+  }
+  .gp-compare th,
+  .gp-compare td {
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--gp-line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .gp-compare thead th {
+    border-top: 0;
+    background: var(--gp-ink-soft);
+    font-size: 0.83rem;
+  }
+  .gp-compare tbody th {
+    width: 32%;
+    color: var(--gp-muted);
+    font-size: 0.82rem;
+    font-weight: 650;
+  }
+  .gp-compare td { font-size: 0.9rem; }
+  .gp-value {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 750;
+  }
+  .gp-value-note {
+    display: block;
+    margin-top: 0.18rem;
+    color: var(--gp-muted);
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+  .gp-inference {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.2rem;
+    padding: 1.25rem;
+    border-left: 6px solid var(--gp-verify);
+    background: var(--gp-verify-soft);
+  }
+  .gp-inference h3 { margin: 0; font-size: 1.15rem; }
+  .gp-inference p { margin: 0.35rem 0 0; }
+
+  .gp-audit-two {
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 4px solid var(--gp-ink);
+  }
+  .gp-audit-two h3 { margin: 0; font-size: 1.55rem; line-height: 1.12; }
+  .gp-meta { margin: 0.5rem 0 0; color: var(--gp-muted); font-size: 0.85rem; }
+  .gp-publishable {
+    padding: 1rem;
+    border: 2px solid var(--gp-verify);
+    background: var(--gp-verify-soft);
+  }
+  .gp-publishable > b,
+  .gp-quarantine > b {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .gp-publishable > b { color: var(--gp-verify); }
+  .gp-publishable dl,
+  .gp-quarantine dl { margin: 0; }
+  .gp-metric {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding-block: 0.48rem;
+    border-top: 1px solid var(--gp-line);
+  }
+  .gp-metric dt { color: var(--gp-muted); }
+  .gp-metric dd {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+  .gp-quarantine {
+    padding: 1rem;
+    border: 3px double var(--gp-refuse);
+    background: var(--gp-refuse-soft);
+  }
+  .gp-quarantine > b { color: var(--gp-refuse); }
+  .gp-quarantine > p { margin: 0 0 0.85rem; font-size: 0.9rem; }
+  .gp-quarantine .gp-metric dd { color: var(--gp-refuse); }
+  .gp-do-not-cite {
+    margin: 0.8rem 0 0;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--gp-refuse);
+    color: var(--gp-refuse);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .gp-claims {
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 4px solid var(--gp-ink);
+  }
+  .gp-claim {
+    display: grid;
+    gap: 0.8rem;
+    padding-block: 1.35rem;
+    border-bottom: 1px solid var(--gp-line-strong);
+  }
+  .gp-claim h3 { margin: 0; font-size: 1.2rem; }
+  .gp-claim p { margin: 0.4rem 0 0; color: var(--gp-muted); }
+  .gp-claim strong { color: var(--gp-ink); }
+
+  .gp-lab {
+    margin-top: 2.5rem;
+    padding: 1.2rem 0;
+    border-block: 1px solid var(--gp-line-strong);
+  }
+  .gp-lab h3 { margin: 0; font-size: 1.25rem; }
+  .gp-lab p { margin: 0.55rem 0 0; color: var(--gp-muted); }
+  .gp-lab-metrics {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .gp-lab-metrics div {
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--gp-line);
+  }
+  .gp-lab-metrics b {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .gp-lab-metrics span { color: var(--gp-muted); font-size: 0.8rem; }
+
+  .gp-details {
+    margin-top: 1.2rem;
+    border-block: 1px solid var(--gp-line-strong);
+  }
+  .gp-details + .gp-details { margin-top: -1px; }
+  .gp-details summary {
+    padding: 1rem 2.2rem 1rem 0;
+    cursor: pointer;
+    font-weight: 800;
+  }
+  .gp-details[open] summary { border-bottom: 1px solid var(--gp-line); }
+  .gp-details-body { padding: 1rem 0 1.4rem; }
+  .gp-details-body > :first-child { margin-top: 0; }
+  .gp-details-body > :last-child { margin-bottom: 0; }
+
+  .gp-gate-table {
+    width: 100%;
+    min-width: 52rem;
+    border-collapse: collapse;
+    background: var(--gp-surface);
+    font-variant-numeric: tabular-nums;
+  }
+  .gp-gate-table caption {
+    padding: 0 0 0.7rem;
+    color: var(--gp-muted);
+    text-align: left;
+    font-size: 0.83rem;
+  }
+  .gp-gate-table th,
+  .gp-gate-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--gp-line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .gp-gate-table th { font-size: 0.8rem; }
+  .gp-gate-table td { font-size: 0.82rem; }
+  .gp-check {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 800;
+  }
+  .gp-check--pass { color: var(--gp-verify); }
+  .gp-check--fail { color: var(--gp-refuse); }
+  .gp-check-note {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--gp-muted);
+    font-size: 0.72rem;
+  }
+  .gp-calibration {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 1rem 0 0;
+    border-top: 3px solid var(--gp-line-strong);
+  }
+  .gp-calibration span {
+    position: relative;
+    padding-top: 0.55rem;
+    color: var(--gp-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+  }
+  .gp-calibration span::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 1px;
+    height: 8px;
+    background: var(--gp-line-strong);
+  }
+  .gp-calibration .gp-cutoff { color: var(--gp-refuse); font-weight: 800; }
+  .gp-calibration .gp-cutoff::before { width: 3px; background: var(--gp-refuse); }
+
+  .gp-refusal-log {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .gp-refusal-log li {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gp-line);
+  }
+  .gp-refusal-log time {
+    color: var(--gp-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+  }
+  .gp-refusal-log h3 { margin: 0; font-size: 1rem; }
+  .gp-refusal-log p { margin: 0.35rem 0 0; color: var(--gp-muted); }
+
+  .gp-glossary {
+    display: grid;
+    gap: 0;
+    margin: 0;
+  }
+  .gp-glossary div {
+    display: grid;
+    gap: 0.2rem;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--gp-line);
+  }
+  .gp-glossary dt { font-weight: 800; }
+  .gp-glossary dd { margin: 0; color: var(--gp-muted); }
+
+  .gp-timeline {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 3px solid var(--gp-ink);
+  }
+  .gp-timeline li {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--gp-line);
+  }
+  .gp-timeline time {
+    color: var(--gp-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+  .gp-timeline p { margin: 0; }
+
+  .gp-footer {
+    padding-block: 2rem 4rem;
+    border-top: 1px solid var(--gp-line-strong);
+    color: var(--gp-muted);
+    font-size: 0.86rem;
+  }
+  .gp-footer-grid { display: grid; gap: 1.3rem; }
+  .gp-footer h2 {
+    margin: 0 0 0.4rem;
+    color: var(--gp-ink);
+    font-size: 0.95rem;
+  }
+  .gp-footer p { margin: 0; }
+
+  @media (min-width: 44rem) {
+    .gp-shell { width: min(100% - 3rem, 72rem); }
+    .gp-hero { grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 0.95fr); align-items: end; }
+    .gp-gate-head { grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.35fr); align-items: start; }
+    .gp-gate-flow { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+    .gp-flow-step { padding: 1rem; border: 1px solid var(--gp-line-strong); }
+    .gp-flow-step + .gp-flow-step::before {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      left: -0.85rem;
+      z-index: 2;
+      width: 1.7rem;
+      height: 1.7rem;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      background: var(--gp-surface);
+      color: var(--gp-muted);
+      font-weight: 800;
+    }
+    .gp-branch { grid-template-columns: 1fr 1fr; }
+    .gp-test-row { grid-template-columns: 11rem 1fr; gap: 2rem; }
+    .gp-method-line { grid-template-columns: repeat(4, 1fr); }
+    .gp-method-step { padding: 1rem; }
+    .gp-method-step + .gp-method-step { border-top: 0; border-left: 1px solid var(--gp-line); }
+    .gp-compare-head { grid-template-columns: 1fr 1fr; }
+    .gp-inference { grid-template-columns: 12rem 1fr; }
+    .gp-audit-two { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr); }
+    .gp-claim { grid-template-columns: minmax(0, 1fr); }
+    .gp-lab-metrics { grid-template-columns: repeat(3, 1fr); }
+    .gp-refusal-log li { grid-template-columns: 6rem 1fr; gap: 1rem; }
+    .gp-glossary div { grid-template-columns: 10rem 1fr; gap: 1rem; }
+    .gp-timeline li { grid-template-columns: 8rem 1fr; gap: 1rem; }
+    .gp-footer-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 60rem) {
+    .gp-scroll-hint { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gp *, .gp *::before, .gp *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media print {
+    .gp { background: var(--gp-surface); }
+    .gp-details > .gp-details-body { display: block; }
+    .gp-scroll { overflow: visible; }
+  }
+</style>
+
+<a class="gp-skip" href="#gate">Skip to why Goalpost withholds results</a>
+
+<main class="gp">
+  <div class="gp-shell">
+    <header class="gp-mast" aria-label="Goalpost explainer">
+      <div class="gp-wordmark">Goalpost</div>
+      <p>Audit targets are anonymised while courtesy disclosure is open. They remain described by category only.</p>
+    </header>
+
+    <section class="gp-hero" aria-labelledby="gp-title">
+      <div>
+        <p class="gp-context">AI hiring, tested for repeatability</p>
+        <h1 id="gp-title">The same CV got two different hiring verdicts.</h1>
+        <p class="gp-deck"><strong>Same published tool. Same settings. 5 identical runs.</strong> Goalpost checks whether the decision, the reasons and the advice stay put.</p>
+        <p class="gp-plain-thesis">It also checks its own measuring process. The reader must clear a basic repeatability bar; an instability claim faces an extra margin. If an applicable rule fails, Goalpost withholds the affected measure or claim.</p>
+      </div>
+
+      <figure class="gp-run-proof" aria-labelledby="gp-run-caption">
+        <figcaption id="gp-run-caption">
+          <strong>One fictional candidate, Audit #1</strong>
+          <span>same CV + settings</span>
+        </figcaption>
+        <ol class="gp-runs" aria-label="Five verdicts from five identical runs">
+          <li class="gp-run gp-run--reject"><span>Run 1</span><strong>REJECT</strong></li>
+          <li class="gp-run gp-run--accept"><span>Run 2</span><strong>ACCEPT</strong></li>
+          <li class="gp-run gp-run--reject"><span>Run 3</span><strong>REJECT</strong></li>
+          <li class="gp-run gp-run--accept"><span>Run 4</span><strong>ACCEPT</strong></li>
+          <li class="gp-run gp-run--reject"><span>Run 5</span><strong>REJECT</strong></li>
+        </ol>
+        <div class="gp-split" aria-label="Three reject verdicts and two accept verdicts">
+          <p><b>3</b> rejected</p>
+          <p><b>2</b> accepted</p>
+        </div>
+        <p class="gp-proof-note">The worst case split 3–2. Across Audit #1, verdicts changed for <strong>3 / 25</strong> candidates. Audit #2 found <strong>6 / 25</strong> after its only allowed backup reader—locked before any replies—passed.</p>
+      </figure>
+    </section>
+  </div>
+
+  <section class="gp-gate" id="gate" aria-labelledby="gp-gate-title">
+    <div class="gp-shell">
+      <div class="gp-gate-head">
+        <div>
+          <h2 id="gp-gate-title">Goalpost has stopped itself 3 times.</h2>
+          <p class="gp-gate-copy">The hiring tools answer in prose. A separate AI, called the reader, turns each reply into comparable lists. That creates a risk: apparent variation could come from the reader, not the hiring tool.</p>
+        </div>
+        <div class="gp-refusal-count" aria-label="Three reporting-gate refusals">
+          <strong>3</strong>
+          <span>reporting-gate refusals, including the project’s own headline finding</span>
+        </div>
+      </div>
+
+      <div class="gp-gate-rule" role="note" aria-label="Goalpost withholding rule">
+        <b>WITHHELD means the instrument is working</b>
+        <p>The calculation exists in the evidence file, but Goalpost will not present it as a finding it can stand behind.</p>
+      </div>
+
+      <div class="gp-gate-flow" aria-label="How the two-stage reporting gate works">
+        <div class="gp-flow-step">
+          <h3>Hold one reply fixed</h3>
+          <p>The hiring tool’s exact prose is frozen. At this point, the thing being measured cannot change.</p>
+        </div>
+        <div class="gp-flow-step">
+          <h3>Read that reply 3×</h3>
+          <p>The reader separately extracts the decision, reasons and advice each time.</p>
+          <ul class="gp-read-list" aria-label="Three repeat readings">
+            <li><span>Read 1</span><code>decision · reasons · advice</code></li>
+            <li><span>Read 2</span><code>decision · reasons · advice</code></li>
+            <li><span>Read 3</span><code>decision · reasons · advice</code></li>
+          </ul>
+        </div>
+        <div class="gp-flow-step">
+          <h3>Apply two reporting rules in order</h3>
+          <div class="gp-rule-stack">
+            <p><strong>Basic repeat bar: ≥ 0.90.</strong> Below it, withhold the affected measure.</p>
+            <p><strong>Extra instability margin.</strong> Even after the basic bar passes, a claim that something is unstable must clear this stricter rule.</p>
+          </div>
+          <div class="gp-branch">
+            <div class="gp-outcome gp-outcome--pass">
+              <b>Every applicable rule passed</b>
+              <p>The measure or claim is eligible to report.</p>
+            </div>
+            <div class="gp-outcome gp-outcome--stop">
+              <b>An applicable rule failed</b>
+              <p>Stop. Withhold the affected measure or claim.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="gp-limit"><strong>What this gate does:</strong> it rules out one source of measurement noise. <strong>What it does not do:</strong> prove that the reader is correct. A consistently wrong reader could still pass. “Certified” on this page means eligible to report after passing every applicable reader-repeatability rule, not certified as true.</p>
+    </div>
+  </section>
+
+  <section class="gp-section gp-section--measure" aria-labelledby="gp-measures-title">
+    <div class="gp-shell">
+      <div class="gp-narrow">
+        <h2 id="gp-measures-title">Three questions, asked of identical runs</h2>
+        <p class="gp-section-intro">Goalpost measures repeat-stability: whether the same input gets the same output. It does not measure whether the hiring decision is accurate or fair.</p>
+      </div>
+
+      <div class="gp-three-tests">
+        <div class="gp-test-row">
+          <h3>Decision</h3>
+          <p>Did the tool keep the same <strong>hire, reject or unclear</strong> verdict?</p>
+        </div>
+        <div class="gp-test-row">
+          <h3>Reasons</h3>
+          <p>Did it discuss the same topics? A repeated topic is not automatically a stable explanation: in <strong>⅓ – ½</strong> of paired comparisons, the same topic switched from counting for the candidate to counting against them.</p>
+        </div>
+        <div class="gp-test-row">
+          <h3>Advice</h3>
+          <p>Did it recommend the same changes? Audit #1’s exact grouped-overlap score was <strong>0.448</strong>, on a scale where <strong>1.00</strong> means the compared lists match. This is an overlap score, not a percentage of runs.</p>
+        </div>
+      </div>
+
+      <div class="gp-method-line" aria-label="Audit method in four stages">
+        <div class="gp-method-step">
+          <b>Lock the test material</b>
+          <p>25 fictional CVs: five for each of five roles, with one job spec per role. No real people. Cases, prompts and code are hash-pinned before the run.</p>
+        </div>
+        <div class="gp-method-step">
+          <b>Repeat without tuning</b>
+          <p>Each CV runs 5 identical times: 25 cases × 5 runs = 125 pipeline runs per audit, at the published tool’s own settings and pinned commit.</p>
+        </div>
+        <div class="gp-method-step">
+          <b>Translate prose</b>
+          <p>The reader creates lists. Synonyms are grouped under a committed, versioned taxonomy; ungrouped values stay in the evidence.</p>
+        </div>
+        <div class="gp-method-step">
+          <b>Gate, then report</b>
+          <p>The reader repeat-check runs before any prose-based measure is published. Every call, hash, version and cost goes into the evidence file and a one-page report.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gp-section gp-section--evidence" aria-labelledby="gp-evidence-title">
+    <div class="gp-shell">
+      <div class="gp-narrow">
+        <h2 id="gp-evidence-title">What changed, and what the control rules out</h2>
+        <p class="gp-section-intro">The first published tool and its control belong together. The serving model, fictional cases and settings stay the same. The multi-step screening workflow is the part removed.</p>
+      </div>
+
+      <div class="gp-compare-head" aria-label="Comparison design">
+        <b>Held constant: the same model</b>
+        <span>Changed: published 4-agent pipeline → plain one-prompt screener</span>
+      </div>
+      <div class="gp-scroll" role="region" aria-label="Audit one and same-model control comparison" tabindex="0">
+        <table class="gp-compare">
+          <caption>Same model held constant; the multi-step workflow is removed in the control.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Measure</th>
+              <th scope="col">Audit #1: published 4-agent pipeline</th>
+              <th scope="col">Control: same model, no pipeline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Status and setup</th>
+              <td><span class="gp-value">CERTIFIED, MATCHED READER</span><span class="gp-value-note">Open-weights model, as-shipped settings. The same reader setup is used in both columns. $0.28 final measurement for the primary audit.</span></td>
+              <td><span class="gp-value">CERTIFIED, MATCHED READER</span><span class="gp-value-note">The passing v3 + gemma reader supplies this comparison. The failed gpt-4.1 control reader in the gate log does not.</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Candidates whose verdict flipped</th>
+              <td><span class="gp-value">3 / 25</span></td>
+              <td><span class="gp-value">4 / 25</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Decision stability</th>
+              <td><span class="gp-value">0.968</span><span class="gp-value-note">A technical average across repeat comparisons; the natural frequency above is the headline.</span></td>
+              <td><span class="gp-value">0.960</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Reason-topic stability</th>
+              <td><span class="gp-value">0.993</span><span class="gp-value-note">Matched-reader value. The other certified reader measured 0.983. The source summary rounded the matched comparison to 0.61 → 0.99.</span></td>
+              <td><span class="gp-value">0.612</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Advice stability</th>
+              <td><span class="gp-value">0.456</span><span class="gp-value-note">Matched-reader value. The other certified reader measured 0.448.</span></td>
+              <td><span class="gp-value">0.507</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Reason–advice gap</th>
+              <td><span class="gp-value">+0.537</span><span class="gp-value-note">The two certified reader setups give 0.535 / 0.537.</span></td>
+              <td><span class="gp-value">+0.106</span><span class="gp-value-note">Compared with the pipeline’s +0.537.</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Meaning flips</th>
+              <td><span class="gp-value">0.378</span><span class="gp-value-note">Matched-reader value. Across certified readers the public claim stays ⅓ – ½: same topic, opposite sign.</span></td>
+              <td><span class="gp-value">0.249</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="gp-scroll-hint" aria-hidden="true">Swipe the comparison sideways for all columns.</p>
+
+      <div class="gp-inference">
+        <h3>What this comparison supports</h3>
+        <p>Removing the pipeline did not remove verdict flips: the published workflow had 3 / 25 and the same model alone had 4 / 25. The reason–advice pattern changed sharply, from +0.537 to +0.106. The bounded inference is that the model can flip verdicts without the workflow, while the workflow design changes the explanation pattern.</p>
+      </div>
+
+      <div class="gp-audit-two">
+        <div>
+          <h3>Second published tool: Audit #2, a 3-stage screener</h3>
+          <p class="gp-meta">Frontier model, declared substitute, as-shipped settings. $4.00. The primary reader and the only allowed backup were locked before any target reply existed. No further reader or retry was allowed. The backup passed.</p>
+        </div>
+        <div class="gp-publishable">
+          <b>Locked backup reader passed: results may be reported</b>
+          <dl>
+            <div class="gp-metric"><dt>Verdict flips</dt><dd>6 / 25</dd></div>
+            <div class="gp-metric"><dt>Decision stability</dt><dd>0.936</dd></div>
+            <div class="gp-metric"><dt>No clear verdict (“Maybe”)</dt><dd>7 / 25</dd></div>
+            <div class="gp-metric"><dt>Reasons stability</dt><dd>0.729</dd></div>
+            <div class="gp-metric"><dt>Advice stability</dt><dd>0.556</dd></div>
+            <div class="gp-metric"><dt>Reason–advice gap</dt><dd>+0.173</dd></div>
+          </dl>
+          <p class="gp-meta">Every flipped case was in the “no clear verdict” group.</p>
+        </div>
+        <div class="gp-quarantine" role="note" aria-label="Withheld primary-reader calculations retained only for the audit trail">
+          <b>PRIMARY READER WITHHELD</b>
+          <p>The primary reader failed its own repeat check. Its calculations remain visible only as an audit trail. The passing backup supplies the publishable findings.</p>
+          <dl>
+            <div class="gp-metric"><dt>Reasons, primary calculation</dt><dd>0.719</dd></div>
+            <div class="gp-metric"><dt>Advice, primary calculation</dt><dd>0.567</dd></div>
+          </dl>
+          <p class="gp-do-not-cite">Not findings. These values must not be cited.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gp-section gp-section--additional" aria-labelledby="gp-claims-title">
+    <div class="gp-shell">
+      <div class="gp-narrow">
+        <h2 id="gp-claims-title">Additional findings outside the control comparison</h2>
+        <p class="gp-section-intro">The matched comparison already carries the model, workflow and explanation claims. Two further governance observations come directly from the audited tools.</p>
+      </div>
+
+      <ul class="gp-claims">
+        <li class="gp-claim">
+          <div>
+            <h3>Both published tools depend on retired model versions.</h3>
+            <p><strong>2 of 2</strong> audited tools are no longer runnable exactly as published because the model they pin has been retired. The audits use disclosed substitutes; the tool identities stay anonymous.</p>
+          </div>
+        </li>
+        <li class="gp-claim">
+          <div>
+            <h3>One tool often did not give a clear decision.</h3>
+            <p>Audit #2 returned no clear verdict for <strong>7 of 25</strong> candidates. Every verdict flip was in that group. The primary reader struggled with the prose, but the only allowed backup—locked before any replies—passed and returned nearby results. That makes the refusal a fact about the first reader, not evidence that the tool itself was unreadable.</p>
+          </div>
+        </li>
+      </ul>
+
+      <aside class="gp-lab" aria-labelledby="gp-lab-title">
+        <p class="gp-role-note">Supporting context, not a fourth target audit</p>
+        <h3 id="gp-lab-title">Lab backdrop: 4 frontier configs</h3>
+        <p>Screeners built by the researcher: 3 OpenAI + 1 Anthropic, in structured mode with no reader in the path. T = 0, the setting intended to minimise randomness.</p>
+        <div class="gp-lab-metrics">
+          <div><b>+0.12 … +0.29</b><span>reason–advice gap in every config</span></div>
+          <div><b>0.50 – 0.68</b><span>advice stability range</span></div>
+          <div><b>every model</b><span>verdict flips at temperature zero</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="gp-section gp-section--record" aria-labelledby="gp-record-title">
+    <div class="gp-shell">
+      <div class="gp-narrow">
+        <h2 id="gp-record-title">The measurement record</h2>
+        <p class="gp-section-intro">The main story uses plain language. The exact reader checks, refusal history, vocabulary and project status remain below.</p>
+      </div>
+
+      <details class="gp-details" open>
+        <summary>Exact reporting-gate checks</summary>
+        <div class="gp-details-body">
+          <div class="gp-scroll" role="region" aria-label="Exact reader repeatability checks" tabindex="0">
+            <table class="gp-gate-table">
+              <caption>Each value is printed beside its outcome. “Lens” in the source record means reader setup. Gate sampling is separate from the audit runs: 25 sampled responses, each re-read k=3 times.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Record</th>
+                  <th scope="col">Reasons</th>
+                  <th scope="col">Advice</th>
+                  <th scope="col">Reporting outcome</th>
+                  <th scope="col">Why it matters</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Audit #1, first lens (v2)</strong><br>gpt-4.1 · 27 Jul</td>
+                  <td><span class="gp-check gp-check--pass">0.904 ≥ 0.90</span><span class="gp-check-note">passed the bar; failed the stricter margin</span></td>
+                  <td><span class="gp-check gp-check--pass">0.902 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--fail">INSTABILITY CLAIM WITHHELD</span></td>
+                  <td>The 0.904 check passed the 0.90 bar but fell 0.051 short of the row’s 0.955 margin. The numbers were not withheld wholesale; the favourite gap claim was.</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit #1, rebuilt lens (v3)</strong><br>gpt-4.1 · 27 Jul</td>
+                  <td><span class="gp-check gp-check--pass">0.988 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">0.932 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">ELIGIBLE TO REPORT</span></td>
+                  <td>The reader had been rebuilt after seeing this target’s transcripts. That target-informed tuning is a limitation, not erased by the pass.</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit #1, matched comparison reader</strong><br>v3 + gemma · 8 Aug</td>
+                  <td><span class="gp-check gp-check--pass">1.000 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">0.993 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">ELIGIBLE TO REPORT</span></td>
+                  <td>Decision self-agreement was 1.000. This reader supplies the pipeline column in the matched control comparison.</td>
+                </tr>
+                <tr>
+                  <td><strong>Bare-model control, same v3 lens</strong><br>no pipeline scaffold · 8 Aug</td>
+                  <td><span class="gp-check gp-check--fail">0.895 &lt; 0.90</span><span class="gp-check-note">failed</span></td>
+                  <td><span class="gp-check gp-check--fail">0.817 &lt; 0.90</span><span class="gp-check-note">failed</span></td>
+                  <td><span class="gp-check gp-check--fail">WITHHELD</span></td>
+                  <td>This v3 reader run did not produce the certified control figures. A separate reader setup passed and supplied those figures.</td>
+                </tr>
+                <tr>
+                  <td><strong>Bare-model control, matched comparison reader</strong><br>v3 + gemma · 8 Aug</td>
+                  <td><span class="gp-check gp-check--pass">0.991 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">1.000 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">ELIGIBLE TO REPORT</span></td>
+                  <td>Decision self-agreement was 1.000. This reader supplies the control column in the matched comparison.</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit #2, primary lens</strong><br>v3 + gpt-4.1, frozen in advance · 8 Aug</td>
+                  <td><span class="gp-check gp-check--fail">0.876 &lt; 0.90</span><span class="gp-check-note">failed</span></td>
+                  <td><span class="gp-check gp-check--fail">0.814 &lt; 0.90</span><span class="gp-check-note">failed</span></td>
+                  <td><span class="gp-check gp-check--fail">WITHHELD</span></td>
+                  <td>The rules forbid rebuilding this reader after seeing Audit #2’s replies.</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit #2, declared fallback</strong><br>v3 + gemma, also frozen in advance · 8 Aug</td>
+                  <td><span class="gp-check gp-check--pass">0.989 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">0.975 ≥ 0.90</span><span class="gp-check-note">passed</span></td>
+                  <td><span class="gp-check gp-check--pass">ELIGIBLE TO REPORT</span></td>
+                  <td>Decision self-agreement was 1.000. The fallback licensed the published Audit #2 results.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="gp-scroll-hint" aria-hidden="true">Swipe the record sideways for all columns.</p>
+          <div class="gp-calibration" aria-label="Calibration scale from 0.50 to 1.00, with reportability cutoff at 0.90">
+            <span>0.50</span>
+            <span>0.70</span>
+            <span class="gp-cutoff">0.90 cutoff</span>
+            <span>1.00</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="gp-details">
+        <summary>The three refusals</summary>
+        <div class="gp-details-body">
+          <ol class="gp-refusal-log">
+            <li>
+              <time datetime="2026-07-27">27 Jul</time>
+              <div><h3>No #1: the strictest rule stopped the favourite claim.</h3><p>The first reader scored 0.904 on reasons and 0.902 on advice. Both passed the 0.90 bar, but 0.904 was 0.051 short of the 0.955 margin required for the instability claim. A rebuilt v3 reader later passed, but it had studied the target transcripts. That dependence is disclosed.</p></div>
+            </li>
+            <li>
+              <time datetime="2026-08-08">08 Aug</time>
+              <div><h3>No #2: the target-informed reader failed on the control.</h3><p>The same v3 reader was less repeatable on prose without the target’s structure. The certified control figures therefore come from the v3 + gemma reader that passed on both sides of the comparison.</p></div>
+            </li>
+            <li>
+              <time datetime="2026-08-08">08 Aug</time>
+              <div><h3>No #3: the frozen primary reader failed.</h3><p>For Audit #2, the primary and only backup reader were locked before any target reply existed. The primary failed; the backup then passed at 0.989 / 0.975. Their target measurements agree to about ±0.01. The failed calculation stays in the audit trail; the backup licenses the findings.</p></div>
+            </li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="gp-details">
+        <summary>Reconciliation with the supplied snapshot</summary>
+        <div class="gp-details-body">
+          <p>The supplied one-pass page captured Audit #2 before the fallback reader finished. It therefore showed <strong>5 / 25</strong>, <strong>0.944</strong>, <strong>0.719</strong> and <strong>0.567</strong>, with the last two struck through as withheld. The completed, pre-declared fallback now supports 6 / 25, 0.936, 0.729 and 0.556; the primary values remain visible above as withheld-reader calculations.</p>
+          <p>A provenance review also corrected the first Audit #1 reader check from the supplied page’s <strong>0.899</strong> to <strong>0.904</strong>. The original chart position was wrong for either value. This rebuild uses the committed primary record and keeps the superseded figures here so the change is auditable, not silent.</p>
+        </div>
+      </details>
+
+      <details class="gp-details">
+        <summary>Plain-language glossary and score caveats</summary>
+        <div class="gp-details-body">
+          <dl class="gp-glossary">
+            <div><dt>Reader</dt><dd>A separate AI that turns a hiring tool’s prose into lists that can be compared.</dd></div>
+            <div><dt>Self-agreement</dt><dd>The reader repeat-check on the exact same reply. It measures repeatability, not correctness.</dd></div>
+            <div><dt>Lens</dt><dd>The technical record’s name for a particular reader model and instruction setup.</dd></div>
+            <div><dt>Cluster-level</dt><dd>Equivalent wording is grouped before comparison. The ungrouped, raw-word result is also retained and is always lower in the results shown here.</dd></div>
+            <div><dt>Corpus</dt><dd>The locked collection of fictional CV/job cases.</dd></div>
+            <div><dt>Temperature</dt><dd>A randomness-related setting. Goalpost uses each published tool’s own setting; T = 0 labels the lab setting intended to minimise randomness.</dd></div>
+            <div><dt>Stability score</dt><dd>An average across comparisons, not the percentage of candidates that flipped. That is why 3 / 25 and 0.968 can both describe Audit #1.</dd></div>
+          </dl>
+        </div>
+      </details>
+
+      <details class="gp-details">
+        <summary>Origin and dated project status</summary>
+        <div class="gp-details-body">
+          <p>The work grew out of a 2026 undergraduate dissertation, which measured reasons at 0.89 and advice at 0.36. Goalpost turns that lab result into a repeatable audit process.</p>
+          <ol class="gp-timeline">
+            <li><time>APR 2026</time><p>Dissertation: reasons 0.89 vs advice 0.36.</p></li>
+            <li><time>05 JUL</time><p>Goalpost build begins; gate thresholds pre-registered.</p></li>
+            <li><time>26 JUL</time><p>Four lab configs measured; the gap replicates in every one.</p></li>
+            <li><time>27 JUL</time><p>Audit #1 complete after the gate’s first refusal.</p></li>
+            <li><time>08 AUG</time><p>Controls and matched lenses; Audit #2; disclosure email sent to target #1’s author.</p></li>
+            <li><time>NOW</time><p>Audit #2 certified via the fallback reader; response window open; write-up v4 finished.</p></li>
+            <li><time>~22 AUG</time><p>Planned publication, anonymous by default.</p></li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <footer class="gp-footer">
+    <div class="gp-shell gp-footer-grid">
+      <div>
+        <h2>Evidence trail</h2>
+        <p>Every reported number traces to a committed transcript, corpus hash, configuration identity, audited-code commit and pinned version of each pipeline stage.</p>
+      </div>
+      <div>
+        <h2>Why the tools are anonymous</h2>
+        <p>Both audited tools remain category-only while courtesy disclosure is open. Publication is anonymous by default; no identifying detail is added here.</p>
+      </div>
+      <div>
+        <h2>Cost record</h2>
+        <p>Total paid API spend across the investigation in this evidence snapshot: under $12.</p>
+      </div>
+    </div>
+  </footer>
+</main>
