@@ -10,8 +10,9 @@ the norm. Plan: **step 1**, the author posts the content-free contact
 request below as a GitHub issue on the repo (reveals only that someone
 wants to share research privately — nothing about findings); **step 2**,
 when he replies with a channel, the full note below goes to it verbatim.
-If no response by ~19 August, the anonymous-by-default path applies
-unchanged — the attempt and its date are the record.
+Publication proceeded 9 August (author decision, D-063) with anonymity
+preserved; the posted request and its date are the record of contact
+effort, and the full note goes to any channel he ever provides.
 
 **Recipient:** Pakawat Kraisintu (GitHub: Pakawat-Dev), author of the
 MIT-licensed Candidate_Screening_Agent. Bio: "enjoys coding as a hobby" —
@@ -21,22 +22,24 @@ tone calibrated accordingly.
 
 ## Step 1 — content-free contact request (public GitHub issue)
 
-> **Title:** Independent research involving this repo — may I share it
-> with you privately before publishing?
+> **Title:** Independent research involving this repo — full details
+> available to you privately
 >
-> Hi Pakawat — I'm an AI-governance researcher and I've done some
-> independent research that involves this repository. I'd like to share
-> the full details with you privately before anything is published, as a
-> courtesy — you'd get the first read and a chance to respond. Could you
-> post or email me a way to reach you? I'm at
-> jamie.horsburgh777@outlook.com and the eventual write-up venue is
+> Hi Pakawat — I'm an AI-governance researcher. I've published an
+> independent, anonymised behavioural analysis that involves this
+> repository (it is not named or linked anywhere in the publication).
+> I'd like to share the complete details and evidence with you privately
+> — you have a standing offer to correct anything you believe is in
+> error, and any response you'd like made will be printed alongside.
+> Could you post or email me a way to reach you? I'm at
+> jamie.horsburgh777@outlook.com; the write-up venue is
 > https://jamiehorsburgh.substack.com. Thanks for publishing your work
 > openly.
 
 ## Step 2 — the full note (private channel, once he provides one)
 
-Subject: Heads-up before I publish: an independent stability audit of
-your candidate-screening project
+Subject: An independent stability audit of your candidate-screening
+project — full details and evidence for you
 
 Hi Pakawat,
 
@@ -47,8 +50,8 @@ open-source audit instrument that measures whether LLM screening systems
 give the same answer twice, and your Candidate_Screening_Agent was its
 second real-world target — because it's one of the few complete,
 runnable, published examples of the LangGraph screening pattern. That's a
-compliment to the openness of your work, and I want you to see the
-results before anyone else does.
+compliment to the openness of your work. An anonymised analysis is now
+published; this note gives you the full detail directly.
 
 What I did: I ran your pipeline's three LLM stages entirely on my own
 API keys, at the pinned commit 707e6ab, mirroring your prompts and data
@@ -76,21 +79,16 @@ so. I'd also note that every configuration I've measured, on six model
 families, flips some verdicts on identical inputs — this is not unique
 to your design.
 
-In the write-up I describe the project as "a published 3-stage screening
-pipeline" without naming it or you. I'm happy to (a) name the project
-with a link, (b) keep it anonymous, or (c) hold publication for a
-reasonable window while you look at the full evidence. If you think I've
-made an error, I want to know before I publish, and I'll print your
-response alongside if you'd like.
+The write-up describes the project as "a published 3-stage screening
+pipeline" without naming it or you, and that anonymity stands unless you
+prefer attribution (in which case: name and link, gladly). If you think
+I've made an error anywhere, I want to know — corrections will be made
+prominently, and I'll print any response of yours alongside if you'd
+like.
 
 The evidence is yours on request: reply and I'll send the complete
 bundle within a day — every transcript, config, metric file and the
 audit instrument itself, enough to re-run everything yourself.
-
-Timeline, so this isn't an open loop: I'm planning to publish on or
-around 22 August 2026. If I don't hear from you I'll go ahead with the
-anonymous version (option b), and the offer to correct or respond stays
-open after publication.
 
 No action is needed from you; this is a courtesy note, not a demand.
 Thanks for building in the open — audits like this are only possible

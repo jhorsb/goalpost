@@ -1,10 +1,14 @@
 # Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse
 
 **Jamie Horsburgh** — independent researcher
-*Draft v1 (2026-08-09) — for arXiv (cs.CY). Every number traces to a
+*v1 (2026-08-09) — for arXiv (cs.CY). Every number traces to a
 committed transcript in the accompanying evidence repository. Audited
-systems are described by design category; full identification is pinned
-in the evidence, pending courtesy-disclosure windows with their authors.*
+systems are described by design category; identification is pinned in
+the evidence. The first pipeline's author received the complete findings
+privately before publication, with a standing correction offer; the
+second publishes no contact channel — a public contact request stands on
+their repository and the full findings note is held for any reply.
+Anonymity is the default for both unless they opt in to naming.*
 
 ---
 

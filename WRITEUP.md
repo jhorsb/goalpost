@@ -1,7 +1,6 @@
 # I ran an AI hiring tool five times on the same CV. It changed its mind.
 
-*Draft v4 — from the WRITEUP_TEMPLATE skeleton; every number traces to a
-committed audit transcript. Target identity withheld from the prose per
+*Published 9 August 2026 — every number traces to a committed audit transcript; evidence repository public as of today. Target identity withheld from the prose per
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
 
@@ -320,9 +319,11 @@ of a coffee.
 
 *On the target's identity: this piece deliberately describes a design
 category rather than naming a small open-source project. The full
-identification is pinned in the audit evidence, and the professional norm
-I intend to follow is disclosure to the audited party before publication.
-If you're going to measure people's work, you owe them the first read.*
+identification is pinned in the audit evidence. The project's author was
+sent the complete findings privately before publication, with a standing
+offer to correct anything in error and to have any response printed
+alongside; anonymity is the default unless they choose otherwise. If
+you're going to measure people's work, you owe them the first read.*
 
 **Next:** more targets. Asking "does your screening tool give the same
 answer twice?" now costs about a pound per system. If you run one, the
