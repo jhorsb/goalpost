@@ -22,7 +22,7 @@ round should check this table against the surfaces, not trust it.
 | 12 | FIXED | D-068 | README carries the conditional phrasing, bound |
 | 13 | FIXED | D-068 | explainer advice row states the conditioning, bound |
 | 14 | FIXED | D-068 | reporter headline carries the clause + discard count; 15 reports regenerated; old form banned |
-| 15 | FIXED | D-077 | "roughly a third to a half" + exact range (0.378–0.508) in README/explainer/paper. WRITEUP's exact phrase "between a third and a half" is author-protected and sits directly beside the exact range; flagged to the author rather than altered |
+| 15 | FIXED | D-077, D-082 | "roughly a third to a half" + exact range (0.378–0.508) at every site. WRITEUP's author-protected phrase was held pending the author's decision through two re-verification rounds; the author opted (D-082) to adopt "roughly a third to a half" there too |
 | 16 | FIXED | D-067 | 6/25 modal-no-verdict under the certified lens; 7-of-25 banned |
 | 17 | FIXED | D-070 | "a pound per system" (the £ claim spelled out) caught on full-text read; both spellings banned |
 | 18 | FIXED | D-077 | "always lower" → "never higher" (equality occurs: slice-live gpt4omini recourse raw=cluster=1.000); WRITEUP box likewise |

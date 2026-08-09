@@ -9,7 +9,7 @@ type: software
 repository-code: "https://github.com/jhorsb/goalpost"
 license: MIT
 date-released: "2026-08-09"
-version: "1.0.0"
+version: "1.0.1"
 doi: 10.5281/zenodo.21862442
 identifiers:
   - type: doi
@@ -17,7 +17,7 @@ identifiers:
     description: "Concept DOI — resolves to the latest archived version."
   - type: doi
     value: 10.5281/zenodo.21862443
-    description: "Version DOI — the v1.0.0 snapshot underlying the paper."
+    description: "Version DOI — the v1.0.0 snapshot (initial archive)."
 keywords:
   - algorithmic recourse
   - LLM auditing

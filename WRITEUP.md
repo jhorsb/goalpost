@@ -170,7 +170,7 @@ The pipeline's recruiter agent always evaluates under the same four
 headings — skills, experience, education, extras. Those headings are
 almost perfectly stable across runs: measure "did it discuss the same
 topics?" and you get 0.983. But measure whether each topic *counted for or
-against the candidate*, and it flips in **between a third and a half** of
+against the candidate*, and it flips in **roughly a third to a half** of
 paired comparisons (0.378–0.508, depending on which of two independently
 certified extraction lenses does the reading). Your experience can be the
 reason you're recommended on one run and the reason you're not on the

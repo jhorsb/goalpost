@@ -563,8 +563,9 @@ are in the accompanying repository, MIT-licensed. Where pipeline stages
 ran on accounts the instrument's meter does not see, provider dashboard
 totals are the cost source of truth. The repository is archived at
 Zenodo under DOI 10.5281/zenodo.21862442, which resolves to the latest
-version; the exact snapshot underlying this paper is release v1.0.0,
-DOI 10.5281/zenodo.21862443. Cite this paper for the method and
+version; the exact snapshot underlying this paper is the release tagged
+**v1.0.1** in that archive (each release carries its own version DOI,
+recorded in `CITATION.cff`). Cite this paper for the method and
 findings, and the software DOI when using the instrument itself or
 depending on the archived evidence. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
