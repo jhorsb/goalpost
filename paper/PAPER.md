@@ -1,6 +1,7 @@
 # Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse
 
 **Jamie Horsburgh** — independent researcher
+([ORCID 0009-0005-2567-5906](https://orcid.org/0009-0005-2567-5906))
 *v1 (2026-08-09) — for arXiv (cs.CY). Every measurement traces to a
 committed transcript in the accompanying evidence repository;
 literature, model-metadata and cost figures cite named sources. Audited

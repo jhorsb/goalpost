@@ -4,6 +4,7 @@ title: "Goalpost: A Certification-Gated Protocol for Auditing the Stability of L
 authors:
   - family-names: Horsburgh
     given-names: Jamie
+    orcid: "https://orcid.org/0009-0005-2567-5906"
 type: software
 repository-code: "https://github.com/jhorsb/goalpost"
 license: MIT
@@ -29,5 +30,6 @@ preferred-citation:
   authors:
     - family-names: Horsburgh
       given-names: Jamie
+      orcid: "https://orcid.org/0009-0005-2567-5906"
   year: 2026
   notes: "Preprint; arXiv identifier added on submission. Cite the paper for the method and findings; cite the software DOI (10.5281/zenodo.21862442) when using the instrument or depending on the archived evidence."
