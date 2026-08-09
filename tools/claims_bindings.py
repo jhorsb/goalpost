@@ -106,7 +106,12 @@ def bindings():
     zeros, total_fx = _zero_effects()
 
     W, P = "WRITEUP.md", "paper/PAPER.md"
+    E = "phase7/goalpost-explainer-rebuilt.html"
     return [
+        ("a2 no-verdict (explainer)", E,
+         r"no clear verdict for <strong>(\d) of 25</strong>", (str(_unclear(A2)),)),
+        ("a2 containment (explainer)", E,
+         r"([Ff]ive|[Ss]ix|[Ff]our|\d) of the six verdict flips were in that group", ("Five",)),
         ("a1 flips (writeup)", W, r"verdict changed on (\w+) of\s+?twenty-five", (WORDS[_flips(A1)],)),
         ("a1 recourse (writeup)", W, r"Recourse\s+stability measured \*\*(0\.\d{3})\*\*", (a1_rec,)),
         ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s+a pre-registered bar", (a1_sa_rec,)),

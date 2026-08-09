@@ -36,6 +36,9 @@ BANNED = [
     (r"indistinguishable from", None),
     (r"\banonymis|\banonymity", r"narrative non-naming|not anonymity"),
     (r"Same CV on Tuesday", None),
+    # audit-2 no-verdict: certified lens says 6/25 (D-067); any 7-of-25
+    # phrasing is the withheld lens's figure resurfacing
+    (r"7\s*/\s*25|7 of 25|seven of (?:the )?25|seven of twenty-five", None),
 ]
 
 # Record counts that must agree wherever they are asserted.
