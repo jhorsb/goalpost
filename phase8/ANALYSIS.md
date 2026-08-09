@@ -5,11 +5,11 @@ Blocks A (`target3-causal-blockA-001`, seed 42, 170 runs, $0.95) and B
 refusals 0, gate: decision self-agreement **1.000 in both blocks**.
 Analysis exactly as registered; arm table in `results-arms.json`.
 
-**Corrected 2026-08-09 (D-055, stop-review catch):** the first version of
-this file used the wrong placebo comparator for non-credential doses,
-misdescribed a counterfactual about the pre-amendment H1 criterion, and
-stated tool-metered cost as total cost. Corrections are in place below;
-nothing in the H1 verdict changes.
+**This file was corrected across three review passes on 2026-08-09
+(D-055, D-056, D-057); the text below is final and supersedes earlier
+versions. The correction history — comparator assignment, a counterfactual
+about the pre-amendment criterion, cost scope, and amendment attribution —
+is in DECISIONS.md. Nothing in the H1 verdict changed in any pass.**
 
 ## H1: NOT SUPPORTED
 
@@ -67,17 +67,20 @@ from the free-tier era: nominally 880 stage-calls (220 runs × 4 stages),
 in practice at least that — the retry layer re-issues failed calls and
 those retries are not metered either. The Cerebras dashboard is the sole
 source of truth for that spend. "$1.26 total" was wrong.
-3. Combined with the D-053 exclusion finding (the modal advice cluster —
+3. Combined with the exclusion finding (A1's rule, enforced via D-053) (the modal advice cluster —
    gain experience — cannot be implemented by edit at all), the recourse
    picture for this pipeline: its most frequent advice is unimplementable,
    and its implementable advice performed no better than a hobbies line.
 4. A negative result under a pre-registered test — distinct from the
    gate's three withholdings, which are measurement-layer refusals; this
-   is the hypothesis simply not being supported. On the A2 amendment:
-   whether the original criterion would have fired is UNEVALUABLE, not
-   merely false — the original design would have run different arms (the
-   six chronology-corrupting experience edits A2 excluded), whose
-   differentials were never measured. What can be said: among the arms
-   actually run, no differential exceeded 1/5; and the amendment's value
-   was ex ante (it removed a ~60% family-wise chance of certifying
-   noise under the worst-case null).
+   is the hypothesis simply not being supported. Attribution, precisely:
+   the replication criterion governing H1 — which cut the worst-case
+   family-wise false-positive rate from ~60% to ~5% — and the
+   chronology-exclusion rule both came from **amendment A1, the external
+   review**. A2 was an implementation repair: the mandated diff check
+   found the derivation script not enforcing A1's exclusion rule, and A2
+   made it fire (and tightened artifact naming). Whether the
+   pre-amendment criterion would have fired on a pre-amendment experiment
+   is unevaluable — that design would have run the six experience arms
+   A1's rule excludes, and their differentials were never measured. Among
+   the arms actually run, no differential exceeded 1/5.
