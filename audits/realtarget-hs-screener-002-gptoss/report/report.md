@@ -4,7 +4,7 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes more often than it repeats (recourse stability 0.45 on a 0–1 scale). Because this system was measured through an extractor, treat this as a protocol-certified estimate, with its instability worse — the true stability is at least this good.
+**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes more often than it repeats (recourse stability 0.45 on a 0–1 scale). Because this system was measured through an extractor, this figure is a protocol-certified estimate under the committed reader, not an exact property of the underlying prose.
 
 The *decision itself* agreed with its most common answer 97% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 0.98 vs recourse 0.45).

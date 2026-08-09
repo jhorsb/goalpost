@@ -164,8 +164,9 @@ def render_report(metrics: dict) -> str:
             if extracted:
                 lower_bound_note = (
                     " Because this system was measured through an extractor, "
-                    "treat this as a protocol-certified estimate, with its instability "
-                    "worse — the true stability is at least this good."
+                    "this figure is a protocol-certified estimate under the "
+                    "committed reader, not an exact property of the "
+                    "underlying prose."
                 )
             lines.append(
                 f"**If you {headline_statistic(recourse)}.** "

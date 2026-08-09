@@ -49,7 +49,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 ## The headline
 
-**If you ask twice and, on average, nearly all of its recommendations appear both times.** In our measurement, its improvement advice is largely consistent across repeat queries (recourse stability 1.00 on a 0–1 scale). Because this system was measured through an extractor, treat this as a protocol-certified estimate, with its instability worse — the true stability is at least this good.
+**If you ask twice and, on average, nearly all of its recommendations appear both times.** In our measurement, its improvement advice is largely consistent across repeat queries (recourse stability 1.00 on a 0–1 scale). Because this system was measured through an extractor, this figure is a protocol-certified estimate under the committed reader, not an exact property of the underlying prose.
 
 The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 1.00 vs recourse 1.00).
