@@ -100,6 +100,7 @@ def bindings():
     sa1 = _sut(A1)["extractor_self_agreement"]
     a1_sa_rec = f"{sa1['recourse']['cluster']['mean_jaccard']:.3f}"
     lab_gaps = [_gap(a, i) for a, i in LABS4]
+    lab_recs = [_mean(a, "recourse_stability", i=i) for a, i in LABS4]
     lab_decs = [_mean(a, "decision", i=i) for a, i in LABS4]
     six_gaps = [_gap(a, i) for a, i in SIX]
     kimi_unparsed = 125 - _parsed("kimi-k3-lab-001")
@@ -185,6 +186,12 @@ def bindings():
          r"gap from \+(0\.\d{3}) to \+(0\.\d{3})", (mt_gap, ct_gap)),
         ("a2 gap stat (explainer)", E,
          r"Reason–advice gap</dt><dd>\+(0\.\d{3})</dd>", (a2_gap,)),
+        ("lab gap range card (explainer)", E,
+         r"<b>\+(0\.\d{2}) … \+(0\.\d{2})</b><span>reason–advice gap in every config",
+         (f"{min(lab_gaps):.2f}", f"{max(lab_gaps):.2f}")),
+        ("lab advice range card (explainer)", E,
+         r"<b>(0\.\d{2}) – (0\.\d{2})</b><span>advice stability range",
+         (f"{min(lab_recs):.2f}", f"{max(lab_recs):.2f}")),
         ("audit3 zero effects (paper)", P, r"\*\*(\d+) of 20 advised-edit effects were exactly zero\*\*",
          (str(zeros),)),
     ]
