@@ -158,7 +158,9 @@ self-agreement rose to decision 1.000 / reasons 0.988 / recourse 0.932
 (25-case sample, k=3, cluster level), certifying both sides. Final
 certified numbers: reason stability **0.983** at the pipeline's own
 category granularity (raw 0.895; partly structural — disclosed), recourse
-**0.448** — a **reason–recourse gap of 0.535**, the dissertation's
+**0.448** (over same-decision run-pairs per the registered metric;
+14/250 pairs discarded, all in the three flip cases)
+— a **reason–recourse gap of 0.534**, the dissertation's
 asymmetry on a real target, obtained the pre-registered way: the gate
 blocked the claim, the extractor was improved, the measurement was
 re-run, and the finding survived. Also newly certified: direction-flip

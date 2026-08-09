@@ -4,7 +4,7 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.54 on a 0–1 scale).
+**Ask twice and, when the decision comes back the same, on average only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.54 on a 0–1 scale, compared only between runs that reached the same decision; 0 of 10 run-pairs excluded for decision flips).
 
 The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 1.00 vs recourse 0.54).
@@ -49,7 +49,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 ## The headline
 
-**If you ask twice and, on average, nearly all of its recommendations appear both times.** In our measurement, its improvement advice is largely consistent across repeat queries (recourse stability 1.00 on a 0–1 scale). Because this system was measured through an extractor, this figure is a protocol-certified estimate under the committed reader, not an exact property of the underlying prose.
+**Ask twice and, when the decision comes back the same, on average nearly all of its recommendations appear both times.** In our measurement, its improvement advice is largely consistent across repeat queries (recourse stability 1.00 on a 0–1 scale, compared only between runs that reached the same decision; 0 of 10 run-pairs excluded for decision flips). Because this system was measured through an extractor, this figure is a protocol-certified estimate under the committed reader, not an exact property of the underlying prose.
 
 The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 1.00 vs recourse 1.00).

@@ -40,24 +40,42 @@ def anchor_label(score: float) -> str:
 
 
 def headline_statistic(recourse_jaccard: float) -> str:
-    """Data-derived lay headline: 'ask twice; on average only 1 in N
-    recommendations appears both times.'"""
+    """Data-derived lay headline: 'ask twice; when the decision comes
+    back the same, on average only 1 in N recommendations appears both
+    times.' The same-decision clause is the construct, not a caveat
+    (METHODOLOGY §1): cross-decision pairs are excluded from this
+    number, so every variant of the sentence must carry it."""
     if recourse_jaccard <= 0:
         return (
-            "ask twice and, on average, none of its recommendations "
-            "appears both times"
+            "ask twice and, when the decision comes back the same, "
+            "on average none of its recommendations appears both times"
         )
     if recourse_jaccard > 0.85:
         return (
-            "ask twice and, on average, nearly all of its recommendations "
-            "appear both times"
+            "ask twice and, when the decision comes back the same, "
+            "on average nearly all of its recommendations appear both times"
         )
     # Coarse fractions read as lay language ("1 in 3"), finer ones don't.
     frac = Fraction(recourse_jaccard).limit_denominator(4)
     return (
-        f"ask twice and, on average, only {frac.numerator} in "
+        f"ask twice and, when the decision comes back the same, "
+        f"on average only {frac.numerator} in "
         f"{frac.denominator} of its recommendations appears both times"
     )
+
+
+def _pooled_discarded_pairs(sut: dict) -> tuple[int, int]:
+    """Run-pairs dropped by the same-decision filter, pooled over all
+    C(n,2) pairs of scored runs; printed beside the conditional number
+    (METHODOLOGY §1: 'their fraction is reported')."""
+    discarded = total = 0
+    for condition in sut["conditions"]:
+        for case in condition["cases"]:
+            n = case["denominators"]["scored"]
+            pairs = n * (n - 1) // 2
+            total += pairs
+            discarded += round(case.get("discarded_pair_fraction", 0.0) * pairs)
+    return discarded, total
 
 
 def _sut_headline_numbers(sut: dict) -> dict:
@@ -168,10 +186,15 @@ def render_report(metrics: dict) -> str:
                     "committed reader, not an exact property of the "
                     "underlying prose."
                 )
+            headline = headline_statistic(recourse)
+            discarded, total_pairs = _pooled_discarded_pairs(sut)
             lines.append(
-                f"**If you {headline_statistic(recourse)}.** "
+                f"**{headline[0].upper()}{headline[1:]}.** "
                 f"In our measurement, its improvement {anchor_label(recourse)} "
-                f"(recourse stability {recourse:.2f} on a 0–1 scale)."
+                f"(recourse stability {recourse:.2f} on a 0–1 scale, compared "
+                f"only between runs that reached the same decision; "
+                f"{discarded} of {total_pairs} run-pairs excluded for "
+                f"decision flips)."
                 + lower_bound_note
             )
         lines.append("")

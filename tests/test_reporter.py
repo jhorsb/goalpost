@@ -63,6 +63,25 @@ def test_headline_statistic_is_data_derived_not_adjective():
     assert "1 in 2" in headline_statistic(0.5)
 
 
+def test_headline_statistic_states_same_decision_conditioning():
+    # Sol #11-14 / METHODOLOGY §1: the number is computed over
+    # same-decision pairs only; every lay headline variant must say so.
+    for score in (0.0, 0.5, 0.9):
+        assert "decision comes back the same" in headline_statistic(score)
+
+
+def test_report_discloses_discarded_pair_count():
+    # The same-decision filter's discards must be printed beside the
+    # conditional number (METHODOLOGY §1: "their fraction is reported").
+    metrics = metrics_fixture(recourse=0.45)
+    metrics["suts"][0]["conditions"][0]["cases"][0]["discarded_pair_fraction"] = 0.6
+    md = render_report(metrics)
+    assert "6 of 10 run-pairs excluded" in md
+    assert "same decision" in md
+    md_zero = render_report(metrics_fixture())
+    assert "0 of 10 run-pairs excluded" in md_zero
+
+
 def test_anchors_are_versioned():
     assert ANCHORS["version"]
     assert ANCHORS["bands"]

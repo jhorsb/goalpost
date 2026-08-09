@@ -22,7 +22,9 @@ every pipeline stage, and the audited code's commit.
 
 - **Audit #1** — a published 4-agent screening pipeline, run exactly as
   shipped on the author's own keys. Verdict flipped on 3/25 identical
-  inputs; advice repeated less than half the time (0.448); explanations
+  inputs; advice repeated less than half the time even between runs
+  that agreed on the verdict (0.448; cross-verdict pairs are excluded
+  from this measure and reported separately); explanations
   kept their topics (0.98+) while flipping whether a topic counted *for*
   or *against* the candidate in a third to a half of comparisons. A
   matched control (same model, no pipeline) showed the verdict-flipping

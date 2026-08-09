@@ -51,6 +51,18 @@ def _parsed(audit, i=0):
     return sum(c["denominators"]["parsed"] for c in _cases(audit, i))
 
 
+def _discarded_pairs(audit, i=0):
+    """Pairs dropped by the same-decision filter, over all C(n,2) pairs
+    of scored runs — the conditioning disclosure (Sol #11-14)."""
+    disc = total = 0
+    for c in _cases(audit, i):
+        n = c["denominators"]["scored"]
+        pairs = n * (n - 1) // 2
+        total += pairs
+        disc += round(c.get("discarded_pair_fraction", 0.0) * pairs)
+    return disc, total
+
+
 def _unclear(audit, i=0):
     return sum(1 for c in _cases(audit, i)
                if c["decision_stability"]["modal_decision"] == "unclear")
@@ -114,7 +126,9 @@ def bindings():
         ("a1 flips (readme)", R, r"Verdict flipped on (\d)/25 identical", (str(_flips(A1)),)),
         ("a2 flips (readme)", R, r"Verdict flipped on (\d)/25;", (str(_flips(A2)),)),
         ("a2 no-verdict (readme)", R, r"for (\d)/25 the most common outcome", (str(_unclear(A2)),)),
-        ("a1 recourse (readme)", R, r"less than half the time \((0\.\d{3})\)", (a1_rec,)),
+        ("a1 recourse conditional (readme)", R,
+         r"less than half the time even between runs\s+that agreed on the verdict \((0\.\d{3})",
+         (a1_rec,)),
         # disclosure note (unsent; must match certified record when it goes)
         ("a2 flips (note)", D, r"verdict changed\s+for (\w+) of 25", (str(_flips(A2)),)),
         ("a2 no-verdict (note)", D, r"and for (\w+) of 25 candidates the", (str(_unclear(A2)),)),
@@ -135,6 +149,17 @@ def bindings():
          r"(\w+) of the six (?:verdict flips|flipped cases) (?:were|occurred) in", ("five",)),
         ("a1 flips (writeup)", W, r"verdict changed on (\w+) of\s+?twenty-five", (WORDS[_flips(A1)],)),
         ("a1 recourse (writeup)", W, r"Recourse\s+stability measured \*\*(0\.\d{3})\*\*", (a1_rec,)),
+        # Sol #11-14: the same-decision conditioning must stay attached
+        # to the 0.448 claim wherever it is made
+        ("a1 recourse conditioning phrase (writeup)", W,
+         r"stability measured \*\*(0\.\d{3})\*\*: ask this pipeline twice and,\s+when both\s+runs reach the same verdict",
+         (a1_rec,)),
+        ("a1 discarded pairs (writeup)", W,
+         r"excluded \((\d+) of the (\d+) pairs here",
+         tuple(str(v) for v in _discarded_pairs(A1))),
+        ("a1 recourse conditioning (explainer)", E,
+         r"grouped-overlap score was <strong>(0\.\d{3})</strong>.{0,220}?same verdict",
+         (a1_rec,)),
         ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s+a pre-registered bar", (a1_sa_rec,)),
         ("a1 topic (writeup)", W, r"topics\?\" and you get (0\.\d{3})", (a1_rea,)),
         ("valence range (writeup)", W, r"\((0\.\d{3})–(0\.\d{3}), depending", (mt_val, a1_val)),

@@ -41,6 +41,10 @@ BANNED = [
     # audit-2 no-verdict: certified lens says 6/25 (D-067); any 7-of-25
     # phrasing is the withheld lens's figure resurfacing
     (r"7\s*/\s*25|7 of 25|seven of (?:the )?25|seven of twenty-five", None),
+    # Sol #11-14: the unconditional ask-twice headline hid the
+    # same-decision conditioning; the conditional form says "twice and,
+    # when ..." so this exact contraction is always the old template
+    (r"twice and, on average", None),
 ]
 
 # Record counts that must agree wherever they are asserted.

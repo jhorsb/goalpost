@@ -131,12 +131,18 @@ tool's own default settings.* I make no claim about the rate at which it
 occurs — only that a candidate's outcome from this design can depend on
 which run they happened to get.
 
-**2. The advice repeats about half the time.** (Certified.) Recourse
-stability measured **0.448**: ask this pipeline twice and, on average,
-fewer than half of its improvement recommendations appear both times —
-the least stable advice of anything I have measured with this
+**2. The advice repeats about half the time, even when the verdict
+holds still.** (Certified.) Recourse
+stability measured **0.448**: ask this pipeline twice and, when both
+runs reach the same verdict, on average fewer than half of its
+improvement recommendations appear both times — the least stable advice
+of anything I have measured with this
 instrument, across lab configurations on six base models and a
-bare-model control on the pipeline's own model. Because the tool's
+bare-model control on the pipeline's own model. The same-verdict
+condition is the measure's design, not a footnote: run-pairs where the
+verdict itself flipped are excluded (14 of the 250 pairs here, all
+within finding 1's three flip cases), so this is advice churn on top of
+a settled decision, not instability borrowed from finding 1. Because the tool's
 output is free text, this number passes through an extraction layer: it
 is a protocol-certified estimate rather than an exact property of the
 underlying prose. The extraction layer's measured consistency on advice,

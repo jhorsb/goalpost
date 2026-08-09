@@ -4,7 +4,7 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 3 in 4 of its recommendations appears both times.** In our measurement, its improvement advice mostly repeats, with noticeable variation (recourse stability 0.81 on a 0–1 scale).
+**Ask twice and, when the decision comes back the same, on average only 3 in 4 of its recommendations appears both times.** In our measurement, its improvement advice mostly repeats, with noticeable variation (recourse stability 0.81 on a 0–1 scale, compared only between runs that reached the same decision; 4 of 50 run-pairs excluded for decision flips).
 
 The *decision itself* agreed with its most common answer 96% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 0.91 vs recourse 0.81).

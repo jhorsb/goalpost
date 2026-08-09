@@ -65,7 +65,7 @@ def test_html_is_a_real_document_not_wrapped_markdown():
 
 def test_html_contains_headline_and_satnav():
     html = render()
-    assert "ask twice" in html
+    assert "ask twice" in html.lower()
     assert "sat-nav" in html
 
 
