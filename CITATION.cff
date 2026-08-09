@@ -18,6 +18,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.21862443
     description: "Version DOI — the v1.0.0 snapshot (initial archive)."
+  - type: doi
+    value: 10.5281/zenodo.21864570
+    description: "Version DOI — the v1.0.1 snapshot underlying the paper."
 keywords:
   - algorithmic recourse
   - LLM auditing
