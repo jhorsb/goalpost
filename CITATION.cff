@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use Goalpost or its evidence, please cite it as below."
+title: "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse"
+authors:
+  - family-names: Horsburgh
+    given-names: Jamie
+type: software
+repository-code: "https://github.com/jhorsb/goalpost"
+license: MIT
+date-released: "2026-08-09"
+version: "0.1.0"
+keywords:
+  - algorithmic recourse
+  - LLM auditing
+  - contestability
+  - repeat-stability
+  - AI governance
+preferred-citation:
+  type: article
+  title: "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse"
+  authors:
+    - family-names: Horsburgh
+      given-names: Jamie
+  year: 2026
+  notes: "Draft; arXiv identifier to be added on submission."
