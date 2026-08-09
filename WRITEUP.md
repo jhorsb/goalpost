@@ -4,6 +4,14 @@
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
 
+> **Cite this work.** The instrument, the three audits and every
+> transcript behind the numbers below are archived and citable:
+> Horsburgh, J. (2026). *Goalpost: A Certification-Gated Protocol for
+> Auditing the Stability of LLM Screening Decisions, Reasons, and
+> Recourse.* [10.5281/zenodo.21862442](https://doi.org/10.5281/zenodo.21862442).
+> Code and evidence: [github.com/jhorsb/goalpost](https://github.com/jhorsb/goalpost).
+> ORCID [0009-0005-2567-5906](https://orcid.org/0009-0005-2567-5906).
+
 ---
 
 Somewhere on the internet is a free, working AI hiring tool. Anyone can
