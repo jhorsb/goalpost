@@ -23,6 +23,7 @@ ARTIFACTS = [
     "README.md",
     "phase7/goalpost-explainer-rebuilt.html",
     "DISCLOSURE_NOTE_2.md",   # send-ready: drift here means mailing a false claim
+    "paper/goalpost-protocol-v1.html",  # generated from PAPER.md; regenerate, never edit
 ]
 GENERATED_REPORTS = sorted(Path("audits").glob("*/report/report.md")) + sorted(
     Path("audits").glob("*/report/report.html")
@@ -219,8 +220,27 @@ def _scan_numerals(findings, name, text, known):
             findings.append(f"UNKNOWN {name}:{line}  numeral '{m.group(1)}' not derivable from evidence or allowlist")
 
 
+KNOWN_HTML = {
+    "phase7/goalpost-explainer-rebuilt.html",
+    "paper/goalpost-protocol-v1.html",
+    # archive/ and audits/ reports are handled or historical by design
+}
+
+
+def unscanned_surface_check(findings):
+    """A publishable HTML file the lint doesn't know about is itself a
+    finding — stale copies must never accumulate silently again."""
+    for p in Path(".").rglob("*.html"):
+        s = str(p)
+        if s.startswith(("audits/", "phase7/archive/", ".git")):
+            continue
+        if s not in KNOWN_HTML and "scratch" not in s:
+            findings.append(f"SURFACE unknown HTML artifact not under lint: {s}")
+
+
 def main() -> int:
     findings = []
+    unscanned_surface_check(findings)
 
     surfaces = [(p, Path(p).read_text()) for p in ARTIFACTS if Path(p).exists()]
     surfaces += [(str(p), p.read_text()) for p in GENERATED_REPORTS]

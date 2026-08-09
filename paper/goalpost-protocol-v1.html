@@ -205,7 +205,7 @@ certified unless that reader clears a pre-registered self-agreement bar
 (with a stricter margin for claims of instability). Withheld is a
 first-class, publishable outcome. I report the protocol's complete track
 record across three audits of two published screening pipelines, a
-bare-model control, and lab configurations on six model families —
+bare-model control, and lab configurations on six base models —
 including three occasions on which the gate refused to certify results
 (once, the author's own sought-after finding), a measurement-selection
 effect that was caught, tested, and designed out, and a pre-registered
@@ -255,8 +255,8 @@ cross-system table, provenance requirements, endpoint-pinning, and a
 causal-validity extension in which the audited system's own advice is
 implemented as placebo-controlled edits.</li>
 <li><strong>A complete worked record</strong> (§5–6): three audits of
-two published pipelines, a matched control, six-family lab measurements
-— and, deliberately at equal prominence, the protocol's refusal record:
+two published pipelines, a matched control, six-model lab measurements —
+and, deliberately at equal prominence, the protocol's refusal record:
 three gate withholdings, a caught selection effect, an external
 statistical review that removed a ~60% family-wise false-positive risk
 from a pre-registration before it could bite, and reporting-layer errors
@@ -505,7 +505,7 @@ certified</td>
 <td>primary frozen reader <strong>withheld</strong> (0.876/0.814);
 pre-declared fallback certified (0.989/0.975)</td>
 <td>25×5</td>
-<td>dec 0.936 (6/25); 7/25 no-verdict; gap +0.173</td>
+<td>dec 0.936 (6/25); 6/25 modal-no-verdict; gap +0.173</td>
 <td>certified (fallback; both reported)</td>
 </tr>
 <tr>
@@ -555,23 +555,25 @@ registration frozen before any target transcript existed). The primary
 frozen reader <strong>failed the gate</strong> (0.876/0.814); the
 pre-declared fallback passed (0.989/0.975), and — the protocol's
 strongest internal validation — the two readers disagree sharply about
-<em>themselves</em> while agreeing about the <em>target</em> to ±0.01
-(reasons 0.719 vs 0.729; recourse 0.567 vs 0.556). Certified: decision
-0.936 (6/25 flips); reasons 0.729; recourse 0.556; gap +0.173.
-<strong>7/25 candidates received no clear verdict at all</strong>
-("Maybe" is this system's explicit tier — the only abstention vocabulary
-measured in this record, used consistently), and every verdict flip
-occurred in that group.</p>
-<p><strong>Lab backdrop, six model families.</strong> On identical
-frozen cases, the reason–recourse gap is positive on every family
-measured — three OpenAI models, one Anthropic, one open-weights
-(gpt-oss), one Moonshot — ranging +0.11 to +0.29, including at
-temperature zero where allowed. Two governance observations arrived
-unbidden: one frontier model (Kimi K3) <strong>rejects any temperature
-but 1.0</strong> — determinism cannot even be requested — and posted the
-worst output-contract compliance measured (36/125 runs unparseable); and
-both audited pipelines pin models that no longer exist at any provider —
-published screening tools silently become unrunnable as shipped.</p>
+<em>themselves</em> while agreeing about the <em>target</em> within
+0.012 (reasons 0.719 vs 0.729; recourse 0.567 vs 0.556; within 0.012).
+Certified: decision 0.936 (6/25 flips); reasons 0.729; recourse 0.556;
+gap +0.173. <strong>6/25 candidates received no clear verdict</strong> —
+their modal outcome across five runs was this system's explicit "Maybe"
+tier, one of them unanimously in all five — and five of the six verdict
+flips occurred in that group. ("Maybe" is the only abstention vocabulary
+measured in this record, used consistently.)</p>
+<p><strong>Lab backdrop, six base models.</strong> On identical frozen
+cases, the reason–recourse gap is positive on every base model measured
+— three OpenAI proprietary models, one Anthropic, OpenAI's open-weights
+gpt-oss, and Moonshot's Kimi K3; six models from three providers —
+ranging +0.11 to +0.29, including at temperature zero where allowed. Two
+governance observations arrived unbidden: one frontier model (Kimi K3)
+<strong>rejects any temperature but 1.0</strong> — determinism cannot
+even be requested — and posted the worst output-contract compliance
+measured (36/125 runs unparseable); and both audited pipelines pin
+models that no longer exist at any provider — published screening tools
+silently become unrunnable as shipped.</p>
 <p><strong>Exploratory, labelled as such.</strong> The corpus was
 strength-banded at design time. Across the four systems with per-case
 certified records, <strong>all 14 verdict flips landed in the
@@ -627,7 +629,7 @@ rebuilt reader's rule had been written after seeing audit #1's
 transcripts. External draft review named it; the control
 <em>demonstrated</em> it (refusal 2); the audit-#2 registration banned
 it (readers frozen pre-transcript, held-out development from then on). A
-second certified reader reproduced the target's gap to ±0.002, so the
+second certified reader reproduced the target's gap within 0.003, so the
 finding survived its own measurement scandal — but the rule never
 travelled unexamined again.</li>
 <li><strong>An external review that mattered.</strong> The audit-#3
