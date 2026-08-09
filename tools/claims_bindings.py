@@ -72,6 +72,27 @@ def _paid_subtotal():
     return tot, tot - kimi + 5.24
 
 
+def _audit3_runs():
+    """Observed audit-3 executions across both blocks (Sol #1: the
+    paper must report what ran, not what was planned)."""
+    total = 0
+    for b in ("A", "B"):
+        for c in _cases(f"target3-causal-block{b}-001"):
+            total += c["denominators"]["attempted"]
+    return total
+
+
+def _mini_taxonomy_pair():
+    """gpt-4.1-mini reason stability, raw vs cluster — the paper's
+    taxonomy-lift example must be one real model's pair (Sol #3)."""
+    m = _sut("phase4-validation-001", 1)
+    assert m["name"] == "gpt-4.1-mini"
+    cases = m["conditions"][0]["cases"]
+    raw = st.mean(c["reason_stability"]["raw"]["mean_jaccard"] for c in cases)
+    cl = st.mean(c["reason_stability"]["cluster"]["mean_jaccard"] for c in cases)
+    return f"{raw:.2f}", f"{cl:.2f}"
+
+
 def _discarded_pairs(audit, i=0):
     """Pairs dropped by the same-decision filter, over all C(n,2) pairs
     of scored runs — the conditioning disclosure (Sol #11-14)."""
@@ -197,6 +218,14 @@ def bindings():
         ("paid spend documented subtotal (explainer)", E,
          r"about \$(\d+\.\d{2}) of documented paid spend",
          (f"{_paid_subtotal()[1]:.2f}",)),
+        # Sol #1: observed-vs-planned run count in the audit summary table
+        ("audit3 run count (paper table)", P,
+         r"(\d+) runs \((\d+) planned; (\d+) arms excluded pre-run\)",
+         (str(_audit3_runs()), "280", "6")),
+        # Sol #3: taxonomy-lift example must be one real model's pair
+        ("taxonomy example pair (paper)", P,
+         r"raw (0\.\d{2}) → cluster (0\.\d{2}) on one lab model",
+         _mini_taxonomy_pair()),
         ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s+a pre-registered bar", (a1_sa_rec,)),
         ("a1 topic (writeup)", W, r"topics\?\" and you get (0\.\d{3})", (a1_rea,)),
         ("valence range (writeup)", W, r"\((0\.\d{3})–(0\.\d{3}), depending", (mt_val, a1_val)),

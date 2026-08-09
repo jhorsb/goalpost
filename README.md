@@ -16,7 +16,7 @@ that survived temperature zero.
 ## What it has measured so far
 
 Three audits of real, published screening tools, plus lab configurations
-on six base models from three providers. Every number traces to a committed transcript in
+on six base models from three providers. Every measurement traces to a committed transcript in
 `audits/` with corpus hash, configuration identity, pinned versions of
 every pipeline stage, and the audited code's commit.
 

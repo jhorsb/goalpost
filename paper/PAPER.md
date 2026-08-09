@@ -1,8 +1,9 @@
 # Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse
 
 **Jamie Horsburgh** — independent researcher
-*v1 (2026-08-09) — for arXiv (cs.CY). Every number traces to a
-committed transcript in the accompanying evidence repository. Audited
+*v1 (2026-08-09) — for arXiv (cs.CY). Every measurement traces to a
+committed transcript in the accompanying evidence repository;
+literature, model-metadata and cost figures cite named sources. Audited
 systems are described by design category; identification is pinned in
 the evidence. The first pipeline's author received the complete findings
 privately before publication, with a standing correction offer; the
@@ -165,7 +166,7 @@ cross-decision pairs are excluded and the discarded fraction reported).
 levels — raw extracted slugs; rule-normalised; clustered under a
 committed, versioned synonym taxonomy — and the raw level is always
 reported beside the headline cluster level, because the taxonomy does
-real, visible work (e.g. raw 0.28 → cluster 0.86 on one lab model).
+real, visible work (e.g. raw 0.31 → cluster 0.86 on one lab model).
 
 **Valence flips.** Because coarse categories inflate topic-overlap, I
 also measure the **direction flip rate**: among same-topic pairs, how
@@ -199,7 +200,8 @@ manufactures "instability" from nothing. The gate makes this objection a
 measurement:
 
 - On each audit, the reader re-reads a stratified sample of the audited
-  system's *own* responses k times (here k=3, 25 responses). Its
+  system's *own* responses k times (here k=3; 25 sampled responses,
+  10 in audit #3's smaller block B). Its
   self-agreement is computed with the same ladder as the audit itself.
 - **Bar:** no stability claim is certified unless reader self-agreement
   ≥ 0.90 at the level the claim is made. **Margin:** a claim of
@@ -218,7 +220,8 @@ measurement:
 **The certification condition, exactly.** For a claim about a measure
 with observed stability *s*, read by a reader with self-agreement *a*
 (both at the ladder level of the claim; *a* is the mean pairwise Jaccard
-of the reader's k=3 re-extractions over the 25 sampled responses, and
+of the reader's k=3 re-extractions over the sampled responses — 25 per
+audit, 10 in audit #3's block B — and
 mean modal agreement for decisions):
 
 > **certified(s, a)  ⇔  a ≥ 0.90  ∧  ( s ≥ 0.85  ∨  a − s ≥ 0.15 )**
@@ -265,7 +268,9 @@ numbers went stale twice before this rule existed.
 
 ### 4.5 Provenance and endpoints
 
-Every run records derived seeds, prompts, responses, token usage, cost,
+Every run records derived seeds, prompts (except the unlicensed
+upstream's, fetched at runtime and hash-verified, never stored — §10),
+responses, token usage, metered cost,
 model fingerprints, pinned upstream commits and content hashes; caches
 are content-addressed with repetition index in the key (repeats are never
 cache hits). Measurements go to a **single named provider endpoint fixed
@@ -304,7 +309,7 @@ refusals throughout; existence claims only.
 | #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½ | certified |
 | bare-model control | freeform | v3+gpt-4.1 **withheld** (0.895/0.817); v3+gemma certified | 25×5 | dec 0.960 (4/25); gap +0.106 vs pipeline +0.537 | certified (2nd reader) |
 | #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 6/25 modal-no-verdict; gap +0.173 | certified (fallback; both reported) |
-| #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 8×35 runs | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
+| #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 220 runs (280 planned; 6 arms excluded pre-run) | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
 | lab configs | structured ×5, freeform ×1 | deterministic parse / gated reader | 25×5 each | gap +0.11…+0.29 on six families | certified |
 
 **Audit #1 — a published four-agent screening pipeline** (open-weights
@@ -448,7 +453,7 @@ the control supplies the differential argument (+0.537 vs +0.106 under
 one reader and one grain).
 
 **T3 — "Your reader is an LLM judge; judges are noisy; your gate rests on
-n=25, k=3."** The thresholds were pre-registered and never revised; the
+k=3 and at most 25 sampled responses."** The thresholds were pre-registered and never revised; the
 gate's authority is demonstrated by its refusals, including of my own
 finding. Residual honesty: self-agreement estimates carry sampling noise
 I do not interval-ise, and the cluster-basis ruling for one audit was
@@ -495,10 +500,13 @@ N≥5 before design-class language fully earns itself.
 ## 10. Availability
 
 The instrument, all configurations, pre-registrations with amendment
-logs, the append-only decision log (D-001–D-059), and complete evidence
-for every audit (transcripts, normalised sets, metrics, reports, costs)
-are in the accompanying repository, MIT-licensed; an archived DOI release
-accompanies publication. One audited upstream carries no licence and its
+logs, the append-only decision log (D-001 onward), and complete evidence
+for every audit (transcripts, normalised sets, metrics, reports, metered
+costs)
+are in the accompanying repository, MIT-licensed. Where pipeline stages
+ran on accounts the instrument's meter does not see, provider dashboard
+totals are the cost source of truth. An archived DOI release (Zenodo)
+follows v1.0; `CITATION.cff` carries the identifier once minted. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
 commit and hash-verified; the other is vendored under its MIT licence
 with attribution.

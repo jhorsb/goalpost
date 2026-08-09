@@ -52,6 +52,12 @@ BANNED = [
     (r"under \$12", None),
     # Sol #17: no evidence supports a £1-per-system figure in any form
     (r"£1|a pound per system", None),
+    # Sol #50: "every number traces" overclaims — literature, metadata
+    # and dashboard costs are not transcripts; scoped to "measurement"
+    (r"every (?:reported )?number (?:in this piece )?traces", None),
+    # Sol #51: stage calls and paid retries are not individually
+    # recorded; the defensible unit is the run transcript
+    (r"Every API call recorded|every API call and cost is recorded", None),
 ]
 
 # Record counts that must agree wherever they are asserted.

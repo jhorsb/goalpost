@@ -1,6 +1,6 @@
 # I ran an AI hiring tool five times on the same CV. It changed its mind.
 
-*Published 9 August 2026 — every number traces to a committed audit transcript; evidence repository public as of today. Target identity withheld from the prose per
+*Published 9 August 2026 — every measurement traces to a committed audit transcript; evidence repository public as of today. Target identity withheld from the prose per
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
 
@@ -63,7 +63,7 @@ audit touched anyone's hosted service.
 
 The protocol was frozen before any measurement: twenty-five fictional CVs
 against five job specs, five identical runs each, at the pipeline's own
-default settings. Every API call recorded. Decision, reasons, and advice
+default settings. Every run's inputs and outputs recorded in full. Decision, reasons, and advice
 pulled from the tool's free-text output by a separate extraction model —
 a different model family from the one being audited, following the
 cross-model practice the LLM-as-judge literature recommends — whose own
@@ -322,7 +322,7 @@ twice.
 
 ## Kick the tyres
 
-Every number in this piece traces to a committed transcript with a full
+Every measurement in this piece traces to a committed transcript with a full
 provenance chain: corpus hash, configuration identity, the version of
 every pipeline stage, and the pinned commit of the audited code. The
 instrument is a small open Python tool: one config file, one command, a
