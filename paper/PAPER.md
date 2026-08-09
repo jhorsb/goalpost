@@ -303,7 +303,7 @@ refusals throughout; existence claims only.
 |---|---|---|---|---|---|
 | #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½ | certified |
 | bare-model control | freeform | v3+gpt-4.1 **withheld** (0.895/0.817); v3+gemma certified | 25×5 | dec 0.960 (4/25); gap +0.106 vs pipeline +0.537 | certified (2nd reader) |
-| #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 7/25 no-verdict; gap +0.173 | certified (fallback; both reported) |
+| #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 6/25 modal-no-verdict; gap +0.173 | certified (fallback; both reported) |
 | #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 8×35 runs | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
 | lab configs | structured ×5, freeform ×1 | deterministic parse / gated reader | 25×5 each | gap +0.11…+0.29 on six families | certified |
 
@@ -335,12 +335,14 @@ per-stage as-shipped temperatures; registration frozen before any target
 transcript existed). The primary frozen reader **failed the gate**
 (0.876/0.814); the pre-declared fallback passed (0.989/0.975), and — the
 protocol's strongest internal validation — the two readers disagree
-sharply about *themselves* while agreeing about the *target* to ±0.01
-(reasons 0.719 vs 0.729; recourse 0.567 vs 0.556). Certified: decision
-0.936 (6/25 flips); reasons 0.729; recourse 0.556; gap +0.173. **7/25
-candidates received no clear verdict at all** ("Maybe" is this system's
-explicit tier — the only abstention vocabulary measured in this record, used
-consistently), and every verdict flip occurred in that group.
+sharply about *themselves* while agreeing about the *target* within 0.012
+(reasons 0.719 vs 0.729; recourse 0.567 vs 0.556; within 0.012). Certified: decision
+0.936 (6/25 flips); reasons 0.729; recourse 0.556; gap +0.173. **6/25
+candidates received no clear verdict** — their modal outcome across five
+runs was this system's explicit "Maybe" tier, one of them unanimously in
+all five — and five of the six verdict flips occurred in that group.
+("Maybe" is the only abstention vocabulary measured in this record, used
+consistently.)
 
 **Lab backdrop, six base models.** On identical frozen cases, the
 reason–recourse gap is positive on every base model measured — three
@@ -412,7 +414,7 @@ are the evidence the latter can be trusted.
   draft review named it; the control *demonstrated* it (refusal 2); the
   audit-#2 registration banned it (readers frozen pre-transcript,
   held-out development from then on). A second certified reader
-  reproduced the target's gap to ±0.002, so the finding survived its own
+  reproduced the target's gap within 0.003, so the finding survived its own
   measurement scandal — but the rule never travelled unexamined again.
 - **An external review that mattered.** The audit-#3 registration's
   original existence criterion carried a ~60% family-wise false-positive

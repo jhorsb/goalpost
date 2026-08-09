@@ -50,14 +50,14 @@ from the system that issued it.
 
 1. The audit was built to measure an advice lottery (different runs give
    differently-effective routes). What it measured instead, at these
-   doses, is more uncomfortable: **none of the advice demonstrably works**
-   — advised edits are statistically indistinguishable from irrelevant
-   ones and from doing nothing, on the system's own verdicts.
+   doses, is more uncomfortable: **no advised edit demonstrated an
+   advantage** — none exceeded its placebo comparator by more than 2/5,
+   and most had zero measured effect, on the system's own verdicts.
 2. Claims are bounded exactly as registered: existence-level, at the
    stated doses, on 8 borderline cases, n=5 granularity where ±2/5 is
    noise. "The advice doesn't work" is NOT certified; the reportable
    descriptive statement is "no advised edit exceeded its placebo
-   comparator by more than 2/5 in any block, and 13 of 20 effects were
+   comparator by more than 2/5 in any block, and 14 of 20 effects were
    exactly zero."
 
 **Cost, stated fully:** tool-metered $1.26 covers the OpenAI side

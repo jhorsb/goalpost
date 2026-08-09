@@ -15,6 +15,8 @@ import re
 import sys
 from pathlib import Path
 
+from claims_bindings import bindings
+
 ARTIFACTS = [
     "WRITEUP.md",
     "paper/PAPER.md",
@@ -115,6 +117,8 @@ ALLOWLIST = {
     # costs (metered; dashboards are source of truth for the rest)
     "0.28", "1.26", "0.95", "0.31", "4.00",
     # derived-in-prose values with named derivations
+    "0.012",  # cross-lens recourse difference 0.5668−0.5555 (Sol #5), ceil 3dp
+    "0.003",  # cross-lens gap reproduction |0.5371−0.5344| (Sol #7)
     "0.43",   # attributable gap difference: 0.537 − 0.106 (WRITEUP)
     "0.01",   # cross-lens agreement magnitude, D-040 (±0.01)
     "0.002",  # cross-lens gap reproduction, D-040 (0.537 vs 0.535)
@@ -240,15 +244,17 @@ def main() -> int:
 
     total_numeral_check(findings, surfaces)
 
-    # keystone numerals: anchor must exist, and its captured value must
-    # equal the evidence recomputation (fail-closed in both directions)
-    for desc, artifact, pat, expected in keystones():
+    # per-claim bindings (tools/claims_bindings.py): anchor must exist,
+    # and every captured group must equal its evidence recomputation
+    for desc, artifact, pat, expected in bindings():
         text = Path(artifact).read_text()
         m = re.search(pat, text)
         if not m:
-            findings.append(f"NUMERAL {desc}: anchor pattern not found in {artifact} (claim moved or vanished)")
-        elif m.group(1) != expected:
-            findings.append(f"NUMERAL {desc}: {artifact} says {m.group(1)}, evidence computes {expected}")
+            findings.append(f"BINDING {desc}: anchor not found in {artifact} (claim moved or vanished)")
+            continue
+        got = m.groups()
+        if tuple(got) != tuple(expected):
+            findings.append(f"BINDING {desc}: {artifact} says {got}, evidence computes {tuple(expected)}")
 
     if findings:
         print(f"{len(findings)} finding(s):")
@@ -257,7 +263,7 @@ def main() -> int:
         return 1
     print(f"claims-lint CLEAN across {len(surfaces)} surfaces "
           f"({len(BANNED)} banned patterns, {len(COUNTS)} count assertions, "
-          f"{len(keystones())} keystone numerals)")
+          f"{len(bindings())} claim bindings)")
     return 0
 
 

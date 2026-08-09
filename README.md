@@ -28,8 +28,9 @@ every pipeline stage, and the audited code's commit.
   matched control (same model, no pipeline) showed the verdict-flipping
   belongs to the model and the explanation pattern to the design.
 - **Audit #2** — a published 3-stage LangGraph screener on a frontier
-  model. Verdict flipped on 6/25; 7/25 candidates received no clear
-  verdict at all — and every flip was in that group.
+  model. Verdict flipped on 6/25; for 6/25 the most common outcome was no
+  clear verdict (one unanimously so) — and five of the six flips were in
+  that group.
 - **Audit #3** — pre-registered causal follow-up on audit #1: implement
   the tool's own advice as committed CV edits and re-run. The advice
   lottery hypothesis was not supported; 14 of 20 advised edits did

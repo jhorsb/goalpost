@@ -163,13 +163,13 @@ managed to state it, and unlike the number beside it, it never needed a
 control run to defend it.
 
 **About the gap.** Reasons measured 0.983 and advice 0.448 — a stability
-gap of 0.535, wider than anything I have measured on a lab configuration.
+gap of 0.534, wider than anything I have measured on a lab configuration.
 An earlier draft of this piece reported that number and then spent three
 paragraphs explaining why I couldn't fully stand behind it. What changed is
 the control described in the next section: measured the same way, with the
 same model and the same lens, a plain one-prompt screener's gap is
-**0.106**. Whatever share of 0.535 is measurement artifact applies to both
-sides equally, so the *difference*, roughly 0.43, is the part attributable
+**0.106**. Whatever share of the same-lens target gap, 0.537, is
+measurement artifact applies to both sides equally, so the *difference*, roughly 0.43, is the part attributable
 to the pipeline's design.
 
 One caveat survives: the two sides aren't measured at the same

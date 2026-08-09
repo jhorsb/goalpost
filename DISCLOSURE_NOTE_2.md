@@ -68,9 +68,9 @@ pattern, not a criticism of you.
 
 What I found, in one paragraph: on identical inputs, the verdict changed
 for 6 of 25 candidates; the improvement advice repeats a bit more than
-half the time (0.556 on a 0–1 overlap measure); and 7 of 25 candidates
-consistently received no clear verdict ("Maybe") — with every verdict
-flip occurring in that group. I want to flag something genuinely
+half the time (0.556 on a 0–1 overlap measure); and for 6 of 25 candidates the
+most common outcome was no clear verdict ("Maybe"), one unanimously so —
+with five of the six verdict flips occurring among them. I want to flag something genuinely
 positive alongside: yours is the only system I've measured with an
 explicit "Maybe" tier, and it uses it consistently — on genuinely
 borderline candidates, declining to decide is arguably the most honest
