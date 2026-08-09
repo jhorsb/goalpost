@@ -107,7 +107,21 @@ def bindings():
 
     W, P = "WRITEUP.md", "paper/PAPER.md"
     E = "phase7/goalpost-explainer-rebuilt.html"
+    R, D = "README.md", "DISCLOSURE_NOTE_2.md"
     return [
+        # README
+        ("a1 flips (readme)", R, r"Verdict flipped on (\d)/25 identical", (str(_flips(A1)),)),
+        ("a2 flips (readme)", R, r"Verdict flipped on (\d)/25;", (str(_flips(A2)),)),
+        ("a2 no-verdict (readme)", R, r"for (\d)/25 the most common outcome", (str(_unclear(A2)),)),
+        ("a1 recourse (readme)", R, r"less than half the time \((0\.\d{3})\)", (a1_rec,)),
+        # disclosure note (unsent; must match certified record when it goes)
+        ("a2 flips (note)", D, r"verdict changed\s+for (\w+) of 25", (str(_flips(A2)),)),
+        ("a2 no-verdict (note)", D, r"and for (\w+) of 25 candidates the", (str(_unclear(A2)),)),
+        ("a2 recourse (note)", D, r"\((0\.\d{3}) on a 0–1 overlap", (a2_rec,)),
+        # explainer reconciliation paragraph (plain-text figures)
+        ("a2 reconciliation quad (explainer)", E,
+         r"fallback now supports (\d) / 25, (0\.\d{3}), (0\.\d{3}) and (0\.\d{3})",
+         (str(_flips(A2)), a2_dec, a2_rea, a2_rec)),
         ("a2 no-verdict prose (explainer)", E,
          r"no clear verdict for <strong>(\d) of 25</strong>", (str(_unclear(A2)),)),
         ("a2 no-verdict stat (explainer)", E,

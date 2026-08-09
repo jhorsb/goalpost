@@ -5,13 +5,13 @@
 **Channel problem, and the two-step plan.** Unlike author #1, this author
 publishes no email anywhere (profile email null; no README contact;
 commits via GitHub noreply). A public GitHub issue containing the
-findings would de-anonymise the audit before he can respond — inverting
+findings would publicly name the audit's subject before he can respond — inverting
 the norm. Plan: **step 1**, the author posts the content-free contact
 request below as a GitHub issue on the repo (reveals only that someone
 wants to share research privately — nothing about findings); **step 2**,
 when he replies with a channel, the full note below goes to it verbatim.
-Publication proceeded 9 August (author decision, D-063) with anonymity
-preserved; the posted request and its date are the record of contact
+Publication proceeded 9 August (author decision, D-063) with the
+project unnamed in the publication; the posted request and its date are the record of contact
 effort, and the full note goes to any channel he ever provides.
 
 **Recipient:** Pakawat Kraisintu (GitHub: Pakawat-Dev), author of the
@@ -26,8 +26,8 @@ tone calibrated accordingly.
 > available to you privately
 >
 > Hi Pakawat — I'm an AI-governance researcher. I've published an
-> independent, anonymised behavioural analysis that involves this
-> repository (it is not named or linked anywhere in the publication).
+> independent behavioural analysis that involves this repository —
+> it is not named or linked anywhere in the publication.
 > I'd like to share the complete details and evidence with you privately
 > — you have a standing offer to correct anything you believe is in
 > error, and any response you'd like made will be printed alongside.
@@ -50,8 +50,8 @@ open-source audit instrument that measures whether LLM screening systems
 give the same answer twice, and your Candidate_Screening_Agent was its
 second real-world target — because it's one of the few complete,
 runnable, published examples of the LangGraph screening pattern. That's a
-compliment to the openness of your work. An anonymised analysis is now
-published; this note gives you the full detail directly.
+compliment to the openness of your work. An analysis that does not name your project is now published; this
+note gives you the full detail directly.
 
 What I did: I ran your pipeline's three LLM stages entirely on my own
 API keys, at the pinned commit 707e6ab, mirroring your prompts and data
@@ -80,7 +80,7 @@ families, flips some verdicts on identical inputs — this is not unique
 to your design.
 
 The write-up describes the project as "a published 3-stage screening
-pipeline" without naming it or you, and that anonymity stands unless you
+pipeline" without naming it or you, and that non-naming stands unless you
 prefer attribution (in which case: name and link, gladly). If you think
 I've made an error anywhere, I want to know — corrections will be made
 prominently, and I'll print any response of yours alongside if you'd

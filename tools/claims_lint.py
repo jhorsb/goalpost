@@ -22,6 +22,7 @@ ARTIFACTS = [
     "paper/PAPER.md",
     "README.md",
     "phase7/goalpost-explainer-rebuilt.html",
+    "DISCLOSURE_NOTE_2.md",   # send-ready: drift here means mailing a false claim
 ]
 GENERATED_REPORTS = sorted(Path("audits").glob("*/report/report.md")) + sorted(
     Path("audits").glob("*/report/report.html")
@@ -205,7 +206,7 @@ def _prose_only(name, text):
 
 def total_numeral_check(findings, surfaces):
     known = evidence_numbers() | ALLOWLIST
-    for name, raw in surfaces[:4]:
+    for name, raw in surfaces[:len(ARTIFACTS)]:
         text = _prose_only(name, raw)
         _scan_numerals(findings, name, text, known)
 
@@ -235,7 +236,7 @@ def main() -> int:
 
     WORD2DIGIT = {"three": "3", "four": "4", "six": "6", "eight": "8",
                   "fourteen": "14", "thirteen": "13", "two": "2"}
-    for name, text in surfaces[:4]:  # counts only asserted in authored artifacts
+    for name, text in surfaces[:len(ARTIFACTS)]:  # authored artifacts
         for pat, expected in COUNTS.items():
             ok = {expected, WORD2DIGIT.get(expected, expected)}
             for m in re.finditer(pat, text, re.I):
