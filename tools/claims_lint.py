@@ -251,13 +251,16 @@ def main() -> int:
     # and every captured group must equal its evidence recomputation
     for desc, artifact, pat, expected in bindings():
         text = Path(artifact).read_text()
-        m = re.search(pat, text)
-        if not m:
+        matches = list(re.finditer(pat, text))
+        if not matches:
             findings.append(f"BINDING {desc}: anchor not found in {artifact} (claim moved or vanished)")
             continue
-        got = m.groups()
-        if tuple(got) != tuple(expected):
-            findings.append(f"BINDING {desc}: {artifact} says {got}, evidence computes {tuple(expected)}")
+        exp = tuple(str(e).lower() for e in expected)
+        for m in matches:  # every instance of the claim must agree
+            got = tuple(str(g).lower() for g in m.groups())
+            if got != exp:
+                line = text.count("\n", 0, m.start()) + 1
+                findings.append(f"BINDING {desc}: {artifact}:{line} says {m.groups()}, evidence computes {tuple(expected)}")
 
     if findings:
         print(f"{len(findings)} finding(s):")

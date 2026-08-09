@@ -108,10 +108,16 @@ def bindings():
     W, P = "WRITEUP.md", "paper/PAPER.md"
     E = "phase7/goalpost-explainer-rebuilt.html"
     return [
-        ("a2 no-verdict (explainer)", E,
+        ("a2 no-verdict prose (explainer)", E,
          r"no clear verdict for <strong>(\d) of 25</strong>", (str(_unclear(A2)),)),
-        ("a2 containment (explainer)", E,
-         r"([Ff]ive|[Ss]ix|[Ff]our|\d) of the six verdict flips were in that group", ("Five",)),
+        ("a2 no-verdict stat (explainer)", E,
+         r"No clear verdict \(“Maybe”\)</dt><dd>(\d) / 25", (str(_unclear(A2)),)),
+        ("a2 flips stat (explainer)", E,
+         r"Verdict flips</dt><dd>(\d) / 25", (str(_flips(A2)),)),
+        ("a2 flips hero (explainer)", E,
+         r"Audit #2 found <strong>(\d) / 25</strong>", (str(_flips(A2)),)),
+        ("a2 containment, all phrasings (explainer)", E,
+         r"(\w+) of the six (?:verdict flips|flipped cases) (?:were|occurred) in", ("five",)),
         ("a1 flips (writeup)", W, r"verdict changed on (\w+) of\s+?twenty-five", (WORDS[_flips(A1)],)),
         ("a1 recourse (writeup)", W, r"Recourse\s+stability measured \*\*(0\.\d{3})\*\*", (a1_rec,)),
         ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s+a pre-registered bar", (a1_sa_rec,)),
