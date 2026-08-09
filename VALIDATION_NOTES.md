@@ -419,3 +419,43 @@ must pin an explicit as-of date in the job spec or use absolute
 durations; the drift is disclosed here for every existing audit. Candidate
 sidebar for the write-up; candidate seed-case for the audit-#3
 causal-recourse design.
+
+## Audit #3 (2026-08-09) — causal recourse validity, target #1's pipeline
+
+`target3-causal-blockA-001` / `-blockB-001`, governed by
+`phase8/PREREGISTRATION-AUDIT3.md` (amendments A1 = external review — the
+replication criterion cutting worst-case family-wise FPR ~60%→~5%, and
+the chronology-exclusion rule; A2 = implementation repair after the
+mandated diff check failed 8 of 16 edit diffs). Final analysis:
+`phase8/ANALYSIS.md`, corrected across three review passes (D-055–D-057)
+— every correction was to reporting prose; no measurement moved.
+
+Question: does the pipeline's advice *work*, and does advice from
+different runs differ in effectiveness? Method: consensus vs singleton
+advice items implemented as pre-committed CV edits at frozen doses, two
+placebo arms, 8 borderline cases, two independent 5-run blocks. 220/220
+parsed, decision-lens self-agreement 1.000 both blocks.
+
+**Results:**
+1. **H1 (differential effectiveness) NOT SUPPORTED** — max |C−S|
+   differential 1/5 against a ≥3/5-same-sign-twice criterion.
+2. **14 of 20 advised-edit effects were exactly 0 vs placebo**; range
+   −2/5…+2/5. The best advised uplift (+2/5, PRINCE2, one block) was
+   equalled by appending a hobbies line (pm-04: 2/5→4/5, both placebos).
+3. **sc-data-analyst-04: 0 accepts in 35 runs across every arm** — the
+   pipeline's own advice, implemented at registered doses, never changed
+   her outcome.
+4. **The modal advice cluster (gain experience) was unimplementable by
+   edit at all** — every attempt corrupted CV chronology and was excluded
+   by A1's rule.
+
+Scope: existence-level, at the stated doses, n=5 granularity (±2/5 is
+noise). "The advice doesn't work" is NOT certified. The reportable
+statement: no advised edit exceeded its placebo comparator by more than
+2/5, and most did nothing. Cost: $1.26 tool-metered (OpenAI side);
+pipeline calls on the paid Cerebras account are metered on its dashboard
+only.
+
+Combined reading across audits #1 and #3, one line: **this pipeline's
+advice neither repeats (0.448–0.456) nor, when implemented, demonstrably
+works — and its most frequent advice cannot be implemented at all.**
