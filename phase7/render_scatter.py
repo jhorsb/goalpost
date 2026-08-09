@@ -17,7 +17,8 @@ from pathlib import Path
 
 import yaml
 
-PAGE = Path("phase7/goalpost-explainer-rebuilt.html")
+import os
+PAGE = Path(os.environ.get("GOALPOST_PAGE", "phase7/goalpost-explainer-rebuilt.html"))
 BOARD = Path("phase7/board.json")
 META = Path("phase7/model-metadata.yaml")
 BEGIN, END = "<!-- GOALPOST-SCATTER:BEGIN -->", "<!-- GOALPOST-SCATTER:END -->"

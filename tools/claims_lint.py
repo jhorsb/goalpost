@@ -238,9 +238,61 @@ def unscanned_surface_check(findings):
             findings.append(f"SURFACE unknown HTML artifact not under lint: {s}")
 
 
+def _tagstrip(html):
+    txt = re.sub(r"<style.*?</style>", " ", html, flags=re.S)
+    txt = re.sub(r"<[^>]+>", " ", txt)
+    return re.sub(r"\s+", " ", txt).strip()
+
+
+def derivation_freshness_check(findings):
+    """Generated artifacts must equal a fresh render of their sources —
+    scanning a stale render is silent drift (stop-gate, 2026-08-09)."""
+    import shutil
+    import subprocess
+    import sys as _sys
+    import tempfile
+
+    # 1. paper HTML ⇐ PAPER.md via pandoc
+    if shutil.which("pandoc") is None:
+        findings.append("FRESH   pandoc unavailable — paper HTML derivation UNVERIFIED (fail-closed)")
+    else:
+        with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+            tmp = f.name
+        subprocess.run(["pandoc", "paper/PAPER.md", "-f", "gfm", "-t", "html", "-s",
+                        "-o", tmp, "--metadata",
+                        "title=Goalpost: A Certification-Gated Protocol"], check=True)
+        if _tagstrip(Path(tmp).read_text()) != _tagstrip(Path("paper/goalpost-protocol-v1.html").read_text()):
+            findings.append("FRESH   paper/goalpost-protocol-v1.html is NOT the render of current PAPER.md — regenerate")
+
+    # 2. explainer board section ⇐ board.json
+    _sys.path.insert(0, "src")
+    from goalpost.boards import render_board_html
+    page = Path("phase7/goalpost-explainer-rebuilt.html").read_text()
+    in_page = page.split("GOALPOST-BOARD:BEGIN -->")[1].split("<!-- GOALPOST-BOARD:END")[0]
+    fresh = render_board_html(json.loads(Path("phase7/board.json").read_text()))
+    if _tagstrip(in_page) != _tagstrip(fresh):
+        findings.append("FRESH   explainer board section is NOT the render of current board.json — re-inject")
+
+    # 3. explainer scatter section ⇐ board.json + model-metadata.yaml
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as f:
+        tmp2 = f.name
+    Path(tmp2).write_text(page)
+    r = subprocess.run([_sys.executable, "phase7/render_scatter.py"],
+                       env={**__import__("os").environ, "GOALPOST_PAGE": tmp2,
+                            "PYTHONPATH": "src"}, capture_output=True, text=True)
+    if r.returncode != 0:
+        findings.append(f"FRESH   scatter regeneration failed: {r.stderr.strip()[:120]}")
+    else:
+        s_in = page.split("GOALPOST-SCATTER:BEGIN -->")[1].split("<!-- GOALPOST-SCATTER")[0]
+        s_new = Path(tmp2).read_text().split("GOALPOST-SCATTER:BEGIN -->")[1].split("<!-- GOALPOST-SCATTER")[0]
+        if _tagstrip(s_in) != _tagstrip(s_new):
+            findings.append("FRESH   explainer scatter section is NOT the render of current board.json/metadata — re-run render_scatter")
+
+
 def main() -> int:
     findings = []
     unscanned_surface_check(findings)
+    derivation_freshness_check(findings)
 
     surfaces = [(p, Path(p).read_text()) for p in ARTIFACTS if Path(p).exists()]
     surfaces += [(str(p), p.read_text()) for p in GENERATED_REPORTS]
