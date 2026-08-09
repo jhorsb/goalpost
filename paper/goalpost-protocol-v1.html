@@ -619,9 +619,11 @@ review) added the replication criterion — cutting the worst-case
 family-wise false-positive rate from ~60% to ~5% — the credential
 placebo, and a chronology-exclusion rule for experience edits; amendment
 A2 was an implementation repair after the mandated independent diff
-check found the derivation script failing to enforce A1's rule (8 of 16
-diffs failed and were regenerated; the check is part of the protocol
-precisely because it caught its own author).</p>
+check found the derivation script failing to enforce A1's rule (13 of 16
+diffs carried at least one failing verdict — eight substantive failures
+in the decision log's summary, D-053 — and all were regenerated or
+excluded; the check is part of the protocol precisely because it caught
+its own author).</p>
 <p>Results (8 borderline cases, 220/220 runs parsed, reader decision
 self-agreement 1.000 in both blocks): <strong>the
 differential-effectiveness hypothesis was not supported</strong> — after
@@ -643,9 +645,10 @@ chronology and was excluded by A1's rule.</p>
 informative, and I read audit #3's primary contribution accordingly: it
 demonstrates that the protocol's causal extension runs mechanically —
 frozen dose tables, committed diffs, a pre-run diff check that caught
-the author's own derivation script (its verdict table is summarised in
-the decision log, D-053; the session record is author-held) — with the
-placebo-bounded negative as evidence at that scale and no more.</p>
+the author's own derivation script (its verdict table is committed
+verbatim with session provenance in
+<code>phase8/DIFF-CHECK-RECORD.md</code>; D-053 summarises it) — with
+the placebo-bounded negative as evidence at that scale and no more.</p>
 <p>The registered scope holds: "the advice doesn't work" is <em>not</em>
 certified; "no advised edit exceeded its placebo comparator by more than
 2/5 at these doses, and 14 of 20 block-specific estimates were exactly

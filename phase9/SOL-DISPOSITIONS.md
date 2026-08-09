@@ -93,3 +93,11 @@ the acknowledgements now say so); the audit-3 diff-check's evidentiary
 status stated in the paper (N3 — session record author-held, D-053
 summary; recovery of the verdict table queued). Frozen-text instances
 (#34's registration lines) are exempt by the annotation rule.
+
+*Dated annotation (2026-08-09, D-080): N3's queued recovery is done —
+the first diff check's verdict table, mandate, and all three subagent
+reports are committed verbatim with session provenance and rollout
+checksums as `phase8/DIFF-CHECK-RECORD.md`; the paper now points there
+instead of "author-held". The record shows 13 of 16 rows carrying at
+least one failing verdict; D-053's "8 of 16" stands as its clauses'
+(a)+(b) summary, and the paper's parenthetical now states both counts.*
