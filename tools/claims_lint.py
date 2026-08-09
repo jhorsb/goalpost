@@ -45,6 +45,11 @@ BANNED = [
     # same-decision conditioning; the conditional form says "twice and,
     # when ..." so this exact contraction is always the old template
     (r"twice and, on average", None),
+    # Sol #34: "anonymous" is the retracted framing (D-065: narrative
+    # non-naming — identification is public in evidence)
+    (r"\banonymous\b", r"not anonymity|narrative non-naming"),
+    # Sol #20: documented paid subtotal exceeds $12; the claim is dead
+    (r"under \$12", None),
 ]
 
 # Record counts that must agree wherever they are asserted.
@@ -126,6 +131,9 @@ ALLOWLIST = {
     "16.6", "0.879", "0.939",
     # costs (metered; dashboards are source of truth for the rest)
     "0.28", "1.26", "0.95", "0.31", "4.00",
+    # cost-record card (Sol #20): metrics-file sum, Kimi resume pass,
+    # Kimi dashboard total — bound in claims_bindings where derivable
+    "8.00", "0.38", "5.24",
     # derived-in-prose values with named derivations
     "0.012",  # cross-lens recourse difference 0.5668−0.5555 (Sol #5), ceil 3dp
     "0.003",  # cross-lens gap reproduction |0.5371−0.5344| (Sol #7)

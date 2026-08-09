@@ -51,6 +51,27 @@ def _parsed(audit, i=0):
     return sum(c["denominators"]["parsed"] for c in _cases(audit, i))
 
 
+def _hero_run_order():
+    """Audit-1's 3-2 split case, decisions in committed run order —
+    the hero graphic must show the real sequence (Sol #2)."""
+    path = Path(f"audits/{A1}/runs/998e563a832dd8f9/runs.jsonl")
+    return tuple(json.loads(l)["decision"] for l in path.open()
+                 if json.loads(l)["case_id"] == "sc-project-manager-02")
+
+
+def _paid_subtotal():
+    """Documented paid spend: metered totals across committed metrics
+    files, with Kimi's figure (resume pass only, a known artifact)
+    replaced by its dashboard total ~$5.24 (VALIDATION_NOTES §Kimi)."""
+    tot = kimi = 0.0
+    for p in Path("audits").glob("*/metrics/0.1.0/metrics.json"):
+        c = json.loads(p.read_text()).get("total_cost_usd") or 0.0
+        tot += c
+        if "kimi" in str(p):
+            kimi = c
+    return tot, tot - kimi + 5.24
+
+
 def _discarded_pairs(audit, i=0):
     """Pairs dropped by the same-decision filter, over all C(n,2) pairs
     of scored runs — the conditioning disclosure (Sol #11-14)."""
@@ -160,6 +181,22 @@ def bindings():
         ("a1 recourse conditioning (explainer)", E,
          r"grouped-overlap score was <strong>(0\.\d{3})</strong>.{0,220}?same verdict",
          (a1_rec,)),
+        # Sol #2: hero graphic must show the committed transcript's run
+        # order — class and label captured per run, bound to runs.jsonl
+        ("a1 hero run order (explainer)", E,
+         r'gp-run--(\w+)"><span>Run 1</span><strong>(\w+)</strong>[\s\S]*?'
+         r'gp-run--(\w+)"><span>Run 2</span><strong>(\w+)</strong>[\s\S]*?'
+         r'gp-run--(\w+)"><span>Run 3</span><strong>(\w+)</strong>[\s\S]*?'
+         r'gp-run--(\w+)"><span>Run 4</span><strong>(\w+)</strong>[\s\S]*?'
+         r'gp-run--(\w+)"><span>Run 5</span><strong>(\w+)</strong>',
+         tuple(v for d in _hero_run_order() for v in (d, d))),
+        # Sol #20: cost-record card bound to the metered evidence
+        ("paid spend metered total (explainer)", E,
+         r"metrics files totals \$(\d+\.\d{2})",
+         (f"{_paid_subtotal()[0]:.2f}",)),
+        ("paid spend documented subtotal (explainer)", E,
+         r"about \$(\d+\.\d{2}) of documented paid spend",
+         (f"{_paid_subtotal()[1]:.2f}",)),
         ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s+a pre-registered bar", (a1_sa_rec,)),
         ("a1 topic (writeup)", W, r"topics\?\" and you get (0\.\d{3})", (a1_rea,)),
         ("valence range (writeup)", W, r"\((0\.\d{3})–(0\.\d{3}), depending", (mt_val, a1_val)),

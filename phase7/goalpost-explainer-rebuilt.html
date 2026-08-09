@@ -842,12 +842,12 @@
           <strong>One fictional candidate, Audit #1</strong>
           <span>same CV + settings</span>
         </figcaption>
-        <ol class="gp-runs" aria-label="Five verdicts from five identical runs">
+        <ol class="gp-runs" aria-label="Five verdicts from five identical runs, in the order they ran">
           <li class="gp-run gp-run--reject"><span>Run 1</span><strong>REJECT</strong></li>
-          <li class="gp-run gp-run--accept"><span>Run 2</span><strong>ACCEPT</strong></li>
+          <li class="gp-run gp-run--reject"><span>Run 2</span><strong>REJECT</strong></li>
           <li class="gp-run gp-run--reject"><span>Run 3</span><strong>REJECT</strong></li>
           <li class="gp-run gp-run--accept"><span>Run 4</span><strong>ACCEPT</strong></li>
-          <li class="gp-run gp-run--reject"><span>Run 5</span><strong>REJECT</strong></li>
+          <li class="gp-run gp-run--accept"><span>Run 5</span><strong>ACCEPT</strong></li>
         </ol>
         <div class="gp-split" aria-label="Three reject verdicts and two accept verdicts">
           <p><b>3</b> rejected</p>
@@ -1098,7 +1098,7 @@
         <li class="gp-claim">
           <div>
             <h3>Both published tools depend on retired model versions.</h3>
-            <p><strong>2 of 2</strong> audited tools are no longer runnable exactly as published because the model they pin has been retired. The audits use disclosed substitutes; the tool identities stay anonymous.</p>
+            <p><strong>2 of 2</strong> audited tools are no longer runnable exactly as published because the model they pin has been retired. The audits use disclosed substitutes; the tools stay unnamed in this narrative, with identification pinned in the public evidence.</p>
           </div>
         </li>
         <li class="gp-claim">
@@ -1271,8 +1271,8 @@
             <li><time>26 JUL</time><p>Four lab configs measured; the gap replicates in every one.</p></li>
             <li><time>27 JUL</time><p>Audit #1 complete after the gate’s first refusal.</p></li>
             <li><time>08 AUG</time><p>Controls and matched lenses; Audit #2; disclosure email sent to target #1’s author.</p></li>
-            <li><time>NOW</time><p>Audit #2 results eligible to report via the fallback reader; response window open; write-up v4 finished.</p></li>
-            <li><time>~22 AUG</time><p>Planned publication, anonymous by default.</p></li>
+            <li><time>09 AUG</time><p>Audit #2 reported via the certified fallback reader; response windows remain open.</p></li>
+            <li><time>09 AUG</time><p>Published early by the author’s decision, with notice sent to target #1’s author. Tools stay unnamed in the narrative by default.</p></li>
           </ol>
         </div>
       </details>
@@ -1286,12 +1286,12 @@
         <p>Every reported number traces to a committed transcript, corpus hash, configuration identity, audited-code commit and pinned version of each pipeline stage.</p>
       </div>
       <div>
-        <h2>Why the tools are anonymous</h2>
-        <p>Both audited tools remain category-only while courtesy disclosure is open. Publication is anonymous by default; no identifying detail is added here.</p>
+        <h2>Why the tools are not named</h2>
+        <p>Both audited tools remain category-only in this narrative while courtesy disclosure windows are open. This is narrative non-naming, not anonymity: identification is pinned in the public evidence, and naming is each author’s choice.</p>
       </div>
       <div>
         <h2>Cost record</h2>
-        <p>Total paid API spend across the investigation in this evidence snapshot: under $12.</p>
+        <p>Metered spend in the committed metrics files totals $8.00. The Kimi run’s metrics file caught only its $0.38 resume pass; its dashboard-recorded total was ~$5.24, giving about $12.85 of documented paid spend. Retries and $0-pinned pipeline stages are unmetered, so provider dashboards, not this snapshot, are the source of truth.</p>
       </div>
     </div>
   </footer>
