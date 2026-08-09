@@ -1,0 +1,150 @@
+"""Per-claim bindings: every statistical claim in WRITEUP.md and
+paper/PAPER.md, anchored by a context regex and bound to a value
+recomputed from the evidence files. This is the fail-closed layer:
+absence of an anchor OR a captured value differing from evidence is a
+finding. The pool check in claims_lint.py is only a typo/undocumented-
+numeral detector on top; membership there is NOT provenance.
+"""
+
+import json
+import statistics as st
+from pathlib import Path
+
+A1 = "realtarget-hs-screener-002-gptoss"
+MT = "matched-target-gemma-001"
+CTRL = "control-bare-model-001"
+A2 = "target2-csa-002-fallback"
+LABS4 = [("phase4-validation-001", 0), ("phase4-validation-001", 1),
+         ("phase4-validation-001", 2), ("phase4-crosslab-claude-001", 0)]
+SIX = LABS4 + [(CTRL, 0), ("kimi-k3-lab-001", 0)]
+
+
+def _sut(audit, i=0):
+    return json.loads(Path(f"audits/{audit}/metrics/0.1.0/metrics.json")
+                      .read_text())["suts"][i]
+
+
+def _cases(audit, i=0):
+    return _sut(audit, i)["conditions"][0]["cases"]
+
+
+def _mean(audit, key, level="cluster", i=0):
+    if key == "decision":
+        vals = [c["decision_stability"]["modal_agreement"] for c in _cases(audit, i)]
+    elif key == "valence":
+        vals = [c.get("direction_flip_rate_cluster") for c in _cases(audit, i)]
+    else:
+        vals = [c[key][level]["mean_jaccard"] for c in _cases(audit, i)]
+    return st.mean(v for v in vals if v is not None)
+
+
+def _gap(audit, i=0):
+    return _mean(audit, "reason_stability", i=i) - _mean(audit, "recourse_stability", i=i)
+
+
+def _flips(audit, i=0):
+    return sum(1 for c in _cases(audit, i)
+               if c["decision_stability"]["modal_agreement"] not in (None, 1.0))
+
+
+def _parsed(audit, i=0):
+    return sum(c["denominators"]["parsed"] for c in _cases(audit, i))
+
+
+def _unclear(audit, i=0):
+    return sum(1 for c in _cases(audit, i)
+               if c["decision_stability"]["modal_decision"] == "unclear")
+
+
+def _zero_effects():
+    """Recompute audit-3's 14/20 with the D-056 comparator map."""
+    r = json.loads(Path("phase8/results-arms.json").read_text())
+    CRED = {("sc-data-analyst-04", "editC"), ("sc-data-analyst-04", "editS"),
+            ("sc-frontend-developer-04", "editS"), ("sc-project-manager-02", "editC"),
+            ("sc-project-manager-04", "editC"), ("sc-support-team-lead-04", "editS")}
+    n = lambda s: int(s.split("/")[0]) if s != "—" else None
+    zeros = total = 0
+    for c, row in r.items():
+        for arm in ("editC", "editS"):
+            for blk in ("A", "B"):
+                v = n(row[f"{arm}_{blk}"])
+                if v is None:
+                    continue
+                comp = n(row["placC_A"]) if (c, arm) in CRED else n(row["placN_A"])
+                total += 1
+                if v == comp:
+                    zeros += 1
+    return zeros, total
+
+
+WORDS = {3: "three", 4: "four", 6: "six", 7: "seven", 14: "fourteen"}
+
+
+def bindings():
+    """Returns [(description, artifact, regex, (expected, ...))]."""
+    a1_rec = f"{_mean(A1, 'recourse_stability'):.3f}"
+    a1_rea = f"{_mean(A1, 'reason_stability'):.3f}"
+    a1_raw = f"{_mean(A1, 'reason_stability', level='raw'):.3f}"
+    a1_val = f"{_mean(A1, 'valence'):.3f}"
+    mt_val = f"{_mean(MT, 'valence'):.3f}"
+    a1_gap = f"{_gap(A1):.3f}"
+    mt_gap = f"{_gap(MT):.3f}"
+    ct_gap = f"{_gap(CTRL):.3f}"
+    ct_rec = f"{_mean(CTRL, 'recourse_stability'):.3f}"
+    mt_rec = f"{_mean(MT, 'recourse_stability'):.3f}"
+    ct_val = f"{_mean(CTRL, 'valence'):.3f}"
+    a2_dec = f"{_mean(A2, 'decision'):.3f}"
+    a2_rea = f"{_mean(A2, 'reason_stability'):.3f}"
+    a2_rec = f"{_mean(A2, 'recourse_stability'):.3f}"
+    a2_gap = f"{_gap(A2):.3f}"
+    sa1 = _sut(A1)["extractor_self_agreement"]
+    a1_sa_rec = f"{sa1['recourse']['cluster']['mean_jaccard']:.3f}"
+    lab_gaps = [_gap(a, i) for a, i in LABS4]
+    lab_decs = [_mean(a, "decision", i=i) for a, i in LABS4]
+    six_gaps = [_gap(a, i) for a, i in SIX]
+    kimi_unparsed = 125 - _parsed("kimi-k3-lab-001")
+    zeros, total_fx = _zero_effects()
+
+    W, P = "WRITEUP.md", "paper/PAPER.md"
+    return [
+        ("a1 flips (writeup)", W, r"verdict changed on (\w+) of\s*\n?twenty-five", (WORDS[_flips(A1)],)),
+        ("a1 recourse (writeup)", W, r"Recourse\s*\nstability measured \*\*(0\.\d{3})\*\*", (a1_rec,)),
+        ("a1 reader SA (writeup)", W, r"was (0\.\d{3}) against\s*\na pre-registered bar", (a1_sa_rec,)),
+        ("a1 topic (writeup)", W, r"topics\?\" and you get (0\.\d{3})", (a1_rea,)),
+        ("a1 raw (writeup)", W, r"\(raw (0\.\d{3})\)", (a1_raw,)),
+        ("valence range (writeup)", W, r"\((0\.\d{3})–(0\.\d{3}), depending", (mt_val, a1_val)),
+        ("a1 gap (writeup)", W, r"stability\s*\ngap of (0\.\d{3})", (a1_gap,)),
+        ("ctrl gap (writeup)", W, r"screener's gap is\s*\n?\*\*\+?(0\.\d{3})\*\*", (ct_gap,)),
+        ("attributable diff (writeup)", W, r"roughly (0\.\d{2}), is the part",
+         (f"{float(mt_gap) - float(ct_gap):.2f}",)),
+        ("ctrl flips (writeup)", W, r"answer on (\w+) of twenty-five", (WORDS[_flips(CTRL)],)),
+        ("advice no-more-stable pair (writeup)", W, r"\((0\.\d{3}) against (0\.\d{3}), if",
+         (mt_rec, ct_rec)),
+        ("valence amplification (writeup)", W, r"(0\.\d{3})\s*\nagainst the bare model's (0\.\d{3})",
+         (mt_val, ct_val)),
+        ("labs4 gap range (writeup)", W, r"gaps of \+(0\.\d{2}) to \+(0\.\d{2})",
+         (f"{min(lab_gaps):.2f}", f"{max(lab_gaps):.2f}")),
+        ("labs4 dec range (writeup)", W, r"\(agreement\s*\n(0\.\d{2})–(0\.\d{2})\)",
+         (f"{min(lab_decs):.2f}", f"{max(lab_decs):.2f}")),
+        ("six-model gap range (writeup)", W, r"every one \(\+(0\.\d{2}) to \+(0\.\d{2})\)",
+         (f"{min(six_gaps):.2f}", f"{max(six_gaps):.2f}")),
+        # paper
+        ("a1 dec (paper table)", P, r"dec (0\.\d{3}) \(3/25", (f"{_mean(A1, 'decision'):.3f}",)),
+        ("a2 dec (paper table)", P, r"dec (0\.\d{3}) \(6/25", (a2_dec,)),
+        ("a1 recourse (paper)", P, r"recourse stability\s*\n\*\*(0\.\d{3})\*\*", (a1_rec,)),
+        ("a1 topic+raw (paper)", P, r"stability\s*\n(0\.\d{3}) at the pipeline's own four-heading rubric\s*\ngranularity \(raw (0\.\d{3})\)",
+         (a1_rea, a1_raw)),
+        ("valence range (paper)", P, r"\*\*(0\.\d{3})–(0\.\d{3})\*\* of same-topic", (mt_val, a1_val)),
+        ("ctrl summary (paper)", P, r"decision (0\.\d{3}) \(4/25 flips\); reasons (0\.\d{3}); recourse (0\.\d{3}); gap \+(0\.\d{3})",
+         (f"{_mean(CTRL, 'decision'):.3f}", f"{_mean(CTRL, 'reason_stability'):.3f}", ct_rec, ct_gap)),
+        ("ctrl-vs-pipeline gap (paper)", P, r"gap \+(0\.\d{3})\s*\nvs the pipeline's \+(0\.\d{3})", (ct_gap, mt_gap)),
+        ("valence pair (paper)", P, r"valence (0\.\d{3}) vs\s*\n?(0\.\d{3})", (ct_val, mt_val)),
+        ("a2 summary (paper)", P, r"decision\s*\n(0\.\d{3}) \(6/25 flips\); reasons (0\.\d{3}); recourse (0\.\d{3}); gap \+(0\.\d{3})",
+         (a2_dec, a2_rea, a2_rec, a2_gap)),
+        ("a2 no-verdict count (paper)", P, r"\*\*(\d)/25\s*\ncandidates received no clear verdict", (str(_unclear(A2)),)),
+        ("six-model gap range (paper)", P, r"ranging\s*\n\+(0\.\d{2}) to \+(0\.\d{2})",
+         (f"{min(six_gaps):.2f}", f"{max(six_gaps):.2f}")),
+        ("kimi unparseable (paper)", P, r"\((\d+)/125 runs unparseable\)", (str(kimi_unparsed),)),
+        ("audit3 zero effects (paper)", P, r"\*\*(\d+) of 20 advised-edit effects were exactly zero\*\*",
+         (str(zeros),)),
+    ]

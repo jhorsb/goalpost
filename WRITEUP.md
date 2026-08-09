@@ -135,7 +135,7 @@ which run they happened to get.
 stability measured **0.448**: ask this pipeline twice and, on average,
 fewer than half of its improvement recommendations appear both times —
 the least stable advice of anything I have measured with this
-instrument, across lab configurations on six model families and a
+instrument, across lab configurations on six base models and a
 bare-model control on the pipeline's own model. Because the tool's
 output is free text, this number passes through an extraction layer: it
 is a protocol-certified estimate rather than an exact property of the
@@ -210,7 +210,7 @@ model changed its accept/reject answer on four of twenty-five candidates;
 the full pipeline on three. The chain neither causes this nor cures it, and
 it would be unfair to the developer to imply otherwise. This was not
 unique to the audited developer: every configuration I have measured —
-eight, across six model families — exhibited at least one verdict flip
+eight, on six base models from three providers — exhibited at least one verdict flip
 on identical inputs.
 
 **What belongs to the design.** The gap, and the valence flipping. The
@@ -267,7 +267,8 @@ the gap having *narrowed* on current models, measured differently enough
 that I'd call it an evolution rather than a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
 0.96–0.98), something my dissertation's design couldn't observe. Since
-that first audit completed, the lab set has grown to six model families —
+that first audit completed, the lab set has grown to six base models
+from three providers —
 including an open-weights model and a Chinese lab's flagship — and the
 reasons-versus-advice gap has appeared on every one (+0.11 to +0.29).
 

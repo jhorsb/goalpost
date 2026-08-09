@@ -16,7 +16,7 @@ that survived temperature zero.
 ## What it has measured so far
 
 Three audits of real, published screening tools, plus lab configurations
-on six model families. Every number traces to a committed transcript in
+on six base models from three providers. Every number traces to a committed transcript in
 `audits/` with corpus hash, configuration identity, pinned versions of
 every pipeline stage, and the audited code's commit.
 
@@ -37,9 +37,10 @@ every pipeline stage, and the audited code's commit.
   by appending a hobbies line, and the tool's most frequent advice
   ("gain more experience") was unimplementable without corrupting the
   CV's chronology. One candidate: 0 accepts in 35 runs across every arm.
-- **Lab backdrop** — the reason–recourse gap appears on every model
-  family measured: OpenAI ×3, Anthropic, gpt-oss, Moonshot (+0.12 to
-  +0.30), including at temperature zero. Both audited tools also pin
+- **Lab backdrop** — the reason–recourse gap appears on every base model
+  measured: three OpenAI proprietary models, Anthropic's Haiku, OpenAI's
+  open-weights gpt-oss, and Moonshot's Kimi K3 (+0.11 to +0.29),
+  including at temperature zero where the provider allows it. Both audited tools also pin
   models that no longer exist at any provider — published screening
   tools silently become unrunnable as shipped.
 

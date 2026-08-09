@@ -30,8 +30,7 @@ stability claim is certified unless that reader clears a pre-registered
 self-agreement bar (with a stricter margin for claims of instability).
 Withheld is a first-class, publishable outcome. I report the protocol's
 complete track record across three audits of two published screening
-pipelines, a bare-model control, and lab configurations on six model
-families — including three occasions on which the gate refused to certify
+pipelines, a bare-model control, and lab configurations on six base models — including three occasions on which the gate refused to certify
 results (once, the author's own sought-after finding), a
 measurement-selection effect that was caught, tested, and designed out,
 and a pre-registered causal follow-up that found no demonstrable
@@ -82,7 +81,7 @@ This paper contributes:
    which the audited system's own advice is implemented as
    placebo-controlled edits.
 3. **A complete worked record** (§5–6): three audits of two published
-   pipelines, a matched control, six-family lab measurements — and,
+   pipelines, a matched control, six-model lab measurements — and,
    deliberately at equal prominence, the protocol's refusal record: three
    gate withholdings, a caught selection effect, an external statistical
    review that removed a ~60% family-wise false-positive risk from a
@@ -343,9 +342,10 @@ candidates received no clear verdict at all** ("Maybe" is this system's
 explicit tier — the only abstention vocabulary measured in this record, used
 consistently), and every verdict flip occurred in that group.
 
-**Lab backdrop, six model families.** On identical frozen cases, the
-reason–recourse gap is positive on every family measured — three OpenAI
-models, one Anthropic, one open-weights (gpt-oss), one Moonshot — ranging
+**Lab backdrop, six base models.** On identical frozen cases, the
+reason–recourse gap is positive on every base model measured — three
+OpenAI proprietary models, one Anthropic, OpenAI's open-weights gpt-oss,
+and Moonshot's Kimi K3; six models from three providers — ranging
 +0.11 to +0.29, including at temperature zero where allowed. Two
 governance observations arrived unbidden: one frontier model (Kimi K3)
 **rejects any temperature but 1.0** — determinism cannot even be
