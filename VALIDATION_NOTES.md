@@ -146,7 +146,8 @@ self-agreement 1.000):**
 **Reportable under the D-023 cluster-basis gate (decided on a widened
 25-case, k=3 sample — 75 measurements):**
 - **Recourse stability 0.456** (IQR 0.32–0.57): ask this published pipeline
-  twice and, on average, only about half its recommendations appear both
+  twice and, when both runs reach the same verdict, on average only about
+  half its recommendations appear both
   times — the least stable advice of anything measured in this project.
   Extractor agreement at the reported grouping: 0.902, clearing the 0.90
   bar by 0.002 — boundary proximity disclosed in the report, and the figure
@@ -231,14 +232,17 @@ every basis). Cluster level, 25 cases, T=0.7, N=5:
 
 Readings:
 
-1. **The gap replicates under the matched lens** (+0.537 gemma vs +0.535
+1. **The gap replicates under the matched lens** (+0.537 gemma vs +0.534
    gpt-4.1 on the same transcripts) — it is not an artifact of which
    certified extractor reads the text.
-2. **The pipeline's design owns the gap.** Same model, same corpus, same
+2. **The gap tracks the pipeline's design.** Same model, same corpus, same
    lens: chain +0.537, bare model +0.106. The chain's fixed rubric pumps
-   topic stability (0.612 → 0.993) while leaving advice as unstable as the
-   bare model's (0.456 vs 0.507). The design manufactures consistent-looking
-   *explanations* without manufacturing consistent *guidance*.
+   topic stability (0.612 → 0.993) while leaving advice no more stable than
+   the
+   bare model's (0.456 vs 0.507) — design-associated evidence under the
+   matched comparison, not a fully identified causal estimate. The chain
+   yields consistent-looking
+   *explanations* without consistent *guidance*.
 3. **The chain amplifies valence flipping**: 0.378 vs 0.249 under one lens.
    Lens variance disclosed: the target's direction-flip reads 0.508 under
    the gpt-4.1 lens and 0.378 under gemma (both certified) — public claims
@@ -291,9 +295,11 @@ system under audit.
    than target #1's 3/25, on a frontier model, at the tool's own settings.
    Extractor decision agreement 1.000 on both lenses, so this carries no
    measurement caveat under either.
-2. **7 of 25 candidates receive no clear verdict at all.** The tool's own
+2. **For 6 of 25 candidates the most common outcome is no clear verdict**
+   (one unanimously so; certified fallback lens). The tool's own
    vocabulary is Strong Yes / Yes / Maybe / No; "Maybe" maps to `unclear`
-   per the pre-registration. **Every flipped case sits in this group.** A
+   per the pre-registration. **Five of the six flipped cases sit in this
+   group.** A
    system that declines to decide, and is least stable exactly where it
    declines, is a contestability problem distinct from instability: there is
    no decision to appeal.
@@ -442,7 +448,9 @@ parsed, decision-lens self-agreement 1.000 both blocks.
 **Results:**
 1. **H1 (differential effectiveness) NOT SUPPORTED** — max |C−S|
    differential 1/5 against a ≥3/5-same-sign-twice criterion.
-2. **14 of 20 advised-edit effects were exactly 0 vs placebo**; range
+2. **14 of 20 block-specific advised-edit effect estimates (10 valid
+   edits × 2 blocks) were exactly 0 vs placebo**; five of the ten edits
+   were zero in both blocks; range
    −2/5…+2/5. The best advised uplift (+2/5, PRINCE2, one block) was
    equalled by appending a hobbies line (pm-04: 2/5→4/5, both placebos).
 3. **sc-data-analyst-04: 0 accepts in 35 runs across every arm** — the
@@ -452,10 +460,12 @@ parsed, decision-lens self-agreement 1.000 both blocks.
    edit at all** — every attempt corrupted CV chronology and was excluded
    by A1's rule.
 
-Scope: existence-level, at the stated doses, n=5 granularity (±2/5 is
-noise). "The advice doesn't work" is NOT certified. The reportable
+Scope: existence-level, at the stated doses, n=5 granularity; the
+placebo arms themselves moved outcomes by as much as 2/5 (descriptive
+context, not a registered threshold). "The advice doesn't work" is NOT
+certified. The reportable
 statement: no advised edit exceeded its placebo comparator by more than
-2/5, and most did nothing. Cost: $1.26 tool-metered (OpenAI side);
+2/5, and 14 of 20 block-specific estimates were exactly zero. Cost: $1.26 tool-metered (OpenAI side);
 pipeline calls on the paid Cerebras account are metered on its dashboard
 only.
 

@@ -465,19 +465,37 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
                 "underlying prose."
             )
         recourse_text = f"{recourse:.2f}"
+        headline = headline_statistic(recourse)
+        discarded, total_pairs = _pooled_discarded_pairs(sut)
         parts.append(
             "<p class='headline'>"
-            f"<strong>If you {_html_escape(headline_statistic(recourse))}.</strong> "
+            f"<strong>{_html_escape(headline[0].upper() + headline[1:])}.</strong> "
             f"In our measurement, its improvement {_html_escape(anchor_label(recourse))} "
-            f"(recourse stability {_html_escape(recourse_text)} on a 0&ndash;1 scale)."
+            f"(recourse stability {_html_escape(recourse_text)} on a 0&ndash;1 "
+            "scale, compared only between runs that reached the same decision; "
+            f"{discarded} of {total_pairs} run-pairs excluded for decision "
+            "flips)."
             f"{lower_bound_note}</p>"
         )
 
-    if heads["decision"] is not None:
+    # Decision claims pass the same published gate as markdown/boards
+    # (Sol re-verify #53): fail-closed when decision SA is unrecorded.
+    decision_sa = (sa.get("decision") or {}).get("mean_modal_agreement")
+    decision_ok = (not extracted) or (
+        decision_sa is not None and decision_sa >= GATE_AGREEMENT
+    )
+    if heads["decision"] is not None and decision_ok:
         decision_text = f"{heads['decision']:.0%}"
         parts.append(
             "<p>The <em>decision itself</em> agreed with its most common answer "
             f"{_html_escape(decision_text)} of the time across repeat runs.</p>"
+        )
+    elif heads["decision"] is not None:
+        parts.append(
+            "<p>The decision-stability figure is withheld: the reader's "
+            "measured self-agreement on decisions "
+            f"({_html_escape(decision_sa) if decision_sa is not None else 'not recorded'}) "
+            f"does not meet the pre-registered bar (&ge; {GATE_AGREEMENT:.2f}).</p>"
         )
     if recourse_ok and reasons_ok and heads["reasons"] is not None:
         reasons_text = f"{heads['reasons']:.2f}"

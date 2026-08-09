@@ -29,6 +29,25 @@ GENERATED_REPORTS = sorted(Path("audits").glob("*/report/report.md")) + sorted(
     Path("audits").glob("*/report/report.html")
 )
 
+# Secondary record surfaces: scanned for BANNED phrasings only (not the
+# count/numeral checks — they carry gate-log values by design). Added
+# after the Sol re-verification (D-079) found retracted claims surviving
+# precisely in the files the lint never read. Deliberately excluded:
+# DECISIONS.md and phase9/* (append-only records that QUOTE banned
+# phrasings as history) and phase8/PREREGISTRATION-AUDIT3.md (frozen;
+# corrections happen by dated annotation, not edit).
+SECONDARY = [
+    "VALIDATION_NOTES.md",
+    "DESIGN.md",
+    "METHODOLOGY.md",
+    "DELEGATION.md",
+    "paper/threats.md",
+    "paper/read-notes-lee-2026.md",
+    "phase8/ANALYSIS.md",
+    "phase8/EXCLUSIONS.md",
+    "phase7/UI_CRITIQUE_PROMPT.md",
+]
+
 # Retracted phrasings (D-065 et al.). Tuples: (pattern, allow_regex_or_None)
 BANNED = [
     (r"lower bound", r"retracted|invalidation probability"),  # others' theorems OK
@@ -75,6 +94,12 @@ BANNED = [
     # interval; the supported phrasings name the placebo swing or warn
     # against ranking, they do not declare noise
     (r"±2/5 is noise|hundredths are noise", None),
+    # Sol re-verify #9/#40: the retracted gap rounding — full precision
+    # is 0.534 (D-067); the same-lens figure is 0.537
+    (r"\b0\.535\b", None),
+    # Sol re-verify N6: the observed placebo maximum is descriptive; it
+    # is not a registered threshold that licenses reading swings as null
+    (r"not read as effects|are not read as effects", None),
 ]
 
 # Record counts that must agree wherever they are asserted.
@@ -334,6 +359,7 @@ def main() -> int:
 
     surfaces = [(p, Path(p).read_text()) for p in ARTIFACTS if Path(p).exists()]
     surfaces += [(str(p), p.read_text()) for p in GENERATED_REPORTS]
+    surfaces += [(p, Path(p).read_text()) for p in SECONDARY if Path(p).exists()]
 
     for name, text in surfaces:
         for pat, allow in BANNED:

@@ -124,6 +124,29 @@ def test_html_rendering():
     assert html.startswith("<!DOCTYPE html>") or html.startswith("<html")
 
 
+def test_html_headline_matches_markdown_disclosures():
+    # Sol re-verify N7/#14/#53: the HTML path must carry the same
+    # conditioning disclosure, discard count and decision gate as markdown.
+    from goalpost.reporter import render_report_html
+
+    metrics = metrics_fixture(recourse=0.45, extracted=True)
+    metrics["suts"][0]["conditions"][0]["cases"][0]["discarded_pair_fraction"] = 0.6
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 0.80},
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    html = render_report_html(metrics)
+    assert "6 of 10 run-pairs excluded" in html
+    assert "same decision" in html
+    assert "decision itself" not in html  # gated: SA 0.80 < 0.90
+    assert "decision-stability figure is withheld" in html.lower()
+    metrics["suts"][0]["extractor_self_agreement"]["decision"]["mean_modal_agreement"] = 1.0
+    html2 = render_report_html(metrics)
+    assert "decision itself" in html2
+
+
 def test_no_duplicated_advice_word_in_headline():
     md = render_report(metrics_fixture(recourse=0.58))
     assert "advice advice" not in md

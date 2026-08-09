@@ -123,9 +123,11 @@ Cost of the final certified measurement: **$0.28**, about 22p, and nearly
 all of it spent on the extraction and checking layers rather than the tool
 itself. An independent stability check on a published, runnable
 screening pipeline costs less than a Freddo. (Cumulatively, counting every false start, quota
-wall, the extractor rebuild and the control run described below, the whole
-investigation ran to about five dollars of paid API spend, plus free-tier
-usage on an open-weights host.)
+wall, the extractor rebuild, the control run described below, and the
+two later audits, the project's documented paid API spend is about
+thirteen dollars, plus free-tier
+usage on an open-weights host; provider dashboards hold the unmetered
+remainder.)
 
 ## What I found
 

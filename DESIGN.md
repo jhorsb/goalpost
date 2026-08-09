@@ -13,7 +13,9 @@ A five-stage pipeline with a frozen boundary between every stage. Each stage con
 corpus (frozen, hashed)
    → perturbation engine → variants/ (frozen derived artifact,
    |                        deterministic from corpus + seed + config)
-   → runner       → transcripts/  (JSONL evidence: every API call)
+   → runner       → transcripts/  (JSONL evidence: every scored run's
+                                   inputs and outputs; internal stage
+                                   calls and retries are not itemised)
    → parser       → runs/         (StructuredRun records)
    → normaliser   → normalised/<version>/ (canonical sets + mapping log)
    → metrics      → metrics/<version>/    (per-case + aggregate JSON)
@@ -106,7 +108,7 @@ Computed **per item type** (reasons vs recourse — differential extraction diff
 
 ## 5. Reports (Jinja2 → Markdown + HTML; JSON alongside)
 
-**Page one — lay report** (union rep / journalist): what was tested in plain words; the headline as a **data-derived statistic** ("ask this system twice and, on average, only 1 in 3 of its recommendations appears both times"), not an adjective — verbal anchor bands come from a **committed, versioned anchors artifact** stamped into every report; the sat-nav paragraph; one sentence each for reason-vs-recourse, decision stability, and **decision flips under immaterial edits** (above the fold); a "what this doesn't tell you" box (repeat-stability ≠ accuracy ≠ fairness; freeform numbers are extractor-mediated certified estimates, agreement score shown); a **minimal provenance stamp** (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
+**Page one — lay report** (union rep / journalist): what was tested in plain words; the headline as a **data-derived statistic** ("ask this system twice and, when the decision comes back the same, on average only 1 in 3 of its recommendations appears both times"), not an adjective — verbal anchor bands come from a **committed, versioned anchors artifact** stamped into every report; the sat-nav paragraph; one sentence each for reason-vs-recourse, decision stability, and **decision flips under immaterial edits** (above the fold); a "what this doesn't tell you" box (repeat-stability ≠ accuracy ≠ fairness; freeform numbers are extractor-mediated certified estimates, agreement score shown); a **minimal provenance stamp** (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
 
 **Technical appendix:** full three-level ladder with per-item-type lift; taxonomy granularity (cluster count + members); coverage companions; denominator chain and exclusions; NOVEL rates; extractor self-agreement per item type; per-class perturbation breakdowns; per-case distribution strips; provenance tuple; resolved config.
 

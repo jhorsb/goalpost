@@ -57,8 +57,8 @@ from the system that issued it.
    system's own verdicts.
 2. Claims are bounded exactly as registered: existence-level, at the
    stated doses, on 8 borderline cases, n=5 granularity — and the
-   placebo arms themselves moved outcomes by as much as 2/5, so
-   differences within ±2/5 are not read as effects. "The advice doesn't work" is NOT certified; the reportable
+   placebo arms themselves moved outcomes by as much as 2/5 (descriptive
+   context, not a registered threshold). "The advice doesn't work" is NOT certified; the reportable
    descriptive statement is "no advised edit exceeded its placebo
    comparator by more than 2/5 in any block, and 14 of 20 effects were
    exactly zero."

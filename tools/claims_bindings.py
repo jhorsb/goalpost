@@ -111,9 +111,14 @@ def _unclear(audit, i=0):
 
 
 def _zero_effects():
-    """Recompute audit-3's 14/20 with the D-056 comparator map."""
+    """Recompute audit-3's 14/20 with the D-056 comparator map.
+    CRED = the five certification-LINE doses (D-056: 'only the five
+    certification-line doses use placC'). da-04/editC is an EDUCATION
+    dose (DIFFS.md:21) and uses the neutral placebo — its earlier
+    inclusion here was a map error (Sol re-verify N1); counts were
+    unaffected only because both of that case's placebos are 0/5."""
     r = json.loads(Path("phase8/results-arms.json").read_text())
-    CRED = {("sc-data-analyst-04", "editC"), ("sc-data-analyst-04", "editS"),
+    CRED = {("sc-data-analyst-04", "editS"),
             ("sc-frontend-developer-04", "editS"), ("sc-project-manager-02", "editC"),
             ("sc-project-manager-04", "editC"), ("sc-support-team-lead-04", "editS")}
     n = lambda s: int(s.split("/")[0]) if s != "—" else None
@@ -135,7 +140,7 @@ def _edits_zero_both_blocks():
     """Edits (case×arm) whose A and B estimates both equal their
     comparator — the '5 of 10' companion to 14/20 (D-073)."""
     r = json.loads(Path("phase8/results-arms.json").read_text())
-    CRED = {("sc-data-analyst-04", "editC"), ("sc-data-analyst-04", "editS"),
+    CRED = {("sc-data-analyst-04", "editS"),
             ("sc-frontend-developer-04", "editS"), ("sc-project-manager-02", "editC"),
             ("sc-project-manager-04", "editC"), ("sc-support-team-lead-04", "editS")}
     n = lambda s: int(s.split("/")[0]) if s != "—" else None

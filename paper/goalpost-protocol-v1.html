@@ -425,14 +425,14 @@ stability in the interval (a − 0.15, 0.85) satisfies neither branch and
 is uncertifiable — at the bar itself (a = 0.90) the band spans s ∈
 (0.75, 0.85), a full 0.10 wide, narrowing to nothing only as a → 1.
 Moderate stability is therefore structurally the hardest thing for this
-protocol to certify. That is intended, not incidental: the mid-range is
-exactly where extraction noise does the most damage — a genuinely stable
-system read by a mediocre reader and a genuinely unstable system read by
-a good one can produce the same mid-range s, and no margin short of the
-one imposed separates them. The cost is disclosed rather than hidden: a
-mid-range result is published as withheld with both s and a printed, and
-a sharper reader — not a lower bar — is the only path to certifying
-it.</p>
+protocol to certify. That is intended, not incidental: in the mid-range,
+a genuinely stable system read by a mediocre reader and a genuinely
+unstable system read by a good one can produce the same s, and the
+pre-registered 0.15 margin is the judgment call that refuses to guess
+between them — a chosen constant, not a derived optimum. The cost is
+disclosed rather than hidden: a mid-range result is published as
+withheld with both s and a printed, and a sharper reader — not a lower
+bar — is the only path to certifying it.</p>
 <p>Thresholds are design constants, pre-registered with an
 expiry-bearing revision allowance (ours permitted one revision, "only
 before any reportable audit is run"; it expired unused).</p>
@@ -512,7 +512,7 @@ lab set.</p>
 <td>v2 failed margin; v3 certified (0.988/0.932); 2nd reader
 certified</td>
 <td>25×5</td>
-<td>dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½</td>
+<td>dec 0.968 (3/25 flips); recourse 0.448; valence ~⅓–½</td>
 <td>certified</td>
 </tr>
 <tr>
@@ -642,9 +642,10 @@ chronology and was excluded by A1's rule.</p>
 <p>At two evaluable cases, the hypothesis test itself is weakly
 informative, and I read audit #3's primary contribution accordingly: it
 demonstrates that the protocol's causal extension runs mechanically —
-frozen dose tables, committed diffs, an independent pre-run check that
-caught the author's own derivation script — with the placebo-bounded
-negative as evidence at that scale and no more.</p>
+frozen dose tables, committed diffs, a pre-run diff check that caught
+the author's own derivation script (its verdict table is summarised in
+the decision log, D-053; the session record is author-held) — with the
+placebo-bounded negative as evidence at that scale and no more.</p>
 <p>The registered scope holds: "the advice doesn't work" is <em>not</em>
 certified; "no advised edit exceeded its placebo comparator by more than
 2/5 at these doses, and 14 of 20 block-specific estimates were exactly
@@ -726,9 +727,10 @@ baseline (§9) is the missing instrument for that.</p>
 <p><strong>T4 — "You measured a serving host, not a design."</strong>
 For absolute numbers, partly irreducible: host-inclusive measurement is
 disclosed, and no cross-host replication of the target exists. The
-attribution claims survive by construction — target and control share
-model, host, settings and reader, so serving noise cancels from the
-difference.</p>
+design-associated claims are protected by the match — target and control
+share model, host, settings and reader, a shared serving-noise exposure
+that narrows the confound, though independent stochastic runs do not
+cancel it by construction.</p>
 <p><strong>T5 — "n=25, two pipelines, substituted models — what
 generalises?"</strong> Existence claims only, scoped to the
 design-as-served; substitutions are disclosed and are themselves a
@@ -781,9 +783,12 @@ critique of the audit-#3 registration that became amendment A1 — the
 ~60%→~5% family-wise false-positive correction — plus a seven-point
 pre-publication review and a pre-submission review all came from GPT-5.6
 Sol Pro (OpenAI), prompted by the author, with each adopted point
-verified against the record before it was applied. No human other than
-the author reviewed this work before publication. All errors are mine —
-several demonstrably so, per §7.</p>
+verified against the record before it was applied. The two full-repo
+audit reports and the pre-submission review are committed verbatim under
+<code>phase9/</code>; the earlier review sessions are author-held
+records, so their attribution rests on this disclosure. No human other
+than the author reviewed this work before publication. All errors are
+mine — several demonstrably so, per §7.</p>
 <h2 id="references">References</h2>
 <ul>
 <li>Alvarez-Melis, D., Jaakkola, T. (2018). On the Robustness of

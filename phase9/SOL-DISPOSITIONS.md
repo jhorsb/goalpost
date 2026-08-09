@@ -66,3 +66,30 @@ round should check this table against the surfaces, not trust it.
 
 Open findings: **none**. 53 fixed, 2 wont-fix (both the same sanctioned
 negation), with every fix carrying a ban or binding where one can hold it.
+
+---
+
+## Re-verification round (SOL-REVERIFY-D078, 2026-08-09)
+
+The closed-loop re-verification (same reviewer, session task-msm3q8z3)
+returned **NOT CLEAN — 17 dispositions PARTIAL/NOT-RESOLVED, 7 new
+findings (N1–N7)**. Root pattern: fixes had landed on publication
+surfaces while the same claims survived in secondary record files the
+lint never scanned, plus the report HTML path missing the D-068/D-077
+disclosures and a comparator-map bug in the binding layer.
+
+**All addressed in D-079:** the HTML report path now mirrors markdown
+(conditioning + discard count + gated decision line, test-first); the
+credential-comparator map corrected to the five certification-line doses
+(N1 — counts unchanged, verified); nine secondary surfaces added to the
+lint's banned-pattern scan, which mechanically surfaced 11 residues, all
+fixed (#9, #11, #14, #16, #25, #27, #34, #37, #40, #51, #53); the
+over-strong D-073/D-077/D-078 replacement prose calibrated (N2 margin as
+chosen constant; N5 README amplification not exclusivity; N6 placebo
+maximum as descriptive context; #41/#47 no-cancellation and
+design-tracking wording); the pre-submission review committed verbatim
+(N4, partially — the two earlier review sessions remain author-held and
+the acknowledgements now say so); the audit-3 diff-check's evidentiary
+status stated in the paper (N3 — session record author-held, D-053
+summary; recovery of the verdict table queued). Frozen-text instances
+(#34's registration lines) are exempt by the annotation rule.

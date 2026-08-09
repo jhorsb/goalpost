@@ -130,9 +130,11 @@ reasoning, not just the artefact.
 - **Withheld stays visibly withheld.** Improve how it reads; never let a
   withheld number appear as though it were certified. This is an integrity
   constraint, not a stylistic one.
-- **Both audited tools stay anonymous.** They are described by category
-  only, deliberately — one author has been sent a courtesy disclosure and
-  the response window is still open. Do not add identifying detail even if
+- **Both audited tools stay unnamed in the narrative.** They are described
+  by category
+  only, deliberately — identification is pinned in the public evidence,
+  and one author has been sent a courtesy disclosure with
+  the response window still open. Do not add identifying detail even if
   you can infer it.
 
 ## What good looks like

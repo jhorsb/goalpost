@@ -255,11 +255,12 @@ interval (a − 0.15, 0.85) satisfies neither branch and is uncertifiable
 — at the bar itself (a = 0.90) the band spans s ∈ (0.75, 0.85), a full
 0.10 wide, narrowing to nothing only as a → 1. Moderate stability is
 therefore structurally the hardest thing for this protocol to certify.
-That is intended, not incidental: the mid-range is exactly where
-extraction noise does the most damage — a genuinely stable system read
+That is intended, not incidental: in the mid-range, a genuinely stable
+system read
 by a mediocre reader and a genuinely unstable system read by a good one
-can produce the same mid-range s, and no margin short of the one imposed
-separates them. The cost is disclosed rather than hidden: a mid-range
+can produce the same s, and the pre-registered 0.15 margin is the
+judgment call that refuses to guess between them — a chosen constant,
+not a derived optimum. The cost is disclosed rather than hidden: a mid-range
 result is published as withheld with both s and a printed, and a sharper
 reader — not a lower bar — is the only path to certifying it.
 
@@ -331,7 +332,7 @@ counts and headline measures for the three audits and the lab set.
 
 | audit | mode | reader status | n | headline measures | outcome |
 |---|---|---|---|---|---|
-| #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½ | certified |
+| #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ~⅓–½ | certified |
 | bare-model control | freeform | v3+gpt-4.1 **withheld** (0.895/0.817); v3+gemma certified | 25×5 | dec 0.960 (4/25); gap +0.106 vs pipeline +0.537 | certified (2nd reader) |
 | #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 6/25 modal-no-verdict; gap +0.173 | certified (fallback; both reported) |
 | #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 220 runs (280 planned; 6 arms excluded pre-run) | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
@@ -433,8 +434,10 @@ chronology and was excluded by A1's rule.
 At two evaluable cases, the hypothesis test itself is weakly
 informative, and I read audit #3's primary contribution accordingly: it
 demonstrates that the protocol's causal extension runs mechanically —
-frozen dose tables, committed diffs, an independent pre-run check that
-caught the author's own derivation script — with the placebo-bounded
+frozen dose tables, committed diffs, a pre-run diff check that
+caught the author's own derivation script (its verdict table is
+summarised in the decision log, D-053; the session record is
+author-held) — with the placebo-bounded
 negative as evidence at that scale and no more.
 
 The registered scope holds: "the advice doesn't work" is *not* certified;
@@ -515,9 +518,11 @@ the human inter-rater baseline (§9) is the missing instrument for that.
 
 **T4 — "You measured a serving host, not a design."** For absolute
 numbers, partly irreducible: host-inclusive measurement is disclosed, and
-no cross-host replication of the target exists. The attribution claims
-survive by construction — target and control share model, host, settings
-and reader, so serving noise cancels from the difference.
+no cross-host replication of the target exists. The design-associated
+claims are protected by the match — target and control share model,
+host, settings
+and reader, a shared serving-noise exposure that narrows the confound,
+though independent stochastic runs do not cancel it by construction.
 
 **T5 — "n=25, two pipelines, substituted models — what generalises?"**
 Existence claims only, scoped to the design-as-served; substitutions are
@@ -576,7 +581,10 @@ audit-#3 registration that became amendment A1 — the ~60%→~5%
 family-wise false-positive correction — plus a seven-point
 pre-publication review and a pre-submission review all came from
 GPT-5.6 Sol Pro (OpenAI), prompted by the author, with each adopted
-point verified against the record before it was applied. No human other
+point verified against the record before it was applied. The two
+full-repo audit reports and the pre-submission review are committed
+verbatim under `phase9/`; the earlier review sessions are author-held
+records, so their attribution rests on this disclosure. No human other
 than the author reviewed this work before publication. All errors are
 mine — several
 demonstrably so, per §7.

@@ -27,13 +27,15 @@ measured — say so.
 
 Reasons are counted at four fixed rubric headings; advice at individual
 recommendations. Coarse buckets match more easily. An XAI reviewer will say an
-unknown share of 0.535 is measurement resolution, not behaviour.
+unknown share of 0.534 is measurement resolution, not behaviour.
 
 **Evidence in repo:** Fully anticipated — D-027(1) demoted the gap from
 headline; the valence-flip finding (0.378–0.508), robust to granularity, was
-promoted to lead; the control gives the differential argument (target 0.535 vs
-bare-model 0.106 under the same lens and granularity — resolution artifacts
-apply to both sides, the ~0.43 difference doesn't). **Residual weakness:** the
+promoted to lead; the control gives the differential argument (target 0.537 vs
+bare-model 0.106 under the same lens and granularity — the match narrows
+resolution confounds, though it cannot guarantee the two architectures' prose
+interacts identically with extraction; the ~0.43 difference is
+design-associated evidence). **Residual weakness:** the
 two sides are still measured at different resolutions, and no repo experiment
 quantifies how much of the *absolute* gap granularity accounts for (e.g.
 re-scoring reasons at sub-heading granularity). The write-up says "cannot
@@ -66,8 +68,9 @@ fingerprints.
 
 **Evidence in repo:** D-017 policy (first-party preferred, routing disclosed);
 crucially, the bare-model control (D-028) ran the *same model on the same
-host* — so the design-attribution claims (gap, valence amplification) survive
-any serving-noise level, since both arms absorb it equally. **Honest absence:**
+host* — so serving noise is a shared exposure for the design-associated
+claims (gap, valence amplification): narrowed as a confound, though
+independent stochastic runs do not cancel it by construction. **Honest absence:**
 the *absolute* stability numbers (0.448, 0.968) are host-inclusive — the repo
 cannot separate model-inherent from serving-infrastructure noise, and no
 cross-host replication of the target exists. Atil et al.'s finding that

@@ -30,7 +30,7 @@ rendering because resume is runner core.
 
 ## Sub-agent log
 
-- **2026-08-08 · explainer rebuild (unnumbered, via UI critique prompt):** Codex rebuilt `phase7/goalpost-explainer.html` → `goalpost-explainer-rebuilt.html` from `UI_CRITIQUE_PROMPT.md` + `UI_PROVENANCE_RESOLUTION.md`. Reviewed as untrusted (CSP/anonymity/figures) and published. Its adversarial pass caught two provenance defects in our page (sample phrasing inconsistency; a mis-plotted gate value) and one integrity flaw we missed (mixed-reader comparison columns). Committed directly as 2f9ec58 (no branch — sandbox `.git` limitation, per protocol note above).
+- **2026-08-08 · explainer rebuild (unnumbered, via UI critique prompt):** Codex rebuilt `phase7/goalpost-explainer.html` → `goalpost-explainer-rebuilt.html` from `UI_CRITIQUE_PROMPT.md` + `UI_PROVENANCE_RESOLUTION.md`. Reviewed as untrusted (CSP/non-naming/figures) and published. Its adversarial pass caught two provenance defects in our page (sample phrasing inconsistency; a mis-plotted gate value) and one integrity flaw we missed (mixed-reader comparison columns). Committed directly as 2f9ec58 (no branch — sandbox `.git` limitation, per protocol note above).
 
 
 | date | task | outcome |
