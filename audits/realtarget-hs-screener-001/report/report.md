@@ -4,7 +4,7 @@
 
 ## The headline
 
-**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.80, recourse 0.67, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
+**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.80, recourse 0.67, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. A future audit may register a stronger extractor; for this audit's declared readers, withheld is final.
 
 The decision-stability figure is withheld: the reader's measured self-agreement on decisions (not recorded) does not meet the pre-registered bar (≥ 0.90).
 
@@ -16,7 +16,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.80, recourse 0.67, k=3, 4 sampled cases); figures are protocol-certified estimates, not exact properties of the underlying prose.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.80, recourse 0.67, k=3, 4 sampled cases); stability figures are withheld under the pre-registered gate, and no certified estimate is offered.
 
 > **Incomplete audit.** The spending cap stopped this audit before all planned blocks ran. Missing blocks: `47f0b084a7d3230e/t0.7_n5/sc-platform-engineer-05`, `47f0b084a7d3230e/t0.7_n5/sc-data-analyst-01`, `47f0b084a7d3230e/t0.7_n5/sc-data-analyst-02`, `47f0b084a7d3230e/t0.7_n5/sc-data-analyst-03`, `47f0b084a7d3230e/t0.7_n5/sc-data-analyst-04`, `47f0b084a7d3230e/t0.7_n5/sc-data-analyst-05`, `47f0b084a7d3230e/t0.7_n5/sc-frontend-developer-01`, `47f0b084a7d3230e/t0.7_n5/sc-frontend-developer-02`, `47f0b084a7d3230e/t0.7_n5/sc-frontend-developer-03`, `47f0b084a7d3230e/t0.7_n5/sc-frontend-developer-04`, `47f0b084a7d3230e/t0.7_n5/sc-frontend-developer-05`, `47f0b084a7d3230e/t0.7_n5/sc-project-manager-01`, `47f0b084a7d3230e/t0.7_n5/sc-project-manager-02`, `47f0b084a7d3230e/t0.7_n5/sc-project-manager-03`, `47f0b084a7d3230e/t0.7_n5/sc-project-manager-04`, `47f0b084a7d3230e/t0.7_n5/sc-project-manager-05`, `47f0b084a7d3230e/t0.7_n5/sc-support-team-lead-01`, `47f0b084a7d3230e/t0.7_n5/sc-support-team-lead-02`, `47f0b084a7d3230e/t0.7_n5/sc-support-team-lead-03`, `47f0b084a7d3230e/t0.7_n5/sc-support-team-lead-04`, `47f0b084a7d3230e/t0.7_n5/sc-support-team-lead-05`
 

@@ -17,7 +17,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 1.000 at the reported grouping (1.000 raw), recourse 0.901 at the reported grouping (0.846 raw), k=3, 10 sampled cases); figures are protocol-certified estimates, not exact properties of the underlying prose.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 1.000 at the reported grouping (1.000 raw), recourse 0.901 at the reported grouping (0.846 raw), k=3, 10 sampled cases); figures are certified estimates under the committed reader, not exact properties of the underlying prose.
 
 ---
 

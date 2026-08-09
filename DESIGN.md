@@ -102,7 +102,7 @@ Per (SUT, condition, case), over N repeats:
 ### 4.4 Extractor self-agreement (freeform mode)
 Computed **per item type** (reasons vs recourse — differential extraction difficulty must not fabricate the gap), on a stratified sample of responses, k=3 uncached extractions each (cache bypass via nonce); agreement = mean Jaccard of extracted sets.
 
-**Gate (asymmetric by design):** extractor noise only *attenuates* observed stability. Therefore:
+**Gate (asymmetric by design):** extractor noise *preferentially* attenuates observed stability, though it can also inflate overlap (D-065) — the asymmetry is a conservative choice, not an identity. Therefore:
 - **High-stability claims** are reportable whenever self-agreement ≥ 0.90 (certified estimates under the committed reader; the earlier "lower bound" framing is retracted — see D-065).
 - **Instability claims and the reason–recourse gap** additionally require self-agreement to exceed the measured stability by ≥ 0.15; otherwise the report prints the agreement score and withholds the claim.
 
@@ -208,7 +208,7 @@ The design was presented in seven sections and validated one at a time (2026-07-
 
 **Section 5 — Reports (3 + 1 note):**
 1. Ranking eligibility floors — SUTs enter the ranked table only if they clear coverage/denominator/NOVEL thresholds; others listed unranked with reasons; overlapping-IQR rows render as tie-bands, not strict order.
-2. Verbal anchor bands become a committed, versioned artifact stamped into every report; the lay headline uses a data-derived statistic ("ask twice; on average only 1 in 3 recommendations appears both times"), not an adjective.
+2. Verbal anchor bands become a committed, versioned artifact stamped into every report; the lay headline uses a data-derived statistic ("ask twice; when the decision comes back the same, on average only 1 in 3 recommendations appears both times"), not an adjective.
 3. Perturbation results added to all renderings — per-class breakdowns in the appendix, an above-the-fold lay line for decision flips under immaterial edits, and a lay sentence for plain decision stability.
 4. *Note:* page one carries a minimal provenance stamp (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
 

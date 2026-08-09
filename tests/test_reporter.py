@@ -231,6 +231,66 @@ def test_decision_line_gated_when_decision_agreement_missing():
     assert "decision itself* agreed" not in md
 
 
+def test_decision_line_applies_full_boxed_rule():
+    # Round-2 #53: decision claims obey certified(s,a) in full —
+    # s=0.84, a=0.95 fails both branches (s<0.85 and a−s=0.11<0.15).
+    metrics = metrics_fixture(recourse=0.92, decision=0.84, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 0.95},
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    md = render_report(metrics)
+    assert "decision itself* agreed" not in md
+    assert "decision-stability figure is withheld" in md.lower()
+
+
+def test_reasons_comparative_claim_requires_actual_difference():
+    # Round-2 M3: "substantially steadier" must not print for equal values.
+    md = render_report(metrics_fixture(recourse=1.0, reasons=1.0))
+    assert "substantially steadier" not in md
+    assert "Reason stability 1.00; recourse 1.00" in md
+    md2 = render_report(metrics_fixture(recourse=0.36, reasons=0.89))
+    assert "substantially steadier" in md2
+
+
+def test_withheld_report_does_not_call_figures_certified():
+    # Round-2 M4: a withheld report's caveats must not describe its
+    # figures as protocol-certified estimates.
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 1.0},
+        "reasons": {"mean_jaccard": 0.58},
+        "recourse": {"mean_jaccard": 0.87},
+    }
+    md = render_report(metrics)
+    assert "withheld" in md.lower()
+    assert "protocol-certified estimate" not in md.lower()
+
+
+def test_withheld_remediation_respects_frozen_reader_rule():
+    # Round-2 M5: remediation must not read as post-target reader swap.
+    metrics = metrics_fixture(recourse=0.36, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 1.0},
+        "reasons": {"mean_jaccard": 0.58},
+        "recourse": {"mean_jaccard": 0.87},
+    }
+    md = render_report(metrics)
+    assert "Re-run with a stronger extractor" not in md
+    assert "future audit" in md
+
+
+def test_comparison_tie_band_language_is_descriptive():
+    # Round-2 M2: no inferential "statistically indistinguishable" claim.
+    md = render_comparison(comparison_fixture())
+    assert "statistically indistinguishable" not in md
+    assert "no statistical test" in md.lower()
+
+
 def test_structured_mode_never_gated():
     md = render_report(metrics_fixture(recourse=0.36, extracted=False))
     assert "withheld" not in md.lower()

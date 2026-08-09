@@ -1,6 +1,6 @@
 # Goalpost comparison — phase4-validation-001
 
-Ranked by recourse stability (cluster level). Rows sharing a tie-band have overlapping spreads: treat them as statistically indistinguishable, not ordered.
+Ranked by recourse stability (cluster level). Rows sharing a tie-band have overlapping spreads: treat them as not meaningfully ordered by this display (no statistical test is performed).
 
 | band | SUT | mode | recourse stability | IQR | cases |
 |---|---|---|---|---|---|

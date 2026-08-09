@@ -4,7 +4,7 @@
 
 ## The headline
 
-**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.89, recourse 0.82, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
+**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.89, recourse 0.82, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. A future audit may register a stronger extractor; for this audit's declared readers, withheld is final.
 
 The *decision itself* agreed with its most common answer 95% of the time across repeat runs.
 
@@ -16,7 +16,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.895 at the reported grouping (0.871 raw), recourse 0.817 at the reported grouping (0.745 raw), k=3, 25 sampled cases); figures are protocol-certified estimates, not exact properties of the underlying prose.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.895 at the reported grouping (0.871 raw), recourse 0.817 at the reported grouping (0.745 raw), k=3, 25 sampled cases); stability figures are withheld under the pre-registered gate, and no certified estimate is offered.
 
 ---
 

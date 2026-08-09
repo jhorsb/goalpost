@@ -31,8 +31,8 @@ every pipeline stage, and the audited code's commit.
   or *against* the candidate in roughly a third to a half of comparisons
   (0.378–0.508, by lens). A
   matched control (same model, no pipeline) flipped verdicts too — the
-  chain is not necessary for that — while the explanation pattern was
-  strongly amplified by the chained design (gap +0.53 against the
+  chain is not necessary for that — while the explanation pattern
+  tracks the chained design (same-lens gap +0.54 against the
   control's +0.11).
 - **Audit #2** — a published 3-stage LangGraph screener on a frontier
   model. Verdict flipped on 6/25; for 6/25 the most common outcome was no

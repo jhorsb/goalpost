@@ -583,8 +583,9 @@ audit-#3 registration that became amendment A1 — the ~60%→~5%
 family-wise false-positive correction — plus a seven-point
 pre-publication review and a pre-submission review all came from
 GPT-5.6 Sol Pro (OpenAI), prompted by the author, with each adopted
-point verified against the record before it was applied. The two
-full-repo audit reports and the pre-submission review are committed
+point verified against the record before it was applied. The full-repo
+audit, its re-verification reports, and the pre-submission review are
+committed
 verbatim under `phase9/`; the earlier review sessions are author-held
 records, so their attribution rests on this disclosure. No human other
 than the author reviewed this work before publication. All errors are

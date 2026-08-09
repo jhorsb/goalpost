@@ -74,10 +74,9 @@ def _measures_for(sut: dict, values: dict[str, float | None]) -> dict:
 
     sa = sut.get("extractor_self_agreement") or {}
     decision_agreement = (sa.get("decision") or {}).get("mean_modal_agreement")
-    decision_ok = (
-        decision_agreement is not None
-        and decision_agreement >= reporter.GATE_AGREEMENT
-    )
+    # Full boxed rule for decisions too (round-2 #53): certified(s, a),
+    # not the agreement bar alone.
+    decision_ok = reporter._reportable(values["decision"], decision_agreement)
     reasons_ok = reporter._reportable(
         values["reasons"],
         reporter._gate_agreement_value(sa.get("reasons", {})),

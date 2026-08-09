@@ -175,7 +175,7 @@ def render_report(metrics: dict) -> str:
                 f"reportability gate (≥ {GATE_AGREEMENT:.2f}, with a "
                 f"{GATE_MARGIN:.2f} margin for instability claims). A less "
                 "consistent extractor can fabricate instability, so no "
-                "stability claim is made. Re-run with a stronger extractor."
+                "stability claim is made. A future audit may register a stronger extractor; for this audit's declared readers, withheld is final."
             )
         else:
             lower_bound_note = ""
@@ -202,8 +202,8 @@ def render_report(metrics: dict) -> str:
         # (decision reader SA >= bar; mirrors boards.py — Sol #53):
         # extracted mode with no recorded decision SA withholds, fail-closed.
         decision_sa = (sa.get("decision") or {}).get("mean_modal_agreement")
-        decision_ok = (not extracted) or (
-            decision_sa is not None and decision_sa >= GATE_AGREEMENT
+        decision_ok = (not extracted) or _reportable(
+            heads["decision"], decision_sa
         )
         if heads["decision"] is not None and decision_ok:
             lines.append(
@@ -218,11 +218,18 @@ def render_report(metrics: dict) -> str:
                 f"does not meet the pre-registered bar (≥ {GATE_AGREEMENT:.2f})."
             )
         if recourse_ok and reasons_ok and heads["reasons"] is not None:
-            lines.append(
-                f"The *reasons given* were substantially steadier than the "
-                f"advice (reason stability {heads['reasons']:.2f} vs recourse "
-                f"{recourse:.2f})."
-            )
+            # the relational claim requires a relation (round-2 M3)
+            if heads["reasons"] - recourse >= 0.05:
+                lines.append(
+                    f"The *reasons given* were substantially steadier than the "
+                    f"advice (reason stability {heads['reasons']:.2f} vs recourse "
+                    f"{recourse:.2f})."
+                )
+            else:
+                lines.append(
+                    f"Reason stability {heads['reasons']:.2f}; recourse "
+                    f"{recourse:.2f}."
+                )
         lines.append("")
         lines.append("## Why this matters")
         lines.append("")
@@ -254,8 +261,12 @@ def render_report(metrics: dict) -> str:
                 "form by a separate extraction model (self-agreement: reasons "
                 f"{_fmt_sa('reasons')}, recourse {_fmt_sa('recourse')}, "
                 f"k={sa.get('k')}, {sa.get('sampled_cases', '?')} sampled "
-                "cases); figures are protocol-certified estimates, not exact "
-                "properties of the underlying prose."
+                "cases); "
+                + ("figures are certified estimates under the committed "
+                   "reader, not exact properties of the underlying prose."
+                   if recourse_ok else
+                   "stability figures are withheld under the pre-registered "
+                   "gate, and no certified estimate is offered.")
             )
         for caveat in caveats:
             lines.append(f"- {caveat}")
@@ -452,7 +463,7 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
             f"reportability gate (&ge; {_html_escape(gate_agreement)}, with a "
             f"{_html_escape(gate_margin)} margin for instability claims). "
             "A less consistent extractor can fabricate instability, so no "
-            "stability claim is made. Re-run with a stronger extractor."
+            "stability claim is made. A future audit may register a stronger extractor; for this audit's declared readers, withheld is final."
             "</p>"
         )
     else:
@@ -481,8 +492,8 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
     # Decision claims pass the same published gate as markdown/boards
     # (Sol re-verify #53): fail-closed when decision SA is unrecorded.
     decision_sa = (sa.get("decision") or {}).get("mean_modal_agreement")
-    decision_ok = (not extracted) or (
-        decision_sa is not None and decision_sa >= GATE_AGREEMENT
+    decision_ok = (not extracted) or _reportable(
+        heads["decision"], decision_sa
     )
     if heads["decision"] is not None and decision_ok:
         decision_text = f"{heads['decision']:.0%}"
@@ -500,11 +511,17 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
     if recourse_ok and reasons_ok and heads["reasons"] is not None:
         reasons_text = f"{heads['reasons']:.2f}"
         recourse_text = f"{recourse:.2f}"
-        parts.append(
-            "<p>The <em>reasons given</em> were substantially steadier than the "
-            f"advice (reason stability {_html_escape(reasons_text)} "
-            f"vs recourse {_html_escape(recourse_text)}).</p>"
-        )
+        if heads["reasons"] - recourse >= 0.05:
+            parts.append(
+                "<p>The <em>reasons given</em> were substantially steadier than the "
+                f"advice (reason stability {_html_escape(reasons_text)} "
+                f"vs recourse {_html_escape(recourse_text)}).</p>"
+            )
+        else:
+            parts.append(
+                f"<p>Reason stability {_html_escape(reasons_text)}; recourse "
+                f"{_html_escape(recourse_text)}.</p>"
+            )
     parts.extend(
         [
             "</section>",
@@ -527,9 +544,12 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
             "by a separate extraction model (self-agreement: reasons "
             f"{_html_self_agreement(sa, 'reasons')}, recourse "
             f"{_html_self_agreement(sa, 'recourse')}, k={sa.get('k')}, "
-            f"{sa.get('sampled_cases', '?')} sampled cases); figures are "
-            "protocol-certified estimates, not exact properties of the "
-            "underlying prose."
+            f"{sa.get('sampled_cases', '?')} sampled cases); "
+            + ("figures are certified estimates under the committed reader, "
+               "not exact properties of the underlying prose."
+               if recourse_ok else
+               "stability figures are withheld under the pre-registered "
+               "gate, and no certified estimate is offered.")
         )
         parts.append(f"<li>{_html_escape(caveat)}</li>")
     parts.extend(["</ul>", "</section>"])
@@ -797,8 +817,9 @@ def render_comparison(metrics: dict) -> str:
         lines.append("")
 
     lines.append("Ranked by recourse stability (cluster level). Rows sharing "
-                 "a tie-band have overlapping spreads: treat them as "
-                 "statistically indistinguishable, not ordered.")
+                 "a tie-band have overlapping spreads: treat them as not "
+                 "meaningfully ordered by this display (no statistical "
+                 "test is performed).")
     lines.append("")
     lines.append("| band | SUT | mode | recourse stability | IQR | cases |")
     lines.append("|---|---|---|---|---|---|")

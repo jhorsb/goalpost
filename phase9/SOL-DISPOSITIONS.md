@@ -101,3 +101,28 @@ checksums as `phase8/DIFF-CHECK-RECORD.md`; the paper now points there
 instead of "author-held". The record shows 13 of 16 rows carrying at
 least one failing verdict; D-053's "8 of 16" stands as its clauses'
 (a)+(b) summary, and the paper's parenthetical now states both counts.*
+
+## Re-verification round 2 (SOLREVERIFY2, 2026-08-09)
+
+Round 2 (committed verbatim: SOL-REVERIFY-2.md) returned **NOT CLEAN — 7
+closures PARTIAL (#11, #15, #41, #52, #53, N4, N5), 8 new findings
+M1–M8** — a shrinking, more marginal set (55 → 24 → 15). Closed in
+D-081: **#53/M-class renderer semantics** (decision claims now pass the
+FULL boxed rule certified(s,a) in markdown, HTML and the board; the
+comparative "substantially steadier" sentence requires an actual
+difference; withheld reports no longer call their figures certified
+estimates; the remediation line respects the frozen-reader rule; the
+comparison tie-band language is descriptive, "statistically
+indistinguishable" banned); **#11/M8 scaffold surfaces**
+(WRITEUP_TEMPLATE.md and STATUS.md join the scan; DESIGN's template
+quote conditioned); **M1** (emphasis-evading "only *attenuates*" fixed
+in DESIGN and METHODOLOGY, ban made emphasis-tolerant); **N5/M7** (README
+now pairs same-lens +0.54 with +0.11 and says "tracks", not
+"amplified"); **#41** (WRITEUP no longer asserts granularity "does not
+explain the distance"); **N4/M6** (both re-verification reports now
+committed verbatim, acknowledgements updated to match); **M2**
+(comparison.md files are lint surfaces). Remaining open by their
+nature: **#15** (WRITEUP's author-protected phrase — the author's call,
+question standing), **#52** (mutation coverage is a ratchet, not a
+guarantee; each round's specific residues are covered as found), **N3**
+(rollout recovery running in a separate session).

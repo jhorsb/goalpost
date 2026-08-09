@@ -2,7 +2,7 @@
 
 > **Cross-mode comparison.** These systems were measured under different elicitation modes (structured vs freeform); their numbers are not strictly like-for-like. Rows are labelled.
 
-Ranked by recourse stability (cluster level). Rows sharing a tie-band have overlapping spreads: treat them as statistically indistinguishable, not ordered.
+Ranked by recourse stability (cluster level). Rows sharing a tie-band have overlapping spreads: treat them as not meaningfully ordered by this display (no statistical test is performed).
 
 | band | SUT | mode | recourse stability | IQR | cases |
 |---|---|---|---|---|---|

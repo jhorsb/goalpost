@@ -25,8 +25,10 @@ ARTIFACTS = [
     "DISCLOSURE_NOTE_2.md",   # send-ready: drift here means mailing a false claim
     "paper/goalpost-protocol-v1.html",  # generated from PAPER.md; regenerate, never edit
 ]
-GENERATED_REPORTS = sorted(Path("audits").glob("*/report/report.md")) + sorted(
-    Path("audits").glob("*/report/report.html")
+GENERATED_REPORTS = (
+    sorted(Path("audits").glob("*/report/report.md"))
+    + sorted(Path("audits").glob("*/report/report.html"))
+    + sorted(Path("audits").glob("*/report/comparison.md"))
 )
 
 # Secondary record surfaces: scanned for BANNED phrasings only (not the
@@ -46,6 +48,8 @@ SECONDARY = [
     "phase8/ANALYSIS.md",
     "phase8/EXCLUSIONS.md",
     "phase7/UI_CRITIQUE_PROMPT.md",
+    "WRITEUP_TEMPLATE.md",
+    "STATUS.md",
 ]
 
 # Retracted phrasings (D-065 et al.). Tuples: (pattern, allow_regex_or_None)
@@ -53,7 +57,8 @@ BANNED = [
     (r"lower bound", r"retracted|invalidation probability"),  # others' theorems OK
     (r"is a floor", None),
     (r"at least this good", None),
-    (r"only attenuates", None),
+    # emphasis-tolerant: "only *attenuates*" evaded the plain form (M1)
+    (r"only\s+\*?attenuates\*?|can only make a system\s+look", None),
     (r"indistinguishable from", None),
     (r"\banonymis|\banonymity", r"narrative non-naming|not anonymity"),
     (r"Same CV on Tuesday", None),
@@ -100,6 +105,10 @@ BANNED = [
     # Sol re-verify N6: the observed placebo maximum is descriptive; it
     # is not a registered threshold that licenses reading swings as null
     (r"not read as effects|are not read as effects", None),
+    # Round-2 #52/M2: the pre-conditioning HTML template's opener, and
+    # the unsupported inferential tie-band claim
+    (r"If you ask twice", None),
+    (r"statistically indistinguishable", None),
 ]
 
 # Record counts that must agree wherever they are asserted.

@@ -199,8 +199,9 @@ One caveat survives: the two sides aren't measured at the same
 resolution. Reasons are counted at the level of four
 fixed rubric headings, advice at the level of individual recommendations,
 and coarse buckets match each other more easily than fine-grained items do.
-That inflates the absolute gap on both sides. It does not explain the
-distance between them.
+That inflates the absolute gap on both sides; how much of the distance
+between them it explains is unquantified, which is part of why finding
+3, measured at matched granularity, is the result I lead with.
 
 **What the gate did, and why it still matters.** Before any audit ran, I
 pre-registered a rule: no stability claim earns certification unless the

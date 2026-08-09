@@ -35,7 +35,8 @@ claimants — need explanations to be *actionable*, not decorative.
 | `[SUT_1]` | `[D_1]` | `[REASON_1]` | `[RECOURSE_1]` |
 | … | | | |
 
-Lay caption pre-drafted: *"Ask `[SUT_X]` twice and, on average, only
+Lay caption pre-drafted: *"Ask `[SUT_X]` twice and, when the decision
+comes back the same, on average only
 `[FRACTION]` of its recommendations appears both times."*
 
 ## 4. What it means (≈250 words)
@@ -54,8 +55,8 @@ Lay caption pre-drafted: *"Ask `[SUT_X]` twice and, on average, only
 > audit: a system can give perfectly consistent and perfectly wrong
 > answers, and consistency is all I measured. The CVs are fictional by
 > design. The numbers depend on a published synonym-grouping step — I
-> report the ungrouped numbers alongside (they are lower for every
-> system). These are measurements of specific configurations I set up and
+> report the ungrouped numbers alongside (they are never higher, and
+> for nearly every system lower). These are measurements of specific configurations I set up and
 > controlled, on specific dates, with the full transcripts published; they
 > are not claims about any vendor's product as deployed. And comparisons
 > with my original 2026 study are directional only — the study measured a
