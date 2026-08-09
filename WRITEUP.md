@@ -18,7 +18,8 @@ rejected the candidate three times and accepted them twice.
 Not a candidate I invented to break it — one of twenty-five fictional but
 realistic CVs, spanning five different jobs, that I ran through the tool
 five times each. On three of the twenty-five, the verdict changed across
-identical runs. Same CV on Tuesday, different answer on Thursday.
+identical runs. Same CV, same configuration, different run — different
+answer.
 
 Imagine a sat-nav that always tells you *why* you haven't arrived —
 "you're 40 miles out" — but gives you contradictory directions every time
@@ -109,8 +110,8 @@ finding in its own right:
 
 Cost of the final certified measurement: **$0.28**, about 22p, and nearly
 all of it spent on the extraction and checking layers rather than the tool
-itself. An independent stability check on a deployed screening pipeline
-costs less than a Freddo. (Cumulatively, counting every false start, quota
+itself. An independent stability check on a published, runnable
+screening pipeline costs less than a Freddo. (Cumulatively, counting every false start, quota
 wall, the extractor rebuild and the control run described below, the whole
 investigation ran to about five dollars of paid API spend, plus free-tier
 usage on an open-weights host.)
@@ -130,17 +131,17 @@ tool's own default settings.* I make no claim about the rate at which it
 occurs — only that a candidate's outcome from this design can depend on
 which run they happened to get.
 
-**2. The advice repeats about half the time.** (Certified, as a lower
-bound.) Recourse stability measured **0.448**: ask this pipeline twice
-and, on average, fewer than half of its improvement recommendations
-appear both times — the least stable advice of anything I have measured
-with this instrument, including four frontier-lab configurations and a
-bare-model control on the pipeline's own model. Because the tool's output
-is free text, this number passes through an extraction model, and
-extraction noise can only make stability look *worse*, so 0.448 is a
-floor, not a point estimate. The extraction layer's measured
-consistency on advice, at the level this claim is made, was 0.932 against
-a pre-registered bar of 0.90.
+**2. The advice repeats about half the time.** (Certified.) Recourse
+stability measured **0.448**: ask this pipeline twice and, on average,
+fewer than half of its improvement recommendations appear both times —
+the least stable advice of anything I have measured with this
+instrument, across lab configurations on six model families and a
+bare-model control on the pipeline's own model. Because the tool's
+output is free text, this number passes through an extraction layer: it
+is a protocol-certified estimate rather than an exact property of the
+underlying prose. The extraction layer's measured consistency on advice,
+at the level this claim is made, was 0.932 against a pre-registered bar
+of 0.90.
 
 **3. The explanations kept their topics and flipped their meaning.** This
 is the finding I did not go looking for, and it is the one I now think is
@@ -159,7 +160,7 @@ it mentions, and is unstable in what it asserts.
 
 That is my dissertation's thesis in a sharper form than my dissertation
 managed to state it, and unlike the number beside it, it never needed a
-control run to rescue it.
+control run to defend it.
 
 **About the gap.** Reasons measured 0.983 and advice 0.448 — a stability
 gap of 0.535, wider than anything I have measured on a lab configuration.
@@ -191,9 +192,10 @@ the one number the rebuild also happened to inflate.
 
 I want this instrument's failure mode to be a number I decline to stand
 behind. An audit tool that certifies whatever its author is hunting for,
-with no gate that can tell it no, is a demo. Mine said no twice. The first
-refusal landed on the finding I was chasing; the second, later, on an
-extraction lens I had grown attached to.
+with no gate that can tell it no, is a demo. Across this project the gate
+has said no three times: to the finding I was chasing, to a rebuilt
+extraction lens I had grown attached to, and — under a later audit's
+pre-registration that forbade any rescue — to that audit's primary lens.
 
 ## The control, and what it rules out
 
@@ -206,10 +208,10 @@ the four-agent chain. Three things then separate cleanly.
 **What belongs to the model, not the pipeline.** Verdict flipping. The bare
 model changed its accept/reject answer on four of twenty-five candidates;
 the full pipeline on three. The chain neither causes this nor cures it, and
-it would be unfair to the developer to imply otherwise. Every configuration I have
-measured, six now across three model families, flips at least some
-verdicts. If you are running an LLM as a screening gate, the odds are
-this is your problem too, not this developer's.
+it would be unfair to the developer to imply otherwise. This was not
+unique to the audited developer: every configuration I have measured —
+eight, across six model families — exhibited at least one verdict flip
+on identical inputs.
 
 **What belongs to the design.** The gap, and the valence flipping. The
 chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while leaving
@@ -264,7 +266,10 @@ advice, gaps of +0.12 to +0.29, with advice stability between 0.50 and
 the gap having *narrowed* on current models, measured differently enough
 that I'd call it an evolution rather than a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
-0.96–0.98), something my dissertation's design couldn't observe.
+0.96–0.98), something my dissertation's design couldn't observe. Since
+that first audit completed, the lab set has grown to six model families —
+including an open-weights model and a Chinese lab's flagship — and the
+reasons-versus-advice gap has appeared on every one (+0.11 to +0.29).
 
 Two honest caveats on that comparison. Those lab configurations were
 measured in a different mode — emitting machine-readable output directly,
@@ -287,8 +292,9 @@ corroboration, not replication: in two unrelated domains, the part of the
 output that identifies the situation holds still while the part that
 prescribes action moves. And one exploratory cut of my own data points
 the same way: my corpus was built with deliberately strong, weak and
-borderline candidates, and **every verdict flip in this project, thirteen
-across three systems, landed on a borderline candidate.** Strong and weak
+borderline candidates, and **every verdict flip in this project — fourteen,
+across the four systems with per-case certified records — landed on a
+borderline candidate.** Strong and weak
 candidates never flipped. Instability is not spread evenly; it
 concentrates exactly where the decision is genuinely contestable, which is
 also exactly where a candidate most needs the system to hold still. (That
@@ -322,7 +328,8 @@ category rather than naming a small open-source project. The full
 identification is pinned in the audit evidence. The project's author was
 sent the complete findings privately before publication, with a standing
 offer to correct anything in error and to have any response printed
-alongside; anonymity is the default unless they choose otherwise. If
+alongside. The project is not named in the narrative unless its author
+opts in; full identification is pinned in the audit evidence. If
 you're going to measure people's work, you owe them the first read.*
 
 **Next:** more targets. Asking "does your screening tool give the same

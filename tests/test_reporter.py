@@ -86,7 +86,7 @@ def test_report_shows_three_level_ladder_and_denominators():
 
 def test_freeform_report_carries_lower_bound_framing_and_agreement():
     md = render_report(metrics_fixture(extracted=True))
-    assert "lower bound" in md.lower()
+    assert "protocol-certified estimate" in md.lower()
     assert "0.92" in md  # recourse self-agreement shown
 
 
@@ -134,7 +134,7 @@ def test_freeform_high_stability_above_gate_reports_lower_bound():
         "recourse": {"mean_jaccard": 0.96},
     }
     md = render_report(metrics)
-    assert "lower bound" in md.lower()
+    assert "protocol-certified estimate" in md.lower()
     assert "withheld" not in md.lower()
 
 

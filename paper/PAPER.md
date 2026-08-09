@@ -8,7 +8,9 @@ the evidence. The first pipeline's author received the complete findings
 privately before publication, with a standing correction offer; the
 second publishes no contact channel — a public contact request stands on
 their repository and the full findings note is held for any reply.
-Anonymity is the default for both unless they opt in to naming.*
+Neither is named in the narrative unless its author opts in;
+identification is pinned in the public evidence — narrative non-naming,
+not anonymity.*
 
 ---
 
@@ -32,9 +34,10 @@ pipelines, a bare-model control, and lab configurations on six model
 families — including three occasions on which the gate refused to certify
 results (once, the author's own sought-after finding), a
 measurement-selection effect that was caught, tested, and designed out,
-and a pre-registered causal follow-up in which the audited pipeline's own
-advice, implemented as placebo-controlled CV edits, was indistinguishable
-from appending a hobbies line. I argue that re-query stability of
+and a pre-registered causal follow-up that found no demonstrable
+advantage for the audited pipeline's advice over placebo at the
+registered doses — most advised edits had zero measured effect, and the
+largest observed uplift was matched by a hobbies-line placebo. I argue that re-query stability of
 decision-attached, LLM-authored recourse is an axis absent from the
 robustness literature's own taxonomies, that it is necessary (though not
 sufficient) for recourse validity and contestability, and that
@@ -213,6 +216,29 @@ measurement:
   withheld is final. Both readers' results are always reported together;
   two pre-declared attempts are honest only if both are published.
 
+**The certification condition, exactly.** For a claim about a measure
+with observed stability *s*, read by a reader with self-agreement *a*
+(both at the ladder level of the claim; *a* is the mean pairwise Jaccard
+of the reader's k=3 re-extractions over the 25 sampled responses, and
+mean modal agreement for decisions):
+
+> **certified(s, a)  ⇔  a ≥ 0.90  ∧  ( s ≥ 0.85  ∨  a − s ≥ 0.15 )**
+
+The high-stability branch (s ≥ 0.85) certifies at the bar alone; below
+it, the claim asserts instability and the reader must beat the measured
+stability by the 0.15 margin. Reasons and recourse clear the condition
+independently for their own claims; a gap claim requires both sides
+certified. The asymmetry is a conservative design choice — extraction
+noise *preferentially* manufactures instability by splitting, omitting or
+inconsistently normalising equivalent items — not an identity: noise can
+also inflate overlap (coarse clusters, consistent insertions), which is
+why certified figures are estimates under the committed reader, never
+exact properties of the prose. **The gate certifies repeatable extraction
+under the committed reader; it does not certify semantic truth or
+expert-valid interpretation.** Where a pre-declared fallback reader
+exists, both readers' results are published; certification attaches to
+the reader that supplies the reported figures.
+
 Thresholds are design constants, pre-registered with an expiry-bearing
 revision allowance (ours permitted one revision, "only before any
 reportable audit is run"; it expired unused).
@@ -273,6 +299,14 @@ first measurement run and independently checked against the dose table.
 All numbers are cluster-level unless stated, with raw disclosed in the
 evidence; 25 fictional cases (five roles, strength-banded), N=5, 0
 refusals throughout; existence claims only.
+
+| audit | mode | reader status | n | headline measures | outcome |
+|---|---|---|---|---|---|
+| #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½ | certified |
+| bare-model control | freeform | v3+gpt-4.1 **withheld** (0.895/0.817); v3+gemma certified | 25×5 | dec 0.960 (4/25); gap +0.106 vs pipeline +0.537 | certified (2nd reader) |
+| #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 7/25 no-verdict; gap +0.173 | certified (fallback; both reported) |
+| #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 8×35 runs | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
+| lab configs | structured ×5, freeform ×1 | deterministic parse / gated reader | 25×5 each | gap +0.11…+0.29 on six families | certified |
 
 **Audit #1 — a published four-agent screening pipeline** (open-weights
 serving model, disclosed substitute for its retired pinned model;
@@ -418,7 +452,10 @@ finding. Residual honesty: self-agreement estimates carry sampling noise
 I do not interval-ise, and the cluster-basis ruling for one audit was
 made knowing the raw basis would withhold — pre-registered-adjacent, not
 pre-registered. Confidence intervals on reader self-agreement are queued
-for the next registration.
+for the next registration. And the scope restated: the gate certifies
+repeatable extraction, not valid interpretation — two readers can agree
+with themselves and each other while sharing an ontology-induced bias;
+the human inter-rater baseline (§9) is the missing instrument for that.
 
 **T4 — "You measured a serving host, not a design."** For absolute
 numbers, partly irreducible: host-inclusive measurement is disclosed, and

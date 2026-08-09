@@ -149,8 +149,8 @@ self-agreement 1.000):**
   twice and, on average, only about half its recommendations appear both
   times — the least stable advice of anything measured in this project.
   Extractor agreement at the reported grouping: 0.902, clearing the 0.90
-  bar by 0.002 — boundary proximity disclosed in the report, and the claim
-  is a lower bound (extractor noise can only make it look worse).
+  bar by 0.002 — boundary proximity disclosed in the report, and the figure
+  is a protocol-certified estimate under the committed reader.
 
 **Resolved by extractor hardening (D-025, same day):** extractor v3
 anchors reason units on the response's own category structure; measured

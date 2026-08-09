@@ -100,9 +100,12 @@ def _gate_agreement_value(sa_item: dict) -> float | None:
 
 
 def _reportable(stability: float | None, agreement: float | None) -> bool:
-    """Asymmetric gate (DESIGN.md §4.4): extractor noise only attenuates,
-    so high stability survives as a lower bound at agreement ≥ 0.90;
-    instability claims additionally need agreement ≥ stability + margin."""
+    """Asymmetric gate (DESIGN.md §4.4): extractor noise preferentially
+    manufactures instability (splitting/omitting/inconsistent normalising),
+    though it can also inflate overlap; the asymmetry is a conservative
+    design choice, not an identity. High stability certifies at
+    agreement ≥ 0.90; instability claims additionally need
+    agreement ≥ stability + margin."""
     if stability is None or agreement is None:
         return False
     if agreement < GATE_AGREEMENT:
@@ -161,7 +164,7 @@ def render_report(metrics: dict) -> str:
             if extracted:
                 lower_bound_note = (
                     " Because this system was measured through an extractor, "
-                    "treat this as a **lower bound** on its instability being "
+                    "treat this as a protocol-certified estimate, with its instability "
                     "worse — the true stability is at least this good."
                 )
             lines.append(
@@ -213,7 +216,8 @@ def render_report(metrics: dict) -> str:
                 "form by a separate extraction model (self-agreement: reasons "
                 f"{_fmt_sa('reasons')}, recourse {_fmt_sa('recourse')}, "
                 f"k={sa.get('k')}, {sa.get('sampled_cases', '?')} sampled "
-                "cases); stability numbers are lower bounds."
+                "cases); figures are protocol-certified estimates, not exact "
+                "properties of the underlying prose."
             )
         for caveat in caveats:
             lines.append(f"- {caveat}")
