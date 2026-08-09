@@ -70,7 +70,7 @@ consistency is *measured, not assumed*. More on why that matters below.
 
 **Where the calls went, and why it matters.** Every measurement here went
 to a single named provider endpoint, fixed in advance and recorded in the
-audit config — never through a routing layer that picks a backend on your
+audit config, never through a routing layer that picks a backend on your
 behalf. The same model served by different backends can disagree
 substantially: one analysis found the
 choice of backend alone shifting benchmark scores by [up to 16.6
@@ -78,7 +78,7 @@ percentage points](https://www.lesswrong.com/posts/KsyoSAyBRXtwzSugg/not-pinning
 and a peer-reviewed study of five APIs configured for determinism still
 measured [accuracy swings of up to 15% between
 runs](https://aclanthology.org/2025.eval4nlp-1.12/). The mechanism is
-mundane — reduction kernels split their work differently at different
+mundane: reduction kernels split their work differently at different
 batch sizes, so identical prompts drift with server load.
 
 For a leaderboard, that's a footnote. For this audit it would be fatal,
@@ -281,14 +281,14 @@ about a pattern rather than a project.
 The pattern also has company outside hiring. A 2026 clinical study
 ([Lee](https://arxiv.org/abs/2604.11287)) generated the same exercise
 prescription twenty times over and found high whole-output similarity
-alongside unstable actionable parameters. That is not my measurement —
-Lee scores whole outputs, not a reason/advice split — so I'll claim
+alongside unstable actionable parameters. That is not my measurement
+(Lee scores whole outputs, not a reason/advice split), so I'll claim
 corroboration, not replication: in two unrelated domains, the part of the
 output that identifies the situation holds still while the part that
 prescribes action moves. And one exploratory cut of my own data points
 the same way: my corpus was built with deliberately strong, weak and
-borderline candidates, and **every verdict flip in this project — thirteen,
-across three systems — landed on a borderline candidate.** Strong and weak
+borderline candidates, and **every verdict flip in this project, thirteen
+across three systems, landed on a borderline candidate.** Strong and weak
 candidates never flipped. Instability is not spread evenly; it
 concentrates exactly where the decision is genuinely contestable, which is
 also exactly where a candidate most needs the system to hold still. (That
