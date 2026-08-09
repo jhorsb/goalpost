@@ -126,8 +126,9 @@ def main() -> None:
     <div style="flex:1 1 300px">{svg_price}</div>
   </div>
   <p style="max-width:70ch;font-size:0.8rem;opacity:0.7;line-height:1.5">
-  <b>Read the fail points before the trend.</b> n = 25 cases per model; differences of a few
-  hundredths are noise. Filled dots were measured in structured mode; the ring
+  <b>Read the fail points before the trend.</b> n = 25 cases per model and no uncertainty
+  intervals are computed, so do not read differences of a few
+  hundredths as a ranking. Filled dots were measured in structured mode; the ring
   ({escape(", ".join(excluded)) or "none"}) through a gated reader — different measurement
   architectures, plotted together only because each is certified on its own terms.
   {escape(", ".join(excluded)) or "None"} has no price point: open-weights pricing is

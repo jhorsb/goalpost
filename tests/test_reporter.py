@@ -149,6 +149,7 @@ def test_freeform_high_stability_above_gate_reports_lower_bound():
     metrics = metrics_fixture(recourse=0.92, extracted=True)
     metrics["suts"][0]["extractor_self_agreement"] = {
         "k": 3,
+        "decision": {"mean_modal_agreement": 1.0},
         "reasons": {"mean_jaccard": 0.95},
         "recourse": {"mean_jaccard": 0.96},
     }
@@ -170,6 +171,41 @@ def test_freeform_instability_claim_needs_margin():
     }
     md = render_report(metrics)
     assert "withheld" in md.lower()
+
+
+def test_decision_line_gated_on_decision_reader_agreement():
+    # Sol #53: the decision sentence must pass the same published gate
+    # the board applies (decision reader SA >= 0.90), not bypass it.
+    metrics = metrics_fixture(recourse=0.92, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 0.80},
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    md = render_report(metrics)
+    assert "decision itself* agreed" not in md
+    assert "decision-stability figure is withheld" in md.lower()
+
+
+def test_decision_line_prints_when_decision_reader_clears_bar():
+    metrics = metrics_fixture(recourse=0.92, extracted=True)
+    metrics["suts"][0]["extractor_self_agreement"] = {
+        "k": 3,
+        "decision": {"mean_modal_agreement": 1.0},
+        "reasons": {"mean_jaccard": 0.95},
+        "recourse": {"mean_jaccard": 0.96},
+    }
+    md = render_report(metrics)
+    assert "decision itself* agreed" in md
+
+
+def test_decision_line_gated_when_decision_agreement_missing():
+    # fail-closed: extracted mode with no recorded decision SA cannot
+    # assert decision stability (mirrors boards.py)
+    metrics = metrics_fixture(recourse=0.92, extracted=True)
+    md = render_report(metrics)  # fixture's sa has no "decision" key
+    assert "decision itself* agreed" not in md
 
 
 def test_structured_mode_never_gated():
@@ -310,6 +346,7 @@ def test_gate_falls_back_to_flat_for_old_metrics():
     metrics = metrics_fixture(recourse=0.36, extracted=True)
     metrics["suts"][0]["extractor_self_agreement"] = {
         "k": 3,
+        "decision": {"mean_modal_agreement": 1.0},
         "reasons": {"mean_jaccard": 0.95},
         "recourse": {"mean_jaccard": 0.96},
     }

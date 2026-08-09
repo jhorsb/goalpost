@@ -68,6 +68,13 @@ BANNED = [
     # 14/20 shorthand that reads as 14 distinct interventions
     (r"exactly as shipped", None),
     (r"most advised edits|most did nothing", None),
+    # Sol #22/#23: the pre-Kimi record (13 flips, three systems, 0/45)
+    # is superseded by 14/four/0-60 (D-067); any 0/45 is it resurfacing
+    (r"0\s*/\s*45", None),
+    # Sol #37/#49: "noise" claims need a registered threshold or an
+    # interval; the supported phrasings name the placebo swing or warn
+    # against ranking, they do not declare noise
+    (r"±2/5 is noise|hundredths are noise", None),
 ]
 
 # Record counts that must agree wherever they are asserted.

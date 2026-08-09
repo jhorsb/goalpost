@@ -46,7 +46,8 @@ models:
                                     # unlike gpt-oss, no invention involved)
     architecture: structured
     note: "T=1.0 mandated by the API (T=0 refused); 89/125 runs parsed — the
-      rest broke the output contract"
+      rest broke the output contract; plotted date is Moonshot's public
+      announcement date, not a dated provider snapshot (none exists)"
 
 # Deliberately excluded:
 # - the two audited pipelines: configurations, not models. A pipeline's

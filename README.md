@@ -28,7 +28,8 @@ every pipeline stage, and the audited code's commit.
   that agreed on the verdict (0.448; cross-verdict pairs are excluded
   from this measure and reported separately); explanations
   kept their topics (0.98+) while flipping whether a topic counted *for*
-  or *against* the candidate in a third to a half of comparisons. A
+  or *against* the candidate in roughly a third to a half of comparisons
+  (0.378–0.508, by lens). A
   matched control (same model, no pipeline) flipped verdicts too — the
   chain is not necessary for that — while the explanation pattern
   appeared only with the chained design.

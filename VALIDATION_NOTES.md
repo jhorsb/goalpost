@@ -315,9 +315,10 @@ calls) + $0.00 (lens 2, Cerebras free tier).
 ## Strength-band stratification (2026-08-08) — exploratory, prompted by Lee (2026)
 
 Post-hoc cut of certified audits by the corpus's designed strength bands
-(10 borderline / 10 strong / 5 weak). **All 13 verdict flips across all
-three systems (audit #1, bare-model control, audit #2) fall in the
-borderline band; strong and weak candidates never flipped (0/45).**
+(10 borderline / 10 strong / 5 weak). **All 14 verdict flips across all
+four systems with per-case certified records (audit #1, bare-model
+control, audit #2, Kimi) fall in the
+borderline band; strong and weak candidates never flipped (0/60).**
 Audit #2's unanimous-"unclear" case is also borderline. Advice shows the
 opposite gradient (strong candidates' advice least stable) but strong
 candidates also receive the fewest recommendations (mean set 1.48 vs 2.80

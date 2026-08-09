@@ -1,5 +1,12 @@
 # Pre-registration — audit #3: causal recourse validity (2026-08-08)
 
+*Post-run status note (2026-08-09, D-054; annotation only — no
+registration content below is altered): this audit has since been
+EXECUTED under the frozen registration. The pre-run status line below
+says "amended once"; it predates amendment A2 (D-053, also pre-first-
+call). The in-file amendment log (A1, A2) at the end of this file is
+authoritative.*
+
 **Status: REGISTERED, NOT RUN. Amended once (2026-08-08, D-052) —
 before any measurement existed — in response to external review; the
 amendment log is at the end of this file.** Nothing below may be revised

@@ -35,7 +35,8 @@ placebo count across seeds.
 All 20 edit-block effects span **−2/5 to +2/5**; **14 of 20 are exactly
 0**. The largest positive effect (pm-02 editC, PRINCE2, block B: +2/5)
 is matched by negatives (pm-04 editC −2/5; stl-04 editC −2/5) and by a
-placebo:
+placebo: pm-04's placebo arms (a hobbies line; an irrelevant First-Aid
+certificate) moved that case 2/5 → 4/5, the same +2/5.
 
 ## The sharpest single result: Eleanor, 0 for 35
 
@@ -52,10 +53,12 @@ from the system that issued it.
    differently-effective routes). What it measured instead, at these
    doses, is more uncomfortable: **no advised edit demonstrated an
    advantage** — none exceeded its placebo comparator by more than 2/5,
-   and most had zero measured effect, on the system's own verdicts.
+   and 14 of 20 block-specific effects were exactly zero, on the
+   system's own verdicts.
 2. Claims are bounded exactly as registered: existence-level, at the
-   stated doses, on 8 borderline cases, n=5 granularity where ±2/5 is
-   noise. "The advice doesn't work" is NOT certified; the reportable
+   stated doses, on 8 borderline cases, n=5 granularity — and the
+   placebo arms themselves moved outcomes by as much as 2/5, so
+   differences within ±2/5 are not read as effects. "The advice doesn't work" is NOT certified; the reportable
    descriptive statement is "no advised edit exceeded its placebo
    comparator by more than 2/5 in any block, and 14 of 20 effects were
    exactly zero."

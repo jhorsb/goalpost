@@ -69,9 +69,12 @@ under fixed thresholds. I ran it entirely on my own accounts and keys,
 exactly as its code wires it together, quirks included. Nothing about the
 audit touched anyone's hosted service.
 
-The protocol was frozen before any measurement: twenty-five fictional CVs
+The audit design (corpus, run counts, thresholds) was frozen before any
+measurement: twenty-five fictional CVs
 against five job specs, five identical runs each, at the pipeline's own
-default settings. Every run's inputs and outputs recorded in full. Decision, reasons, and advice
+default settings. The extraction layer is the exception, and it is
+described below: it failed its own gate mid-audit and was rebuilt, then
+re-certified. Every run's inputs and outputs recorded in full. Decision, reasons, and advice
 pulled from the tool's free-text output by a separate extraction model —
 a different model family from the one being audited, following the
 cross-model practice the LLM-as-judge literature recommends — whose own
@@ -267,7 +270,8 @@ here on.
 > different measurement, and out of scope here. The CVs are
 > fictional by design; no real person's data was involved. The similarity
 > numbers depend on a published synonym-grouping step, and I report the
-> ungrouped numbers alongside (they are lower for every system measured).
+> ungrouped numbers alongside (they are never higher, and for nearly
+> every system lower).
 > The 25-case sample supports the existence claims made above and no rate
 > claims. The reason-side numbers are measured at the target's own
 > category granularity, using an extraction rule I developed after seeing

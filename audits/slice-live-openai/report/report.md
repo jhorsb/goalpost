@@ -51,7 +51,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 **Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.58, recourse 0.87, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
 
-The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
+The decision-stability figure is withheld: the reader's measured self-agreement on decisions (not recorded) does not meet the pre-registered bar (≥ 0.90).
 
 ## Why this matters
 

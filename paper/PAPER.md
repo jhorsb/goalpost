@@ -122,8 +122,9 @@ decision-makers, non-trivial limit of theirs.
 
 **LLM output consistency and LLM-as-judge.** Atil et al. [2024] document
 accuracy swings up to 15% across runs of five LLMs at deterministic
-settings and attribute persistence to serving-level batching; provider
-and backend choice alone measurably shift benchmark outcomes. The
+settings and attribute persistence to serving-level batching; a separate
+serving-layer analysis found provider and backend choice alone shifting
+benchmark scores by up to 16.6 percentage points [Not pinning, 2025]. The
 LLM-as-judge literature names *repetition stability* as an evaluator
 reliability construct [Shi et al. 2025] — and is simultaneously the
 sceptic's argument against any LLM-extracted measurement, including this one.
@@ -328,8 +329,8 @@ stability **0.448** (reader SA 0.932 vs bar 0.90); reason-topic stability
 0.983 at the pipeline's own four-heading rubric granularity (raw 0.895).
 Valence: the same heading flipped between counting for and against the
 candidate in **0.378–0.508** of same-topic pairs, depending on which of
-two independently certified readers is used — reported as "a third to a
-half", never a point estimate.
+two independently certified readers is used — reported as "roughly a
+third to a half", never a point estimate.
 
 **Bare-model control.** The same serving model, corpus, settings and
 certified reader, with a plain one-prompt screener replacing the chain:
@@ -379,7 +380,7 @@ unrunnable as shipped.
 **Exploratory, labelled as such.** The corpus was strength-banded at
 design time. Across the four systems with per-case certified records,
 **all 14 verdict flips landed in the deliberately borderline third**
-(0/45+ strong and weak case-slots flipped), and Kimi's contract failures
+(0/60 strong and weak case-slots flipped), and Kimi's contract failures
 concentrated there too (28/36). Post-hoc cut; a designed manipulation is
 future work (§9).
 
@@ -572,6 +573,9 @@ demonstrably so, per §7.
 - Mökander, J., Schuett, J., Kirk, H.R., Floridi, L. (2023). Auditing
   large language models: a three-layered approach. AI and Ethics.
   arXiv:2302.08500.
+- "Not pinning your OpenRouter provider might invalidate your evals"
+  (2025). LessWrong.
+  https://www.lesswrong.com/posts/KsyoSAyBRXtwzSugg/not-pinning-your-openrouter-provider-might-invalidate-your
 - Rawal, K., Kamar, E., Lakkaraju, H. (2020). Algorithmic Recourse in the
   Wild. arXiv:2012.11788.
 - Shi, L., Ma, C., Liang, W., Diao, X., Ma, W., Vosoughi, S. (2025).

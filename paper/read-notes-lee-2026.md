@@ -52,11 +52,14 @@ Corpus bands by design: 10 borderline / 10 strong / 5 weak.
 | audit #1 pipeline | 3/10 | 0/10 | 0/5 |
 | bare-model control | 4/10 | 0/10 | 0/5 |
 | audit #2 pipeline | 6/10 | 0/10 | 0/5 |
+| kimi-k3 lab | 1/10 | 0/10 | 0/5 |
 
-**Every verdict flip in the project — 13 across three systems — occurred
+**Every verdict flip in the project — 14 across the four systems with
+per-case certified records — occurred
 in the deliberately borderline third of the corpus.** Strong and weak
-candidates never flipped (0/45 case-slots). Audit #2's no-verdict cases:
-6 of 7 borderline; the 7th (sc-data-analyst-04, borderline) returned
+candidates never flipped (0/60 case-slots). Audit #2's modal-no-verdict
+cases number 6/25 under the certified fallback lens, among them
+sc-data-analyst-04, which returned
 "unclear" unanimously in all 5 runs — it never flipped because it never
 decided.
 

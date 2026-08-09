@@ -198,10 +198,24 @@ def render_report(metrics: dict) -> str:
                 + lower_bound_note
             )
         lines.append("")
-        if heads["decision"] is not None:
+        # Decision claims pass the same published gate the board applies
+        # (decision reader SA >= bar; mirrors boards.py — Sol #53):
+        # extracted mode with no recorded decision SA withholds, fail-closed.
+        decision_sa = (sa.get("decision") or {}).get("mean_modal_agreement")
+        decision_ok = (not extracted) or (
+            decision_sa is not None and decision_sa >= GATE_AGREEMENT
+        )
+        if heads["decision"] is not None and decision_ok:
             lines.append(
                 f"The *decision itself* agreed with its most common answer "
                 f"{heads['decision']:.0%} of the time across repeat runs."
+            )
+        elif heads["decision"] is not None:
+            lines.append(
+                "The decision-stability figure is withheld: the reader's "
+                "measured self-agreement on decisions "
+                f"({decision_sa if decision_sa is not None else 'not recorded'}) "
+                f"does not meet the pre-registered bar (≥ {GATE_AGREEMENT:.2f})."
             )
         if recourse_ok and reasons_ok and heads["reasons"] is not None:
             lines.append(

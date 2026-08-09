@@ -84,8 +84,8 @@ target.
 documented as deliberate: existence claims only, no rate claims (D-024);
 claims scoped to "the pipeline's prompt-and-chain design as served by a current
 open model," substitution disclosed as itself a governance finding; D-032's
-line-by-line scope audit removed four overclaims. The wider pattern (six
-configurations, three model families, all flip some verdicts) is presented as
+line-by-line scope audit removed four overclaims. The wider pattern (eight
+configurations, six model families, all flip some verdicts) is presented as
 hedged inference, not universal claim. **Residual weakness:** the design-class
 claim ("chained rubric designs manufacture explanation stability without
 guidance stability") rests on one pipeline and one control — a reviewer can
