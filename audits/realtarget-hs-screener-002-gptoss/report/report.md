@@ -4,7 +4,7 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes more often than it repeats (recourse stability 0.45 on a 0–1 scale). Because this system was measured through an extractor, treat this as a **lower bound** on its instability being worse — the true stability is at least this good.
+**If you ask twice and, on average, only 1 in 2 of its recommendations appears both times.** In our measurement, its improvement advice changes more often than it repeats (recourse stability 0.45 on a 0–1 scale). Because this system was measured through an extractor, treat this as a protocol-certified estimate, with its instability worse — the true stability is at least this good.
 
 The *decision itself* agreed with its most common answer 97% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 0.98 vs recourse 0.45).
@@ -17,7 +17,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.988 at the reported grouping (0.983 raw), recourse 0.932 at the reported grouping (0.819 raw), k=3, 25 sampled cases); stability numbers are lower bounds.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.988 at the reported grouping (0.983 raw), recourse 0.932 at the reported grouping (0.819 raw), k=3, 25 sampled cases); figures are protocol-certified estimates, not exact properties of the underlying prose.
 
 ---
 

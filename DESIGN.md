@@ -101,12 +101,12 @@ Per (SUT, condition, case), over N repeats:
 Computed **per item type** (reasons vs recourse — differential extraction difficulty must not fabricate the gap), on a stratified sample of responses, k=3 uncached extractions each (cache bypass via nonce); agreement = mean Jaccard of extracted sets.
 
 **Gate (asymmetric by design):** extractor noise only *attenuates* observed stability. Therefore:
-- **High-stability claims** are reportable as a **lower bound** whenever self-agreement ≥ 0.90.
+- **High-stability claims** are reportable whenever self-agreement ≥ 0.90 (certified estimates under the committed reader; the earlier "lower bound" framing is retracted — see D-065).
 - **Instability claims and the reason–recourse gap** additionally require self-agreement to exceed the measured stability by ≥ 0.15; otherwise the report prints the agreement score and withholds the claim.
 
 ## 5. Reports (Jinja2 → Markdown + HTML; JSON alongside)
 
-**Page one — lay report** (union rep / journalist): what was tested in plain words; the headline as a **data-derived statistic** ("ask this system twice and, on average, only 1 in 3 of its recommendations appears both times"), not an adjective — verbal anchor bands come from a **committed, versioned anchors artifact** stamped into every report; the sat-nav paragraph; one sentence each for reason-vs-recourse, decision stability, and **decision flips under immaterial edits** (above the fold); a "what this doesn't tell you" box (repeat-stability ≠ accuracy ≠ fairness; freeform numbers are extractor-mediated lower bounds, agreement score shown); a **minimal provenance stamp** (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
+**Page one — lay report** (union rep / journalist): what was tested in plain words; the headline as a **data-derived statistic** ("ask this system twice and, on average, only 1 in 3 of its recommendations appears both times"), not an adjective — verbal anchor bands come from a **committed, versioned anchors artifact** stamped into every report; the sat-nav paragraph; one sentence each for reason-vs-recourse, decision stability, and **decision flips under immaterial edits** (above the fold); a "what this doesn't tell you" box (repeat-stability ≠ accuracy ≠ fairness; freeform numbers are extractor-mediated certified estimates, agreement score shown); a **minimal provenance stamp** (audit id, date, tool + anchors versions) so cropped screenshots stay traceable.
 
 **Technical appendix:** full three-level ladder with per-item-type lift; taxonomy granularity (cluster count + members); coverage companions; denominator chain and exclusions; NOVEL rates; extractor self-agreement per item type; per-class perturbation breakdowns; per-case distribution strips; provenance tuple; resolved config.
 
@@ -193,7 +193,7 @@ The design was presented in seven sections and validated one at a time (2026-07-
 6. *Author query resolved:* bare-text recourse was the assistant's simplification; the honours two-field schema (`{action_id, description}`, reasons `{reason_id, direction, note}`) adopted.
 
 **Section 3 — Metrics (3):**
-1. Extractor gate inverted (asymmetric): extractor noise only attenuates, so high measured stability with self-agreement ≥ 0.90 is reportable as a *lower bound*; the +0.15 margin applies only to instability claims and the reason–recourse gap; self-agreement computed per item type (reasons vs recourse), stratified sample, k=3 uncached — differential extraction difficulty must not fabricate the gap.
+1. Extractor gate inverted (asymmetric): extractor noise *preferentially* manufactures instability (it can also inflate overlap — the asymmetry is a conservative choice, not an identity; D-065), so high measured stability with self-agreement ≥ 0.90 is reportable; the +0.15 margin applies only to instability claims and the reason–recourse gap; self-agreement computed per item type (reasons vs recourse), stratified sample, k=3 uncached — differential extraction difficulty must not fabricate the gap.
 2. Coverage companions (emptiness rate, mean set size) printed beside every stability number; headlines driven by empty∧empty pairs flagged.
 3. Per-case effective n_pairs reported; minimum enforced for inclusion in aggregates; exclusions listed.
 

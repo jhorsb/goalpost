@@ -4,7 +4,7 @@
 
 ## The headline
 
-**If you ask twice and, on average, only 2 in 3 of its recommendations appears both times.** In our measurement, its improvement advice advice changes about as often as it repeats (recourse stability 0.58 on a 0–1 scale).
+**If you ask twice and, on average, only 2 in 3 of its recommendations appears both times.** In our measurement, its improvement advice changes about as often as it repeats (recourse stability 0.58 on a 0–1 scale).
 
 The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
 The *reasons given* were substantially steadier than the advice (reason stability 1.00 vs recourse 0.58).
@@ -49,10 +49,9 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 ## The headline
 
-**If you ask twice and, on average, only 3 in 4 of its recommendations appears both times.** In our measurement, its improvement advice advice mostly repeats, with noticeable variation (recourse stability 0.73 on a 0–1 scale). Because this system was measured through an extractor, treat this as a **lower bound** on its instability being worse — the true stability is at least this good.
+**Stability numbers for this system are withheld.** It was measured through an extraction model whose measured self-agreement (reasons 0.58, recourse 0.87, k=3) does not meet the pre-registered reportability gate (≥ 0.90, with a 0.15 margin for instability claims). A less consistent extractor can fabricate instability, so no stability claim is made. Re-run with a stronger extractor.
 
 The *decision itself* agreed with its most common answer 100% of the time across repeat runs.
-The *reasons given* were substantially steadier than the advice (reason stability 1.00 vs recourse 0.73).
 
 ## Why this matters
 
@@ -62,7 +61,7 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 - Repeat-stability is not accuracy: a system can be perfectly consistent and perfectly wrong.
 - This audit says nothing about fairness or bias — that is a different measurement.
-- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.58, recourse 0.87, k=3); stability numbers are lower bounds.
+- This system's free-text output was converted to comparable form by a separate extraction model (self-agreement: reasons 0.58, recourse 0.87, k=3, ? sampled cases); figures are protocol-certified estimates, not exact properties of the underlying prose.
 
 ---
 

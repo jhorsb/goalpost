@@ -422,8 +422,9 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
         if extracted:
             lower_bound_note = (
                 " Because this system was measured through an extractor, "
-                "treat this as a <strong>lower bound</strong> on its instability "
-                "being worse &mdash; the true stability is at least this good."
+                "treat this as a <strong>protocol-certified estimate</strong> "
+                "under the committed reader, not an exact property of the "
+                "underlying prose."
             )
         recourse_text = f"{recourse:.2f}"
         parts.append(
@@ -470,8 +471,9 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
             "by a separate extraction model (self-agreement: reasons "
             f"{_html_self_agreement(sa, 'reasons')}, recourse "
             f"{_html_self_agreement(sa, 'recourse')}, k={sa.get('k')}, "
-            f"{sa.get('sampled_cases', '?')} sampled cases); stability numbers "
-            "are lower bounds."
+            f"{sa.get('sampled_cases', '?')} sampled cases); figures are "
+            "protocol-certified estimates, not exact properties of the "
+            "underlying prose."
         )
         parts.append(f"<li>{_html_escape(caveat)}</li>")
     parts.extend(["</ul>", "</section>"])

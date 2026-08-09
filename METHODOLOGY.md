@@ -81,7 +81,9 @@ item type) gates reporting: below the pre-registered bar (0.90, with a
 0.15 margin for instability claims — set before any reportable audit and
 unrevised since), stability numbers are withheld rather than reported.
 The gate is asymmetric by design: extractor noise can only make a system
-look *less* stable, so high stability survives as a lower bound while
+look *less* stable more readily than more stable (the asymmetry is a
+conservative design choice, not an identity — noise can also inflate
+overlap), so high stability certifies at the bar while
 instability claims carry the burden of proof.
 
 ## 4. Reproducibility machinery
