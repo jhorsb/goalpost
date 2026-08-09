@@ -35,7 +35,9 @@ stability claim is certified unless that reader clears a pre-registered
 self-agreement bar (with a stricter margin for claims of instability).
 Withheld is a first-class, publishable outcome. I report the protocol's
 complete track record across three audits of two published screening
-pipelines, a bare-model control, and lab configurations on six base models — including three occasions on which the gate refused to certify
+pipelines, a bare-model control, and lab configurations on six base
+models. That record includes three occasions on which the gate refused
+to certify
 results (once, the author's own sought-after finding), a
 measurement-selection effect that was caught, tested, and designed out,
 and a pre-registered causal follow-up that found no demonstrable
@@ -247,6 +249,20 @@ expert-valid interpretation.** Where a pre-declared fallback reader
 exists, both readers' results are published; certification attaches to
 the reader that supplies the reported figures.
 
+**The condition has a dead band, by design.** Work the algebra: for any
+reader short of perfect self-agreement, observed stability in the
+interval (a − 0.15, 0.85) satisfies neither branch and is uncertifiable
+— at the bar itself (a = 0.90) the band spans s ∈ (0.75, 0.85), a full
+0.10 wide, narrowing to nothing only as a → 1. Moderate stability is
+therefore structurally the hardest thing for this protocol to certify.
+That is intended, not incidental: the mid-range is exactly where
+extraction noise does the most damage — a genuinely stable system read
+by a mediocre reader and a genuinely unstable system read by a good one
+can produce the same mid-range s, and no margin short of the one imposed
+separates them. The cost is disclosed rather than hidden: a mid-range
+result is published as withheld with both s and a printed, and a sharper
+reader — not a lower bar — is the only path to certifying it.
+
 Thresholds are design constants, pre-registered with an expiry-bearing
 revision allowance (ours permitted one revision, "only before any
 reportable audit is run"; it expired unused).
@@ -414,6 +430,13 @@ pipeline's modal advice cluster — *gain more experience* — proved
 unimplementable by edit at all: every attempt corrupted the CV's
 chronology and was excluded by A1's rule.
 
+At two evaluable cases, the hypothesis test itself is weakly
+informative, and I read audit #3's primary contribution accordingly: it
+demonstrates that the protocol's causal extension runs mechanically —
+frozen dose tables, committed diffs, an independent pre-run check that
+caught the author's own derivation script — with the placebo-bounded
+negative as evidence at that scale and no more.
+
 The registered scope holds: "the advice doesn't work" is *not* certified;
 "no advised edit exceeded its placebo comparator by more than 2/5 at
 these doses, and 14 of 20 block-specific estimates were exactly zero" is. Combined with audit #1, the
@@ -443,8 +466,9 @@ are the evidence the latter can be trusted.
   measurement scandal — but the rule never travelled unexamined again.
 - **An external review that mattered.** The audit-#3 registration's
   original existence criterion carried a ~60% family-wise false-positive
-  rate under the worst-case null — arithmetic supplied by an external
-  reviewer and verified exactly. Whether the original criterion would
+  rate under the worst-case null — arithmetic supplied by a model-based
+  external review (GPT-5.6 Sol Pro, prompted by the author; see
+  Acknowledgements) and verified exactly. Whether the original criterion would
   have fired is unevaluable (the original design would have run arms the
   amended rule excludes); its *ex ante* risk is not.
 - **Reporting-layer errors, mechanically caught.** Every substantive
@@ -478,7 +502,12 @@ gate's authority is demonstrated by its refusals, including of my own
 finding. Residual honesty: self-agreement estimates carry sampling noise
 I do not interval-ise, and the cluster-basis ruling for one audit was
 made knowing the raw basis would withhold — pre-registered-adjacent, not
-pre-registered. Confidence intervals on reader self-agreement are queued
+pre-registered (the raw-basis numbers are co-reported beside the gate
+call in every report, so a reader who prefers the stricter basis can
+apply it and see what withholding would have removed). The gate's dead
+band (§4.2) belongs in this threat's ledger too: moderate-stability
+results are structurally the hardest to certify, a conservatism chosen,
+named, and paid for in withheld results rather than waived. Confidence intervals on reader self-agreement are queued
 for the next registration. And the scope restated: the gate certifies
 repeatable extraction, not valid interpretation — two readers can agree
 with themselves and each other while sharing an ontology-induced bias;
@@ -541,9 +570,15 @@ This is a solo-authored project developed with agent assistance:
 orchestration and protocol authorship via Claude (Anthropic), bulk
 implementation against committed failing tests via Codex (OpenAI), with
 the division of labour, briefs, and every diff review recorded in the
-repository's `DELEGATION.md`. An external reviewer's statistical critique
-of the audit-#3 registration (amendment A1) materially improved it and is
-credited in the registration's own log. All errors are mine — several
+repository's `DELEGATION.md`. The external reviews were model-based too,
+and are disclosed on the same terms: the statistical critique of the
+audit-#3 registration that became amendment A1 — the ~60%→~5%
+family-wise false-positive correction — plus a seven-point
+pre-publication review and a pre-submission review all came from
+GPT-5.6 Sol Pro (OpenAI), prompted by the author, with each adopted
+point verified against the record before it was applied. No human other
+than the author reviewed this work before publication. All errors are
+mine — several
 demonstrably so, per §7.
 
 ## References

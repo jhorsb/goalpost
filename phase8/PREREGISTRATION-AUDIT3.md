@@ -5,7 +5,9 @@ registration content below is altered): this audit has since been
 EXECUTED under the frozen registration. The pre-run status line below
 says "amended once"; it predates amendment A2 (D-053, also pre-first-
 call). The in-file amendment log (A1, A2) at the end of this file is
-authoritative.*
+authoritative. Attribution note (D-078): the "external review" behind
+A1 was a model-based review — GPT-5.6 Sol Pro, prompted by the author —
+recorded here so "external" is not read as "human".*
 
 **Status: REGISTERED, NOT RUN. Amended once (2026-08-08, D-052) —
 before any measurement existed — in response to external review; the
