@@ -340,6 +340,7 @@ opts in; full identification is pinned in the audit evidence. If
 you're going to measure people's work, you owe them the first read.*
 
 **Next:** more targets. Asking "does your screening tool give the same
-answer twice?" now costs about a pound per system. If you run one, the
+answer twice?" costs between pennies and a few pounds per system,
+depending on the configuration. If you run one, the
 instrument is open and the corpus is fictional; point it at your own
 configuration and read the evidence file.

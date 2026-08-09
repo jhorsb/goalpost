@@ -50,6 +50,8 @@ BANNED = [
     (r"\banonymous\b", r"not anonymity|narrative non-naming"),
     # Sol #20: documented paid subtotal exceeds $12; the claim is dead
     (r"under \$12", None),
+    # Sol #17: no evidence supports a £1-per-system figure in any form
+    (r"£1|a pound per system", None),
 ]
 
 # Record counts that must agree wherever they are asserted.
