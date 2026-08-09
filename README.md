@@ -128,6 +128,31 @@ prompts are never stored in this repository (no upstream licence; fetched
 at runtime, hash-verified); target #2's are vendored under its MIT
 licence with attribution.
 
+## How to cite
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21862442.svg)](https://doi.org/10.5281/zenodo.21862442)
+
+There are two citable objects. Cite the **paper** for the method and
+findings; cite the **software DOI** when you use the instrument itself or
+depend on the archived evidence.
+
+The concept DOI [10.5281/zenodo.21862442](https://doi.org/10.5281/zenodo.21862442)
+always resolves to the latest archived version. To pin the exact snapshot
+this repository's published numbers came from, cite release v1.0.0,
+[10.5281/zenodo.21862443](https://doi.org/10.5281/zenodo.21862443).
+
+```bibtex
+@software{horsburgh2026goalpost,
+  author  = {Horsburgh, Jamie},
+  title   = {Goalpost: A Certification-Gated Protocol for Auditing the
+             Stability of LLM Screening Decisions, Reasons, and Recourse},
+  year    = {2026},
+  version = {1.0.0},
+  doi     = {10.5281/zenodo.21862442},
+  url     = {https://github.com/jhorsb/goalpost}
+}
+```
+
 ## Licence
 
 MIT (see `LICENSE`, including the note on audited third-party IP

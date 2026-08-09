@@ -523,8 +523,12 @@ for every audit (transcripts, normalised sets, metrics, reports, metered
 costs)
 are in the accompanying repository, MIT-licensed. Where pipeline stages
 ran on accounts the instrument's meter does not see, provider dashboard
-totals are the cost source of truth. An archived DOI release (Zenodo)
-follows v1.0; `CITATION.cff` carries the identifier once minted. One audited upstream carries no licence and its
+totals are the cost source of truth. The repository is archived at
+Zenodo under DOI 10.5281/zenodo.21862442, which resolves to the latest
+version; the exact snapshot underlying this paper is release v1.0.0,
+DOI 10.5281/zenodo.21862443. Cite this paper for the method and
+findings, and the software DOI when using the instrument itself or
+depending on the archived evidence. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
 commit and hash-verified; the other is vendored under its MIT licence
 with attribution.
