@@ -12,7 +12,7 @@ in the evidence, pending courtesy-disclosure windows with their authors.*
 
 Regulation increasingly demands that automated screening give reasons and
 a route to challenge. Almost none of it asks whether either survives the
-same case being run twice. We present **Goalpost**, an open protocol and
+same case being run twice. I present **Goalpost**, an open protocol and
 instrument for auditing **repeat-stability** in LLM-mediated screening
 configurations: run an identical case through an identical configuration
 repeatedly and measure whether the **decision**, the **reasons**, and the
@@ -22,7 +22,7 @@ free-text outputs are converted to comparable form by a separate
 extraction model whose own repeatability is measured, not assumed, and no
 stability claim is certified unless that reader clears a pre-registered
 self-agreement bar (with a stricter margin for claims of instability).
-Withheld is a first-class, publishable outcome. We report the protocol's
+Withheld is a first-class, publishable outcome. I report the protocol's
 complete track record across three audits of two published screening
 pipelines, a bare-model control, and lab configurations on six model
 families — including three occasions on which the gate refused to certify
@@ -30,7 +30,7 @@ results (once, the author's own sought-after finding), a
 measurement-selection effect that was caught, tested, and designed out,
 and a pre-registered causal follow-up in which the audited pipeline's own
 advice, implemented as placebo-controlled CV edits, was indistinguishable
-from appending a hobbies line. We argue that re-query stability of
+from appending a hobbies line. I argue that re-query stability of
 decision-attached, LLM-authored recourse is an axis absent from the
 robustness literature's own taxonomies, that it is necessary (though not
 sufficient) for recourse validity and contestability, and that
@@ -57,7 +57,7 @@ case is stable by construction. When the decision-maker is a large
 language model, that construction fails: LLM systems are non-deterministic
 even at nominally deterministic settings, for serving-stack reasons
 unlikely to disappear [Atil et al. 2024]. The unperturbed case becomes an
-open measurement question — and, we will argue, the one the affected
+open measurement question — and, I will argue, the one the affected
 individual actually faces.
 
 This paper contributes:
@@ -80,7 +80,7 @@ This paper contributes:
    gate withholdings, a caught selection effect, an external statistical
    review that removed a ~60% family-wise false-positive risk from a
    pre-registration before it could bite, and reporting-layer errors
-   caught by mechanical review. We treat the refusal record as evidence
+   caught by mechanical review. I treat the refusal record as evidence
    that the gate binds; an audit instrument that has never told its
    operator *no* provides no evidence that it can.
 
@@ -90,9 +90,9 @@ This paper contributes:
 actionable recourse in linear classification [Ustun et al. 2019] and is
 unified by the survey of Karimi et al. [2022], whose split between
 contrastive explanations (*why*) and consequential recommendations (*what
-to do*) is the ancestor of our reason/recourse decomposition. In that
-formalism recourse is guarantee-bearing; ours is an *extracted
-utterance*, and we measure the behavioural stability of the utterance —
+to do*) is the ancestor of the reason/recourse decomposition used here. In that
+formalism recourse is guarantee-bearing; mine is an *extracted
+utterance*, and I measure the behavioural stability of the utterance —
 a deliberately weaker object, named as such (§8, T1).
 
 **Robust recourse and explanation stability.** ROAR introduced recourse
@@ -105,7 +105,7 @@ execution. Re-query variance at identical inputs — no cause, no change —
 is absent from that taxonomy. Likewise the explanation-robustness
 literature [Alvarez-Melis & Jaakkola 2018] measures attribution stability
 across *neighbouring* inputs; identical-input free-text explanation is
-outside its instruments. Our axis is the degenerate and, for LLM
+outside its instruments. This axis is the degenerate and, for LLM
 decision-makers, non-trivial limit of theirs.
 
 **LLM output consistency and LLM-as-judge.** Atil et al. [2024] document
@@ -114,8 +114,8 @@ settings and attribute persistence to serving-level batching; provider
 and backend choice alone measurably shift benchmark outcomes. The
 LLM-as-judge literature names *repetition stability* as an evaluator
 reliability construct [Shi et al. 2025] — and is simultaneously the
-sceptic's argument against any LLM-extracted measurement, including ours.
-Our gate (§4.2) is that literature's recommendation — measure your judge
+sceptic's argument against any LLM-extracted measurement, including this one.
+The gate (§4.2) is that literature's recommendation — measure your judge
 — implemented as a hard certification threshold with a refusal path.
 
 **LLM screening audits.** External audits of LLM résumé screeners measure
@@ -129,15 +129,15 @@ audit* instrument with a full evidence chain.
 **Nearest neighbours, distinguished.** Lee [2026] measures repeated
 generation of clinical exercise prescriptions and finds high whole-output
 semantic similarity alongside unstable actionable parameters — the same
-constrained-stable/open-ended-unstable shape we find, in an unrelated
+constrained-stable/open-ended-unstable shape I find, in an unrelated
 domain. It is corroboration, not replication: Lee scores whole outputs,
 not a reason/recourse split, attaches no decision, and assumes rather
 than measures its judge's reliability. Dong et al. [2026] put "algorithmic
 recourse" and "LLM" in one title, but the LLM is the *predictor* and
 recourse is computed against it by an external optimiser — the inverse of
-our setting, in which the LLM utters the recourse and the question is
+the setting here, in which the LLM utters the recourse and the question is
 whether the utterance holds still and, if followed, does anything (§6).
-To our knowledge, no prior work measures re-query stability of
+To my knowledge, no prior work measures re-query stability of
 decision-attached, LLM-authored recourse, and none applies an LLM
 system's own advice back to the system that issued it.
 
@@ -161,12 +161,12 @@ committed, versioned synonym taxonomy — and the raw level is always
 reported beside the headline cluster level, because the taxonomy does
 real, visible work (e.g. raw 0.28 → cluster 0.86 on one lab model).
 
-**Valence flips.** Because coarse categories inflate topic-overlap, we
+**Valence flips.** Because coarse categories inflate topic-overlap, I
 also measure the **direction flip rate**: among same-topic pairs, how
 often the topic's direction (counts *for* vs *against* the candidate)
 differs between runs. This companion is robust to granularity — given
-the same topic came up, did its sign change? — and carries our sharpest
-finding (§5).
+the same topic came up, did its sign change? — and carries the sharpest
+finding here (§5).
 
 **Denominators, always.** Every case reports attempted / parsed / scored
 runs and refusals; failed parses never silently join a stability number.
@@ -231,7 +231,7 @@ and temperature; anything else is a different experiment and gets a
 different table. Tier displays use committed verbal bands, never ranks:
 band membership is the claim, position within a band is not. All
 cross-audit surfaces (boards, charts) are **generated from the metrics
-files by committed scripts** — in our own record, hand-transcribed
+files by committed scripts** — in this project's own record, hand-transcribed
 numbers went stale twice before this rule existed.
 
 ### 4.5 Provenance and endpoints
@@ -302,7 +302,7 @@ sharply about *themselves* while agreeing about the *target* to ±0.01
 (reasons 0.719 vs 0.729; recourse 0.567 vs 0.556). Certified: decision
 0.936 (6/25 flips); reasons 0.729; recourse 0.556; gap +0.173. **7/25
 candidates received no clear verdict at all** ("Maybe" is this system's
-explicit tier — the only abstention vocabulary we measured, used
+explicit tier — the only abstention vocabulary measured in this record, used
 consistently), and every verdict flip occurred in that group.
 
 **Lab backdrop, six model families.** On identical frozen cases, the
@@ -358,7 +358,7 @@ implemented at all.
 
 ## 7. The refusal record
 
-We report the protocol's failures with its findings because the former
+I report the protocol's failures with its findings because the former
 are the evidence the latter can be trusted.
 
 - **Three gate refusals.** (1) Audit #1, first pass: the reader passed
@@ -394,24 +394,24 @@ are the evidence the latter can be trusted.
 ## 8. Threats to validity
 
 **T1 — "This isn't recourse; recourse has validity conditions."**
-Correct as far as it goes: our recourse-stability is set-overlap of
-extracted advice, not a guarantee. Our reply is twofold: consistency is
+Correct as far as it goes: recourse-stability here is set-overlap of
+extracted advice, not a guarantee. My reply is twofold: consistency is
 *a priori* necessary for any validity guarantee to be meaningful (advice
 that differs on every query cannot carry one), and §6 measures validity
 directly — finding, at the registered doses, none demonstrable.
 
 **T2 — "The reason–recourse gap is a granularity artifact."** Partly, and
-we say so: the two sides are measured at different resolutions, and we do
+I say so: the two sides are measured at different resolutions, and I do
 not quantify the absolute share granularity explains. The valence-flip
-companion is granularity-robust and leads our findings for that reason;
+companion is granularity-robust and leads the findings for that reason;
 the control supplies the differential argument (+0.537 vs +0.106 under
 one reader and one grain).
 
 **T3 — "Your reader is an LLM judge; judges are noisy; your gate rests on
 n=25, k=3."** The thresholds were pre-registered and never revised; the
-gate's authority is demonstrated by its refusals, including of our own
+gate's authority is demonstrated by its refusals, including of my own
 finding. Residual honesty: self-agreement estimates carry sampling noise
-we do not interval-ise, and the cluster-basis ruling for one audit was
+I do not interval-ise, and the cluster-basis ruling for one audit was
 made knowing the raw basis would withhold — pre-registered-adjacent, not
 pre-registered. Confidence intervals on reader self-agreement are queued
 for the next registration.
@@ -459,6 +459,17 @@ accompanies publication. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
 commit and hash-verified; the other is vendored under its MIT licence
 with attribution.
+
+## Acknowledgements
+
+This is a solo-authored project developed with agent assistance:
+orchestration and protocol authorship via Claude (Anthropic), bulk
+implementation against committed failing tests via Codex (OpenAI), with
+the division of labour, briefs, and every diff review recorded in the
+repository's `DELEGATION.md`. An external reviewer's statistical critique
+of the audit-#3 registration (amendment A1) materially improved it and is
+credited in the registration's own log. All errors are mine — several
+demonstrably so, per §7.
 
 ## References
 
