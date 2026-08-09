@@ -67,7 +67,7 @@ default settings. Every API call recorded. Decision, reasons, and advice
 pulled from the tool's free-text output by a separate extraction model —
 a different model family from the one being audited, following the
 cross-model practice the LLM-as-judge literature recommends — whose own
-consistency is *measured, not assumed*. More on why that matters below.
+consistency is *measured, not assumed*.
 
 **Where the calls went, and why it matters.** Every measurement here went
 to a single named provider endpoint, fixed in advance and recorded in the
@@ -135,11 +135,11 @@ which run they happened to get.
 holds still.** (Certified.) Recourse
 stability measured **0.448**: ask this pipeline twice and, when both
 runs reach the same verdict, on average fewer than half of its
-improvement recommendations appear both times — the least stable advice
+improvement recommendations appear both times, the least stable advice
 of anything I have measured with this
 instrument, across lab configurations on six base models and a
 bare-model control on the pipeline's own model. The same-verdict
-condition is the measure's design, not a footnote: run-pairs where the
+condition is part of the measure's design: run-pairs where the
 verdict itself flipped are excluded (14 of the 250 pairs here, all
 within finding 1's three flip cases), so this is advice churn on top of
 a settled decision, not instability borrowed from finding 1. Because the tool's
@@ -200,8 +200,8 @@ I want this instrument's failure mode to be a number I decline to stand
 behind. An audit tool that certifies whatever its author is hunting for,
 with no gate that can tell it no, is a demo. Across this project the gate
 has said no three times: to the finding I was chasing, to a rebuilt
-extraction lens I had grown attached to, and — under a later audit's
-pre-registration that forbade any rescue — to that audit's primary lens.
+extraction lens I had grown attached to, and, under a later audit's
+pre-registration that forbade any rescue, to that audit's primary lens.
 
 ## The control, and what it rules out
 
@@ -215,8 +215,8 @@ the four-agent chain. Three things then separate cleanly.
 model changed its accept/reject answer on four of twenty-five candidates;
 the full pipeline on three. The chain neither causes this nor cures it, and
 it would be unfair to the developer to imply otherwise. This was not
-unique to the audited developer: every configuration I have measured —
-eight, on six base models from three providers — exhibited at least one verdict flip
+unique to the audited developer: every configuration I have measured
+(eight, on six base models from three providers) exhibited at least one verdict flip
 on identical inputs.
 
 **What belongs to the design.** The gap, and the valence flipping. The
@@ -246,7 +246,7 @@ here on.
 > **The boring box, kept deliberately intact.** Stability is not accuracy:
 > a system can be perfectly consistent and perfectly wrong, and I measured
 > consistency only. This is not a fairness or bias audit — that is a
-> different measurement, deliberately out of scope here. The CVs are
+> different measurement, and out of scope here. The CVs are
 > fictional by design; no real person's data was involved. The similarity
 > numbers depend on a published synonym-grouping step, and I report the
 > ungrouped numbers alongside (they are lower for every system measured).
@@ -274,13 +274,13 @@ that I'd call it an evolution rather than a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
 0.96–0.98), something my dissertation's design couldn't observe. Since
 that first audit completed, the lab set has grown to six base models
-from three providers —
-including an open-weights model and a Chinese lab's flagship — and the
+from three providers,
+including an open-weights model and a Chinese lab's flagship, and the
 reasons-versus-advice gap has appeared on every one (+0.11 to +0.29).
 
-Two honest caveats on that comparison. Those lab configurations were
-measured in a different mode — emitting machine-readable output directly,
-with no extraction layer in the path — so cross-reading them against the
+Two caveats on that comparison. Those lab configurations were
+measured in a different mode (emitting machine-readable output directly,
+with no extraction layer in the path), so cross-reading them against the
 target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
@@ -304,7 +304,7 @@ across the four systems with per-case certified records — landed on a
 borderline candidate.** Strong and weak
 candidates never flipped. Instability is not spread evenly; it
 concentrates exactly where the decision is genuinely contestable, which is
-also exactly where a candidate most needs the system to hold still. (That
+also where a candidate most needs the system to hold still. (That
 cut was made after seeing the data, so it is an observation for the next
 audit to test, not a certified finding of this one.)
 
@@ -330,13 +330,13 @@ hard spending cap, and a dry-run that prices the audit before a single
 call is made. Run it against your own configuration for about the price
 of a coffee.
 
-*On the target's identity: this piece deliberately describes a design
+*On the target's identity: this piece describes a design
 category rather than naming a small open-source project. The full
 identification is pinned in the audit evidence. The project's author was
 sent the complete findings privately before publication, with a standing
 offer to correct anything in error and to have any response printed
 alongside. The project is not named in the narrative unless its author
-opts in; full identification is pinned in the audit evidence. If
+opts in. If
 you're going to measure people's work, you owe them the first read.*
 
 **Next:** more targets. Asking "does your screening tool give the same
