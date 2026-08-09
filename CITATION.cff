@@ -22,4 +22,4 @@ preferred-citation:
     - family-names: Horsburgh
       given-names: Jamie
   year: 2026
-  notes: "Draft; arXiv identifier to be added on submission."
+  notes: "Preprint; arXiv identifier and archived software DOI added on release. Cite the paper for the method and findings; cite the repository DOI when using the instrument or archived evidence."

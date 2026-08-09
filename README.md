@@ -15,28 +15,34 @@ that survived temperature zero.
 
 ## What it has measured so far
 
-Three audits of real, published screening tools, plus lab configurations
+Three audits across two real, published screening tools (the third is a
+pre-registered causal follow-up on the first), plus lab configurations
 on six base models from three providers. Every measurement traces to a committed transcript in
 `audits/` with corpus hash, configuration identity, pinned versions of
 every pipeline stage, and the audited code's commit.
 
-- **Audit #1** — a published 4-agent screening pipeline, run exactly as
-  shipped on the author's own keys. Verdict flipped on 3/25 identical
+- **Audit #1** — a published 4-agent screening pipeline: its
+  prompt-and-chain design run as published, on the author's own keys and
+  a disclosed substitute for its retired pinned model. Verdict flipped on 3/25 identical
   inputs; advice repeated less than half the time even between runs
   that agreed on the verdict (0.448; cross-verdict pairs are excluded
   from this measure and reported separately); explanations
   kept their topics (0.98+) while flipping whether a topic counted *for*
   or *against* the candidate in a third to a half of comparisons. A
-  matched control (same model, no pipeline) showed the verdict-flipping
-  belongs to the model and the explanation pattern to the design.
+  matched control (same model, no pipeline) flipped verdicts too — the
+  chain is not necessary for that — while the explanation pattern
+  appeared only with the chained design.
 - **Audit #2** — a published 3-stage LangGraph screener on a frontier
   model. Verdict flipped on 6/25; for 6/25 the most common outcome was no
   clear verdict (one unanimously so) — and five of the six flips were in
   that group.
 - **Audit #3** — pre-registered causal follow-up on audit #1: implement
   the tool's own advice as committed CV edits and re-run. The advice
-  lottery hypothesis was not supported; 14 of 20 advised edits did
-  exactly nothing against placebo, the best advised uplift was equalled
+  lottery hypothesis was not supported (evaluable on the two cases that
+  retained both edit arms); 14 of 20 block-specific edit-effect
+  estimates (10 valid edits × 2 blocks) were
+  exactly zero against placebo, 5 of the 10 edits were zero in both
+  blocks, the best advised uplift was equalled
   by appending a hobbies line, and the tool's most frequent advice
   ("gain more experience") was unimplementable without corrupting the
   CV's chronology. One candidate: 0 accepts in 35 runs across every arm.
@@ -80,7 +86,7 @@ The part that matters more than any single number:
 ## Quickstart
 
 ```bash
-# needs Python 3.12 and uv; keys live in .env (see .env.example patterns)
+# needs Python 3.11+ and uv; keys live in .env (see .env.example patterns)
 ./goalpost.sh audit --config phase4/validation.yaml --dry-run   # priced plan, no calls
 ./goalpost.sh audit --config phase4/validation.yaml             # live, hard budget cap
 ./goalpost.sh resume audits/<audit-id>                          # crash/quota-safe resume

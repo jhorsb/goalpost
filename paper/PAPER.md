@@ -13,6 +13,9 @@ Neither is named in the narrative unless its author opts in;
 identification is pinned in the public evidence — narrative non-naming,
 not anonymity.*
 
+*Keywords:* LLM auditing; algorithmic recourse; repeatability; automated
+hiring; contestability; explanation stability; LLM-as-judge.
+
 ---
 
 ## Abstract
@@ -36,7 +39,8 @@ results (once, the author's own sought-after finding), a
 measurement-selection effect that was caught, tested, and designed out,
 and a pre-registered causal follow-up that found no demonstrable
 advantage for the audited pipeline's advice over placebo at the
-registered doses — most advised edits had zero measured effect, and the
+registered doses — 14 of 20 block-specific advised-edit effect estimates
+were zero, and the
 largest observed uplift was matched by a hobbies-line placebo. I argue that re-query stability of
 decision-attached, LLM-authored recourse is an axis absent from the
 robustness literature's own taxonomies, that it is necessary (though not
@@ -304,6 +308,9 @@ All numbers are cluster-level unless stated, with raw disclosed in the
 evidence; 25 fictional cases (five roles, strength-banded), N=5, 0
 refusals throughout; existence claims only.
 
+**Table 1 — audit summary.** Modes, reader certification status, run
+counts and headline measures for the three audits and the lab set.
+
 | audit | mode | reader status | n | headline measures | outcome |
 |---|---|---|---|---|---|
 | #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ⅓–½ | certified |
@@ -327,12 +334,19 @@ half", never a point estimate.
 certified reader, with a plain one-prompt screener replacing the chain:
 decision 0.960 (4/25 flips); reasons 0.612; recourse 0.507; gap +0.106
 vs the pipeline's +0.537 under the matched reader; valence 0.249 vs
-0.378. Attribution follows: verdict-flipping belongs to the **model**
-(the chain neither causes nor cures it); the reason–recourse gap and the
-valence amplification belong to the **design** — the chain's fixed rubric
-lifts topic-stability from 0.61 to 0.99 while leaving advice no more
-stable than the bare model's. Measurement-resolution artifacts apply to
-both arms equally; the *difference* is the attributable part.
+0.378. Attribution, stated at the strength the sample supports:
+verdict-flipping occurred **with and without the chain**, so the chain
+is not necessary for it — 3 vs 4 flip-cases on 25 cannot identify
+whether the chain changes its frequency. The larger reason–recourse
+contrast and the valence amplification **track the chained design**
+under the matched comparison — the chain's fixed rubric lifts
+topic-stability from 0.61 to 0.99 while leaving advice no more stable
+than the bare model's. The matched control holds model, host, corpus,
+settings and reader constant, which narrows the major confounds; it
+does not guarantee that architecture-specific output structure
+interacts identically with extraction and granularity, so I report the
+contrast as design-associated evidence rather than a fully identified
+causal estimate.
 
 **Audit #2 — a published three-stage LangGraph screener** (frontier
 serving model, disclosed same-class substitute for its retired pin;
@@ -382,10 +396,14 @@ caught its own author).
 
 Results (8 borderline cases, 220/220 runs parsed, reader decision
 self-agreement 1.000 in both blocks): **the differential-effectiveness
-hypothesis was not supported** — no consensus-vs-singleton difference
+hypothesis was not supported** — after the pre-registered exclusions it
+was evaluable on the two cases retaining both edit arms, and no
+consensus-vs-singleton difference
 exceeded 1/5 against a ≥3/5-same-sign-twice criterion. Descriptively,
-**14 of 20 advised-edit effects were exactly zero** against placebo
-(range −2/5 to +2/5); the largest advised uplift (+2/5, a
+**14 of 20 block-specific advised-edit effect estimates (10 valid edits
+× 2 blocks) were exactly zero** against placebo
+(range −2/5 to +2/5), and five of the ten edits were zero in both
+blocks; the largest advised uplift (+2/5, a
 project-management certification, one block) was equalled by appending a
 hobbies line to a different candidate's CV. One candidate recorded **0
 accepts in 35 runs across every arm** — the pipeline's own advice,
@@ -396,7 +414,7 @@ chronology and was excluded by A1's rule.
 
 The registered scope holds: "the advice doesn't work" is *not* certified;
 "no advised edit exceeded its placebo comparator by more than 2/5 at
-these doses, and most did nothing" is. Combined with audit #1, the
+these doses, and 14 of 20 block-specific estimates were exactly zero" is. Combined with audit #1, the
 recourse picture for this design: its advice neither repeats nor, when
 implemented, demonstrably works — and its most frequent advice cannot be
 implemented at all.

@@ -174,9 +174,13 @@ An earlier draft of this piece reported that number and then spent three
 paragraphs explaining why I couldn't fully stand behind it. What changed is
 the control described in the next section: measured the same way, with the
 same model and the same lens, a plain one-prompt screener's gap is
-**0.106**. Whatever share of the same-lens target gap, 0.537, is
-measurement artifact applies to both sides equally, so the *difference*, roughly 0.43, is the part attributable
-to the pipeline's design.
+**0.106**. The control holds the model, host, corpus, settings and lens
+constant, which narrows the major confounds; it cannot guarantee that
+the two designs' differently-shaped prose passes through extraction and
+grouping identically. I therefore read the distance from the same-lens
+target gap, 0.537, to the control's 0.106 (a *difference* of roughly
+0.43) as design-associated evidence rather than a fully identified
+causal estimate.
 
 One caveat survives: the two sides aren't measured at the same
 resolution. Reasons are counted at the level of four
@@ -211,21 +215,27 @@ the pipeline's own model — same twenty-five CVs, same settings, same
 certified measurement lens — behind a plain one-prompt screener instead of
 the four-agent chain. Three things then separate cleanly.
 
-**What belongs to the model, not the pipeline.** Verdict flipping. The bare
+**What the chain is not necessary for.** Verdict flipping. The bare
 model changed its accept/reject answer on four of twenty-five candidates;
-the full pipeline on three. The chain neither causes this nor cures it, and
-it would be unfair to the developer to imply otherwise. This was not
+the full pipeline on three. Flipping happens with or without the chain;
+twenty-five cases per arm cannot say whether the chain changes how often
+it happens, only that it would be unfair to the developer to pin the
+phenomenon on the design. This was not
 unique to the audited developer: every configuration I have measured
 (eight, on six base models from three providers) exhibited at least one verdict flip
 on identical inputs.
 
-**What belongs to the design.** The gap, and the valence flipping. The
+**What tracks the design.** The gap, and the valence flipping. Under the
+same model, host, corpus and lens, the
 chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while leaving
 advice no more stable than the bare model's (0.456 against 0.507, if
 anything slightly worse). It manufactures consistent-looking
 *explanations* without manufacturing
-consistent *guidance*. It also makes the meaning-flipping worse: 0.378
-against the bare model's 0.249. The architecture that was presumably
+consistent *guidance*. It also shows more meaning-flipping: 0.378
+against the bare model's 0.249. I read this as design-associated
+evidence rather than a clean causal estimate; still, the association
+survived every matched thing I could hold constant. The architecture
+that was presumably
 added to make the system more rigorous made its explanations more
 authoritative-looking and no more stable.
 
@@ -285,9 +295,10 @@ target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
 
-Set against the control above, the reading is that verdict instability is
-a property of this generation of models, while the explanation/advice
-pattern is a property of the chained design, which is why the piece is
+Set against the control above, the reading is that verdict instability
+appeared in every configuration measured, including at temperature zero,
+while the explanation/advice
+pattern tracks the chained design, which is why the piece is
 about a pattern rather than a project.
 
 The pattern also has company outside hiring. A 2026 clinical study

@@ -131,7 +131,30 @@ def _zero_effects():
     return zeros, total
 
 
-WORDS = {3: "three", 4: "four", 6: "six", 7: "seven", 14: "fourteen"}
+def _edits_zero_both_blocks():
+    """Edits (case×arm) whose A and B estimates both equal their
+    comparator — the '5 of 10' companion to 14/20 (D-073)."""
+    r = json.loads(Path("phase8/results-arms.json").read_text())
+    CRED = {("sc-data-analyst-04", "editC"), ("sc-data-analyst-04", "editS"),
+            ("sc-frontend-developer-04", "editS"), ("sc-project-manager-02", "editC"),
+            ("sc-project-manager-04", "editC"), ("sc-support-team-lead-04", "editS")}
+    n = lambda s: int(s.split("/")[0]) if s != "—" else None
+    both = valid = 0
+    for c, row in r.items():
+        for arm in ("editC", "editS"):
+            vals = [n(row[f"{arm}_{b}"]) for b in ("A", "B")]
+            if all(v is None for v in vals):
+                continue
+            valid += 1
+            comp = n(row["placC_A"]) if (c, arm) in CRED else n(row["placN_A"])
+            zs = [v == comp for v in vals if v is not None]
+            if len(zs) == 2 and all(zs):
+                both += 1
+    return both, valid
+
+
+WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
+         7: "seven", 10: "ten", 14: "fourteen"}
 
 
 def bindings():
@@ -233,9 +256,11 @@ def bindings():
         ("gap reproduction pair (writeup)", W,
          r"gap almost exactly \((0\.\d{3})\s+against (0\.\d{3})\)", (mt_gap, a1_gap)),
         ("same-lens gap in attribution (writeup)", W,
-         r"same-lens target gap, (0\.\d{3}),", (mt_gap,)),
+         r"same-lens\s+target gap, (0\.\d{3}), to the control's (0\.\d{3})",
+         (mt_gap, ct_gap)),
         ("ctrl gap (writeup)", W, r"screener's gap is\s+?\*\*\+?(0\.\d{3})\*\*", (ct_gap,)),
-        ("attributable diff (writeup)", W, r"roughly (0\.\d{2}), is the part",
+        ("attributable diff (writeup)", W,
+         r"a \*difference\* of roughly\s+(0\.\d{2})\) as design-associated",
          (f"{float(mt_gap) - float(ct_gap):.2f}",)),
         ("ctrl flips (writeup)", W, r"answer on (\w+) of twenty-five", (WORDS[_flips(CTRL)],)),
         ("advice no-more-stable pair (writeup)", W, r"\((0\.\d{3}) against (0\.\d{3}), if",
@@ -283,6 +308,27 @@ def bindings():
         ("lab advice range card (explainer)", E,
          r"<b>(0\.\d{2}) – (0\.\d{2})</b><span>advice stability range",
          (f"{min(lab_recs):.2f}", f"{max(lab_recs):.2f}")),
-        ("audit3 zero effects (paper)", P, r"\*\*(\d+) of 20 advised-edit effects were exactly zero\*\*",
-         (str(zeros),)),
+        # D-073: block-specific framing everywhere the 14/20 appears —
+        # 20 estimates from 10 valid edits, not 20 interventions
+        ("audit3 zero estimates (paper, all sites)", P,
+         r"(\d+) of (\d+) block-specific (?:advised-edit effect )?estimates",
+         (str(zeros), str(total_fx))),
+        ("audit3 valid edits (paper)", P,
+         r"\((\d+) valid edits\s*\n?× 2 blocks\)",
+         (str(_edits_zero_both_blocks()[1]),)),
+        ("audit3 both-blocks zeros (paper)", P,
+         r"(\w+) of the ten edits were zero in both\s+blocks",
+         (WORDS[_edits_zero_both_blocks()[0]],)),
+        ("audit3 zero estimates (readme)", R,
+         r"(\d+) of (\d+) block-specific edit-effect\s+estimates \((\d+) valid edits",
+         (str(zeros), str(total_fx), str(_edits_zero_both_blocks()[1]))),
+        ("audit3 both-blocks zeros (readme)", R,
+         r"(\d+) of the (\d+) edits were zero in both\s+blocks",
+         (str(_edits_zero_both_blocks()[0]), str(_edits_zero_both_blocks()[1]))),
+        ("audit3 zero estimates (explainer)", E,
+         r"(\d+) of (\d+) advised-edit effect estimates — (\w+) valid edits",
+         (str(zeros), str(total_fx), WORDS[_edits_zero_both_blocks()[1]])),
+        ("audit3 both-blocks zeros (explainer)", E,
+         r"\((\w+) of the ten edits in both blocks\)",
+         (WORDS[_edits_zero_both_blocks()[0]],)),
     ]
