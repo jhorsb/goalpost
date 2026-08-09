@@ -231,7 +231,7 @@ unscaffolded prose, where that structure doesn't exist. Its self-consistency
 fell below the pre-registered bar and the instrument withheld the numbers.
 The worry was real, the gate caught it, and a second independently
 certified lens then reproduced the target's gap almost exactly (0.537
-against 0.535), so the finding survives, but the rule doesn't get to
+against 0.534), so the finding survives, but the rule doesn't get to
 travel unexamined. Extraction rules get developed on held-out data from
 here on.
 

@@ -113,7 +113,8 @@ ALLOWLIST = {
     "0.988", "0.932", "0.989", "0.975", "0.991", "0.993", "1.000",
     "0.58", "0.87",  # slice calibration (D-015)
     # published-lens variants explicitly discussed as cross-reader checks
-    "0.983", "0.448", "0.535", "0.537", "0.378", "0.508", "0.719", "0.567",
+    "0.983", "0.448", "0.537", "0.378", "0.508", "0.719", "0.567",
+    # "0.535" REMOVED (D-067): retracted figure — full-precision gap is 0.534
     # audit-3 registration arithmetic (verified exactly, D-052)
     "0.109", "0.006", "0.047",
     # literature figures (cited sources)
@@ -125,7 +126,6 @@ ALLOWLIST = {
     "0.003",  # cross-lens gap reproduction |0.5371−0.5344| (Sol #7)
     "0.43",   # attributable gap difference: 0.537 − 0.106 (WRITEUP)
     "0.01",   # cross-lens agreement magnitude, D-040 (±0.01)
-    "0.002",  # cross-lens gap reproduction, D-040 (0.537 vs 0.535)
     "0.899",  # superseded figure, quoted AS superseded in the explainer's
               # reconciliation appendix (D-042) — historical reference
     "0.105",  # arithmetic neighbour of the 0.106 gap shown in rounding note
