@@ -1,0 +1,23 @@
+{
+  "upload_type": "software",
+  "title": "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse",
+  "creators": [
+    {
+      "name": "Horsburgh, Jamie",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "description": "<p>Goalpost is an open instrument for auditing <strong>decision, reason and recourse stability</strong> in LLM-mediated screening configurations &mdash; any configuration its operator controls. It measures one property, repeat-consistency: run the same case through the same system repeatedly and check whether the decision, the reasons given, and the advice (what the candidate should change) come back the same. Not accuracy, not fairness &mdash; those are different measurements, deliberately out of scope.</p><p>Every stability claim passes a pre-registered certification gate: a claim is certified only when the extraction reader's own measured self-agreement <em>a</em> clears 0.90, and either the observed stability <em>s</em> is at least 0.85 or <em>a</em> exceeds <em>s</em> by at least 0.15 &mdash; a stricter margin for instability claims, because extraction noise preferentially manufactures exactly that finding. Where the gate fails, the result is published as <strong>withheld</strong>: a first-class audit outcome, recorded three times in this repository, including for the project's own sought-after finding.</p><p>This archive contains the instrument; three audits across two published screening tools (the third a pre-registered causal follow-up on the first); lab configurations on six base models from three providers; all pre-registrations with amendment logs; complete evidence for every audit (transcripts, normalised sets, metrics, reports, metered costs); and an append-only decision log.</p>",
+  "keywords": [
+    "LLM auditing",
+    "algorithmic recourse",
+    "repeatability",
+    "automated hiring",
+    "contestability",
+    "explanation stability",
+    "LLM-as-judge",
+    "AI governance"
+  ]
+}
