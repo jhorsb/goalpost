@@ -46,35 +46,46 @@ COUNTS = {
     r"(\w+) configurations? .{0,20}across six": "eight",
 }
 
-# Prose numerals -> evidence file + json path (spot-checked keystone claims).
-def _metric(audit, *path):
-    d = json.load(open(f"audits/{audit}/metrics/0.1.0/metrics.json"))
-    for k in path:
-        d = d[k] if isinstance(k, str) else d[k]
-    return d
+# Keystone claims: anchored regex WITH capture; the anchor must be present
+# (absence = the claim drifted or vanished -> finding) and the captured
+# number must equal the value recomputed from the evidence files.
+def _cases(audit):
+    return json.load(open(f"audits/{audit}/metrics/0.1.0/metrics.json"))["suts"][0]["conditions"][0]["cases"]
 
-def keystone_checks():
-    """Returns list of (claim_regex, expected_str, description)."""
+
+def _mean(audit, extract):
     import statistics as st
+    vals = [extract(c) for c in _cases(audit)]
+    return st.mean(v for v in vals if v is not None)
 
-    def dec(audit):
-        cases = _metric(audit, "suts", 0, "conditions", 0, "cases")
-        vals = [c["decision_stability"]["modal_agreement"] for c in cases
-                if c["decision_stability"]["modal_agreement"] is not None]
-        return st.mean(vals)
 
-    def rec(audit):
-        cases = _metric(audit, "suts", 0, "conditions", 0, "cases")
-        vals = [c["recourse_stability"]["cluster"]["mean_jaccard"] for c in cases
-                if c["recourse_stability"]["cluster"]["mean_jaccard"] is not None]
-        return st.mean(vals)
-
+def keystones():
+    dec = lambda c: c["decision_stability"]["modal_agreement"]
+    rec = lambda c: c["recourse_stability"]["cluster"]["mean_jaccard"]
+    rea = lambda c: c["reason_stability"]["cluster"]["mean_jaccard"]
+    a1, a2, ctrl = ("realtarget-hs-screener-002-gptoss",
+                    "target2-csa-002-fallback", "control-bare-model-001")
     return [
-        (r"decision stability 0\.968|0\.968", f"{dec('realtarget-hs-screener-002-gptoss'):.3f}", "audit1 decision"),
-        (r"0\.448", f"{rec('realtarget-hs-screener-002-gptoss'):.3f}", "audit1 recourse"),
-        (r"0\.936", f"{dec('target2-csa-002-fallback'):.3f}", "audit2 decision (fallback)"),
-        (r"0\.556", f"{rec('target2-csa-002-fallback'):.3f}", "audit2 recourse"),
-        (r"\+0\.106", f"+{rec('control-bare-model-001') and 0.106:.3f}", "control gap (documented)"),
+        ("audit1 recourse", "WRITEUP.md",
+         r"Recourse\s*\nstability measured \*\*(0\.\d{3})\*\*",
+         f"{_mean(a1, rec):.3f}"),
+        ("audit1 flip count", "WRITEUP.md",
+         r"verdict changed on (three|two|four|five|\d+) of\s*\n?twenty-five",
+         {3: "three"}.get(sum(1 for c in _cases(a1)
+                              if c["decision_stability"]["modal_agreement"] not in (None, 1.0)),
+                          "UNEXPECTED")),
+        ("audit1 dec (paper table)", "paper/PAPER.md",
+         r"dec (0\.\d{3}) \(3/25",
+         f"{_mean(a1, dec):.3f}"),
+        ("audit2 dec (paper table)", "paper/PAPER.md",
+         r"dec (0\.\d{3}) \(6/25",
+         f"{_mean(a2, dec):.3f}"),
+        ("audit2 recourse (paper)", "paper/PAPER.md",
+         r"reasons 0\.729; recourse (0\.\d{3})",
+         f"{_mean(a2, rec):.3f}"),
+        ("control gap (writeup)", "WRITEUP.md",
+         r"screener's gap is\s*\n?\*\*\+?(0\.\d{3})\*\*",
+         f"{_mean(ctrl, rea) - _mean(ctrl, rec):.3f}"),
     ]
 
 
@@ -93,22 +104,27 @@ def main() -> int:
                 line = text.count("\n", 0, m.start()) + 1
                 findings.append(f"BANNED  {name}:{line}  '{m.group(0)}'  …{ctx[:90]}…")
 
+    WORD2DIGIT = {"three": "3", "four": "4", "six": "6", "eight": "8",
+                  "fourteen": "14", "thirteen": "13", "two": "2"}
     for name, text in surfaces[:4]:  # counts only asserted in authored artifacts
         for pat, expected in COUNTS.items():
+            ok = {expected, WORD2DIGIT.get(expected, expected)}
             for m in re.finditer(pat, text, re.I):
                 got = m.group(1).lower()
-                if got != expected and not got.isdigit():
+                if got not in ok:
                     line = text.count("\n", 0, m.start()) + 1
                     findings.append(
                         f"COUNT   {name}:{line}  expected '{expected}', found '{got}' in '{m.group(0)}'")
 
-    # keystone numerals: assert the evidence still produces the published value
-    for pat, expected, desc in keystone_checks():
-        pub = Path("WRITEUP.md").read_text() + Path("paper/PAPER.md").read_text()
-        if re.search(pat, pub):
-            claimed = re.search(r"0\.\d{3}", pat)
-            if claimed and claimed.group(0) != expected:
-                findings.append(f"NUMERAL {desc}: artifact says {claimed.group(0)}, evidence computes {expected}")
+    # keystone numerals: anchor must exist, and its captured value must
+    # equal the evidence recomputation (fail-closed in both directions)
+    for desc, artifact, pat, expected in keystones():
+        text = Path(artifact).read_text()
+        m = re.search(pat, text)
+        if not m:
+            findings.append(f"NUMERAL {desc}: anchor pattern not found in {artifact} (claim moved or vanished)")
+        elif m.group(1) != expected:
+            findings.append(f"NUMERAL {desc}: {artifact} says {m.group(1)}, evidence computes {expected}")
 
     if findings:
         print(f"{len(findings)} finding(s):")
@@ -117,7 +133,7 @@ def main() -> int:
         return 1
     print(f"claims-lint CLEAN across {len(surfaces)} surfaces "
           f"({len(BANNED)} banned patterns, {len(COUNTS)} count assertions, "
-          f"{len(keystone_checks())} keystone numerals)")
+          f"{len(keystones())} keystone numerals)")
     return 0
 
 
