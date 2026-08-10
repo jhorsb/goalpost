@@ -153,9 +153,10 @@ still pending; `CITATION.cff` carries its preferred citation metadata.
 
 The concept DOI [10.5281/zenodo.21862442](https://doi.org/10.5281/zenodo.21862442)
 always resolves to the latest archived version. This release is
-**v1.0.3**. Zenodo mints its version DOI from the release tag, and this
-that identifier is recorded here once available; until then cite the
-concept DOI above. The preceding v1.0.2 archive is
+**v1.0.3**, archived at version DOI
+[10.5281/zenodo.21878366](https://doi.org/10.5281/zenodo.21878366).
+Use that DOI for this exact snapshot and the concept DOI above for the
+latest archived version. The preceding v1.0.2 archive is
 [10.5281/zenodo.21865735](https://doi.org/10.5281/zenodo.21865735). The superseded v1.0.1 archive is
 [10.5281/zenodo.21864570](https://doi.org/10.5281/zenodo.21864570); the
 initial v1.0.0 archive is
@@ -168,7 +169,7 @@ initial v1.0.0 archive is
              Stability of LLM Screening Decisions, Reasons, and Recourse},
   year    = {2026},
   version = {1.0.2},
-  doi     = {10.5281/zenodo.21862442},
+  doi     = {10.5281/zenodo.21878366},
   url     = {https://github.com/jhorsb/goalpost}
 }
 ```

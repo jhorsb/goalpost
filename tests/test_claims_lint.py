@@ -55,6 +55,53 @@ def test_lint_clean_on_committed_artifacts():
     assert f"CLEAN across {len(REQUIRED_SURFACES)} surfaces" in r.stdout
 
 
+def _release_constants():
+    """Read the lint's own source of truth; hardcoding these made the
+    suite fail on every release bump (v1.0.3)."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    from claims_lint import CURRENT_VERSION_DOI, RELEASE_VERSION
+    return RELEASE_VERSION, CURRENT_VERSION_DOI
+
+
+def test_current_version_doi_is_bound_to_release_surfaces():
+    import yaml
+
+    version, doi = _release_constants()
+    citation = yaml.safe_load((ROOT / "CITATION.cff").read_text())
+    assert str(citation["doi"]) == doi
+    assert any(
+        str(identifier.get("value")) == doi
+        and f"v{version}" in str(identifier.get("description"))
+        for identifier in citation["identifiers"]
+    )
+    for relative in ("README.md", "STATUS.md", "paper/PAPER.md"):
+        assert doi in (ROOT / relative).read_text()
+
+
+def test_lint_rejects_current_version_doi_drift(release_tree):
+    _, doi = _release_constants()
+    _replace_once(
+        release_tree / "CITATION.cff",
+        f"doi: {doi}\n",
+        "doi: 10.5281/zenodo.21862442\n",
+    )
+    r = _run_lint(release_tree)
+    assert r.returncode == 1
+    assert "CFF current version DOI" in r.stdout
+
+
+def test_lint_rejects_pending_doi_wording_after_archive(release_tree):
+    version, _ = _release_constants()
+    status = release_tree / "STATUS.md"
+    status.write_text(
+        status.read_text()
+        + f"\nZenodo mints the v{version} version DOI from the release tag.\n"
+    )
+    r = _run_lint(release_tree)
+    assert r.returncode == 1
+    assert f"still describes archived v{version} as pending" in r.stdout
+
+
 def _bindings():
     sys.path.insert(0, str(ROOT / "tools"))
     from claims_bindings import bindings

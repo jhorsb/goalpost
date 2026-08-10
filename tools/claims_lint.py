@@ -32,7 +32,9 @@ VERSION_DOIS = {
     "1.0.0": "10.5281/zenodo.21862443",
     "1.0.1": "10.5281/zenodo.21864570",
     "1.0.2": "10.5281/zenodo.21865735",
+    "1.0.3": "10.5281/zenodo.21878366",
 }
+CURRENT_VERSION_DOI = VERSION_DOIS[RELEASE_VERSION]
 REQUIRED_GATE_AGREEMENT = 0.90
 REQUIRED_HIGH_STABILITY_BAND = 0.85
 REQUIRED_GATE_MARGIN = 0.15
@@ -293,7 +295,7 @@ def semantic_contract_check(findings, surface_map):
         )
         if not re.search(roster_entry, citation, re.I):
             findings.append(
-                f"SEMANTIC historical DOI roster: CITATION.cff must retain "
+                f"SEMANTIC version DOI roster: CITATION.cff must retain "
                 f"v{version} = {doi}"
             )
     if CONCEPT_DOI not in citation:
@@ -314,31 +316,32 @@ def semantic_contract_check(findings, surface_map):
                 f"SEMANTIC author ORCID: {artifact} must retain {token!r}"
             )
 
-    doi_lifecycle = {
-        "README.md": rf"v{re.escape(RELEASE_VERSION)}.*?Zenodo mints.*?release tag.*?recorded.*?once available",
-        "paper/PAPER.md": rf"v{re.escape(RELEASE_VERSION)}.*?Zenodo\s+mints.*?release tag.*?records.*?once available",
-        "CITATION.cff": rf"v{re.escape(RELEASE_VERSION)}.*?Zenodo mints.*?release tag.*?records it once available",
-        "STATUS.md": rf"Zenodo mints the v{re.escape(RELEASE_VERSION)} version DOI.*?release tag.*?recorded\s+only after minting",
+    current_doi_surfaces = {
+        "README.md": rf"release is\s+\*\*v{re.escape(RELEASE_VERSION)}\*\*.*?version DOI.*?{re.escape(CURRENT_VERSION_DOI)}",
+        "paper/PAPER.md": rf"released as\s+\*\*v{re.escape(RELEASE_VERSION)}\*\*.*?version DOI.*?{re.escape(CURRENT_VERSION_DOI)}",
+        "STATUS.md": rf"Zenodo archived the v{re.escape(RELEASE_VERSION)} tag at version DOI.*?{re.escape(CURRENT_VERSION_DOI)}",
     }
-    for artifact, pattern in doi_lifecycle.items():
+    for artifact, pattern in current_doi_surfaces.items():
         text = surface_map.get(artifact)
         if text is not None and not re.search(pattern, text, re.I | re.S):
             findings.append(
-                f"SEMANTIC version DOI lifecycle: {artifact} must state that "
-                f"Zenodo mints v{RELEASE_VERSION}'s DOI from the tag and the "
-                "repository records it only once available"
+                f"SEMANTIC current version DOI: {artifact} must bind "
+                f"v{RELEASE_VERSION} to {CURRENT_VERSION_DOI}"
             )
 
-    if re.search(
-        rf"value:\s*10\.5281/zenodo\.\d+\s*\n"
-        rf"\s*description:[^\n]*v{re.escape(RELEASE_VERSION)}",
-        citation,
-        re.I,
-    ):
-        findings.append(
-            f"SEMANTIC version DOI lifecycle: CITATION.cff must not assign a version DOI "
-            f"to unarchived v{RELEASE_VERSION}"
-        )
+    pending_patterns = (
+        r"records? (?:that identifier|it).*?once available",
+        r"archive is processing",
+        r"until the archive finishes",
+        rf"Zenodo mints the v{re.escape(RELEASE_VERSION)} version DOI",
+    )
+    for artifact in ("README.md", "paper/PAPER.md", "CITATION.cff", "STATUS.md"):
+        text = surface_map.get(artifact, "")
+        if any(re.search(pattern, text, re.I | re.S) for pattern in pending_patterns):
+            findings.append(
+                f"SEMANTIC current version DOI: {artifact} still describes "
+                f"archived v{RELEASE_VERSION} as pending"
+            )
 
 
 def structured_metadata_check(findings, surface_map):
@@ -384,10 +387,10 @@ def structured_metadata_check(findings, surface_map):
                     "SEMANTIC CFF release version: CITATION.cff top-level "
                     f"version must be {RELEASE_VERSION!r}"
                 )
-            if str(parsed.get("doi")) != CONCEPT_DOI:
+            if str(parsed.get("doi")) != CURRENT_VERSION_DOI:
                 findings.append(
-                    "SEMANTIC CFF concept DOI: CITATION.cff top-level doi "
-                    f"must be {CONCEPT_DOI!r}"
+                    "SEMANTIC CFF current version DOI: CITATION.cff top-level doi "
+                    f"must be {CURRENT_VERSION_DOI!r}"
                 )
             authors = parsed.get("authors")
             author_orcids = {
@@ -417,14 +420,13 @@ def structured_metadata_check(findings, surface_map):
                     "SEMANTIC CFF DOI roster: CITATION.cff identifiers missing "
                     f"{sorted(missing_dois)}"
                 )
-            current_identifier = any(
-                re.search(rf"\bv{re.escape(RELEASE_VERSION)}\b", description)
-                for description in doi_identifiers.values()
-            )
-            if current_identifier:
+            current_description = doi_identifiers.get(CURRENT_VERSION_DOI, "")
+            if not re.search(
+                rf"\bv{re.escape(RELEASE_VERSION)}\b", current_description
+            ):
                 findings.append(
-                    "SEMANTIC version DOI lifecycle: CITATION.cff identifiers "
-                    f"must not assign a DOI to v{RELEASE_VERSION} before minting"
+                    "SEMANTIC CFF current version DOI: CITATION.cff identifiers "
+                    f"must bind {CURRENT_VERSION_DOI} to v{RELEASE_VERSION}"
                 )
 
     project = surface_map.get("pyproject.toml")
