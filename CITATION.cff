@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "v1.0.2 correction release; v1.0.1 is the superseded historical archive. Cite DOI 10.5281/zenodo.21865735 for this exact release or the concept DOI 10.5281/zenodo.21862442 for the latest archived version."
+message: "v1.0.3 release. Zenodo mints the v1.0.3 version DOI from the release tag and this file records it once available; until then cite the concept DOI 10.5281/zenodo.21862442, which resolves to the latest archived version."
 title: "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse"
 authors:
   - family-names: Horsburgh
@@ -8,8 +8,8 @@ authors:
 type: software
 repository-code: "https://github.com/jhorsb/goalpost"
 license: MIT
-version: "1.0.2"
-doi: 10.5281/zenodo.21865735
+version: "1.0.3"
+doi: 10.5281/zenodo.21862442
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21862442
@@ -37,4 +37,4 @@ preferred-citation:
       given-names: Jamie
       orcid: "https://orcid.org/0009-0005-2567-5906"
   year: 2026
-  notes: "Preprint; arXiv identifier added on submission. Cite the paper for the method and findings; cite version DOI 10.5281/zenodo.21865735 for this exact software release or concept DOI 10.5281/zenodo.21862442 for the latest archive."
+  notes: "Preprint; arXiv identifier added on submission. Cite the paper for the method and findings; cite the concept DOI 10.5281/zenodo.21862442 for the latest archived software release."

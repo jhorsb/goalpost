@@ -1,6 +1,6 @@
 [project]
 name = "goalpost"
-version = "1.0.2"
+version = "1.0.3"
 description = "CLI audit instrument for decision/reason/recourse stability in LLM-mediated screening pipelines"
 requires-python = ">=3.11"
 dependencies = [

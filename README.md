@@ -8,11 +8,12 @@ through the same system repeatedly and check whether the **decision**, the
 come back the same. Not accuracy, not fairness — those are different
 measurements, deliberately out of scope.
 
-> **Correction status — v1.0.2.** Release v1.0.1 is preserved as
-> the superseded historical record, not the source for current findings.
-> v1.0.2 rebuilds the evidence and every derived surface under corrected
-> parse-eligibility, aggregation-floor and direction-metric definitions
-> recorded in D-083–D-085.
+> **Correction status — v1.0.3.** v1.0.2 rebuilt the evidence and every
+> derived surface under corrected parse-eligibility, aggregation-floor and
+> direction-metric definitions (D-083–D-085); earlier archives are
+> preserved as superseded historical records. v1.0.3 narrows the paper's
+> novelty claims after an external adversarial prior-art review and
+> corrects four citations (D-089).
 
 It grew out of an undergraduate dissertation (Horsburgh 2026) that found
 LLM-generated screening explanations far more stable in their *reasons*
@@ -63,8 +64,8 @@ every pipeline stage, and the audited code's commit.
   measured: three OpenAI proprietary models, Anthropic's Haiku, OpenAI's
   open-weights gpt-oss, and Moonshot's Kimi K3 (+0.11 to +0.29),
   including at temperature zero where the provider allows it. Both audited tools also pin
-  models that no longer exist at any provider — published screening
-  tools silently become unrunnable as shipped.
+  models retired by every provider whose schedule could be checked —
+  published screening tools silently become unrunnable as shipped.
 
 Full result narratives: `VALIDATION_NOTES.md`. Public-facing summary:
 `WRITEUP.md`.
@@ -152,10 +153,10 @@ still pending; `CITATION.cff` carries its preferred citation metadata.
 
 The concept DOI [10.5281/zenodo.21862442](https://doi.org/10.5281/zenodo.21862442)
 always resolves to the latest archived version. This release is
-**v1.0.2**, archived at version DOI
-[10.5281/zenodo.21865735](https://doi.org/10.5281/zenodo.21865735).
-Use that DOI for this exact corrected snapshot and the concept DOI above
-for the latest archived version. The superseded v1.0.1 archive is
+**v1.0.3**. Zenodo mints its version DOI from the release tag, and this
+that identifier is recorded here once available; until then cite the
+concept DOI above. The preceding v1.0.2 archive is
+[10.5281/zenodo.21865735](https://doi.org/10.5281/zenodo.21865735). The superseded v1.0.1 archive is
 [10.5281/zenodo.21864570](https://doi.org/10.5281/zenodo.21864570); the
 initial v1.0.0 archive is
 [10.5281/zenodo.21862443](https://doi.org/10.5281/zenodo.21862443).
@@ -167,7 +168,7 @@ initial v1.0.0 archive is
              Stability of LLM Screening Decisions, Reasons, and Recourse},
   year    = {2026},
   version = {1.0.2},
-  doi     = {10.5281/zenodo.21865735},
+  doi     = {10.5281/zenodo.21862442},
   url     = {https://github.com/jhorsb/goalpost}
 }
 ```

@@ -1,6 +1,6 @@
 {
   "upload_type": "software",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "title": "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse",
   "creators": [
     {

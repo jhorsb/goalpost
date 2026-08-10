@@ -2,7 +2,7 @@
 
 **Jamie Horsburgh** — independent researcher
 ([ORCID 0009-0005-2567-5906](https://orcid.org/0009-0005-2567-5906))
-*v1.0.2 (2026-08-10) — for arXiv (cs.CY). Every
+*v1.0.3 (2026-08-11) — for arXiv (cs.CY). Every
 measurement traces to a
 committed transcript in the accompanying evidence repository;
 literature, model-metadata and cost figures cite named sources. Audited
@@ -18,10 +18,12 @@ not anonymity.*
 *Keywords:* LLM auditing; algorithmic recourse; repeatability; automated
 hiring; contestability; explanation stability; LLM-as-judge.
 
-> **Correction status — v1.0.2.** Release v1.0.1 is preserved as
-> the superseded historical record. This release rebuilds the evidence and
-> every derived claim under corrected parse-eligibility, aggregation-floor
-> and direction-metric definitions recorded in D-083–D-085.
+> **Correction status — v1.0.3.** v1.0.2 rebuilt the evidence and every
+> derived claim under corrected parse-eligibility, aggregation-floor and
+> direction-metric definitions (D-083–D-085); earlier archives are
+> preserved as superseded historical records. This release narrows §2's
+> novelty claims after an external adversarial prior-art review and
+> corrects four citations (§7; D-089).
 
 ---
 
@@ -659,9 +661,10 @@ are in the accompanying repository, MIT-licensed. Where pipeline stages
 ran on accounts the instrument's meter does not see, provider dashboard
 totals are the cost source of truth. The repository is archived at
 Zenodo under DOI 10.5281/zenodo.21862442, which resolves to the latest
-version. This paper and repository are released as **v1.0.2**; the exact
-corrected snapshot is archived at version DOI
-**10.5281/zenodo.21865735**. Cite this paper for the method and findings,
+version. This paper and repository are released as **v1.0.3**; Zenodo
+mints its version DOI from the release tag and the repository records
+that identifier once available, the preceding v1.0.2 archive being
+10.5281/zenodo.21865735. Cite this paper for the method and findings,
 the version DOI when depending on this release's instrument or evidence,
 and the concept DOI for the latest archive. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
