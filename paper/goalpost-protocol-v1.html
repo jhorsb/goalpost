@@ -289,25 +289,51 @@ introduced recourse robust to model shifts with invalidation-probability
 bounds [Upadhyay et al. 2021]; Rawal et al. [2020] showed empirically
 that deployment-time shifts invalidate state-of-the-art recourse. The
 IJCAI survey of robust counterfactual explanations [Jiang et al. 2024]
-taxonomises the field by <em>cause of change</em>: model update, input
-perturbation, noisy human execution. Re-query variance at identical
-inputs — no cause, no change — is absent from that taxonomy. Likewise
-the explanation-robustness literature [Alvarez-Melis &amp; Jaakkola
-2018] measures attribution stability across <em>neighbouring</em>
-inputs; identical-input free-text explanation is outside its
-instruments. This axis is the degenerate and, for LLM decision-makers,
-non-trivial limit of theirs.</p>
+sorts robustness into four separately studied categories: model changes,
+model multiplicity, noisy execution, and input changes. Every one names
+a <em>cause</em>. Re-query variance at identical inputs — one fixed
+model, one unchanged case, no perturbation anywhere — is absent from
+that taxonomy. The nearest neighbour inside it is model multiplicity,
+which compares distinct trained models rather than repeated calls to
+one, and the nearest instrument in its model-change lineage varies the
+random seed <em>across retraining runs</em> [Black et al. 2022]:
+variance between models, not within one.</p>
+<p>Alvarez-Melis &amp; Jaakkola [2018] measure attribution stability
+across <em>neighbouring</em> inputs; their local-Lipschitz instrument is
+degenerate at identical inputs, and it operates on attribution arrays
+rather than prose. Identical-input stability is instrumented elsewhere,
+and I do not claim otherwise: for stochastic attribution methods [Zafar
+&amp; Khan 2019; Visani et al. 2020], and for LLM free-text explanations
+by repeated-prompt uncertainty and stability measures [Tanneru et al.
+2024; Shailya et al. 2025]. Those quantify how much an explanation
+varies under re-generation. None conditions on a decision the same
+system issued, and none carries the measurement to the recourse attached
+to it — which is the axis this protocol adds.</p>
 <p><strong>LLM output consistency and LLM-as-judge.</strong> Atil et al.
 [2024] document accuracy swings up to 15% across runs of five LLMs at
-deterministic settings and attribute persistence to serving-level
-batching; a separate serving-layer analysis found provider and backend
-choice alone shifting benchmark scores by up to 16.6 percentage points
-[Not pinning, 2025]. The LLM-as-judge literature names <em>repetition
-stability</em> as an evaluator reliability construct [Shi et al. 2025] —
-and is simultaneously the sceptic's argument against any LLM-extracted
+deterministic settings; on cause they say only that they "can only
+speculate", so the mechanism is not theirs to claim. Pape et al. [2026]
+supply it, finding that the choice of inference backend alone can shift
+benchmark scores by up to 16.6 percentage points, and attributing the
+divergence to system-level optimisations — prefix caching, CUDA graphs,
+custom kernels and engine-specific logit-processing defaults. The
+LLM-as-judge literature names <em>repetition stability</em> as an
+evaluator reliability construct [Shi et al. 2025] — and is
+simultaneously the sceptic's argument against any LLM-extracted
 measurement, including this one. The gate (§4.2) is that literature's
 recommendation — measure your judge — implemented as a hard
-certification threshold with a refusal path.</p>
+certification threshold with a refusal path. Its components have
+precedents I should name rather than let a reader discover: validating
+an LLM judge is a standing recommendation [Zheng et al. 2023];
+validating it against the target system's own outputs is EvalGen's
+design [Shankar et al. 2024]; formal statistical criteria for accepting
+an LLM annotator exist [Calderon et al. 2025]; and numeric pre-claim
+reliability bars have been proposed concurrently [Norman et al. 2026].
+What I have not found combined anywhere is the composite used here:
+thresholds fixed by pre-registration before any measurement, an
+asymmetric margin that makes an instability claim harder to certify than
+a stability claim, and below-bar results published as a
+<em>withheld</em> outcome rather than dropped.</p>
 <p><strong>LLM screening audits.</strong> External audits of LLM résumé
 screeners measure validity against constructed ground truth and
 demographic bias [Castleman et al. 2026]; consistency appears as an
@@ -328,9 +354,24 @@ one title, but the LLM is the <em>predictor</em> and recourse is
 computed against it by an external optimiser — the inverse of the
 setting here, in which the LLM utters the recourse and the question is
 whether the utterance holds still and, if followed, does anything (§6).
-To my knowledge, no prior work measures re-query stability of
-decision-attached, LLM-authored recourse, and none applies an LLM
-system's own advice back to the system that issued it.</p>
+Applying an LLM's own suggested edit back to the system that issued it
+is, by contrast, established practice, and I want to be precise about
+what it establishes. Self-consistency checks of counterfactual
+self-explanations do exactly this — including on a hiring task, where
+the model is asked to make "a minimal edit to the resume … such that you
+would answer yes" and the edited resume is re-evaluated in a fresh
+session [Madsen et al. 2024]. Decision-boundary consistency tests do it
+on tabular high-stakes tasks [Mayne et al. 2025], and validity checks do
+it for generated counterfactuals [Randl et al. 2025]. Each asks whether
+<em>one</em> suggested edit achieves its stated effect: a faithfulness
+question, answered once.</p>
+<p>The question left open is the repeat one. Whether the same
+configuration, asked the same question about the same case, issues the
+same recourse — and so whether there is a stable thing for an affected
+person to act on at all — is what I have been unable to find measured
+anywhere, and it is what this protocol measures. That framing is the
+residue of an adversarial prior-art search commissioned against this
+paper's own novelty claims (§7).</p>
 <h2 id="3-constructs-and-measures">3. Constructs and measures</h2>
 <p>A <strong>configuration</strong> (system under test) is everything
 the operator controls: model and endpoint, prompts or pipeline code at a
@@ -635,8 +676,10 @@ flips; reason stability 0.761 and recourse 0.620 over the 20 cases
 clearing the pair floor (gap +0.141). Haiku's corresponding corrected
 values are decision 0.990, reason 0.795 and recourse 0.570 over 24
 floor-eligible cases (gap +0.225). Both audited pipelines pin models
-that no longer exist at any provider — published screening tools
-silently become unrunnable as shipped.</p>
+that have since been retired by every provider whose schedule could be
+checked (Groq, Anthropic first-party and AWS Bedrock; one partner
+platform's schedule was not reachable at the time of writing) —
+published screening tools silently become unrunnable as shipped.</p>
 <p><strong>Exploratory, labelled as such.</strong> The corpus was
 strength-banded at design time. Across the four systems with per-case
 certified records, <strong>all 13 scored verdict flips landed in the
@@ -691,40 +734,57 @@ and its most frequent advice cannot be implemented at all.</p>
 <p>I report the protocol's failures with its findings because the former
 are the evidence the latter can be trusted.</p>
 <ul>
-<li><strong>Three gate refusals.</strong> (1) Audit #1, first pass: the
-reader passed the 0.90 bar (0.904) but fell 0.051 short of the
+<li><p><strong>Three gate refusals.</strong> (1) Audit #1, first pass:
+the reader passed the 0.90 bar (0.904) but fell 0.051 short of the
 instability margin — the gate refused the project's own sought-after
 headline while it sat in the evidence file, visible to anyone who could
 subtract. (2) The rebuilt reader, pointed at prose <em>without</em> the
 target's scaffolding, fell below the bar (0.895/0.817) — withheld. (3)
 Audit #2's frozen primary reader failed (0.876/0.814) under a
 registration that forbade rebuilding; the pre-declared fallback resolved
-it.</li>
-<li><strong>A selection effect, caught and designed out.</strong> The
+it.</p></li>
+<li><p><strong>A selection effect, caught and designed out.</strong> The
 rebuilt reader's rule had been written after seeing audit #1's
 transcripts. External draft review named it; the control
 <em>demonstrated</em> it (refusal 2); the audit-#2 registration banned
 it (readers frozen pre-transcript, held-out development from then on). A
 second certified reader reproduced the target's gap within 0.003, so the
 finding survived its own measurement scandal — but the rule never
-travelled unexamined again.</li>
-<li><strong>An external review that mattered.</strong> The audit-#3
+travelled unexamined again.</p></li>
+<li><p><strong>An external review that mattered.</strong> The audit-#3
 registration's original existence criterion carried a ~60% family-wise
 false-positive rate under the worst-case null — arithmetic supplied by a
 model-based external review (GPT-5.6 Sol Pro, prompted by the author;
 see Acknowledgements) and verified exactly. Whether the original
 criterion would have fired is unevaluable (the original design would
 have run arms the amended rule excludes); its <em>ex ante</em> risk is
-not.</li>
-<li><strong>Reporting-layer errors, mechanically caught.</strong> Every
-substantive error in this project's record occurred in prose written
-about clean measurements, not in a measurement: a stale figure, a
-mis-plotted gate value, a wrong placebo comparator, a false
+not.</p></li>
+<li><p><strong>Reporting-layer errors, mechanically caught.</strong>
+Every substantive error in this project's record occurred in prose
+written about clean measurements, not in a measurement: a stale figure,
+a mis-plotted gate value, a wrong placebo comparator, a false
 counterfactual, a misattributed amendment — each caught by adversarial
 or stop-time review and corrected in an append-only log. The protocol's
 response is structural: generated-only reporting surfaces, and
 claim-by-claim checks of result prose against registration text before
-commit.</li>
+commit.</p></li>
+<li><p><strong>An external adversarial review that weakened my own
+positioning.</strong> After v1.0.2 was archived, I commissioned a
+parallel-search review (Kimi K3 Swarm Max) whose brief was to falsify
+this paper's novelty claims from outside the repository. It did, in
+part: applying an LLM's own suggested edit back to the issuing system is
+established practice, including on a hiring task [Madsen et al. 2024],
+and the free-text explanation-stability literature has instruments I had
+described as absent [Tanneru et al. 2024; Shailya et al. 2025]. Section
+2 is rewritten accordingly, and every component of the gate is now
+attributed to a precedent. Four citation defects it found are corrected
+in the reference list, including a figure I had credited to a secondary
+summary rather than its source [Pape et al. 2026]. The review is
+committed verbatim at <code>phase9/KSWARM-EXT-1-REVIEW.md</code>. What
+survived the search is narrower than what I first wrote, and is now the
+claim: identical-case repeat stability of decision-attached,
+LLM-authored recourse, measured through a certification-gated reader,
+with below-bar results published as withheld.</p></li>
 </ul>
 <h2 id="8-threats-to-validity">8. Threats to validity</h2>
 <p><strong>T1 — "This isn't recourse; recourse has validity
@@ -827,12 +887,17 @@ critique of the audit-#3 registration that became amendment A1 — the
 ~60%→~5% family-wise false-positive correction — plus a seven-point
 pre-publication review and a pre-submission review all came from GPT-5.6
 Sol Pro (OpenAI), prompted by the author, with each adopted point
-verified against the record before it was applied. The full-repo audit,
-its re-verification reports, and the pre-submission review are committed
-verbatim under <code>phase9/</code>; the earlier review sessions are
-author-held records, so their attribution rests on this disclosure. No
-human other than the author reviewed this work before publication. All
-errors are mine — several demonstrably so, per §7.</p>
+verified against the record before it was applied. A further external
+adversarial review of this paper's novelty claims and citations was run
+on Kimi K3 Swarm Max (Moonshot AI) and is committed verbatim under
+<code>phase9/</code>; its findings were re-verified against primary
+sources before adoption, and two of its own citation identifiers were
+corrected in that process. The full-repo audit, its re-verification
+reports, and the pre-submission review are committed verbatim under
+<code>phase9/</code>; the earlier review sessions are author-held
+records, so their attribution rests on this disclosure. No human other
+than the author reviewed this work before publication. All errors are
+mine — several demonstrably so, per §7.</p>
 <h2 id="references">References</h2>
 <ul>
 <li>Alvarez-Melis, D., Jaakkola, T. (2018). On the Robustness of
@@ -848,8 +913,9 @@ arXiv:2602.18550.</li>
 Algorithmic Recourse of In-Context Learning for Tabular Data. ICML 2026.
 arXiv:2605.31272.</li>
 <li>Horsburgh, J. (2026). Explanation Drift in LLM-Mediated Automated
-Decision Explanations. Undergraduate dissertation, Glasgow Caledonian
-University.</li>
+Decision Explanations: A Controlled Audit of Fidelity, Consistency and
+Contestability in CV Screening. Undergraduate dissertation, Glasgow
+Caledonian University. ResearchGate publication 406484744.</li>
 <li>Jiang, J., Leofante, F., Rago, A., Toni, F. (2024). Robust
 Counterfactual Explanations in Machine Learning: A Survey. IJCAI 2024.
 arXiv:2402.01928.</li>
@@ -861,9 +927,11 @@ arXiv:2604.11287.</li>
 <li>Mökander, J., Schuett, J., Kirk, H.R., Floridi, L. (2023). Auditing
 large language models: a three-layered approach. AI and Ethics.
 arXiv:2302.08500.</li>
-<li>"Not pinning your OpenRouter provider might invalidate your evals"
-(2025). LessWrong. <a
-href="https://www.lesswrong.com/posts/KsyoSAyBRXtwzSugg/not-pinning-your-openrouter-provider-might-invalidate-your">https://www.lesswrong.com/posts/KsyoSAyBRXtwzSugg/not-pinning-your-openrouter-provider-might-invalidate-your</a></li>
+<li>Pape, D., Evertz, J., Schönherr, L. (2026). The Silent
+Hyperparameter: Quantifying the Impact of Inference Backends on LLM
+Reproducibility. arXiv:2605.19537. (Origin of the 16.6-percentage-point
+figure; reached via the secondary summary "Not pinning your OpenRouter
+provider might invalidate your research", LessWrong, 2026.)</li>
 <li>Rawal, K., Kamar, E., Lakkaraju, H. (2020). Algorithmic Recourse in
 the Wild. arXiv:2012.11788.</li>
 <li>Shi, L., Ma, C., Liang, W., Diao, X., Ma, W., Vosoughi, S. (2025).
@@ -871,6 +939,37 @@ Judging the Judges: A Systematic Study of Position Bias in
 LLM-as-a-Judge. AACL-IJCNLP 2025. arXiv:2406.07791.</li>
 <li>Upadhyay, S., Joshi, S., Lakkaraju, H. (2021). Towards Robust and
 Reliable Algorithmic Recourse. NeurIPS 2021. arXiv:2102.13620.</li>
+<li>Black, E., Wang, Z., Fredrikson, M. (2022). Consistent
+Counterfactuals for Deep Models. ICLR 2022. arXiv:2110.03109.</li>
+<li>Calderon, N., et al. (2025). The Alternative Annotator Test for
+LLM-as-a-Judge. arXiv:2501.10970.</li>
+<li>Madsen, A., Chandar, S., Reddy, S. (2024). Are self-explanations
+from Large Language Models faithful? Findings of ACL 2024.
+arXiv:2401.07927.</li>
+<li>Mayne, H., Kearns, R.O., Yang, Y., Bean, A.M., Delaney, E.D.,
+Russell, C., Mahdi, A. (2025). LLMs Don't Know Their Own Decision
+Boundaries: The Unreliability of Self-Generated Counterfactual
+Explanations. EMNLP 2025.</li>
+<li>Norman, A., et al. (2026). Reliability without Validity: A
+Systematic, Large-Scale Evaluation of LLM Judges. arXiv:2606.19544.</li>
+<li>Randl, K., Pavlopoulos, J., Henriksson, A., Lindgren, T. (2025).
+Mind the gap: from plausible to valid self-explanations in large
+language models. Machine Learning. doi:10.1007/s10994-025-06838-6.</li>
+<li>Shailya, S., et al. (2025). LExT: Towards Evaluating Trustworthiness
+of Natural Language Explanations. arXiv:2504.06227.</li>
+<li>Shankar, S., et al. (2024). Who Validates the Validators? Aligning
+LLM-Assisted Evaluation of LLM Outputs with Human Preferences.
+arXiv:2404.12272.</li>
+<li>Tanneru, S.H., Agarwal, C., Lakkaraju, H. (2024). Quantifying
+Uncertainty in Natural Language Explanations of Large Language Models.
+AISTATS 2024. arXiv:2311.03533.</li>
+<li>Visani, G., et al. (2020). Statistical stability indices for LIME.
+arXiv:2001.11757.</li>
+<li>Zafar, M.R., Khan, N.M. (2019). DLIME: A Deterministic Local
+Interpretable Model-Agnostic Explanations Approach.
+arXiv:1906.10263.</li>
+<li>Zheng, L., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and
+Chatbot Arena. arXiv:2306.05685.</li>
 <li>Ustun, B., Spangher, A., Liu, Y. (2019). Actionable Recourse in
 Linear Classification. FAT* 2019. arXiv:1809.06514.</li>
 </ul>
