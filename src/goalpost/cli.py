@@ -221,6 +221,41 @@ def report(audit_dir: Path = typer.Argument(...)):
     typer.echo(f"Report: {report_dir / 'report.md'}")
 
 
+@app.command()
+def recompute(
+    audit_dir: Path = typer.Argument(...),
+    source_metrics_version: str = typer.Option("0.1.0", "--source-version"),
+    check: bool = typer.Option(False, "--check"),
+):
+    """Regenerate metrics from committed runs/normalised/mapping evidence.
+
+    This command is offline by construction: it never creates a provider
+    client and never reads API credentials.
+    """
+    from goalpost.metrics import METRICS_VERSION
+    from goalpost.recompute import recompute_audit
+
+    regenerated = recompute_audit(
+        audit_dir, source_metrics_version=source_metrics_version, write=not check
+    )
+    destination = audit_dir / "metrics" / METRICS_VERSION / "metrics.json"
+    if check:
+        if not destination.is_file():
+            typer.echo(f"Missing regenerated metrics: {destination}", err=True)
+            raise typer.Exit(1)
+        committed = json.loads(destination.read_text())
+        # Compare the persisted JSON value, not Python container types. Metric
+        # aggregates use tuples in memory; JSON correctly stores those as
+        # arrays, which load back as lists.
+        regenerated_json = json.loads(json.dumps(regenerated))
+        if committed != regenerated_json:
+            typer.echo(f"Stale regenerated metrics: {destination}", err=True)
+            raise typer.Exit(1)
+        typer.echo(f"Metrics verified: {destination}")
+        return
+    typer.echo(f"Metrics regenerated: {destination}")
+
+
 def _mapping_review_rows(log_files: list[Path]) -> list[dict]:
     """Read and deduplicate mapping rows in deterministic file order."""
     rows = []

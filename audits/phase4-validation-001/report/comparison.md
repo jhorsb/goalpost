@@ -8,4 +8,4 @@ Ranked by recourse stability (cluster level). Rows sharing a tie-band have overl
 | 1 | gpt-4.1-nano | structured | 0.67 | [0.45, 1.00] | 25 |
 | 1 | gpt-4.1-mini | structured | 0.57 | [0.40, 0.73] | 25 |
 
-*goalpost 0.1.0 · anchors-1.0.0 · taxonomy 1.0.0+1dfd20707ff9 · report 0.1.0*
+*audit schema 0.1.0 · metrics 0.2.0 · anchors-1.1.0 · taxonomy 1.0.0+1dfd20707ff9 · report 0.2.0*

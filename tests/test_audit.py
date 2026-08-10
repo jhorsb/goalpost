@@ -6,12 +6,146 @@ from pathlib import Path
 
 import pytest
 
-from goalpost.audit import run_audit
+from goalpost.audit import _case_metrics, run_audit
 from goalpost.config import AuditConfig, Case, Condition, SUTConfig
 
 TAXONOMY = Path(__file__).parent.parent / "taxonomies" / "cv-screening-v1.yaml"
 
 CASE = Case(case_id="c1", cv_text="a cv", job_spec_text="a spec")
+
+
+def _normalised_metric_run(
+    *,
+    parse_status: str,
+    decision: str | None,
+    reasons: set[str] | None = None,
+    recourse: set[str] | None = None,
+):
+    reasons = set() if reasons is None else reasons
+    recourse = set() if recourse is None else recourse
+    return {
+        "decision": decision,
+        "reasons": {level: reasons for level in ("raw", "normalised", "cluster")},
+        "recourse": {level: recourse for level in ("raw", "normalised", "cluster")},
+        "direction_maps": {
+            level: {topic: {"negative"} for topic in reasons}
+            for level in ("raw", "normalised", "cluster")
+        },
+        "legacy_direction_maps": {
+            level: {topic: "negative" for topic in reasons}
+            for level in ("raw", "normalised", "cluster")
+        },
+        "parse_status": parse_status,
+        "refusal": parse_status == "refusal",
+    }
+
+
+def test_case_metrics_exclude_failed_parses_before_every_stability_measure():
+    runs = [
+        _normalised_metric_run(
+            parse_status="ok", decision="reject", reasons={"experience"},
+            recourse={"training"},
+        )
+        for _ in range(3)
+    ] + [
+        # Partial outputs can contain opposite decisions, but their failed
+        # status makes every extracted field ineligible for scoring.
+        _normalised_metric_run(parse_status="parse_failure", decision="accept"),
+        _normalised_metric_run(parse_status="parse_failure", decision="reject"),
+    ]
+
+    metrics = _case_metrics(runs, n_attempted=5)
+
+    assert metrics["denominators"] == {
+        "attempted": 5,
+        "parsed": 3,
+        "scored": 3,
+        "refusals": 0,
+    }
+    assert metrics["decision_stability"]["modal_agreement"] == 1.0
+    assert metrics["reason_stability"]["cluster"] == {
+        "mean_jaccard": 1.0,
+        "n_pairs": 3,
+    }
+    assert metrics["recourse_stability"]["cluster"] == {
+        "mean_jaccard": 1.0,
+        "n_pairs": 3,
+    }
+    for level in ("raw", "normalised", "cluster"):
+        assert metrics["direction_reversal"][level]["legacy_topic_incidence"]["rate"] == 0.0
+        assert metrics["direction_reversal"][level]["pairwise"]["rate"] == 0.0
+
+
+def test_zero_parsed_case_has_no_stability_numbers_or_flip():
+    runs = [
+        _normalised_metric_run(
+            parse_status="parse_failure",
+            decision="accept" if index % 2 else "reject",
+        )
+        for index in range(5)
+    ]
+
+    metrics = _case_metrics(runs, n_attempted=5)
+
+    assert metrics["denominators"]["parsed"] == 0
+    assert metrics["denominators"]["scored"] == 0
+    assert metrics["decision_stability"] == {
+        "modal_decision": None,
+        "modal_agreement": None,
+    }
+    assert metrics["reason_stability"]["cluster"]["mean_jaccard"] is None
+    assert metrics["recourse_stability"]["cluster"]["mean_jaccard"] is None
+    assert metrics["reason_coverage"] == {
+        "emptiness_rate": None,
+        "mean_set_size": None,
+        "empty_empty_pair_fraction": None,
+    }
+    assert metrics["recourse_coverage"] == {
+        "emptiness_rate": None,
+        "mean_set_size": None,
+        "empty_empty_pair_fraction": None,
+    }
+    assert metrics["discarded_pair_fraction"] is None
+    for level in ("raw", "normalised", "cluster"):
+        assert metrics["direction_reversal"][level]["legacy_topic_incidence"]["rate"] is None
+        assert metrics["direction_reversal"][level]["pairwise"]["rate"] is None
+
+
+def test_parse_ok_without_a_decision_is_parsed_but_not_scored():
+    metrics = _case_metrics(
+        [
+            _normalised_metric_run(
+                parse_status="ok", decision=None, reasons={"experience"}
+            ),
+            _normalised_metric_run(
+                parse_status="ok", decision="reject", reasons={"experience"}
+            ),
+        ],
+        n_attempted=2,
+    )
+
+    assert metrics["denominators"]["parsed"] == 2
+    assert metrics["denominators"]["scored"] == 1
+    assert metrics["decision_stability"]["modal_agreement"] == 1.0
+    assert metrics["reason_stability"]["cluster"]["mean_jaccard"] is None
+
+
+def test_parse_ok_with_an_invalid_decision_is_not_scored():
+    metrics = _case_metrics(
+        [
+            _normalised_metric_run(
+                parse_status="ok", decision="maybe", reasons={"experience"}
+            ),
+            _normalised_metric_run(
+                parse_status="ok", decision="reject", reasons={"experience"}
+            ),
+        ],
+        n_attempted=2,
+    )
+
+    assert metrics["denominators"]["parsed"] == 2
+    assert metrics["denominators"]["scored"] == 1
+    assert metrics["decision_stability"]["modal_decision"] == "reject"
 
 
 def structured_response(action_id: str) -> str:

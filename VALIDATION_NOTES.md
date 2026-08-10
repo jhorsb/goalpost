@@ -9,6 +9,17 @@ structured elicitation; T = 0.0; N = 5 repeats; canonicaliser gpt-4.1
 **Epistemic stance (kickoff Phase 4):** the tool measures; it does not
 defend the dissertation's numbers. What follows is what was measured.
 
+> **v1.0.2 correction (2026-08-10; D-083).** All current figures below are
+> rebuilt from committed run and normalisation evidence under metrics v0.2.0.
+> Only parsed runs with a valid nonblank decision are scored; failed parses
+> contribute to compliance denominators but to no stability measure. Reason,
+> recourse and direction condition aggregates require at least three
+> contributing run-pairs per case. The former 0.378–0.508 “pairwise” valence
+> range was actually Goalpost v0.1 topic-reversal incidence, whose denominator
+> was distinct topics, not pairs. The former +0.129 valence-amplification claim
+> is withdrawn. v0.1 metrics remain preserved as the superseded historical
+> record; reports and public claims now source only v0.2.0.
+
 ## Headline result
 
 **A reason–recourse stability gap appears on all three 2026-generation
@@ -98,15 +109,17 @@ the $1 cap — block-boundary stop at $0.96, resumed to completion for $0.23):
 
 | SUT | decision stability | reason (cluster) | recourse (cluster) | gap | parse |
 |---|---|---|---|---|---|
-| claude-haiku-4.5 (2025-10-01) | 0.984 | 0.789 (IQR 0.68–0.87) | 0.497 (IQR 0.33–0.56) | **+0.291** | 114/125 |
+| claude-haiku-4.5 (2025-10-01) | 0.990 | 0.795 (IQR 0.68–0.89) | 0.570 (IQR 0.38–0.75) | **+0.225** | 114/125 |
 
 - The reason–recourse gap appears on a fourth model family, same direction,
   same order of magnitude as the OpenAI models (+0.12…+0.29).
 - **11/125 parse failures** — Haiku deviated from the output contract more
-  than any OpenAI model (0/375). Denominators carry this; per the method,
-  failed parses never silently join the stability numbers. Worth a
-  contract-tuning pass before any headline use of the Claude column.
-- Raw-level ladder is low (reason 0.279 / recourse 0.140): Haiku phrases
+  than any OpenAI model (0/375). Denominators carry this; per the corrected
+  method, failed parses never join stability numbers. One case retained only
+  one same-decision pair and is also excluded from the 24-case reason/
+  recourse aggregate.
+- Raw-level ladder is low (reason 0.288 / recourse 0.139 over the same 24
+  floor-eligible cases): Haiku phrases
   factors more variably run-to-run; the committed taxonomy does more work
   here than for any other SUT — visible, as always, in the ladder.
 
@@ -164,9 +177,10 @@ category granularity (raw 0.895; partly structural — disclosed), recourse
 — a **reason–recourse gap of 0.534**, the dissertation's
 asymmetry on a real target, obtained the pre-registered way: the gate
 blocked the claim, the extractor was improved, the measurement was
-re-run, and the finding survived. Also newly certified: direction-flip
-rate 0.508 — the pipeline keeps discussing the same categories but flips
-whether they count for or against the candidate between runs.
+re-run, and the finding survived. Corrected direction result: opposite
+directions occur in 0.188 of unambiguous shared-topic comparisons under
+this reader (25 floor-eligible cases); mixed-sign within-run topic states
+are counted as ambiguous exclusions.
 
 Also notable: the upstream pins a model that no longer exists anywhere —
 published screening tools can silently become unrunnable-as-deployed,
@@ -180,10 +194,10 @@ T=0.7/N=5, same freeform lens machinery — but a plain one-prompt screener
 difference from the real target is attributable to the pipeline's design.
 Run twice under two extraction lenses (SUT responses identical — cached):
 
-| lens | gate outcome | decision | flips | reason (cluster) | recourse (cluster) | direction-flip |
+| lens | gate outcome | decision | flips | reason (cluster) | recourse (cluster) | opposite direction |
 |---|---|---|---|---|---|---|
-| gpt-4.1 v3 (`control-bare-model-gpt41-001`) | **WITHHELD** (SA reasons 0.895 / recourse 0.817 < 0.90) | 0.952 (SA 1.000 — certified) | 5/25 | (0.511) | (0.549) | (0.301) |
-| gemma-4-31b v3 (`control-bare-model-001`) | **certified** (SA reasons 0.991 / recourse 1.000 / decision 1.000) | 0.960 | 4/25 | 0.612 | 0.507 | 0.249 |
+| gpt-4.1 v3 (`control-bare-model-gpt41-001`) | **WITHHELD** (SA reasons 0.895 / recourse 0.817 < 0.90) | 0.952 (SA 1.000 — certified) | 5/25 | (0.511) | (0.549) | *(withheld)* |
+| gemma-4-31b v3 (`control-bare-model-001`) | **certified** (SA reasons 0.991 / recourse 1.000 / decision 1.000) | 0.960 | 4/25 | 0.612 | 0.507 | 0.157 (22 cases) |
 
 Parenthesised numbers are visible-in-evidence but uncertified per the gate.
 
@@ -205,9 +219,10 @@ Parenthesised numbers are visible-in-evidence but uncertified per the gate.
    unscaffolded prose (0.895/0.817). v3's category-anchoring rides the
    target's structure; remove the structure and its consistency drops below
    the bar. The instrument withheld the numbers, exactly as designed.
-4. **Direction-flip comparison — now like-for-like (see below):** the
-   chain amplifies valence instability (target 0.378 vs control 0.249,
-   identical certified lens).
+4. **Direction comparison — like-for-like but granularity-sensitive (see
+   below):** on the 22 cases cluster-eligible in both arms, target 0.167 vs
+   control 0.157 (difference +0.010). The raw common-case contrast is larger,
+   so no unqualified amplification claim is made.
 
 Cost: gpt-4.1-lens run $1.42 (paid, post top-up; dry-run gap — extraction/
 canonicaliser calls excluded from the estimate — remains the known planner
@@ -228,7 +243,8 @@ every basis). Cluster level, 25 cases, T=0.7, N=5:
 | reason (cluster) | 0.993 (raw 0.931) | 0.612 (raw 0.168) | **+0.381** |
 | recourse (cluster) | 0.456 (raw 0.112) | 0.507 (raw 0.129) | −0.051 |
 | reason–recourse gap | **+0.537** | +0.106 | **+0.431** |
-| direction-flip rate | **0.378** | 0.249 | **+0.129** |
+| opposite-direction rate (cluster; 22 common eligible cases) | **0.167** | 0.157 | **+0.010** |
+| opposite-direction rate (raw; 19 common eligible cases) | **0.186** | 0.066 | **+0.120** |
 
 Readings:
 
@@ -243,10 +259,12 @@ Readings:
    matched comparison, not a fully identified causal estimate. The chain
    yields consistent-looking
    *explanations* without consistent *guidance*.
-3. **The chain amplifies valence flipping**: 0.378 vs 0.249 under one lens.
-   Lens variance disclosed: the target's direction-flip reads 0.508 under
-   the gpt-4.1 lens and 0.378 under gemma (both certified) — public claims
-   say "between a third and a half", not a point estimate.
+3. **The direction result is not granularity-robust.** The cluster-level
+   common-case difference is +0.010, while the raw-level difference is
+   +0.120. Across all independently eligible target cases, the two certified
+   readers give 0.188 (gpt-4.1) and 0.156 (gemma) at cluster level. The
+   v1.0.1 amplification claim is withdrawn rather than rescued by choosing
+   the more favourable level.
 4. **Selection-effect bound (D-027 pt 2, closing the loop):** the v3
    category rule does *not* mechanically produce high topic agreement — on
    unscaffolded prose from the same model it yields 0.612 (and the gpt-4.1
@@ -321,7 +339,7 @@ calls) + $0.00 (lens 2, Cerebras free tier).
 ## Strength-band stratification (2026-08-08) — exploratory, prompted by Lee (2026)
 
 Post-hoc cut of certified audits by the corpus's designed strength bands
-(10 borderline / 10 strong / 5 weak). **All 14 verdict flips across all
+(10 borderline / 10 strong / 5 weak). **All 13 scored verdict flips across all
 four systems with per-case certified records (audit #1, bare-model
 control, audit #2, Kimi) fall in the
 borderline band; strong and weak candidates never flipped (0/60).**
@@ -355,13 +373,15 @@ at $4.86 + $0.38 resume; metrics total_cost_usd shows the resume pass only
    stability — hard cases don't merely wobble, they break format.
    Exploratory, same label as the D-046 stratification.
 
-**Measured (on parsed runs, denominators disclosed):** decision 0.979 —
-1 flip among 24 measurable cases, and it is `sc-data-analyst-04`,
-**the same borderline case audit #2's pipeline refused to decide on
-unanimously**; reasons 0.736 / recourse 0.579 (cluster; raw 0.280/0.222),
-gap +0.157 — the dissertation's asymmetry direction on a Chinese-lab
-model. Cross-family count: the reason–recourse gap has now appeared on
-every model family measured (OpenAI ×3, Anthropic, gpt-oss, Moonshot).
+**Measured after excluding failed parses:** decision 1.000 across 22
+measurable cases, with zero scored verdict flips. The apparent v1.0.1 flip
+on `sc-data-analyst-04` came from two opposite partial outputs that both
+failed the parse contract and are now correctly ineligible. Reasons 0.761 /
+recourse 0.620 over the 20 cases clearing the three-pair floor, gap +0.141
+— the dissertation's asymmetry direction on a Chinese-lab model. The
+reason–recourse gap has appeared on every base-model family measured
+(OpenAI ×3, Anthropic, gpt-oss, Moonshot), while scored verdict flips have
+appeared in five of those six families.
 
 Scatter updated (6 models): Kimi at $15/M sits mid-pack on recourse —
 the "newer/pricier = less stable" impression from the first five points
@@ -397,11 +417,11 @@ within a ~5-week window, so cross-system comparisons share the same
 drift; but the contradiction is live inside every run.
 
 **Each system metabolises this differently:**
-- **Kimi K3** re-litigates the internship rule per run — "Not met" /
+- **Kimi K3** re-litigates the internship rule in partial text — "Not met" /
   "only if internship counts" / "met, if narrowly" / "NOT MET
-  (borderline)" — splits its recoverable verdicts ~50/50, and breaks the
-  output contract on all 5 runs (one of three 0/5-parsed cases in its
-  audit, all three borderline-band).
+  (borderline)" — but breaks the output contract on all 5 runs. This is one
+  of three 0/5-parsed cases in its audit (all borderline-band), so those
+  partial verdicts are compliance evidence, not scored decisions.
 - **Audit #2's Claude pipeline** returns "Maybe" unanimously (5/5) — the
   only system with an abstention tier, used consistently; the most honest
   behaviour observed, and unavailable to any binary-verdict system.

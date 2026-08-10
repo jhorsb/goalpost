@@ -1,6 +1,6 @@
 [project]
 name = "goalpost"
-version = "0.1.0"
+version = "1.0.2"
 description = "CLI audit instrument for decision/reason/recourse stability in LLM-mediated screening pipelines"
 requires-python = ">=3.11"
 dependencies = [
@@ -33,4 +33,3 @@ pythonpath = ["src"]
 markers = [
     "codex: delegated RED tests — deselected by default; Codex runs -m codex and makes them pass (kickoff §4b)",
 ]
-

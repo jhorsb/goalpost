@@ -93,9 +93,16 @@ Per (SUT, condition, case), over N repeats:
 
 - **Decision Stability** — modal-decision agreement rate. Refusal and parse-failure rates always beside it, with the full denominator chain (attempted / parsed / scored).
 - **Reason & Recourse Stability** — mean pairwise Jaccard over all C(N,2) **same-decision pairs** (primary; all-pairs as labelled secondary; discarded-pair fraction reported). Computed at all three ladder levels; **headline = clustered** (the honours headline level, confirmed in Phase 0); the full ladder ships in every report with **per-item-type normaliser lift**, so taxonomy asymmetry cannot silently manufacture the reason–recourse gap. Honours conventions kept: sets of IDs without direction, empty∧empty = 1.0, singleton pass-through.
-- **Direction-flip rate** — honours definition, per level.
+- **Opposite-direction rate** — Goalpost v0.2 definition, at raw,
+  normalised and cluster levels: same-decision scored-run pairs only; a
+  shared topic is scorable only when both runs give it one unambiguous binary
+  direction (`positive` or `negative`); opposite signs / unambiguous shared-topic comparisons, with
+  numerator, denominator, ambiguous exclusions and contributing-run-pair
+  count explicit. A case needs ≥3 contributing run-pairs to aggregate.
+  Goalpost v0.1's distinct-topic reversal incidence remains labelled legacy;
+  the dissertation record did not specify its denominator.
 - **Perturbation robustness** — same metrics grouped over variants; **never pooled** with identical-input repeat-stability. Decision-flip-under-immaterial-edit rate is a first-class output.
-- **Coverage companions** — emptiness rate and mean set size beside *every* stability number; headlines driven by empty∧empty pairs are flagged.
+- **Coverage companions** — emptiness rate and mean set size beside *every* stability number; headlines driven by empty∧empty pairs are flagged. Coverage is undefined, not zero, when there are no scored runs; pair fractions are undefined when there are no run-pairs.
 - **Effective n_pairs** — reported per case; cases below a minimum are excluded from aggregates and listed with reasons.
 - **Aggregation** — case → condition unweighted mean, with median/IQR and per-case distributions.
 
@@ -195,7 +202,7 @@ The design was presented in seven sections and validated one at a time (2026-07-
 6. *Author query resolved:* bare-text recourse was the assistant's simplification; the honours two-field schema (`{action_id, description}`, reasons `{reason_id, direction, note}`) adopted.
 
 **Section 3 — Metrics (3):**
-1. Extractor gate inverted (asymmetric): extractor noise *preferentially* manufactures instability (it can also inflate overlap — the asymmetry is a conservative choice, not an identity; D-065), so high measured stability with self-agreement ≥ 0.90 is reportable; the +0.15 margin applies only to instability claims and the reason–recourse gap; self-agreement computed per item type (reasons vs recourse), stratified sample, k=3 uncached — differential extraction difficulty must not fabricate the gap.
+1. Extractor gate inverted (asymmetric): extractor noise *preferentially* manufactures instability (it can also inflate overlap — the asymmetry is a conservative choice, not an identity; D-065), so each measured stability `s` is reportable when reader self-agreement `a ≥ 0.90` and either `s ≥ 0.85` or `a − s ≥ 0.15`; reasons and recourse are tested separately and a gap requires both components to pass, not a third margin on the arithmetic difference. Self-agreement is computed per item type (reasons vs recourse), stratified sample, k=3 uncached — differential extraction difficulty must not fabricate the gap.
 2. Coverage companions (emptiness rate, mean set size) printed beside every stability number; headlines driven by empty∧empty pairs flagged.
 3. Per-case effective n_pairs reported; minimum enforced for inclusion in aggregates; exclusions listed.
 

@@ -22,10 +22,11 @@ from goalpost.metrics import (
     aggregate_cases,
     coverage_companions,
     decision_stability,
-    direction_flip_rate,
     jaccard,
+    legacy_topic_reversal_incidence_stats,
     pairwise_jaccard_stats,
     same_decision_pairwise_jaccard,
+    shared_topic_direction_disagreement,
 )
 from goalpost.normaliser import (
     NORMALISER_VERSION,
@@ -33,7 +34,11 @@ from goalpost.normaliser import (
     load_taxonomies,
     map_item,
 )
-from goalpost.parser import PARSER_VERSION, parse_structured_response
+from goalpost.parser import (
+    PARSER_VERSION,
+    VALID_DECISIONS,
+    parse_structured_response,
+)
 from goalpost.runner import RUNNER_VERSION, CallCache, plan_blocks, run_audit_blocks
 
 AUDIT_VERSION = "0.1.0"
@@ -109,7 +114,8 @@ def _canonicalise_item(raw_id, taxonomy, canonicaliser_client, mapping_log, cach
 
 
 def _normalise_run(parsed, taxonomies, canonicaliser_client, mapping_log, canon_cache):
-    reason_ids = [r.get("reason_id") for r in parsed.reasons if r.get("reason_id")]
+    reason_items = [r for r in parsed.reasons if r.get("reason_id")]
+    reason_ids = [r["reason_id"] for r in reason_items]
     action_ids = [
         a.get("action_id") or a.get("description")
         for a in parsed.recourse
@@ -125,10 +131,20 @@ def _normalise_run(parsed, taxonomies, canonicaliser_client, mapping_log, canon_
                            mapping_log, canon_cache)
         for aid in action_ids
     ]
-    directions = {}
-    for reason, record in zip(parsed.reasons, reason_records):
-        if reason.get("direction"):
-            directions[record.cluster] = reason["direction"]
+    direction_maps = {level: {} for level in ("raw", "normalised", "cluster")}
+    legacy_direction_maps = {
+        level: {} for level in ("raw", "normalised", "cluster")
+    }
+    for reason, record in zip(reason_items, reason_records):
+        direction = reason.get("direction")
+        if not direction:
+            continue
+        for level in direction_maps:
+            topic = getattr(record, level)
+            direction_maps[level].setdefault(topic, set()).add(direction)
+            # Historical v0.1 compatibility only: the old representation kept
+            # the final item when multiple reasons collapsed to one topic.
+            legacy_direction_maps[level][topic] = direction
     return {
         "decision": parsed.decision,
         "reasons": {
@@ -141,7 +157,8 @@ def _normalise_run(parsed, taxonomies, canonicaliser_client, mapping_log, canon_
             "normalised": {a.normalised for a in action_records},
             "cluster": {a.cluster for a in action_records},
         },
-        "direction_map_cluster": directions,
+        "direction_maps": direction_maps,
+        "legacy_direction_maps": legacy_direction_maps,
         "parse_status": parsed.parse_status,
         "refusal": parsed.refusal,
     }
@@ -157,16 +174,53 @@ def _level_stats(normalised_runs, item_key, level, decisions):
 
 
 def _case_metrics(normalised_runs, n_attempted):
-    decisions = [run["decision"] or "__none__" for run in normalised_runs]
-    scored = decision_stability([d for d in decisions if d != "__none__"])
+    # A partial parse is not a weak observation; it is an ineligible one.
+    # Filter once, before *every* stability, direction, and coverage measure,
+    # so empty artifacts from failed parses cannot manufacture agreement.
+    scored_runs = [
+        run
+        for run in normalised_runs
+        if run.get("parse_status") == "ok"
+        and run.get("decision") in VALID_DECISIONS
+    ]
+    decisions = [run["decision"] for run in scored_runs]
+    scored = decision_stability(decisions)
     discarded = same_decision_pairwise_jaccard(
-        [run["recourse"]["cluster"] for run in normalised_runs], decisions
+        [run["recourse"]["cluster"] for run in scored_runs], decisions
     ).discarded_pair_fraction
+    direction_reversal = {}
+    for level in ("raw", "normalised", "cluster"):
+        maps = [run["direction_maps"][level] for run in scored_runs]
+        legacy = legacy_topic_reversal_incidence_stats(
+            [run["legacy_direction_maps"][level] for run in scored_runs]
+        )
+        pairwise = shared_topic_direction_disagreement(maps, decisions)
+        direction_reversal[level] = {
+            "legacy_topic_incidence": {
+                "rate": legacy.rate,
+                "n_topics": legacy.n_topics,
+                "n_reversal_topics": legacy.n_reversal_topics,
+            },
+            "pairwise": {
+                "rate": pairwise.rate,
+                "n_opposite_direction_comparisons": (
+                    pairwise.n_opposite_direction_comparisons
+                ),
+                "n_unambiguous_shared_topic_comparisons": (
+                    pairwise.n_unambiguous_shared_topic_comparisons
+                ),
+                "n_ambiguous_shared_topic_comparisons": (
+                    pairwise.n_ambiguous_shared_topic_comparisons
+                ),
+                "n_contributing_run_pairs": pairwise.n_contributing_run_pairs,
+                "n_same_decision_run_pairs": pairwise.n_same_decision_run_pairs,
+            },
+        }
     return {
         "denominators": {
             "attempted": n_attempted,
             "parsed": sum(1 for r in normalised_runs if r["parse_status"] == "ok"),
-            "scored": len(normalised_runs),
+            "scored": len(scored_runs),
             "refusals": sum(1 for r in normalised_runs if r["refusal"]),
         },
         "decision_stability": {
@@ -174,19 +228,17 @@ def _case_metrics(normalised_runs, n_attempted):
             "modal_agreement": scored.modal_agreement,
         },
         "reason_stability": {
-            level: _level_stats(normalised_runs, "reasons", level, decisions)
+            level: _level_stats(scored_runs, "reasons", level, decisions)
             for level in ("raw", "normalised", "cluster")
         },
         "recourse_stability": {
-            level: _level_stats(normalised_runs, "recourse", level, decisions)
+            level: _level_stats(scored_runs, "recourse", level, decisions)
             for level in ("raw", "normalised", "cluster")
         },
         "discarded_pair_fraction": discarded,
-        "direction_flip_rate_cluster": direction_flip_rate(
-            [r["direction_map_cluster"] for r in normalised_runs]
-        ),
-        "reason_coverage": _coverage(normalised_runs, "reasons"),
-        "recourse_coverage": _coverage(normalised_runs, "recourse"),
+        "direction_reversal": direction_reversal,
+        "reason_coverage": _coverage(scored_runs, "reasons"),
+        "recourse_coverage": _coverage(scored_runs, "recourse"),
     }
 
 
@@ -197,6 +249,50 @@ def _coverage(normalised_runs, item_key):
         "mean_set_size": cov.mean_set_size,
         "empty_empty_pair_fraction": cov.empty_empty_pair_fraction,
     }
+
+
+def _condition_aggregates(case_entries: list[dict]) -> dict:
+    """Apply the registered effective-pair floor to every case aggregate."""
+    aggregates = {
+        f"{item}_cluster": vars(
+            aggregate_cases(
+                [
+                    {
+                        "case_id": entry["case_id"],
+                        "value": entry[f"{item}_stability"]["cluster"][
+                            "mean_jaccard"
+                        ],
+                        "n_pairs": entry[f"{item}_stability"]["cluster"][
+                            "n_pairs"
+                        ],
+                    }
+                    for entry in case_entries
+                ],
+                min_pairs=MIN_PAIRS_FLOOR,
+            )
+        )
+        for item in ("reason", "recourse")
+    }
+    for level in ("raw", "normalised", "cluster"):
+        aggregates[f"direction_reversal_{level}"] = vars(
+            aggregate_cases(
+                [
+                    {
+                        "case_id": entry["case_id"],
+                        "value": entry["direction_reversal"][level]["pairwise"][
+                            "rate"
+                        ],
+                        "n_pairs": entry["direction_reversal"][level]["pairwise"][
+                            "n_contributing_run_pairs"
+                        ],
+                    }
+                    for entry in case_entries
+                ],
+                min_pairs=MIN_PAIRS_FLOOR,
+            )
+        )
+    aggregates["min_pairs_floor"] = MIN_PAIRS_FLOOR
+    return aggregates
 
 
 def _extract_run(response_text, extractor_client, nonce=None, store=None,
@@ -467,23 +563,7 @@ def run_audit(
                 entry = {"case_id": case.case_id}
                 entry.update(_case_metrics(case_runs, n_attempted=condition.repeats))
                 case_entries.append(entry)
-            aggregates = {
-                f"{item}_cluster": vars(
-                    aggregate_cases(
-                        [
-                            {
-                                "case_id": e["case_id"],
-                                "value": e[f"{item}_stability"]["cluster"]["mean_jaccard"],
-                                "n_pairs": e[f"{item}_stability"]["cluster"]["n_pairs"],
-                            }
-                            for e in case_entries
-                        ],
-                        min_pairs=MIN_PAIRS_FLOOR,
-                    )
-                )
-                for item in ("reason", "recourse")
-            }
-            aggregates["min_pairs_floor"] = MIN_PAIRS_FLOOR
+            aggregates = _condition_aggregates(case_entries)
             sut_conditions.append({
                 "condition_id": condition.condition_id,
                 "temperature": condition.temperature,

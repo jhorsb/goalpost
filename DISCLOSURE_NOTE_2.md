@@ -75,9 +75,10 @@ positive alongside: yours is the only system I've measured with an
 explicit "Maybe" tier, and it uses it consistently — on genuinely
 borderline candidates, declining to decide is arguably the most honest
 behaviour I've observed from any screening tool, and my write-up says
-so. I'd also note that every configuration I've measured, on six model
-families, flips some verdicts on identical inputs — this is not unique
-to your design.
+so. I'd also note that seven of the eight configurations I've measured,
+spanning five of six base-model families, flip at least one scored verdict
+on identical inputs — this is not unique to your design. Kimi K3 is the
+exception after failed parses are correctly excluded.
 
 The write-up describes the project as "a published 3-stage screening
 pipeline" without naming it or you, and that non-naming stands unless you
@@ -103,3 +104,16 @@ https://jamiehorsburgh.substack.com
 **Pre-decided (asked-to-be-named case, per D-030):** attribution yes,
 headlining no — name and link in a footnote plus the evidence appendix;
 prose keeps the category description.
+
+---
+
+## Repository status and supersession (2026-08-10; D-084)
+
+This file remains an unsent historical draft and is not send-ready. D-059
+records the planned two-step contact route and D-063 records that its wording
+was revised after publication, but this repository contains no issue URL,
+posting timestamp, reply or private contact channel confirming that step 1
+occurred. The full note above is explicitly unsent. Its analytical wording is
+superseded by the versioned metrics, generated reports and canonical paper and
+must not be sent verbatim. No publication surface should describe a public
+contact request as confirmed solely from this repository.

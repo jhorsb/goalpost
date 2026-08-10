@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Goalpost: A Certification-Gated Protocol</title>
+  <title>Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse</title>
   <style>
     html {
       color: #1a1a1a;
@@ -170,28 +170,32 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Goalpost: A Certification-Gated Protocol</h1>
+<h1 class="title">Goalpost: A Certification-Gated Protocol for Auditing
+the Stability of LLM Screening Decisions, Reasons, and Recourse</h1>
 </header>
-<h1
-id="goalpost-a-certification-gated-protocol-for-auditing-the-stability-of-llm-screening-decisions-reasons-and-recourse">Goalpost:
-A Certification-Gated Protocol for Auditing the Stability of LLM
-Screening Decisions, Reasons, and Recourse</h1>
 <p><strong>Jamie Horsburgh</strong> — independent researcher (<a
 href="https://orcid.org/0009-0005-2567-5906">ORCID
-0009-0005-2567-5906</a>) <em>v1 (2026-08-09) — for arXiv (cs.CY). Every
-measurement traces to a committed transcript in the accompanying
+0009-0005-2567-5906</a>) <em>v1.0.2 (2026-08-10) — for arXiv (cs.CY).
+Every measurement traces to a committed transcript in the accompanying
 evidence repository; literature, model-metadata and cost figures cite
 named sources. Audited systems are described by design category;
-identification is pinned in the evidence. The first pipeline's author
-received the complete findings privately before publication, with a
-standing correction offer; the second publishes no contact channel — a
-public contact request stands on their repository and the full findings
-note is held for any reply. Neither is named in the narrative unless its
-author opts in; identification is pinned in the public evidence —
-narrative non-naming, not anonymity.</em></p>
+identification is pinned in the evidence. The decision log records that
+the first pipeline's author was contacted before publication, but the
+repository does not preserve a byte-exact copy of the sent message. The
+second author's full note remains unsent and no private contact channel
+is recorded here. Neither is named in the narrative unless its author
+opts in; identification is pinned in the public evidence — narrative
+non-naming, not anonymity.</em></p>
 <p><em>Keywords:</em> LLM auditing; algorithmic recourse; repeatability;
 automated hiring; contestability; explanation stability;
 LLM-as-judge.</p>
+<blockquote>
+<p><strong>Correction status — v1.0.2.</strong> Release v1.0.1 is
+preserved as the superseded historical record. This release rebuilds the
+evidence and every derived claim under corrected parse-eligibility,
+aggregation-floor and direction-metric definitions recorded in
+D-083–D-085.</p>
+</blockquote>
 <hr />
 <h2 id="abstract">Abstract</h2>
 <p>Regulation increasingly demands that automated screening give reasons
@@ -249,9 +253,9 @@ argue, the one the affected individual actually faces.</p>
 <ol type="1">
 <li><strong>A construct and measurement design</strong> (§3):
 repeat-stability of decision, reasons and recourse; a three-level
-normalisation ladder with the raw level always reported; direction
-(valence) flip rate as a granularity-robust companion; explicit
-denominators.</li>
+normalisation ladder with the raw level always reported; an
+ambiguity-aware, pairwise opposite-direction rate at every level;
+explicit denominators.</li>
 <li><strong>A protocol</strong> (§4) whose citable core is the
 <strong>certification gate</strong> — the extraction model's
 self-agreement is measured on the audited system's own transcripts and
@@ -346,16 +350,32 @@ clustered under a committed, versioned synonym taxonomy — and the raw
 level is always reported beside the headline cluster level, because the
 taxonomy does real, visible work (e.g. raw 0.31 → cluster 0.86 on one
 lab model).</p>
-<p><strong>Valence flips.</strong> Because coarse categories inflate
-topic-overlap, I also measure the <strong>direction flip rate</strong>:
-among same-topic pairs, how often the topic's direction (counts
-<em>for</em> vs <em>against</em> the candidate) differs between runs.
-This companion is robust to granularity — given the same topic came up,
-did its sign change? — and carries the sharpest finding here (§5).</p>
-<p><strong>Denominators, always.</strong> Every case reports attempted /
-parsed / scored runs and refusals; failed parses never silently join a
-stability number. Format non-compliance turned out to be a finding in
-its own right (§5.4).</p>
+<p><strong>Direction reversal.</strong> Because coarse categories
+inflate topic-overlap, I also measure an <strong>opposite-direction
+rate</strong> at raw, normalised and cluster levels. For each unordered
+pair of same-decision scored runs, a shared topic is scorable only when
+each run assigns that topic exactly one binary direction (<em>for</em>
+or <em>against</em> the candidate). The numerator counts opposite
+directions; the denominator counts unambiguous shared-topic comparisons.
+Mixed-sign and non-binary states within either run are counted as
+ambiguous exclusions rather than collapsed by item order, and a case
+enters the condition aggregate only when at least three run-pairs
+contribute a scorable topic. Cluster is the headline level, with raw and
+normalised reported beside it. The earlier Goalpost v0.1 statistic —
+topics that ever took both directions divided by topics observed —
+remains only as labelled legacy topic-reversal incidence; it is not
+pairwise, and the dissertation record did not specify its
+denominator.</p>
+<p><strong>Denominators, always.</strong> <em>Attempted</em> counts
+completed run records; <em>parsed</em> counts records with
+<code>parse_status == ok</code>; <em>scored</em> further requires a
+nonblank valid decision. Every case reports attempted / parsed / scored
+runs and refusals. Refusals and failed parses remain countable evidence
+but are excluded wholesale from decision, set-overlap, coverage and
+direction measures; partial fields never score. Reason and recourse
+condition aggregates are unweighted means of cases with at least three
+surviving same-decision run-pairs. Format non-compliance turned out to
+be a finding in its own right (§5.4).</p>
 <h2 id="4-the-protocol">4. The protocol</h2>
 <h3 id="41-elicitation-modes-as-system-identity">4.1 Elicitation modes
 as system identity</h3>
@@ -380,10 +400,11 @@ responses, 10 in audit #3's smaller block B). Its self-agreement is
 computed with the same ladder as the audit itself.</li>
 <li><strong>Bar:</strong> no stability claim is certified unless reader
 self-agreement ≥ 0.90 at the level the claim is made.
-<strong>Margin:</strong> a claim of <em>instability</em> (including any
-reason–recourse gap) additionally requires a pre-registered stricter
-margin, because extraction noise preferentially manufactures exactly
-that finding.</li>
+<strong>Margin:</strong> for any individual observed stability below
+0.85, the reader must additionally exceed that stability by 0.15,
+because extraction noise preferentially manufactures exactly that
+finding. Reasons and recourse are tested separately; a reason–recourse
+gap is reportable only when both component claims pass.</li>
 <li>Below either threshold, the result is <strong>withheld</strong>:
 printed as uncertified in the evidence, excluded from claims. Withheld
 is a publishable outcome, not a failure to report.</li>
@@ -512,7 +533,8 @@ lab set.</p>
 <td>v2 failed margin; v3 certified (0.988/0.932); 2nd reader
 certified</td>
 <td>25×5</td>
-<td>dec 0.968 (3/25 flips); recourse 0.448; valence ~⅓–½</td>
+<td>dec 0.968 (3/25 flips); recourse 0.448; opposite direction
+0.156–0.188</td>
 <td>certified</td>
 </tr>
 <tr>
@@ -557,28 +579,33 @@ model; as-shipped T=0.7). Certified: decision stability 0.968 — the
 verdict changed on 3/25 identical inputs, including a 3–2 split;
 recourse stability <strong>0.448</strong> (reader SA 0.932 vs bar 0.90);
 reason-topic stability 0.983 at the pipeline's own four-heading rubric
-granularity (raw 0.895). Valence: the same heading flipped between
-counting for and against the candidate in <strong>0.378–0.508</strong>
-of same-topic pairs, depending on which of two independently certified
-readers is used — reported as "roughly a third to a half", never a point
-estimate.</p>
+granularity (raw 0.895). Direction: among unambiguous shared-topic
+comparisons, the same heading was assigned opposite directions in
+<strong>0.156–0.188</strong>, depending on which of two independently
+certified readers is used. Within-run mixed-sign states are counted as
+ambiguous exclusions and the three-contributing-pair floor is applied
+before aggregation.</p>
 <p><strong>Bare-model control.</strong> The same serving model, corpus,
 settings and certified reader, with a plain one-prompt screener
 replacing the chain: decision 0.960 (4/25 flips); reasons 0.612;
 recourse 0.507; gap +0.106 vs the pipeline's +0.537 under the matched
-reader; valence 0.249 vs 0.378. Attribution, stated at the strength the
-sample supports: verdict-flipping occurred <strong>with and without the
-chain</strong>, so the chain is not necessary for it — 3 vs 4 flip-cases
-on 25 cannot identify whether the chain changes its frequency. The
-larger reason–recourse contrast and the valence amplification
-<strong>track the chained design</strong> under the matched comparison —
-the chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while
-leaving advice no more stable than the bare model's. The matched control
-holds model, host, corpus, settings and reader constant, which narrows
-the major confounds; it does not guarantee that architecture-specific
-output structure interacts identically with extraction and granularity,
-so I report the contrast as design-associated evidence rather than a
-fully identified causal estimate.</p>
+reader. Attribution, stated at the strength the sample supports:
+verdict-flipping occurred <strong>with and without the chain</strong>,
+so the chain is not necessary for it — 3 vs 4 flip-cases on 25 cannot
+identify whether the chain changes its frequency. The larger
+reason–recourse contrast <strong>tracks the chained design</strong>
+under the matched comparison — the chain's fixed rubric lifts
+topic-stability from 0.61 to 0.99 while leaving advice no more stable
+than the bare model's. The matched control holds model, host, corpus,
+settings and reader constant, which narrows the major confounds; it does
+not guarantee that architecture-specific output structure interacts
+identically with extraction and granularity, so I report the contrast as
+design-associated evidence rather than a fully identified causal
+estimate. The corrected direction comparison does not establish
+amplification: on the 22 cases cluster-eligible in both arms, target
+0.167 versus control 0.157 (difference +0.010); on 19 raw-eligible
+common cases, 0.186 versus 0.066. Its sensitivity to the ladder is
+itself a limitation.</p>
 <p><strong>Audit #2 — a published three-stage LangGraph
 screener</strong> (frontier serving model, disclosed same-class
 substitute for its retired pin; per-stage as-shipped temperatures;
@@ -602,12 +629,17 @@ ranging +0.11 to +0.29, including at temperature zero where allowed. Two
 governance observations arrived unbidden: one frontier model (Kimi K3)
 <strong>rejects any temperature but 1.0</strong> — determinism cannot
 even be requested — and posted the worst output-contract compliance
-measured (36/125 runs unparseable); and both audited pipelines pin
-models that no longer exist at any provider — published screening tools
+measured (36/125 runs unparseable). Once those failures are excluded,
+Kimi has decision stability 1.000 across 22 measurable cases with zero
+flips; reason stability 0.761 and recourse 0.620 over the 20 cases
+clearing the pair floor (gap +0.141). Haiku's corresponding corrected
+values are decision 0.990, reason 0.795 and recourse 0.570 over 24
+floor-eligible cases (gap +0.225). Both audited pipelines pin models
+that no longer exist at any provider — published screening tools
 silently become unrunnable as shipped.</p>
 <p><strong>Exploratory, labelled as such.</strong> The corpus was
 strength-banded at design time. Across the four systems with per-case
-certified records, <strong>all 14 verdict flips landed in the
+certified records, <strong>all 13 scored verdict flips landed in the
 deliberately borderline third</strong> (0/60 strong and weak case-slots
 flipped), and Kimi's contract failures concentrated there too (28/36).
 Post-hoc cut; a designed manipulation is future work (§9).</p>
@@ -705,10 +737,12 @@ registered doses, none demonstrable.</p>
 <p><strong>T2 — "The reason–recourse gap is a granularity
 artifact."</strong> Partly, and I say so: the two sides are measured at
 different resolutions, and I do not quantify the absolute share
-granularity explains. The valence-flip companion is granularity-robust
-and leads the findings for that reason; the control supplies the
-differential argument (+0.537 vs +0.106 under one reader and one
-grain).</p>
+granularity explains. The control supplies the differential argument
+(+0.537 vs +0.106 under one reader and one grain). The direction
+companion is reported at all three levels precisely because it is not
+granularity-invariant: the matched target–control contrast is +0.010 at
+cluster level but +0.120 at raw level on their respective common
+eligible case sets.</p>
 <p><strong>T3 — "Your reader is an LLM judge; judges are noisy; your
 gate rests on k=3 and at most 25 sampled responses."</strong> The
 thresholds were pre-registered and never revised; the gate's authority
@@ -762,20 +796,22 @@ and N=2 published targets should become N≥5 before design-class language
 fully earns itself.</p>
 <h2 id="10-availability">10. Availability</h2>
 <p>The instrument, all configurations, pre-registrations with amendment
-logs, the append-only decision log (D-001 onward), and complete evidence
-for every audit (transcripts, normalised sets, metrics, reports, metered
-costs) are in the accompanying repository, MIT-licensed. Where pipeline
-stages ran on accounts the instrument's meter does not see, provider
-dashboard totals are the cost source of truth. The repository is
-archived at Zenodo under DOI 10.5281/zenodo.21862442, which resolves to
-the latest version; the exact snapshot underlying this paper is the
-release tagged <strong>v1.0.1</strong> in that archive (each release
-carries its own version DOI, recorded in <code>CITATION.cff</code>).
-Cite this paper for the method and findings, and the software DOI when
-using the instrument itself or depending on the archived evidence. One
-audited upstream carries no licence and its prompts are therefore never
-stored — fetched at runtime from a pinned commit and hash-verified; the
-other is vendored under its MIT licence with attribution.</p>
+logs, the append-only decision log (D-001 onward), and run-level
+evidence for every audit (transcripts, normalised sets, metrics,
+reports, metered costs) are in the accompanying repository,
+MIT-licensed. Where pipeline stages ran on accounts the instrument's
+meter does not see, provider dashboard totals are the cost source of
+truth. The repository is archived at Zenodo under DOI
+10.5281/zenodo.21862442, which resolves to the latest version. This
+paper and repository are released as <strong>v1.0.2</strong>. Zenodo
+mints its per-version DOI from the release tag; the current repository
+records that identifier in <code>CITATION.cff</code> once available.
+Until the archive finishes, cite the concept DOI. Cite this paper for
+the method and findings, and the software DOI when using the instrument
+itself or depending on the archived evidence. One audited upstream
+carries no licence and its prompts are therefore never stored — fetched
+at runtime from a pinned commit and hash-verified; the other is vendored
+under its MIT licence with attribution.</p>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>This is a solo-authored project developed with agent assistance:
 orchestration and protocol authorship via Claude (Anthropic), bulk

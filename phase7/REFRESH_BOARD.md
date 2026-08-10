@@ -17,8 +17,8 @@ command is safe to re-run.
 
 Rules the board enforces on its own, so they need no policing by hand:
 withheld measures never print as numbers; systems only share a table when
-corpus, reader and taxonomy match; ordering is band-then-alphabetical, so
-no ranking is implied within a tier.
+corpus, elicitation architecture/reader, taxonomy and temperature match;
+ordering is band-then-alphabetical, so no ranking is implied within a tier.
 
 After the board refresh, regenerate the scatter (reads board.json):
 

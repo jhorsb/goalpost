@@ -6,12 +6,12 @@ Ranked by recourse stability (cluster level). Rows sharing a tie-band have overl
 
 | band | SUT | mode | recourse stability | IQR | cases |
 |---|---|---|---|---|---|
+| 1 | gpt4omini-screener-structured | structured | 0.58 | [0.58, 0.58] | 1 |
 
 ## Unranked
 
 These systems did not clear the eligibility floors and are listed without a rank:
 
-- **gpt4omini-screener-structured** (structured): no aggregable cases (all excluded or none scored)
-- **gpt4omini-screener-freeform** (freeform): no aggregable cases (all excluded or none scored)
+- **gpt4omini-screener-freeform** (freeform): extractor self-agreement fails the pre-registered gate at the reported level (recourse 0.87)
 
-*goalpost 0.1.0 · anchors-1.0.0 · taxonomy 1.0.0+1dfd20707ff9 · report 0.1.0*
+*audit schema 0.1.0 · metrics 0.2.0 · anchors-1.1.0 · taxonomy 1.0.0+1dfd20707ff9 · report 0.2.0*

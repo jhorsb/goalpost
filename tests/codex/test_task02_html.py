@@ -29,7 +29,24 @@ def metrics_fixture():
                         for level in ("raw", "normalised", "cluster")
                     },
                     "discarded_pair_fraction": 0.0,
-                    "direction_flip_rate_cluster": 0.0,
+                    "direction_reversal": {
+                        level: {
+                            "legacy_topic_incidence": {
+                                "rate": 0.0,
+                                "n_topics": 1,
+                                "n_reversal_topics": 0,
+                            },
+                            "pairwise": {
+                                "rate": 0.0,
+                                "n_opposite_direction_comparisons": 0,
+                                "n_unambiguous_shared_topic_comparisons": 10,
+                                "n_ambiguous_shared_topic_comparisons": 0,
+                                "n_contributing_run_pairs": 10,
+                                "n_same_decision_run_pairs": 10,
+                            },
+                        }
+                        for level in ("raw", "normalised", "cluster")
+                    },
                     "reason_coverage": {"emptiness_rate": 0.0,
                                         "mean_set_size": 2.0,
                                         "empty_empty_pair_fraction": 0.0},
@@ -37,6 +54,24 @@ def metrics_fixture():
                                           "mean_set_size": 2.0,
                                           "empty_empty_pair_fraction": 0.0},
                 }],
+                "aggregates": {
+                    "reason_cluster": {
+                        "mean": 0.9, "median": 0.9, "iqr": [0.9, 0.9],
+                        "n_included": 1, "excluded": [],
+                    },
+                    "recourse_cluster": {
+                        "mean": 0.4, "median": 0.4, "iqr": [0.4, 0.4],
+                        "n_included": 1, "excluded": [],
+                    },
+                    **{
+                        f"direction_reversal_{level}": {
+                            "mean": 0.0, "median": 0.0, "iqr": [0.0, 0.0],
+                            "n_included": 1, "excluded": [],
+                        }
+                        for level in ("raw", "normalised", "cluster")
+                    },
+                    "min_pairs_floor": 3,
+                },
             }],
         }],
         "total_cost_usd": 0.42,

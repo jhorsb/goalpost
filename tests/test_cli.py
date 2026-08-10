@@ -127,6 +127,26 @@ def test_report_command_writes_comparison_for_multi_sut(tmp_path):
     assert "alpha" in comparison.read_text()
 
 
+def test_recompute_check_compares_json_semantics(tmp_path, monkeypatch):
+    """JSON arrays must compare equal to tuple-valued in-memory aggregates."""
+    import json
+
+    audit_dir = tmp_path / "audit"
+    destination = audit_dir / "metrics" / "0.2.0" / "metrics.json"
+    destination.parent.mkdir(parents=True)
+    destination.write_text(json.dumps({"iqr": [0.25, 0.75]}))
+
+    def fake_recompute(*args, **kwargs):
+        assert kwargs == {"source_metrics_version": "0.1.0", "write": False}
+        return {"iqr": (0.25, 0.75)}
+
+    monkeypatch.setattr("goalpost.recompute.recompute_audit", fake_recompute)
+    result = runner.invoke(app, ["recompute", str(audit_dir), "--check"])
+
+    assert result.exit_code == 0
+    assert "Metrics verified" in result.output
+
+
 def test_resume_requires_stored_config(tmp_path):
     result = runner.invoke(app, ["resume", str(tmp_path)])
     assert result.exit_code != 0

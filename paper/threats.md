@@ -29,13 +29,14 @@ Reasons are counted at four fixed rubric headings; advice at individual
 recommendations. Coarse buckets match more easily. An XAI reviewer will say an
 unknown share of 0.534 is measurement resolution, not behaviour.
 
-**Evidence in repo:** Fully anticipated — D-027(1) demoted the gap from
-headline; the valence-flip finding (0.378–0.508), robust to granularity, was
-promoted to lead; the control gives the differential argument (target 0.537 vs
-bare-model 0.106 under the same lens and granularity — the match narrows
-resolution confounds, though it cannot guarantee the two architectures' prose
-interacts identically with extraction; the ~0.43 difference is
-design-associated evidence). **Residual weakness:** the
+**Evidence in repo:** The control gives the differential argument (target
+0.537 vs bare-model 0.106 under the same reader and headline grain — the
+match narrows resolution confounds, though it cannot guarantee the two
+architectures' prose interacts identically with extraction; the ~0.43
+difference is design-associated evidence). The corrected direction metric is
+reported at raw, normalised and cluster levels and is explicitly not treated
+as granularity-robust: its matched common-case contrast is +0.120 raw but only
++0.010 cluster. **Residual weakness:** the
 two sides are still measured at different resolutions, and no repo experiment
 quantifies how much of the *absolute* gap granularity accounts for (e.g.
 re-scoring reasons at sub-heading granularity). The write-up says "cannot
@@ -69,7 +70,7 @@ fingerprints.
 **Evidence in repo:** D-017 policy (first-party preferred, routing disclosed);
 crucially, the bare-model control (D-028) ran the *same model on the same
 host* — so serving noise is a shared exposure for the design-associated
-claims (gap, valence amplification): narrowed as a confound, though
+gap claim: narrowed as a confound, though
 independent stochastic runs do not cancel it by construction. **Honest absence:**
 the *absolute* stability numbers (0.448, 0.968) are host-inclusive — the repo
 cannot separate model-inherent from serving-infrastructure noise, and no
@@ -87,9 +88,10 @@ target.
 documented as deliberate: existence claims only, no rate claims (D-024);
 claims scoped to "the pipeline's prompt-and-chain design as served by a current
 open model," substitution disclosed as itself a governance finding; D-032's
-line-by-line scope audit removed four overclaims. The wider pattern (eight
-configurations, six model families, all flip some verdicts) is presented as
-hedged inference, not universal claim. **Residual weakness:** the design-class
+line-by-line scope audit removed four overclaims. The wider pattern (seven of
+eight configurations and five of six base-model families show at least one
+scored verdict flip) is presented as hedged inference, not universal claim.
+**Residual weakness:** the design-class
 claim ("chained rubric designs manufacture explanation stability without
 guidance stability") rests on one pipeline and one control — a reviewer can
 fairly ask for a second chained target before "design category" language fully

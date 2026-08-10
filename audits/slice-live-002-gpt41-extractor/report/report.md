@@ -1,6 +1,6 @@
 # Goalpost audit — gpt4omini-screener-structured
 
-*Audit `slice-live-002-gpt41-extractor` · goalpost 0.1.0 · anchors-1.0.0 · sut `a634bbe8` (structured mode)*
+*Audit `slice-live-002-gpt41-extractor` · audit schema 0.1.0 · metrics 0.2.0 · anchors-1.1.0 · sut `a634bbe8` (structured mode)*
 
 ## The headline
 
@@ -24,12 +24,32 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 ### Condition `t0.0_n5` (T=0.0, N=5)
 
+#### Condition aggregates
+
+Unweighted case means after the floor ≥3 contributing run-pairs; exclusions are explicit.
+
+| measure | mean | median | IQR | eligible cases | exclusions |
+|---|---|---|---|---|---|
+| Reason stability (cluster) | 1.000 | 1.000 | [1.000, 1.000] | 1 | none |
+| Recourse stability (cluster) | 0.538 | 0.538 | [0.538, 0.538] | 1 | none |
+| Opposite direction (raw) | 0.000 | 0.000 | [0.000, 0.000] | 1 | none |
+| Opposite direction (normalised) | 0.000 | 0.000 | [0.000, 0.000] | 1 | none |
+| Opposite direction (cluster) | 0.000 | 0.000 | [0.000, 0.000] | 1 | none |
+
 | case | level | reason J | recourse J | n_pairs | decision | attempted/parsed/scored | refusals |
 |---|---|---|---|---|---|---|---|
 | slice-001 | raw | 0.87 | 0.31 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | normalised | 0.87 | 0.31 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | cluster | 1.00 | 0.54 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | coverage | emptiness 0.00, size 2.0 | emptiness 0.00, size 3.0 | — | — | discarded pairs 0% | — |
+
+#### Direction reversal denominators
+
+| case | level | opposite direction | opposite/unambiguous | ambiguous | contributing/same-decision run-pairs | legacy topic incidence |
+|---|---|---|---|---|---|---|
+| slice-001 | raw | 0.000 | 0/46 | 0 | 10/10 | 0/6 |
+| slice-001 | normalised | 0.000 | 0/46 | 0 | 10/10 | 0/6 |
+| slice-001 | cluster | 0.000 | 0/20 | 0 | 10/10 | 0/2 |
 
 ### Provenance
 
@@ -38,14 +58,15 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 - parser_version: `0.1.0`
 - normaliser_version: `0.1.0`
 - taxonomy_version: `1.0.0+1dfd20707ff9`
-- metrics_version: `0.1.0`
+- metrics_version: `0.2.0`
 - audit_version: `0.1.0`
-- report_version: `0.1.0` · anchors: `anchors-1.0.0`
+- recomputed_from: `{'source_metrics_version': '0.1.0', 'eligible_parse_status': ['ok'], 'min_pairs_floor': 3, 'legacy_direction_denominator': 'distinct topics observed across scored repeats; Goalpost v0.1 operationalisation', 'direction_reversal_denominator': 'unambiguous shared topics across same-decision scored-run pairs', 'inputs': [{'path': 'metrics/0.1.0/metrics.json', 'sha256': 'a227a4a3e05757439e4140a31f75c5caebc359e21030431e7f62b6b5aec09753'}, {'path': 'normalised/0.1.0/8032528d3a0f7321/mapping_log.jsonl', 'sha256': '1379f8f26b2ab02df3878ca41c215fb4ce0b82bc45ece7bdb1e3f7f52aa7ca17'}, {'path': 'normalised/0.1.0/8032528d3a0f7321/normalised_runs.jsonl', 'sha256': '2611b32ad64de3d78ee0191173abe8e4fdf95048efe0c502cb321914ef590809'}, {'path': 'normalised/0.1.0/a634bbe86dc4c9a1/mapping_log.jsonl', 'sha256': '5c1b6ad43fc49b3ad32f71643b05a3487e43d54ceb619968be237262d33d09d9'}, {'path': 'normalised/0.1.0/a634bbe86dc4c9a1/normalised_runs.jsonl', 'sha256': '3cec116ee0e0015cfd0f9f907af885b3fbd652970bb73bb4099c1711664f989c'}, {'path': 'runs/8032528d3a0f7321/runs.jsonl', 'sha256': '44aab4d6bde32ae1cdb9b2f66f0c5d2ea5e12dcab99b1ff94ab249877c64204f'}, {'path': 'runs/a634bbe86dc4c9a1/runs.jsonl', 'sha256': 'f918034c0ecb00d51b6383e3a23622072049f5d2ffa758e3ad05399147fa3fc9'}]}`
+- report_version: `0.2.0` · anchors: `anchors-1.1.0`
 - total cost: $0.0321
 
 # Goalpost audit — gpt4omini-screener-freeform
 
-*Audit `slice-live-002-gpt41-extractor` · goalpost 0.1.0 · anchors-1.0.0 · sut `8032528d` (freeform mode)*
+*Audit `slice-live-002-gpt41-extractor` · audit schema 0.1.0 · metrics 0.2.0 · anchors-1.1.0 · sut `8032528d` (freeform mode)*
 
 ## The headline
 
@@ -70,12 +91,32 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 
 ### Condition `t0.0_n5` (T=0.0, N=5)
 
+#### Condition aggregates
+
+Unweighted case means after the floor ≥3 contributing run-pairs; exclusions are explicit.
+
+| measure | mean | median | IQR | eligible cases | exclusions |
+|---|---|---|---|---|---|
+| Reason stability (cluster) | 1.000 | 1.000 | [1.000, 1.000] | 1 | none |
+| Recourse stability (cluster) | 1.000 | 1.000 | [1.000, 1.000] | 1 | none |
+| Opposite direction (raw) | 0.000 | 0.000 | [0.000, 0.000] | 1 | none |
+| Opposite direction (normalised) | 0.000 | 0.000 | [0.000, 0.000] | 1 | none |
+| Opposite direction (cluster) | n/a | n/a | n/a | 0 | slice-001: no scorable pairs |
+
 | case | level | reason J | recourse J | n_pairs | decision | attempted/parsed/scored | refusals |
 |---|---|---|---|---|---|---|---|
 | slice-001 | raw | 0.76 | 1.00 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | normalised | 0.76 | 1.00 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | cluster | 1.00 | 1.00 | 10 | 1.00 | 5/5/5 | 0 |
 | slice-001 | coverage | emptiness 0.00, size 2.0 | emptiness 0.00, size 1.0 | — | — | discarded pairs 0% | — |
+
+#### Direction reversal denominators
+
+| case | level | opposite direction | opposite/unambiguous | ambiguous | contributing/same-decision run-pairs | legacy topic incidence |
+|---|---|---|---|---|---|---|
+| slice-001 | raw | 0.000 | 0/77 | 0 | 10/10 | 0/12 |
+| slice-001 | normalised | 0.000 | 0/77 | 0 | 10/10 | 0/12 |
+| slice-001 | cluster | n/a | 0/0 | 20 | 0/10 | 0/2 |
 
 ### Provenance
 
@@ -84,7 +125,8 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 - parser_version: `0.1.0`
 - normaliser_version: `0.1.0`
 - taxonomy_version: `1.0.0+1dfd20707ff9`
-- metrics_version: `0.1.0`
+- metrics_version: `0.2.0`
 - audit_version: `0.1.0`
-- report_version: `0.1.0` · anchors: `anchors-1.0.0`
+- recomputed_from: `{'source_metrics_version': '0.1.0', 'eligible_parse_status': ['ok'], 'min_pairs_floor': 3, 'legacy_direction_denominator': 'distinct topics observed across scored repeats; Goalpost v0.1 operationalisation', 'direction_reversal_denominator': 'unambiguous shared topics across same-decision scored-run pairs', 'inputs': [{'path': 'metrics/0.1.0/metrics.json', 'sha256': 'a227a4a3e05757439e4140a31f75c5caebc359e21030431e7f62b6b5aec09753'}, {'path': 'normalised/0.1.0/8032528d3a0f7321/mapping_log.jsonl', 'sha256': '1379f8f26b2ab02df3878ca41c215fb4ce0b82bc45ece7bdb1e3f7f52aa7ca17'}, {'path': 'normalised/0.1.0/8032528d3a0f7321/normalised_runs.jsonl', 'sha256': '2611b32ad64de3d78ee0191173abe8e4fdf95048efe0c502cb321914ef590809'}, {'path': 'normalised/0.1.0/a634bbe86dc4c9a1/mapping_log.jsonl', 'sha256': '5c1b6ad43fc49b3ad32f71643b05a3487e43d54ceb619968be237262d33d09d9'}, {'path': 'normalised/0.1.0/a634bbe86dc4c9a1/normalised_runs.jsonl', 'sha256': '3cec116ee0e0015cfd0f9f907af885b3fbd652970bb73bb4099c1711664f989c'}, {'path': 'runs/8032528d3a0f7321/runs.jsonl', 'sha256': '44aab4d6bde32ae1cdb9b2f66f0c5d2ea5e12dcab99b1ff94ab249877c64204f'}, {'path': 'runs/a634bbe86dc4c9a1/runs.jsonl', 'sha256': 'f918034c0ecb00d51b6383e3a23622072049f5d2ffa758e3ad05399147fa3fc9'}]}`
+- report_version: `0.2.0` · anchors: `anchors-1.1.0`
 - total cost: $0.0321

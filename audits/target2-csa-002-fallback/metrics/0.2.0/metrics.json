@@ -1,0 +1,2636 @@
+{
+  "audit_id": "target2-csa-002-fallback",
+  "suts": [
+    {
+      "name": "csa-screening-agent",
+      "sut_id": "6aed88bcce3e158c",
+      "elicitation_mode": "freeform",
+      "extracted": true,
+      "conditions": [
+        {
+          "condition_id": "t0.3_n5",
+          "temperature": 0.3,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "sc-platform-engineer-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.29913059163059164,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.29913059163059164,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.15333333333333335,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.15333333333333335,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.30333333333333334,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 13,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 21,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 13,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 21,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.6666666666666666,
+                    "n_topics": 3,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 14,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.4418253968253968,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.4418253968253968,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8400000000000001,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.4723809523809524,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.4723809523809524,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 25,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 25,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 5,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 26,
+                    "n_ambiguous_shared_topic_comparisons": 4,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3933333333333333,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3933333333333333,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.18188252493980048,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.18188252493980048,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.78,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 7,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 7,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 23,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.25,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.25,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.78,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.11404262404262404,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.11404262404262404,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.61,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 23,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 23,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.2,
+                    "n_topics": 5,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 13,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-platform-engineer-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3603968253968254,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3603968253968254,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.21833333333333335,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.21833333333333335,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.515,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 11,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 25,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 11,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 25,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 10,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2682226107226107,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2682226107226107,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6666666666666667,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2617857142857143,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2617857142857143,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.725,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 24,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 24,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.2857142857142857,
+                    "n_topics": 7,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.05555555555555555,
+                    "n_opposite_direction_comparisons": 1,
+                    "n_unambiguous_shared_topic_comparisons": 18,
+                    "n_ambiguous_shared_topic_comparisons": 16,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1506060606060606,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1506060606060606,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.13246031746031744,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.13246031746031744,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6900000000000001,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 14,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 7,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 14,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 7,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": null,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 0,
+                    "n_ambiguous_shared_topic_comparisons": 20,
+                    "n_contributing_run_pairs": 0,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2117063492063492,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2117063492063492,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5616666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.27102175602175604,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.27102175602175604,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8266666666666668,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 6,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 24,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 5.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.11666666666666667,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.11666666666666667,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.47333333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3588167388167388,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3588167388167388,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7366666666666667,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 7,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 7,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.2,
+                    "n_topics": 5,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 8,
+                    "n_ambiguous_shared_topic_comparisons": 9,
+                    "n_contributing_run_pairs": 5,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2508441558441558,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2508441558441558,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.77,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.05428571428571429,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.05428571428571429,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.2,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.4,
+                    "n_topics": 5,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.1,
+                    "n_opposite_direction_comparisons": 2,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 11,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 1.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.30515873015873013,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.30515873015873013,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19095238095238093,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19095238095238093,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.41833333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 24,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 24,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 26,
+                    "n_ambiguous_shared_topic_comparisons": 4,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.31666666666666665,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.31666666666666665,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5555555555555555,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19645909645909646,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19645909645909646,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7666666666666666,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 7,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 7,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 10,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 6
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.23214285714285712,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.23214285714285712,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7166666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2759090909090909,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2759090909090909,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5433333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 17,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 17,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 23,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 4.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.6
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.31666666666666665,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.31666666666666665,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.48333333333333334,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.1928661616161616,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.1928661616161616,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.4375,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 4
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 4
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 6,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 1,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 4
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.2125,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.2125,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.09583333333333333,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.09583333333333333,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.30833333333333335,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 23,
+                    "n_ambiguous_shared_topic_comparisons": 7,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.14624819624819624,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.14624819624819624,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.37154761904761907,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.37154761904761907,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5152380952380953,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 9,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 9,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 11,
+                    "n_ambiguous_shared_topic_comparisons": 10,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 0.6
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3833333333333333,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3833333333333333,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6875,
+                  "n_pairs": 4
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.17708333333333331,
+                  "n_pairs": 4
+                },
+                "normalised": {
+                  "mean_jaccard": 0.17708333333333331,
+                  "n_pairs": 4
+                },
+                "cluster": {
+                  "mean_jaccard": 0.625,
+                  "n_pairs": 4
+                }
+              },
+              "discarded_pair_fraction": 0.6,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 8,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 4
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 8,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 4
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.25,
+                    "n_topics": 4,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 10,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 4
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.31999999999999995,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.31999999999999995,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7333333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.22934698600333275,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.22934698600333275,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.6579365079365079,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 18,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 18,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 27,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 6.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.061447811447811446,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.061447811447811446,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.44166666666666665,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0625,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0625,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8333333333333334,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 3,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 3,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 3,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.2,
+                    "n_topics": 5,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 5,
+                    "n_ambiguous_shared_topic_comparisons": 5,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 6
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.15178571428571427,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.15178571428571427,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5666666666666667,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.20801587301587304,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.20801587301587304,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.41833333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 9,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 18,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 9,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 10,
+                    "n_ambiguous_shared_topic_comparisons": 10,
+                    "n_contributing_run_pairs": 7,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-01",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.14619047619047618,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.14619047619047618,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.9,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.06166666666666667,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.06166666666666667,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.24833333333333335,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 20,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 13,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.25,
+                    "n_topics": 4,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 14,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.2,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.05113636363636364,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.05113636363636364,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.75,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19047619047619047,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19047619047619047,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7222222222222222,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 26,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 3,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 2,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 26,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 3,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 2,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.5,
+                    "n_topics": 4,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 5,
+                    "n_ambiguous_shared_topic_comparisons": 10,
+                    "n_contributing_run_pairs": 5,
+                    "n_same_decision_run_pairs": 6
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-03",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.20984848484848487,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.20984848484848487,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.22845598845598847,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.22845598845598847,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.39,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 9,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 15,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 9,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 4,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.6666666666666666,
+                    "n_topics": 3,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 16,
+                    "n_ambiguous_shared_topic_comparisons": 5,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.4,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-04",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "unclear",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.3444444444444444,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.3444444444444444,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5416666666666666,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.08333333333333333,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.08333333333333333,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5555555555555555,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 9,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 5,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 9,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 6,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 5,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 5,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 9,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 6
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-05",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.235515873015873,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.235515873015873,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.09,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.09,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.31166666666666665,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 11,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 11,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 19,
+                    "n_ambiguous_shared_topic_comparisons": 4,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 0.7287222222222222,
+              "median": 0.75,
+              "iqr": [
+                0.5666666666666667,
+                0.8
+              ],
+              "n_included": 25,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 0.5555380952380953,
+              "median": 0.5555555555555555,
+              "iqr": [
+                0.41833333333333333,
+                0.725
+              ],
+              "n_included": 25,
+              "excluded": []
+            },
+            "direction_reversal_raw": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 24,
+              "excluded": [
+                {
+                  "case_id": "sc-support-team-lead-02",
+                  "reason": "n_pairs 2 < 3"
+                }
+              ]
+            },
+            "direction_reversal_normalised": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 24,
+              "excluded": [
+                {
+                  "case_id": "sc-support-team-lead-02",
+                  "reason": "n_pairs 2 < 3"
+                }
+              ]
+            },
+            "direction_reversal_cluster": {
+              "mean": 0.006481481481481481,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 24,
+              "excluded": [
+                {
+                  "case_id": "sc-data-analyst-02",
+                  "reason": "no scorable pairs"
+                }
+              ]
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ],
+      "extractor_self_agreement": {
+        "k": 3,
+        "sampled_cases": 25,
+        "extractor_version": "0.3.0",
+        "extractor_prompt_hash": "34e17dd4d1bf71fb",
+        "measurement_cost_usd": 0.0,
+        "reasons": {
+          "raw": {
+            "mean_jaccard": 0.9822222222222223
+          },
+          "normalised": {
+            "mean_jaccard": 0.9822222222222223
+          },
+          "cluster": {
+            "mean_jaccard": 0.9893333333333334
+          },
+          "mean_jaccard": 0.9822222222222223
+        },
+        "recourse": {
+          "raw": {
+            "mean_jaccard": 0.9703703703703703
+          },
+          "normalised": {
+            "mean_jaccard": 0.9703703703703703
+          },
+          "cluster": {
+            "mean_jaccard": 0.9746031746031746
+          },
+          "mean_jaccard": 0.9703703703703703
+        },
+        "decision": {
+          "mean_modal_agreement": 1.0
+        }
+      }
+    }
+  ],
+  "total_cost_usd": 0.0,
+  "missing_blocks": [],
+  "errors": [],
+  "provenance": {
+    "corpus_hash": "0032c8d7ad6047f87b73b4538f29e708774cc90f7eb04047e76868e0a7f8546c|07909789767558501b66e32e70b4282ea274f414de1d43bbe94467700e5b2ffd|1846b5bfce9c08e39e032181bd9a49e9b3f42be3e4568d55a62947efa4a9e7a4|1fd57a2bf307ae9b1bdc429d4c531ed7d0181d99212b0d256926cc7fdd2bdd9d|4058efd90adffbda46fcd7895c2fae3d1a4594aba7002ff71f47338ebce3464e|4436a93298c379acaa7a56dcafa16c766817b2c2eaa1a689c15ec3316e504684|457634a2217a98597589624f532d77811776d49ddb1505da1cf063911f838c04|4832b6cfe6c26aa8c385fe0fb6a78d0eb7a50a5ad4d4e5abc37c9275723dbb41|4c69c678a3473c1a211323a83e0fe02a62acfb06fbb0d3002826711118b95b0a|54adfd2768eb92cd45210ea18c4dff8ce70696e1389ebc250ff2712dadb4579b|6713b68537b953291d36baa9228797437f60b91e07559dd7302cd9ef95b29910|741fa6cf51332f298e442b9714914bf121b4b5dd454b258ffd4ad14d34ea8d35|8f4925646116026702900f1e20f58cbf8e59788077871b648d37c090e998c24d|a0307a3c9c3c0d8993788dc11b7261dcf8b5eb03bf4b5d3167686e90468ac636|a61889df1cb0e64f08e11e5f610c8100c55e624b3ce929c3c11648bbb46a8b4b|af18c1be308e883d3cbfee1ede3d5d33e2a405968e98774a59fbbf828d701291|c5a2040dc8c5ecbe4d212abb9f3a7ecb265d8cec4de1827564af9cf47889ba83|d400a96c16cfe494095a16b22c43d3e319e04022c6c2640fd833a0ceb59146eb|d59884b238be00caf6278d9b324cc8ee06530190cc64ba774ca59b8cdd290900|da2cac2caf8c65e91576f7b27b7f595c9c586f3ad55094b00f0b66df3187ca8c|dfa2684ece9451632d630f61b633d27f5b4f755778b585efe7c6f0cc61fc3030|eb133be5efd9ea46a07f9bd4551c0cabc76725db9eb2125a58c8ca232a767ab8|ed66669c08c966c101f88c30bbf89fa7743d190eee5dd8916a825b11d76c26ee|fd438a0bf30f1558194521a14f1398f5f741070ec91fc3e2a5cd3864a70062f2|fea36593fa1726ae170aff4c3e30ca590d915c96739f93e36339f3eb140bba2d",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.2.0",
+    "audit_version": "0.1.0",
+    "recomputed_from": {
+      "source_metrics_version": "0.1.0",
+      "eligible_parse_status": [
+        "ok"
+      ],
+      "min_pairs_floor": 3,
+      "legacy_direction_denominator": "distinct topics observed across scored repeats; Goalpost v0.1 operationalisation",
+      "direction_reversal_denominator": "unambiguous shared topics across same-decision scored-run pairs",
+      "inputs": [
+        {
+          "path": "metrics/0.1.0/metrics.json",
+          "sha256": "4f2695916cf93b38b3295240bda4a6925bd96634f35de49a1825a759d686a677"
+        },
+        {
+          "path": "normalised/0.1.0/6aed88bcce3e158c/mapping_log.jsonl",
+          "sha256": "77b15f2165ba5610d3cd35d9ad6833afa78e9ea40c91708c694809b7f3ac7a2d"
+        },
+        {
+          "path": "normalised/0.1.0/6aed88bcce3e158c/normalised_runs.jsonl",
+          "sha256": "d1af371e724d3e2345049b8dbea0d754041fe7fff81d1846814eb2f08471b1ce"
+        },
+        {
+          "path": "runs/6aed88bcce3e158c/runs.jsonl",
+          "sha256": "f74e6c122c6c43057812dcab488289edc019ccd1d1f07e00165ae4f7a0475ae9"
+        }
+      ]
+    }
+  }
+}

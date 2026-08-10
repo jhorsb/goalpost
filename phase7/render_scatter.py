@@ -51,8 +51,22 @@ def panel(title: str, xlabel: str, pts, x_of, x_ticks, x_fmt) -> str:
     def x_px(x):
         return ML + (x - lo) / (hi - lo) * (W - ML - MR)
 
-    s = [f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="{escape(title)}" '
-         f'style="width:100%;max-width:{W}px;height:auto;font-family:inherit">']
+    slug = "".join(
+        char.lower() if char.isalnum() else "-" for char in title
+    ).strip("-")
+    panel_id = f"gp-scatter-{slug}"
+    description = "; ".join(
+        f"{p['label']}: recourse stability {p['value']:.2f} "
+        f"at {xlabel} {x_fmt(x_of(p))}"
+        for p in pts
+    )
+    s = [
+        f'<svg viewBox="0 0 {W} {H}" role="img" '
+        f'aria-labelledby="{panel_id}-title {panel_id}-desc" '
+        f'style="width:100%;max-width:{W}px;height:auto;font-family:inherit">',
+        f'<title id="{panel_id}-title">{escape(title)}</title>',
+        f'<desc id="{panel_id}-desc">{escape(description)}</desc>',
+    ]
     s.append(f'<text x="{ML}" y="{MT - 4}" font-size="11" font-weight="700" '
              f'fill="currentColor">{escape(title)}</text>')
     for gy in (0.45, 0.55, 0.65, 0.75):

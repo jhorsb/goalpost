@@ -1,7 +1,7 @@
 """Reporter: lay page + technical appendix from metrics JSON (DESIGN.md §5).
 Slice scope: single-SUT markdown + HTML; comparison table is Phase 3."""
 
-from goalpost.reporter import ANCHORS, headline_statistic, render_report
+from goalpost.reporter import ANCHORS, REPORT_VERSION, headline_statistic, render_report
 
 
 def metrics_fixture(recourse=0.36, reasons=0.89, decision=1.0, extracted=False):
@@ -27,12 +27,52 @@ def metrics_fixture(recourse=0.36, reasons=0.89, decision=1.0, extracted=False):
                     for level in ("raw", "normalised", "cluster")
                 },
                 "discarded_pair_fraction": 0.0,
-                "direction_flip_rate_cluster": 0.0,
+                "direction_reversal": {
+                    level: {
+                        "legacy_topic_incidence": {
+                            "rate": 0.25,
+                            "n_topics": 4,
+                            "n_reversal_topics": 1,
+                        },
+                        "pairwise": {
+                            "rate": 0.125,
+                            "n_opposite_direction_comparisons": 2,
+                            "n_unambiguous_shared_topic_comparisons": 16,
+                            "n_ambiguous_shared_topic_comparisons": 3,
+                            "n_contributing_run_pairs": 8,
+                            "n_same_decision_run_pairs": 10,
+                        },
+                    }
+                    for level in ("raw", "normalised", "cluster")
+                },
                 "reason_coverage": {"emptiness_rate": 0.0, "mean_set_size": 2.0,
                                     "empty_empty_pair_fraction": 0.0},
                 "recourse_coverage": {"emptiness_rate": 0.0, "mean_set_size": 2.0,
                                       "empty_empty_pair_fraction": 0.0},
             }],
+            "aggregates": {
+                "reason_cluster": {
+                    "mean": reasons, "median": reasons,
+                    "iqr": [reasons, reasons], "n_included": 1,
+                    "excluded": [],
+                },
+                "recourse_cluster": {
+                    "mean": recourse, "median": recourse,
+                    "iqr": [recourse, recourse], "n_included": 1,
+                    "excluded": [],
+                },
+                **{
+                    f"direction_reversal_{level}": {
+                        "mean": 0.125,
+                        "median": 0.125,
+                        "iqr": [0.125, 0.125],
+                        "n_included": 1,
+                        "excluded": [],
+                    }
+                    for level in ("raw", "normalised", "cluster")
+                },
+                "min_pairs_floor": 3,
+            },
         }],
     }
     if extracted:
@@ -83,8 +123,56 @@ def test_report_discloses_discarded_pair_count():
 
 
 def test_anchors_are_versioned():
-    assert ANCHORS["version"]
+    assert ANCHORS["version"] == "anchors-1.1.0"
     assert ANCHORS["bands"]
+    assert REPORT_VERSION == "0.2.0"
+
+
+def test_anchor_labels_name_the_measure_they_describe():
+    from goalpost.reporter import anchor_label
+
+    labels = {
+        measure: anchor_label(0.72, measure=measure)
+        for measure in ("decision", "reasons", "recourse")
+    }
+    assert labels["decision"].startswith("decision ")
+    assert labels["reasons"].startswith("reasons ")
+    assert labels["recourse"].startswith("advice ")
+    assert len(set(labels.values())) == 3
+
+
+def test_headline_uses_floor_eligible_condition_aggregates():
+    # Case values include low-pair cases; the condition aggregates are the
+    # protocol output after the min_pairs_floor has been enforced.
+    metrics = metrics_fixture(recourse=0.99, reasons=0.99)
+    aggregates = metrics["suts"][0]["conditions"][0]["aggregates"]
+    aggregates["recourse_cluster"].update(mean=0.40, n_included=1)
+    aggregates["reason_cluster"].update(mean=0.60, n_included=1)
+
+    md = render_report(metrics)
+
+    assert "recourse stability 0.40" in md
+    assert "reason stability 0.60" in md.lower()
+    assert "recourse stability 0.99" not in md
+
+
+def test_report_with_no_floor_eligible_cases_does_not_invent_zero_stability():
+    metrics = metrics_fixture(recourse=0.99, reasons=0.99)
+    aggregates = metrics["suts"][0]["conditions"][0]["aggregates"]
+    for key in ("recourse_cluster", "reason_cluster"):
+        aggregates[key].update(
+            mean=None,
+            median=None,
+            iqr=None,
+            n_included=0,
+            excluded=[{"case_id": "c1", "reason": "n_pairs 1 < 3"}],
+        )
+
+    md = render_report(metrics)
+
+    assert "no cases cleared the n_pairs floor" in md.lower()
+    assert "recourse stability 0.00" not in md
+    assert "none of its recommendations" not in md
 
 
 def test_report_contains_lay_essentials():
@@ -97,10 +185,55 @@ def test_report_contains_lay_essentials():
     assert ANCHORS["version"] in md
 
 
+def test_report_stamp_distinguishes_audit_and_metrics_schema_versions():
+    metrics = metrics_fixture()
+    md = render_report(metrics)
+
+    assert "audit schema 0.1.0 · metrics 0.1.0" in md
+    assert "goalpost 0.1.0" not in md
+
+    from goalpost.reporter import render_report_html
+
+    html = render_report_html(metrics)
+    assert "audit schema 0.1.0" in html
+    assert "metrics 0.1.0" in html
+    assert "goalpost 0.1.0" not in html
+
+
 def test_report_shows_three_level_ladder_and_denominators():
     md = render_report(metrics_fixture())
     assert "raw" in md and "normalised" in md and "cluster" in md
     assert "5/5" in md or ("attempted" in md and "parsed" in md)
+
+
+def test_report_prints_floor_eligible_aggregates_and_exclusions():
+    metrics = metrics_fixture()
+    aggregates = metrics["suts"][0]["conditions"][0]["aggregates"]
+    aggregates["reason_cluster"].update(
+        n_included=0,
+        excluded=[{"case_id": "c1", "reason": "n_pairs 2 < 3"}],
+    )
+
+    md = render_report(metrics)
+
+    assert "Condition aggregates" in md
+    assert "floor ≥3 contributing run-pairs" in md
+    assert "c1: n_pairs 2 < 3" in md
+
+
+def test_report_prints_direction_numerator_denominator_and_ambiguity_counts():
+    from goalpost.reporter import render_report_html
+
+    metrics = metrics_fixture()
+    md = render_report(metrics)
+    html = render_report_html(metrics)
+
+    for rendered in (md, html):
+        assert "Opposite direction" in rendered
+        assert "2/16" in rendered
+        assert "3" in rendered  # ambiguous shared-topic comparisons
+        assert "8/10" in rendered  # contributing/same-decision run-pairs
+        assert "1/4" in rendered  # labelled legacy topic incidence
 
 
 def test_freeform_report_carries_lower_bound_framing_and_agreement():
@@ -376,6 +509,23 @@ def test_comparison_gated_sut_listed_unranked_with_reason():
     assert "delta" in md
     lines = [l for l in md.splitlines() if "delta" in l]
     assert any("gate" in l.lower() for l in lines)
+
+
+def test_comparison_gate_uses_agreement_at_the_reported_cluster_level():
+    metrics = comparison_fixture()
+    freeform = metrics["suts"][-1]
+    freeform["conditions"][0]["aggregates"]["recourse_cluster"].update(
+        mean=0.40, median=0.40, iqr=(0.30, 0.50)
+    )
+    freeform["extractor_self_agreement"]["recourse"] = {
+        "mean_jaccard": 0.60,
+        "cluster": {"mean_jaccard": 0.95},
+    }
+
+    md = render_comparison(metrics)
+
+    ranked = md.split("## Unranked", 1)[0]
+    assert "delta" in ranked
 
 
 def test_comparison_cross_mode_banner():

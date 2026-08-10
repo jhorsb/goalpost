@@ -1,0 +1,400 @@
+{
+  "audit_id": "slice-live-002-gpt41-extractor",
+  "suts": [
+    {
+      "name": "gpt4omini-screener-structured",
+      "sut_id": "a634bbe86dc4c9a1",
+      "elicitation_mode": "structured",
+      "extracted": false,
+      "conditions": [
+        {
+          "condition_id": "t0.0_n5",
+          "temperature": 0.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "slice-001",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.8666666666666666,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.8666666666666666,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.30666666666666664,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.30666666666666664,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5383333333333333,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 6,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 46,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 6,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 46,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 2,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 1.0,
+              "median": 1.0,
+              "iqr": [
+                1.0,
+                1.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 0.5383333333333333,
+              "median": 0.5383333333333333,
+              "iqr": [
+                0.5383333333333333,
+                0.5383333333333333
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_raw": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_normalised": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_cluster": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "gpt4omini-screener-freeform",
+      "sut_id": "8032528d3a0f7321",
+      "elicitation_mode": "freeform",
+      "extracted": true,
+      "conditions": [
+        {
+          "condition_id": "t0.0_n5",
+          "temperature": 0.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "slice-001",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.7618181818181818,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.7618181818181818,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 12,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 77,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 12,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 77,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 2,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": null,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 0,
+                    "n_ambiguous_shared_topic_comparisons": 20,
+                    "n_contributing_run_pairs": 0,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 1.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 1.0,
+              "median": 1.0,
+              "iqr": [
+                1.0,
+                1.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 1.0,
+              "median": 1.0,
+              "iqr": [
+                1.0,
+                1.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_raw": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_normalised": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 1,
+              "excluded": []
+            },
+            "direction_reversal_cluster": {
+              "mean": null,
+              "median": null,
+              "iqr": null,
+              "n_included": 0,
+              "excluded": [
+                {
+                  "case_id": "slice-001",
+                  "reason": "no scorable pairs"
+                }
+              ]
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ],
+      "extractor_self_agreement": {
+        "k": 3,
+        "reasons": {
+          "mean_jaccard": 1.0
+        },
+        "recourse": {
+          "mean_jaccard": 0.9555555555555555
+        }
+      }
+    }
+  ],
+  "total_cost_usd": 0.0320652,
+  "missing_blocks": [],
+  "provenance": {
+    "corpus_hash": "372ea810e47047d0f9124d03490fd14dae302b7e2e56f58fb819177b67553856",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.2.0",
+    "audit_version": "0.1.0",
+    "recomputed_from": {
+      "source_metrics_version": "0.1.0",
+      "eligible_parse_status": [
+        "ok"
+      ],
+      "min_pairs_floor": 3,
+      "legacy_direction_denominator": "distinct topics observed across scored repeats; Goalpost v0.1 operationalisation",
+      "direction_reversal_denominator": "unambiguous shared topics across same-decision scored-run pairs",
+      "inputs": [
+        {
+          "path": "metrics/0.1.0/metrics.json",
+          "sha256": "a227a4a3e05757439e4140a31f75c5caebc359e21030431e7f62b6b5aec09753"
+        },
+        {
+          "path": "normalised/0.1.0/8032528d3a0f7321/mapping_log.jsonl",
+          "sha256": "1379f8f26b2ab02df3878ca41c215fb4ce0b82bc45ece7bdb1e3f7f52aa7ca17"
+        },
+        {
+          "path": "normalised/0.1.0/8032528d3a0f7321/normalised_runs.jsonl",
+          "sha256": "2611b32ad64de3d78ee0191173abe8e4fdf95048efe0c502cb321914ef590809"
+        },
+        {
+          "path": "normalised/0.1.0/a634bbe86dc4c9a1/mapping_log.jsonl",
+          "sha256": "5c1b6ad43fc49b3ad32f71643b05a3487e43d54ceb619968be237262d33d09d9"
+        },
+        {
+          "path": "normalised/0.1.0/a634bbe86dc4c9a1/normalised_runs.jsonl",
+          "sha256": "3cec116ee0e0015cfd0f9f907af885b3fbd652970bb73bb4099c1711664f989c"
+        },
+        {
+          "path": "runs/8032528d3a0f7321/runs.jsonl",
+          "sha256": "44aab4d6bde32ae1cdb9b2f66f0c5d2ea5e12dcab99b1ff94ab249877c64204f"
+        },
+        {
+          "path": "runs/a634bbe86dc4c9a1/runs.jsonl",
+          "sha256": "f918034c0ecb00d51b6383e3a23622072049f5d2ffa758e3ad05399147fa3fc9"
+        }
+      ]
+    }
+  }
+}

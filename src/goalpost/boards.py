@@ -8,9 +8,10 @@ from pathlib import Path
 from typing import Any
 
 from goalpost import reporter
+from goalpost.metrics import METRICS_VERSION
 
 
-BOARD_VERSION = "0.1.0"
+BOARD_VERSION = "0.2.0"
 
 _BOARD_BEGIN = "<!-- GOALPOST-BOARD:BEGIN -->"
 _BOARD_END = "<!-- GOALPOST-BOARD:END -->"
@@ -30,45 +31,58 @@ def _mean(values: list[float | None]) -> float | None:
     return sum(present) / len(present) if present else None
 
 
-def _measure_values(sut: dict) -> tuple[int, dict[str, float | None]]:
-    """Pool cluster-level case values from the first condition."""
+def _measure_values(
+    sut: dict,
+) -> tuple[int, dict[str, float | None], dict[str, int]]:
+    """Read the protocol's floor-eligible values from the first condition."""
     conditions = sut.get("conditions") or []
-    cases = (conditions[0].get("cases") or []) if conditions else []
+    condition = conditions[0] if conditions else {}
+    cases = condition.get("cases") or []
+    aggregates = condition.get("aggregates") or {}
 
-    return len(cases), {
+    values = {
         "decision": _mean(
             [case.get("decision_stability", {}).get("modal_agreement") for case in cases]
         ),
-        "reasons": _mean(
-            [
-                case.get("reason_stability", {})
-                .get("cluster", {})
-                .get("mean_jaccard")
-                for case in cases
-            ]
+        "reasons": (aggregates.get("reason_cluster") or {}).get("mean"),
+        "recourse": (aggregates.get("recourse_cluster") or {}).get("mean"),
+    }
+    counts = {
+        "decision": sum(
+            case.get("decision_stability", {}).get("modal_agreement") is not None
+            for case in cases
         ),
-        "recourse": _mean(
-            [
-                case.get("recourse_stability", {})
-                .get("cluster", {})
-                .get("mean_jaccard")
-                for case in cases
-            ]
+        "reasons": (aggregates.get("reason_cluster") or {}).get(
+            "n_included", 0
         ),
+        "recourse": (aggregates.get("recourse_cluster") or {}).get(
+            "n_included", 0
+        ),
+    }
+    return len(cases), values, counts
+
+
+def _certified_measure(
+    measure: str, value: float | None, certified: bool, n_cases: int
+) -> dict:
+    if value is None or not certified:
+        return {"status": "withheld", "n_cases": n_cases}
+    return {
+        "value": value,
+        "band": reporter.anchor_label(value, measure=measure),
+        "n_cases": n_cases,
     }
 
 
-def _certified_measure(value: float | None, certified: bool) -> dict:
-    if value is None or not certified:
-        return {"status": "withheld"}
-    return {"value": value, "band": band_for(value)["label"]}
-
-
-def _measures_for(sut: dict, values: dict[str, float | None]) -> dict:
+def _measures_for(
+    sut: dict, values: dict[str, float | None], counts: dict[str, int]
+) -> dict:
     mode = sut["elicitation_mode"]
     if mode == "structured":
         return {
-            measure: _certified_measure(values[measure], True)
+            measure: _certified_measure(
+                measure, values[measure], True, counts[measure]
+            )
             for measure in _MEASURES
         }
 
@@ -86,9 +100,15 @@ def _measures_for(sut: dict, values: dict[str, float | None]) -> dict:
         reporter._gate_agreement_value(sa.get("recourse", {})),
     )
     return {
-        "decision": _certified_measure(values["decision"], decision_ok),
-        "reasons": _certified_measure(values["reasons"], reasons_ok),
-        "recourse": _certified_measure(values["recourse"], recourse_ok),
+        "decision": _certified_measure(
+            "decision", values["decision"], decision_ok, counts["decision"]
+        ),
+        "reasons": _certified_measure(
+            "reasons", values["reasons"], reasons_ok, counts["reasons"]
+        ),
+        "recourse": _certified_measure(
+            "recourse", values["recourse"], recourse_ok, counts["recourse"]
+        ),
     }
 
 
@@ -126,10 +146,10 @@ def _reader_from_stored_config(audit_dir) -> str | None:
 
 def build_board(audit_dirs: list[Path]) -> dict:
     """Build a JSON-able stability board from audit metrics directories."""
-    grouped: dict[tuple[str, str, str], list[dict]] = {}
+    grouped: dict[tuple[str, str, str, float | None], list[dict]] = {}
 
     for audit_dir in audit_dirs:
-        metrics_path = Path(audit_dir) / "metrics" / BOARD_VERSION / "metrics.json"
+        metrics_path = Path(audit_dir) / "metrics" / METRICS_VERSION / "metrics.json"
         metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
         provenance = metrics["provenance"]
 
@@ -160,15 +180,15 @@ def build_board(audit_dirs: list[Path]) -> dict:
                 provenance["taxonomy_version"],
                 condition_temperature,
             )
-            n_cases, values = _measure_values(sut)
+            n_cases, values, counts = _measure_values(sut)
             grouped.setdefault(group_key, []).append(
                 {
                     "name": sut["name"],
                     "audit_id": metrics["audit_id"],
                     "mode": mode,
                     "reader": reader,
-                    "n_cases": n_cases,
-                    "measures": _measures_for(sut, values),
+                    "n_cases_audited": n_cases,
+                    "measures": _measures_for(sut, values, counts),
                 }
             )
 
@@ -194,6 +214,7 @@ def build_board(audit_dirs: list[Path]) -> dict:
 
     return {
         "board_version": BOARD_VERSION,
+        "metrics_version": METRICS_VERSION,
         "anchors_version": reporter.ANCHORS["version"],
         "groups": groups,
     }
@@ -204,13 +225,18 @@ def _text(value: Any) -> str:
 
 
 def _measure_html(measure: dict) -> str:
+    n_cases = _text(measure.get("n_cases", 0))
     if measure.get("status") == "withheld":
-        return "<span style='color:#6b7280'>withheld</span>"
+        return (
+            "<span style='color:var(--gp-muted, #4b5563)'>withheld</span>"
+            f"<small style='display:block'>n={n_cases} cases</small>"
+        )
     value = _text(f"{measure['value']:.3f}")
     band = _text(measure["band"])
     return (
         f"<strong style='display:block'>{value}</strong>"
-        f"<span style='color:#374151'>{band}</span>"
+        f"<span style='color:var(--gp-muted, #4b5563)'>{band}</span>"
+        f"<small style='display:block'>n={n_cases} cases</small>"
     )
 
 
@@ -218,19 +244,23 @@ def render_board_html(board: dict) -> str:
     """Render ``board`` as a self-contained, script-free HTML fragment."""
     parts = [
         "<section aria-label='Goalpost stability board' "
-        "style='font-family:system-ui,-apple-system,sans-serif;color:rgb(17,24,39);"
+        "style='font-family:system-ui,-apple-system,sans-serif;"
+        "color:var(--gp-ink, #111827);"
         "max-width:76rem;margin:1.5rem auto'>",
         "<h2 style='font-size:1.5rem;margin:0 0 .5rem'>Goalpost stability board</h2>",
         "<p style='margin:.25rem 0'>Bands use the committed anchor set "
-        f"<code>{_text(board['anchors_version'])}</code>.</p>",
-        "<p style='margin:.25rem 0 1rem;color:#4b5563'>This is a quality signal, not a certification.</p>",
+        f"<code>{_text(board['anchors_version'])}</code>. Metrics "
+        f"<code>{_text(board['metrics_version'])}</code>.</p>",
+        "<p style='margin:.25rem 0 1rem;color:var(--gp-muted, #4b5563)'>"
+        "This is a quality signal, not a certification.</p>",
     ]
 
     for group in board.get("groups", []):
         key = group["key"]
         parts.extend(
             [
-                "<section style='border:1px solid #d1d5db;border-radius:.5rem;"
+                "<section style='border:1px solid var(--gp-line, #d1d5db);"
+                "border-radius:.5rem;"
                 "padding:1rem;margin:0 0 1rem'>",
                 "<h3 style='font-size:1.1rem;margin:0 0 .5rem'>Comparison group</h3>",
                 "<dl style='display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;"
@@ -241,6 +271,8 @@ def render_board_html(board: dict) -> str:
                 f"<dd style='margin:0'>{_text(key['architecture'])}</dd></div>",
                 "<div><dt style='font-weight:600'>Taxonomy</dt>"
                 f"<dd style='margin:0'>{_text(key['taxonomy_version'])}</dd></div>",
+                "<div><dt style='font-weight:600'>Temperature</dt>"
+                f"<dd style='margin:0'>{_text(key['temperature'])}</dd></div>",
                 "</dl>",
                 "<div style='overflow-x:auto'><table style='border-collapse:collapse;"
                 "width:100%;font-size:.9rem'>",
@@ -252,13 +284,14 @@ def render_board_html(board: dict) -> str:
             "Audit",
             "Mode",
             "Reader",
-            "Cases",
+            "Cases audited",
             "Decision",
             "Reasons",
             "Recourse",
         ):
             parts.append(
-                "<th scope='col' style='border-bottom:2px solid #9ca3af;"
+                "<th scope='col' style='border-bottom:2px solid "
+                "var(--gp-line-strong, #9ca3af);"
                 f"padding:.5rem;text-align:left;vertical-align:bottom'>{heading}</th>"
             )
         parts.append("</tr></thead><tbody>")
@@ -270,7 +303,7 @@ def render_board_html(board: dict) -> str:
                 _text(system["audit_id"]),
                 _text(system["mode"]),
                 _text(reader),
-                _text(system["n_cases"]),
+                _text(system["n_cases_audited"]),
                 _measure_html(system["measures"]["decision"]),
                 _measure_html(system["measures"]["reasons"]),
                 _measure_html(system["measures"]["recourse"]),
@@ -278,7 +311,8 @@ def render_board_html(board: dict) -> str:
             parts.append("<tr>")
             for cell in cells:
                 parts.append(
-                    "<td style='border-bottom:1px solid #e5e7eb;padding:.6rem .5rem;"
+                    "<td style='border-bottom:1px solid var(--gp-line, #e5e7eb);"
+                    "padding:.6rem .5rem;"
                     f"vertical-align:top'>{cell}</td>"
                 )
             parts.append("</tr>")

@@ -8,6 +8,12 @@ through the same system repeatedly and check whether the **decision**, the
 come back the same. Not accuracy, not fairness — those are different
 measurements, deliberately out of scope.
 
+> **Correction status — v1.0.2.** Release v1.0.1 is preserved as
+> the superseded historical record, not the source for current findings.
+> v1.0.2 rebuilds the evidence and every derived surface under corrected
+> parse-eligibility, aggregation-floor and direction-metric definitions
+> recorded in D-083–D-085.
+
 It grew out of an undergraduate dissertation (Horsburgh 2026) that found
 LLM-generated screening explanations far more stable in their *reasons*
 (0.89 on a 0–1 set-overlap measure) than in their *advice* (0.36), a gap
@@ -27,13 +33,18 @@ every pipeline stage, and the audited code's commit.
   inputs; advice repeated less than half the time even between runs
   that agreed on the verdict (0.448; cross-verdict pairs are excluded
   from this measure and reported separately); explanations
-  kept their topics (0.98+) while flipping whether a topic counted *for*
-  or *against* the candidate in roughly a third to a half of comparisons
-  (0.378–0.508, by lens). A
+  kept their topics (0.98+) while assigning the opposite direction to a
+  repeated topic in 0.156–0.188 of unambiguous same-topic comparisons,
+  depending on the certified reader. Mixed-sign or non-binary topic states
+  within a run are excluded as ambiguous and counted, not resolved by item
+  order. A
   matched control (same model, no pipeline) flipped verdicts too — the
   chain is not necessary for that — while the explanation pattern
-  tracks the chained design (same-lens gap +0.54 against the
-  control's +0.11).
+  tracks the chained design in the reason–recourse gap (same-lens +0.54
+  against the control's +0.11). The former v1.0.1 valence-amplification
+  claim is withdrawn: the matched cluster-level contrast is only +0.010
+  over the 22 cases eligible in both arms and changes materially at the raw
+  level.
 - **Audit #2** — a published 3-stage LangGraph screener on a frontier
   model. Verdict flipped on 6/25; for 6/25 the most common outcome was no
   clear verdict (one unanimously so) — and five of the six flips were in
@@ -109,7 +120,7 @@ when the cap is hit and resume idempotently.
 | path | what it is |
 |---|---|
 | `src/goalpost/` | the instrument (runner, metrics, gate, normaliser, reporters, board) |
-| `audits/` | complete evidence for every run: transcripts, normalised sets, metrics, reports |
+| `audits/` | run-level evidence: transcripts, normalised sets, metrics, reports |
 | `corpora/` | frozen fictional corpora (25 CVs, 5 roles, strength-banded; derived variants) |
 | `taxonomies/` | committed, versioned synonym taxonomy |
 | `phase4/`–`phase8/` | audit configs, pre-registrations, analyses, per phase |
@@ -123,24 +134,30 @@ when the cap is hit and resume idempotently.
 Both are published, openly downloadable projects, audited entirely on the
 author's own accounts at pinned commits; no hosted service was touched
 and no real person's data was involved. Their identities are pinned in
-the evidence files. Public prose describes them as design categories
-while a courtesy-disclosure window is open with each author — if you're
-going to measure someone's work, they get the first read. Target #1's
-prompts are never stored in this repository (no upstream licence; fetched
-at runtime, hash-verified); target #2's are vendored under its MIT
+the evidence files. Public prose describes them as design categories.
+The disclosure record, including what the repository can and cannot
+verify about contact, is preserved in `DISCLOSURE_NOTE*.md` and D-084.
+Target #1's prompts are never stored in this repository (no upstream
+licence; fetched at runtime and hash-verified); target #2's are vendored under its MIT
 licence with attribution.
 
 ## How to cite
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21862442.svg)](https://doi.org/10.5281/zenodo.21862442)
 
-There are two citable objects. Cite the **paper** for the method and
-findings; cite the **software DOI** when you use the instrument itself or
-depend on the archived evidence.
+There are two citation targets: cite the **paper** for the method and
+findings, and cite the **software DOI** when you use the instrument itself
+or depend on the archived evidence. The paper's preprint identifier is
+still pending; `CITATION.cff` carries its preferred citation metadata.
 
 The concept DOI [10.5281/zenodo.21862442](https://doi.org/10.5281/zenodo.21862442)
-always resolves to the latest archived version. To pin the exact snapshot
-this repository's published numbers came from, cite release v1.0.0,
+always resolves to the latest archived version. This release is
+**v1.0.2**. Zenodo mints the per-version DOI from the release tag; that DOI
+is recorded in the current repository metadata once available. Cite the
+concept DOI above while the archive is processing. The superseded v1.0.1
+archive is
+[10.5281/zenodo.21864570](https://doi.org/10.5281/zenodo.21864570); the
+initial v1.0.0 archive is
 [10.5281/zenodo.21862443](https://doi.org/10.5281/zenodo.21862443).
 
 ```bibtex
@@ -149,7 +166,7 @@ this repository's published numbers came from, cite release v1.0.0,
   title   = {Goalpost: A Certification-Gated Protocol for Auditing the
              Stability of LLM Screening Decisions, Reasons, and Recourse},
   year    = {2026},
-  version = {1.0.0},
+  version = {1.0.2},
   doi     = {10.5281/zenodo.21862442},
   url     = {https://github.com/jhorsb/goalpost}
 }

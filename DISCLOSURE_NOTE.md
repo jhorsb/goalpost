@@ -50,10 +50,12 @@ accept/reject verdict changed on 3 of 25 candidates; its improvement
 advice repeats less than half the time (0.448 on a 0–1 similarity
 measure); and while it discusses the same four rubric headings almost
 perfectly consistently, whether a given heading counts *for or against*
-a candidate flips in roughly a third to a half of repeat comparisons. A
-control run (same model, plain single prompt) shows the verdict flipping
-comes from the underlying model, not your design — but the
-explanation/advice pattern is specific to the chained design. One more
+a candidate is opposite in 0.156–0.188 of unambiguous same-topic
+comparisons, depending on the certified reader. A control run (same model,
+plain single prompt) shows the verdict flipping occurs without the chain;
+the reason–advice gap tracks the chained design, while the corrected
+cluster-level direction contrast is only +0.010 on common eligible cases
+and is not claimed as an amplification effect. One more
 thing you'd probably want to know: the model your code pins
 (llama3-70b-8192) has been retired by every provider that served it, so
 the project no longer runs as shipped; I substituted a current open-weights
@@ -78,3 +80,16 @@ publication.
 No action is needed from you; this is a courtesy note, not a demand.
 Thanks for publishing your work openly — audits like this are only
 possible against people willing to show their code.
+
+---
+
+## Repository status and supersession (2026-08-10; D-084)
+
+This file is preserved as the historical authoring draft; it is not a
+byte-exact sent-message record and it is not send-ready. D-035 records that a
+courtesy email was sent on 8 August, but this repository contains neither the
+sent message nor independent delivery evidence. The analytical paragraph
+above was corrected in the repository on 10 August under D-083, so it is not
+evidence that those corrected findings were delivered. Current findings live
+in the versioned metrics, generated reports and canonical paper; the standing
+correction and response offer remains the decision log's recorded policy.

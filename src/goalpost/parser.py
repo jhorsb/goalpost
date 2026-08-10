@@ -6,7 +6,9 @@ import json
 import re
 from dataclasses import dataclass, field
 
-PARSER_VERSION = "0.1.0"
+PARSER_VERSION = "0.2.0"
+VALID_DECISIONS = frozenset({"accept", "reject", "unclear"})
+VALID_DIRECTIONS = frozenset({"positive", "negative"})
 
 _REFUSAL_PATTERN = re.compile(
     r"\b(i can'?t|i cannot|i won'?t|unable to|not able to|i'?m sorry)\b.{0,80}"
@@ -51,6 +53,67 @@ def _extract_json_after(text: str, token: str, errors: list[str]):
     return None
 
 
+def _list_field(
+    obj: object, field_name: str, token: str, errors: list[str]
+) -> list[object]:
+    if not isinstance(obj, dict):
+        return []
+    value = obj.get(field_name)
+    if not isinstance(value, list):
+        errors.append(f"{token} {field_name} must be a list")
+        return []
+    return value
+
+
+def _validated_reasons(obj: object, errors: list[str]) -> list[dict]:
+    valid = []
+    for index, item in enumerate(
+        _list_field(obj, "reasons", "REASONS_JSON", errors)
+    ):
+        prefix = f"REASONS_JSON reasons[{index}]"
+        if not isinstance(item, dict):
+            errors.append(f"{prefix} must be an object")
+            continue
+        reason_id = item.get("reason_id")
+        direction = item.get("direction")
+        note = item.get("note")
+        item_errors = []
+        if not isinstance(reason_id, str) or not reason_id.strip():
+            item_errors.append(f"{prefix} missing reason_id")
+        if direction not in VALID_DIRECTIONS:
+            item_errors.append(f"{prefix} invalid direction: {direction}")
+        if not isinstance(note, str) or not note.strip():
+            item_errors.append(f"{prefix} missing note")
+        if item_errors:
+            errors.extend(item_errors)
+            continue
+        valid.append(item)
+    return valid
+
+
+def _validated_recourse(obj: object, errors: list[str]) -> list[dict]:
+    valid = []
+    for index, item in enumerate(
+        _list_field(obj, "actions", "RECOURSE_JSON", errors)
+    ):
+        prefix = f"RECOURSE_JSON actions[{index}]"
+        if not isinstance(item, dict):
+            errors.append(f"{prefix} must be an object")
+            continue
+        action_id = item.get("action_id")
+        description = item.get("description")
+        item_errors = []
+        if not isinstance(action_id, str) or not action_id.strip():
+            item_errors.append(f"{prefix} missing action_id")
+        if not isinstance(description, str) or not description.strip():
+            item_errors.append(f"{prefix} missing description")
+        if item_errors:
+            errors.extend(item_errors)
+            continue
+        valid.append(item)
+    return valid
+
+
 def parse_structured_response(text: str) -> ParsedRun:
     errors: list[str] = []
 
@@ -60,19 +123,21 @@ def parse_structured_response(text: str) -> ParsedRun:
 
     decision = None
     if isinstance(decision_obj, dict):
-        label = (decision_obj.get("decision") or {}).get("label")
-        decision = str(label) if label else None
+        decision_field = decision_obj.get("decision")
+        label = (
+            decision_field.get("label")
+            if isinstance(decision_field, dict)
+            else None
+        )
+        if not isinstance(label, str) or not label.strip():
+            errors.append("DECISION_JSON missing decision label")
+        elif label not in VALID_DECISIONS:
+            errors.append(f"DECISION_JSON invalid decision label: {label}")
+        else:
+            decision = label
 
-    reasons = (
-        list(reasons_obj.get("reasons", []))
-        if isinstance(reasons_obj, dict)
-        else []
-    )
-    recourse = (
-        list(recourse_obj.get("actions", []))
-        if isinstance(recourse_obj, dict)
-        else []
-    )
+    reasons = _validated_reasons(reasons_obj, errors)
+    recourse = _validated_recourse(recourse_obj, errors)
 
     contract_present = any(
         obj is not None for obj in (decision_obj, reasons_obj, recourse_obj)

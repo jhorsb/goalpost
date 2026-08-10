@@ -10,6 +10,8 @@ import json
 import statistics as st
 from pathlib import Path
 
+from release_manifest import METRICS_VERSION, REPORT_AUDITS
+
 A1 = "realtarget-hs-screener-002-gptoss"
 MT = "matched-target-gemma-001"
 CTRL = "control-bare-model-001"
@@ -17,10 +19,18 @@ A2 = "target2-csa-002-fallback"
 LABS4 = [("phase4-validation-001", 0), ("phase4-validation-001", 1),
          ("phase4-validation-001", 2), ("phase4-crosslab-claude-001", 0)]
 SIX = LABS4 + [(CTRL, 0), ("kimi-k3-lab-001", 0)]
+MEASURED_CONFIGS = [
+    (A1, 0),
+    (A2, 0),
+    (CTRL, 0),
+    *LABS4,
+    ("kimi-k3-lab-001", 0),
+]
+CERTIFIED_FLIP_RECORD = (A1, A2, CTRL, "kimi-k3-lab-001")
 
 
 def _sut(audit, i=0):
-    return json.loads(Path(f"audits/{audit}/metrics/0.1.0/metrics.json")
+    return json.loads(Path(f"audits/{audit}/metrics/{METRICS_VERSION}/metrics.json")
                       .read_text())["suts"][i]
 
 
@@ -29,12 +39,33 @@ def _cases(audit, i=0):
 
 
 def _mean(audit, key, level="cluster", i=0):
+    sut = _sut(audit, i)
     if key == "decision":
-        vals = [c["decision_stability"]["modal_agreement"] for c in _cases(audit, i)]
+        vals = [
+            c["decision_stability"]["modal_agreement"]
+            for condition in sut["conditions"]
+            for c in condition["cases"]
+        ]
     elif key == "valence":
-        vals = [c.get("direction_flip_rate_cluster") for c in _cases(audit, i)]
+        vals = [
+            condition["aggregates"][f"direction_reversal_{level}"]["mean"]
+            for condition in sut["conditions"]
+        ]
     else:
-        vals = [c[key][level]["mean_jaccard"] for c in _cases(audit, i)]
+        item = "reason" if key == "reason_stability" else "recourse"
+        if level == "cluster":
+            vals = [
+                condition["aggregates"][f"{item}_cluster"]["mean"]
+                for condition in sut["conditions"]
+            ]
+        else:
+            # Raw/normalised ladders predate aggregate fields at those levels;
+            # their report-only diagnostic mean remains the unweighted case mean.
+            vals = [
+                c[key][level]["mean_jaccard"]
+                for condition in sut["conditions"]
+                for c in condition["cases"]
+            ]
     return st.mean(v for v in vals if v is not None)
 
 
@@ -45,6 +76,66 @@ def _gap(audit, i=0):
 def _flips(audit, i=0):
     return sum(1 for c in _cases(audit, i)
                if c["decision_stability"]["modal_agreement"] not in (None, 1.0))
+
+
+def _flips_with_modal_decision(audit, decision, i=0):
+    """Flipped cases whose modal decision is the named class."""
+    return sum(
+        1
+        for case in _cases(audit, i)
+        if case["decision_stability"]["modal_agreement"] not in (None, 1.0)
+        and case["decision_stability"]["modal_decision"] == decision
+    )
+
+
+def _joint_direction(level):
+    """Matched target/control means over cases eligible in both arms."""
+    def eligible(audit):
+        rates = {}
+        for condition in _sut(audit)["conditions"]:
+            if condition["aggregates"]["min_pairs_floor"] != 3:
+                raise ValueError("direction claim requires the registered pair floor 3")
+            for case in condition["cases"]:
+                pairwise = case["direction_reversal"][level]["pairwise"]
+                if (
+                    pairwise["rate"] is not None
+                    and pairwise["n_contributing_run_pairs"] >= 3
+                ):
+                    rates[case["case_id"]] = pairwise["rate"]
+        return rates
+
+    target = eligible(MT)
+    control = eligible(CTRL)
+    common = sorted(target.keys() & control.keys())
+    if not common:
+        raise ValueError(f"no jointly eligible direction cases at {level}")
+    target_mean = st.mean(target[case_id] for case_id in common)
+    control_mean = st.mean(control[case_id] for case_id in common)
+    return len(common), target_mean, control_mean, target_mean - control_mean
+
+
+def _flip_scope():
+    configurations = sum(_flips(audit, i) > 0 for audit, i in MEASURED_CONFIGS)
+    families = sum(_flips(audit, i) > 0 for audit, i in SIX)
+    total = sum(_flips(audit) for audit in CERTIFIED_FLIP_RECORD)
+    return configurations, len(MEASURED_CONFIGS), families, len(SIX), total
+
+
+def _aggregate_n(audit, key, i=0):
+    values = {
+        condition["aggregates"][key]["n_included"]
+        for condition in _sut(audit, i)["conditions"]
+    }
+    if len(values) != 1:
+        raise ValueError(f"{audit} has inconsistent {key} aggregate counts")
+    return values.pop()
+
+
+def _measurable_cases(audit, i=0):
+    return sum(
+        case["decision_stability"]["modal_agreement"] is not None
+        for case in _cases(audit, i)
+    )
 
 
 def _parsed(audit, i=0):
@@ -64,7 +155,8 @@ def _paid_subtotal():
     files, with Kimi's figure (resume pass only, a known artifact)
     replaced by its dashboard total ~$5.24 (VALIDATION_NOTES §Kimi)."""
     tot = kimi = 0.0
-    for p in Path("audits").glob("*/metrics/0.1.0/metrics.json"):
+    for audit in REPORT_AUDITS:
+        p = Path(f"audits/{audit}/metrics/{METRICS_VERSION}/metrics.json")
         c = json.loads(p.read_text()).get("total_cost_usd") or 0.0
         tot += c
         if "kimi" in str(p):
@@ -100,8 +192,11 @@ def _discarded_pairs(audit, i=0):
     for c in _cases(audit, i):
         n = c["denominators"]["scored"]
         pairs = n * (n - 1) // 2
+        fraction = c.get("discarded_pair_fraction")
+        if pairs == 0 or fraction is None:
+            continue
         total += pairs
-        disc += round(c.get("discarded_pair_fraction", 0.0) * pairs)
+        disc += round(fraction * pairs)
     return disc, total
 
 
@@ -158,8 +253,9 @@ def _edits_zero_both_blocks():
     return both, valid
 
 
-WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
-         7: "seven", 10: "ten", 14: "fourteen"}
+WORDS = {0: "zero", 1: "one", 2: "two", 3: "three", 4: "four",
+         5: "five", 6: "six", 7: "seven", 8: "eight", 10: "ten",
+         13: "thirteen", 14: "fourteen"}
 
 
 def bindings():
@@ -174,7 +270,6 @@ def bindings():
     ct_gap = f"{_gap(CTRL):.3f}"
     ct_rec = f"{_mean(CTRL, 'recourse_stability'):.3f}"
     mt_rec = f"{_mean(MT, 'recourse_stability'):.3f}"
-    ct_val = f"{_mean(CTRL, 'valence'):.3f}"
     a2_dec = f"{_mean(A2, 'decision'):.3f}"
     a2_rea = f"{_mean(A2, 'reason_stability'):.3f}"
     a2_rec = f"{_mean(A2, 'recourse_stability'):.3f}"
@@ -186,23 +281,56 @@ def bindings():
     lab_decs = [_mean(a, "decision", i=i) for a, i in LABS4]
     six_gaps = [_gap(a, i) for a, i in SIX]
     kimi_unparsed = 125 - _parsed("kimi-k3-lab-001")
+    cluster_joint = _joint_direction("cluster")
+    raw_joint = _joint_direction("raw")
+    config_flips, config_total, family_flips, family_total, total_flips = (
+        _flip_scope()
+    )
+    kimi = "kimi-k3-lab-001"
+    haiku = "phase4-crosslab-claude-001"
+    kimi_dec = f"{_mean(kimi, 'decision'):.3f}"
+    kimi_rea = f"{_mean(kimi, 'reason_stability'):.3f}"
+    kimi_rec = f"{_mean(kimi, 'recourse_stability'):.3f}"
+    kimi_gap = f"{_gap(kimi):.3f}"
+    haiku_dec = f"{_mean(haiku, 'decision'):.3f}"
+    haiku_rea = f"{_mean(haiku, 'reason_stability'):.3f}"
+    haiku_rec = f"{_mean(haiku, 'recourse_stability'):.3f}"
+    haiku_gap = f"{_gap(haiku):.3f}"
+    a2_unclear_flips = _flips_with_modal_decision(A2, "unclear")
     zeros, total_fx = _zero_effects()
 
     W, P = "WRITEUP.md", "paper/PAPER.md"
     E = "phase7/goalpost-explainer-rebuilt.html"
     R, D = "README.md", "DISCLOSURE_NOTE_2.md"
+    V, T = "VALIDATION_NOTES.md", "paper/threats.md"
     return [
         # README
         ("a1 flips (readme)", R, r"Verdict flipped on (\d)/25 identical", (str(_flips(A1)),)),
         ("a2 flips (readme)", R, r"Verdict flipped on (\d)/25;", (str(_flips(A2)),)),
         ("a2 no-verdict (readme)", R, r"for (\d)/25 the most common outcome", (str(_unclear(A2)),)),
+        ("a2 flip containment (readme)", R,
+         r"and (\w+) of the (\w+) flips were in",
+         (WORDS[a2_unclear_flips], WORDS[_flips(A2)])),
         ("a1 recourse conditional (readme)", R,
          r"less than half the time even between runs\s+that agreed on the verdict \((0\.\d{3})",
          (a1_rec,)),
+        ("direction range (readme)", R,
+         r"opposite direction to a\s+repeated topic in (0\.\d{3})–(0\.\d{3}) of unambiguous",
+         (mt_val, a1_val)),
+        ("joint direction contrast (readme)", R,
+         r"matched cluster-level contrast is only \+(0\.\d{3})\s+over the (\d+) cases eligible in both arms",
+         (f"{cluster_joint[3]:.3f}", str(cluster_joint[0]))),
         # disclosure note (unsent; must match certified record when it goes)
         ("a2 flips (note)", D, r"verdict changed\s+for (\w+) of 25", (str(_flips(A2)),)),
         ("a2 no-verdict (note)", D, r"and for (\w+) of 25 candidates the", (str(_unclear(A2)),)),
         ("a2 recourse (note)", D, r"\((0\.\d{3}) on a 0–1 overlap", (a2_rec,)),
+        ("a2 flip containment (note)", D,
+         r"with (\w+) of the (\w+) verdict flips occurring among",
+         (WORDS[a2_unclear_flips], WORDS[_flips(A2)])),
+        ("flip configuration/family scope (note)", D,
+         r"(\w+) of the (\w+) configurations I've measured,\s+spanning (\w+) of (\w+) base-model families",
+         (WORDS[config_flips], WORDS[config_total],
+          WORDS[family_flips], WORDS[family_total])),
         # explainer reconciliation paragraph (plain-text figures)
         ("a2 reconciliation quad (explainer)", E,
          r"fallback now supports (\d) / 25, (0\.\d{3}), (0\.\d{3}) and (0\.\d{3})",
@@ -216,7 +344,8 @@ def bindings():
         ("a2 flips hero (explainer)", E,
          r"Audit #2 found <strong>(\d) / 25</strong>", (str(_flips(A2)),)),
         ("a2 containment, all phrasings (explainer)", E,
-         r"(\w+) of the six (?:verdict flips|flipped cases) (?:were|occurred) in", ("five",)),
+         r"(\w+) of the (\w+) (?:verdict flips|flipped cases) (?:were|occurred) in",
+         (WORDS[a2_unclear_flips], WORDS[_flips(A2)])),
         ("a1 flips (writeup)", W, r"verdict changed on (\w+) of\s+?twenty-five", (WORDS[_flips(A1)],)),
         ("a1 recourse (writeup)", W, r"Recourse\s+stability measured \*\*(0\.\d{3})\*\*", (a1_rec,)),
         # Sol #11-14: the same-decision conditioning must stay attached
@@ -250,6 +379,9 @@ def bindings():
         ("audit3 run count (paper table)", P,
          r"(\d+) runs \((\d+) planned; (\d+) arms excluded pre-run\)",
          (str(_audit3_runs()), "280", "6")),
+        ("audit3 zero estimates (paper table)", P,
+         r"H1 not supported; (\d+)/(\d+) effects = 0 vs placebo",
+         (str(zeros), str(total_fx))),
         # Sol #3: taxonomy-lift example must be one real model's pair
         ("taxonomy example pair (paper)", P,
          r"raw (0\.\d{2}) → cluster (0\.\d{2}) on one lab model",
@@ -268,12 +400,29 @@ def bindings():
          r"a \*difference\* of roughly\s+(0\.\d{2})\) as design-associated",
          (f"{float(mt_gap) - float(ct_gap):.2f}",)),
         ("ctrl flips (writeup)", W, r"answer on (\w+) of twenty-five", (WORDS[_flips(CTRL)],)),
+        ("flip configuration/family scope (writeup, all sites)", W,
+         r"(\w+) of (?:the )?(\w+) configurations[\s\S]{0,180}?"
+         r"(\w+) of (\w+) base-model families",
+         (WORDS[config_flips], WORDS[config_total],
+          WORDS[family_flips], WORDS[family_total])),
         ("advice no-more-stable pair (writeup)", W, r"\((0\.\d{3}) against (0\.\d{3}), if",
          (mt_rec, ct_rec)),
-        ("valence amplification (writeup)", W, r"(0\.\d{3})\s+against the bare model's (0\.\d{3})",
-         (mt_val, ct_val)),
+        ("joint direction contrast (writeup)", W,
+         r"over the (\d+) cases\s+eligible in both arms, the target is (0\.\d{3}) and the control (0\.\d{3}) — a\s+difference of \+(0\.\d{3})",
+         (str(cluster_joint[0]), f"{cluster_joint[1]:.3f}",
+          f"{cluster_joint[2]:.3f}", f"{cluster_joint[3]:.3f}")),
+        ("joint raw direction contrast (writeup)", W,
+         r"At the raw level, over (\d+) common cases, the values are\s+(0\.\d{3}) and (0\.\d{3})",
+         (str(raw_joint[0]), f"{raw_joint[1]:.3f}",
+          f"{raw_joint[2]:.3f}")),
+        ("total scored flips (writeup)", W,
+         r"every scored verdict flip in this project —\s+(\w+), across the (\w+) systems",
+         (WORDS[total_flips], WORDS[len(CERTIFIED_FLIP_RECORD)])),
         ("labs4 gap range (writeup)", W, r"gaps of \+(0\.\d{2}) to \+(0\.\d{2})",
          (f"{min(lab_gaps):.2f}", f"{max(lab_gaps):.2f}")),
+        ("labs4 advice range (writeup)", W,
+         r"advice stability between (0\.\d{2}) and\s+(0\.\d{2})",
+         (f"{min(lab_recs):.2f}", f"{max(lab_recs):.2f}")),
         ("labs4 dec range (writeup)", W, r"\(agreement\s+(0\.\d{2})–(0\.\d{2})\)",
          (f"{min(lab_decs):.2f}", f"{max(lab_decs):.2f}")),
         ("six-model gap range (writeup)", W, r"every one \(\+(0\.\d{2}) to \+(0\.\d{2})\)",
@@ -284,18 +433,51 @@ def bindings():
         ("a1 recourse (paper)", P, r"stability \*\*(0\.\d{3})\*\* \(reader SA", (a1_rec,)),
         ("a1 topic+raw (paper)", P, r"stability\s+(0\.\d{3}) at the pipeline's own four-heading rubric\s+granularity \(raw (0\.\d{3})\)",
          (a1_rea, a1_raw)),
-        ("valence range (paper)", P, r"\*\*(0\.\d{3})–(0\.\d{3})\*\* of same-topic", (mt_val, a1_val)),
+        ("direction range (paper)", P,
+         r"assigned opposite directions in \*\*(0\.\d{3})–(0\.\d{3})\*\*",
+         (mt_val, a1_val)),
         ("ctrl summary (paper)", P, r"decision (0\.\d{3}) \(4/25 flips\); reasons (0\.\d{3}); recourse (0\.\d{3}); gap \+(0\.\d{3})",
          (f"{_mean(CTRL, 'decision'):.3f}", f"{_mean(CTRL, 'reason_stability'):.3f}", ct_rec, ct_gap)),
         ("ctrl-vs-pipeline gap (paper)", P, r"gap \+(0\.\d{3})\s+vs the pipeline's \+(0\.\d{3})", (ct_gap, mt_gap)),
-        ("valence pair (paper)", P, r"valence (0\.\d{3}) vs\s+?(0\.\d{3})", (ct_val, mt_val)),
+        ("joint direction contrasts (paper)", P,
+         r"on the (\d+) cases cluster-eligible in both arms, target (0\.\d{3})\s+versus control (0\.\d{3}) \(difference \+(0\.\d{3})\); on (\d+) raw-eligible common cases,\s+(0\.\d{3}) versus (0\.\d{3})",
+         (str(cluster_joint[0]), f"{cluster_joint[1]:.3f}",
+          f"{cluster_joint[2]:.3f}", f"{cluster_joint[3]:.3f}",
+          str(raw_joint[0]), f"{raw_joint[1]:.3f}",
+          f"{raw_joint[2]:.3f}")),
         ("a2 summary (paper)", P, r"decision\s+(0\.\d{3}) \(6/25 flips\); reasons (0\.\d{3}); recourse (0\.\d{3}); gap \+(0\.\d{3})",
          (a2_dec, a2_rea, a2_rec, a2_gap)),
         ("a2 no-verdict count (paper)", P, r"\*\*(\d)/25\s+candidates received no clear verdict", (str(_unclear(A2)),)),
-        ("a2 flip containment (paper)", P, r"(\w+) of the six verdict flips occurred", ("five",)),
+        ("a2 flip containment (paper)", P,
+         r"(\w+) of the (\w+) verdict flips occurred",
+         (WORDS[a2_unclear_flips], WORDS[_flips(A2)])),
         ("six-model gap range (paper)", P, r"ranging\s+\+(0\.\d{2}) to \+(0\.\d{2})",
          (f"{min(six_gaps):.2f}", f"{max(six_gaps):.2f}")),
         ("kimi unparseable (paper)", P, r"\((\d+)/125 runs unparseable\)", (str(kimi_unparsed),)),
+        ("kimi corrected summary (paper)", P,
+         r"Kimi has\s+decision stability (\d\.\d{3}) across (\d+) measurable cases with (\w+) flips;\s+reason stability (0\.\d{3}) and recourse (0\.\d{3}) over the (\d+) cases clearing the\s+pair floor \(gap \+(0\.\d{3})\)",
+         (kimi_dec, str(_measurable_cases(kimi)), WORDS[_flips(kimi)],
+          kimi_rea, kimi_rec, str(_aggregate_n(kimi, "reason_cluster")),
+          kimi_gap)),
+        ("haiku corrected summary (paper)", P,
+         r"Haiku's corresponding corrected values are\s+decision (0\.\d{3}), reason (0\.\d{3}) and recourse (0\.\d{3}) over (\d+) floor-eligible\s+cases \(gap \+(0\.\d{3})\)",
+         (haiku_dec, haiku_rea, haiku_rec,
+          str(_aggregate_n(haiku, "reason_cluster")), haiku_gap)),
+        ("total scored flips (paper)", P,
+         r"Across the (\w+) systems with per-case certified records,\s+\*\*all (\d+) scored verdict flips",
+        (WORDS[len(CERTIFIED_FLIP_RECORD)], str(total_flips))),
+        ("direction range (explainer)", E,
+         r"one comparison in six to just under one in five</strong> "
+         r"\((0\.\d{3})–(0\.\d{3}), depending",
+         (mt_val, a1_val)),
+        ("joint direction table (explainer)", E,
+         r"Opposite direction</th>[\s\S]{0,160}?gp-value\">(0\.\d{3})</span>"
+         r"[\s\S]{0,160}?over the (\d+) cases eligible in both arms\. Across all independently eligible target cases, the two passing readers measure (0\.\d{3}) and (0\.\d{3})\."
+         r"[\s\S]{0,180}?gp-value\">(0\.\d{3})</span>[\s\S]{0,160}?same (\d+) common cases\. Difference \+(0\.\d{3})\. At raw level the common-case values are (0\.\d{3}) vs (0\.\d{3})",
+         (f"{cluster_joint[1]:.3f}", str(cluster_joint[0]), mt_val,
+          a1_val, f"{cluster_joint[2]:.3f}", str(cluster_joint[0]),
+          f"{cluster_joint[3]:.3f}", f"{raw_joint[1]:.3f}",
+          f"{raw_joint[2]:.3f}")),
         ("gap pair (explainer)", E,
          r"passed the gate give (0\.\d{3}) / (0\.\d{3})", (a1_gap, mt_gap)),
         ("gap table target cell (explainer)", E,
@@ -313,6 +495,24 @@ def bindings():
         ("lab advice range card (explainer)", E,
          r"<b>(0\.\d{2}) – (0\.\d{2})</b><span>advice stability range",
          (f"{min(lab_recs):.2f}", f"{max(lab_recs):.2f}")),
+        ("joint cluster direction contrast (validation)", V,
+         r"opposite-direction rate \(cluster; (\d+) common eligible cases\) \| \*\*(0\.\d{3})\*\* \| (0\.\d{3}) \| \*\*\+(0\.\d{3})\*\*",
+         (str(cluster_joint[0]), f"{cluster_joint[1]:.3f}",
+          f"{cluster_joint[2]:.3f}", f"{cluster_joint[3]:.3f}")),
+        ("joint raw direction contrast (validation)", V,
+         r"opposite-direction rate \(raw; (\d+) common eligible cases\) \| \*\*(0\.\d{3})\*\* \| (0\.\d{3}) \| \*\*\+(0\.\d{3})\*\*",
+         (str(raw_joint[0]), f"{raw_joint[1]:.3f}",
+          f"{raw_joint[2]:.3f}", f"{raw_joint[3]:.3f}")),
+        ("total scored flips (validation)", V,
+         r"All (\d+) scored verdict flips across all\s+(\w+) systems with per-case certified records",
+         (str(total_flips), WORDS[len(CERTIFIED_FLIP_RECORD)])),
+        ("a2 flip containment (validation)", V,
+         r"\*\*(\w+) of the (\w+) flipped cases sit in this\s+group",
+         (WORDS[a2_unclear_flips], WORDS[_flips(A2)])),
+        ("flip configuration/family scope (threats)", T,
+         r"\(?(\w+) of\s+(\w+) configurations and (\w+) of (\w+) base-model families show",
+         (WORDS[config_flips], WORDS[config_total],
+          WORDS[family_flips], WORDS[family_total])),
         # D-073: block-specific framing everywhere the 14/20 appears —
         # 20 estimates from 10 valid edits, not 20 interventions
         ("audit3 zero estimates (paper, all sites)", P,
