@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
+CURRENT_VERSION_DOI = "10.5281/zenodo.21865735"
 
 
 def _run_lint(root: Path):
@@ -53,6 +54,20 @@ def test_lint_clean_on_committed_artifacts():
     from claims_lint import REQUIRED_SURFACES
 
     assert f"CLEAN across {len(REQUIRED_SURFACES)} surfaces" in r.stdout
+
+
+def test_current_version_doi_is_bound_to_release_surfaces():
+    import yaml
+
+    citation = yaml.safe_load((ROOT / "CITATION.cff").read_text())
+    assert str(citation["doi"]) == CURRENT_VERSION_DOI
+    assert any(
+        str(identifier.get("value")) == CURRENT_VERSION_DOI
+        and "v1.0.2" in str(identifier.get("description"))
+        for identifier in citation["identifiers"]
+    )
+    for relative in ("README.md", "STATUS.md", "paper/PAPER.md"):
+        assert CURRENT_VERSION_DOI in (ROOT / relative).read_text()
 
 
 def _bindings():
@@ -213,6 +228,29 @@ def test_lint_rejects_release_version_drift(release_tree):
     assert r.returncode == 1
     assert "SEMANTIC CITATION release version" in r.stdout
     assert "9.9.9" in r.stdout
+
+
+def test_lint_rejects_current_version_doi_drift(release_tree):
+    citation = release_tree / "CITATION.cff"
+    _replace_once(
+        citation,
+        f"doi: {CURRENT_VERSION_DOI}\n",
+        "doi: 10.5281/zenodo.21862442\n",
+    )
+    r = _run_lint(release_tree)
+    assert r.returncode == 1
+    assert "CFF current version DOI" in r.stdout
+
+
+def test_lint_rejects_pending_doi_wording_after_archive(release_tree):
+    status = release_tree / "STATUS.md"
+    status.write_text(
+        status.read_text()
+        + "\nZenodo mints the v1.0.2 version DOI from the release tag.\n"
+    )
+    r = _run_lint(release_tree)
+    assert r.returncode == 1
+    assert "still describes archived v1.0.2 as pending" in r.stdout
 
 
 def test_lint_rejects_zenodo_version_moved_out_of_top_level(release_tree):
