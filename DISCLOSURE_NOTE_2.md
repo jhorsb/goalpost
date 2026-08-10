@@ -109,11 +109,24 @@ prose keeps the category description.
 
 ## Repository status and supersession (2026-08-10; D-084)
 
-This file remains an unsent historical draft and is not send-ready. D-059
-records the planned two-step contact route and D-063 records that its wording
-was revised after publication, but this repository contains no issue URL,
-posting timestamp, reply or private contact channel confirming that step 1
-occurred. The full note above is explicitly unsent. Its analytical wording is
-superseded by the versioned metrics, generated reports and canonical paper and
-must not be sent verbatim. No publication surface should describe a public
-contact request as confirmed solely from this repository.
+**Step 1 occurred and is publicly verifiable.** The content-free contact
+request was posted by the author as
+<https://github.com/Pakawat-Dev/Candidate_Screening_Agent/issues/1> at
+2026-08-09T09:35:17Z. It asks for a private channel and deliberately carries no
+findings. As of 2026-08-10 it is open with no reply, so no channel has been
+offered.
+
+**Step 2 — the full note above — remains unsent**, correctly: D-059 conditions
+it on a channel that does not yet exist. Because no findings have reached the
+author, the v1.0.2 corrections (D-083–D-085) created no correction obligation
+toward him; nothing superseded had been delivered. Its analytical wording is
+nonetheless superseded by the versioned metrics, generated reports and
+canonical paper, and must not be sent verbatim — the comparative sentence in
+particular now reads "seven of the eight configurations ... five of six
+base-model families", not "every configuration".
+
+D-059's fallback stands: if step 1 draws no reply by ~19 August 2026, the
+narrative non-naming default applies and the dated public attempt is the
+record. This block supersedes the D-084 statement that the repository could not
+evidence step 1; that was true of the repository's own contents and false of
+the world, and the citable issue is now recorded here.
