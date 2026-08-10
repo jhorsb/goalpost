@@ -606,6 +606,12 @@ with attribution.
 
 ## Acknowledgements
 
+The undergraduate dissertation this work extends (Horsburgh 2026) was
+supervised by Zoë Tieges at Glasgow Caledonian University, whose
+scoping of the original research question shaped everything downstream
+of it; she is named here with her agreement. Goalpost itself was built
+after graduation and is not GCU work.
+
 This is a solo-authored project developed with agent assistance:
 orchestration and protocol authorship via Claude (Anthropic), bulk
 implementation against committed failing tests via Codex (OpenAI), with
