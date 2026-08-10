@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use Goalpost or its evidence, please cite it as below."
+message: "v1.0.2 correction release; v1.0.1 is the superseded historical archive. Zenodo mints the v1.0.2 version DOI from the release tag; the current repository records it once available. Cite the concept DOI below while the archive is processing."
 title: "Goalpost: A Certification-Gated Protocol for Auditing the Stability of LLM Screening Decisions, Reasons, and Recourse"
 authors:
   - family-names: Horsburgh
@@ -8,8 +8,7 @@ authors:
 type: software
 repository-code: "https://github.com/jhorsb/goalpost"
 license: MIT
-date-released: "2026-08-09"
-version: "1.0.1"
+version: "1.0.2"
 doi: 10.5281/zenodo.21862442
 identifiers:
   - type: doi
@@ -20,7 +19,7 @@ identifiers:
     description: "Version DOI — the v1.0.0 snapshot (initial archive)."
   - type: doi
     value: 10.5281/zenodo.21864570
-    description: "Version DOI — the v1.0.1 snapshot underlying the paper."
+    description: "Version DOI — the v1.0.1 archived snapshot."
 keywords:
   - algorithmic recourse
   - LLM auditing

@@ -18,16 +18,37 @@ candidate. Three stabilities are computed per case:
 - **Decision Stability** — agreement with the modal decision across the N
   repeats, alongside refusal and parse-failure rates with full denominators.
 - **Reason Stability** and **Recourse Stability** — mean pairwise Jaccard
-  similarity of the reason/recourse sets over all C(N,2) pairs of repeats,
-  computed over **same-decision pairs** (pairs where the decision itself
-  flipped are excluded from the primary number and their fraction is
-  reported).
+  similarity of the reason/recourse sets over **same-decision pairs** of
+  scored repeats (pairs where the decision itself flipped are excluded from
+  the primary number and their fraction is reported).
+
+The denominator chain is exact. **Attempted** counts completed run records;
+**parsed** counts records whose parse status is `ok`; **scored** further
+requires a nonblank valid decision. Refusals and parse failures remain in
+the evidence and denominators but are excluded wholesale from decision,
+Jaccard, coverage and direction metrics; partial fields never score.
+Decision stability has no pair floor. Reason and recourse condition
+aggregates are unweighted means of cases with at least three surviving
+same-decision run-pairs, with every excluded case and reason retained.
 
 Sets are compared at three levels: **raw** (as the model wrote them, after
 mechanical text normalisation), **normalised**, and **clustered** (mapped
 onto a committed, versioned synonym taxonomy). The headline is the
 clustered level — the level the source dissertation reported — and reports
 always show the full ladder so the taxonomy's contribution is visible.
+
+**Direction reversal** is a separate companion, also computed at all three
+levels. For each same-decision scored-run pair and topic shared by the two
+runs, a comparison is scorable only when each run assigns exactly one
+direction. The rate is opposite-direction comparisons divided by
+unambiguous shared-topic comparisons. Mixed-sign or non-binary topic states
+within a run are counted as ambiguous exclusions, never resolved by item
+order; a case enters the aggregate only if at least three run-pairs contribute
+one or more scorable topics. The cluster level is the headline, with raw and normalised
+beside it. Goalpost v0.1's topics-ever-seen-with-both-signs statistic is
+retained only as labelled **legacy topic-reversal incidence** with its topic
+numerator and denominator. It is not pairwise, and the dissertation record
+does not specify that denominator.
 
 ## 2. Lineage: what is inherited, what is generalised
 
@@ -77,9 +98,13 @@ version. Cross-taxonomy comparisons are refused by the tool.
 Freeform mode (auditing an operator prompt Goalpost may not modify) adds a
 pinned extractor model that converts prose to the same structured form. Its
 measured **self-agreement** (k=3 repeated extractions per response, per
-item type) gates reporting: below the pre-registered bar (0.90, with a
-0.15 margin for instability claims — set before any reportable audit and
-unrevised since), stability numbers are withheld rather than reported.
+item type) gates reporting. For an observed stability *s* and reader
+self-agreement *a*, the exact rule is `a ≥ 0.90 and (s ≥ 0.85 or a − s ≥
+0.15)`, set before any reportable audit and unrevised since. Reasons and
+recourse are tested independently; a gap is reportable only when both
+component claims pass, with no separately estimated third margin for the
+arithmetic difference. Below the applicable rule, stability numbers are
+withheld rather than reported.
 The gate is asymmetric by design: extraction noise preferentially makes
 a system
 look *less* stable, though it can also inflate
@@ -91,12 +116,16 @@ instability claims carry the burden of proof.
 ## 4. Reproducibility machinery
 
 Every audit writes: the resolved config; the frozen corpus and (if
-enabled) deterministic perturbation variants; full transcripts of every
-call (SUT, extractor, canonicaliser) with per-repetition derived seeds,
-returned model fingerprints, token usage and cost; version-stamped
-normalised sets and mapping logs; and metrics carrying a provenance tuple
-(corpus hash, SUT identity including prompt hash and elicitation mode,
-condition, and the version of every pipeline stage). Everything downstream
+enabled) deterministic perturbation variants; run-level SUT inputs and
+final outputs with per-repetition derived seeds, returned model
+fingerprints, and the usage and cost visible to the instrument; extractor
+outputs; version-stamped normalised sets and canonicalisation mapping logs;
+and metrics carrying a provenance tuple (corpus hash, SUT identity including
+prompt hash and elicitation mode, condition, and the version of every
+instrument stage). A multi-stage SUT may make internal provider calls that
+its Goalpost adapter exposes only as one final response and aggregate usage;
+those internal prompts and responses are not claimed as transcripts.
+Everything downstream
 of transcripts is a pure function of files on disk: re-scoring under a
 newer taxonomy is free and never silently replaces the old numbers.
 

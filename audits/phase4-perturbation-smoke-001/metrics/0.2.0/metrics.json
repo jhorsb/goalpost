@@ -1,0 +1,742 @@
+{
+  "audit_id": "phase4-perturbation-smoke-001",
+  "suts": [
+    {
+      "name": "gpt-4o-mini",
+      "sut_id": "a634bbe86dc4c9a1",
+      "elicitation_mode": "structured",
+      "extracted": false,
+      "conditions": [
+        {
+          "condition_id": "t0.0_n5",
+          "temperature": 0.0,
+          "repeats": 5,
+          "cases": [
+            {
+              "case_id": "sc-platform-engineer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.6799999999999999,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.6799999999999999,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8666666666666666,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.395,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.395,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 38,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 10,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 38,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.6666666666666666,
+                    "n_topics": 3,
+                    "n_reversal_topics": 2
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 18,
+                    "n_ambiguous_shared_topic_comparisons": 8,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.8,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-data-analyst-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 0.8
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.6,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.6,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 6
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.5333333333333333,
+                  "n_pairs": 6
+                },
+                "normalised": {
+                  "mean_jaccard": 0.5333333333333333,
+                  "n_pairs": 6
+                },
+                "cluster": {
+                  "mean_jaccard": 0.5972222222222222,
+                  "n_pairs": 6
+                }
+              },
+              "discarded_pair_fraction": 0.4,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 9,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 12,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 9,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 12,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 6
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.5,
+                    "n_topics": 2,
+                    "n_reversal_topics": 1
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 12,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 6
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-frontend-developer-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.19642857142857142,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.19642857142857142,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.0725,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.0725,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.675,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 14,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 16,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 14,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 6,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 2,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 20,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.4,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-project-manager-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "reject",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.6285714285714286,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.6285714285714286,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.6166666666666666,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.6166666666666666,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 1.0,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 8,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 38,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 8,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 38,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 3,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 30,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 3.0,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.0,
+                "empty_empty_pair_fraction": 0.0
+              }
+            },
+            {
+              "case_id": "sc-support-team-lead-02",
+              "denominators": {
+                "attempted": 5,
+                "parsed": 5,
+                "scored": 5,
+                "refusals": 0
+              },
+              "decision_stability": {
+                "modal_decision": "accept",
+                "modal_agreement": 1.0
+              },
+              "reason_stability": {
+                "raw": {
+                  "mean_jaccard": 0.4441558441558442,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.4441558441558442,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.7,
+                  "n_pairs": 10
+                }
+              },
+              "recourse_stability": {
+                "raw": {
+                  "mean_jaccard": 0.16666666666666666,
+                  "n_pairs": 10
+                },
+                "normalised": {
+                  "mean_jaccard": 0.16666666666666666,
+                  "n_pairs": 10
+                },
+                "cluster": {
+                  "mean_jaccard": 0.8,
+                  "n_pairs": 10
+                }
+              },
+              "discarded_pair_fraction": 0.0,
+              "direction_reversal": {
+                "raw": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 35,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "normalised": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 14,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 35,
+                    "n_ambiguous_shared_topic_comparisons": 0,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                },
+                "cluster": {
+                  "legacy_topic_incidence": {
+                    "rate": 0.0,
+                    "n_topics": 4,
+                    "n_reversal_topics": 0
+                  },
+                  "pairwise": {
+                    "rate": 0.0,
+                    "n_opposite_direction_comparisons": 0,
+                    "n_unambiguous_shared_topic_comparisons": 11,
+                    "n_ambiguous_shared_topic_comparisons": 10,
+                    "n_contributing_run_pairs": 10,
+                    "n_same_decision_run_pairs": 10
+                  }
+                }
+              },
+              "reason_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 2.6,
+                "empty_empty_pair_fraction": 0.0
+              },
+              "recourse_coverage": {
+                "emptiness_rate": 0.0,
+                "mean_set_size": 1.2,
+                "empty_empty_pair_fraction": 0.0
+              }
+            }
+          ],
+          "aggregates": {
+            "reason_cluster": {
+              "mean": 0.9133333333333333,
+              "median": 1.0,
+              "iqr": [
+                0.8666666666666666,
+                1.0
+              ],
+              "n_included": 5,
+              "excluded": []
+            },
+            "recourse_cluster": {
+              "mean": 0.8144444444444444,
+              "median": 0.8,
+              "iqr": [
+                0.675,
+                1.0
+              ],
+              "n_included": 5,
+              "excluded": []
+            },
+            "direction_reversal_raw": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 5,
+              "excluded": []
+            },
+            "direction_reversal_normalised": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 5,
+              "excluded": []
+            },
+            "direction_reversal_cluster": {
+              "mean": 0.0,
+              "median": 0.0,
+              "iqr": [
+                0.0,
+                0.0
+              ],
+              "n_included": 5,
+              "excluded": []
+            },
+            "min_pairs_floor": 3
+          }
+        }
+      ],
+      "perturbations": {
+        "seed": 42,
+        "classes": [
+          {
+            "perturbation_class": "bullet_style",
+            "n_variants": 5,
+            "decision_flips": 0,
+            "decision_flip_rate": 0.0,
+            "details": [
+              {
+                "variant_id": "sc-platform-engineer-02+bullet_style",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-data-analyst-02+bullet_style",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-frontend-developer-02+bullet_style",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-project-manager-02+bullet_style",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-support-team-lead-02+bullet_style",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              }
+            ]
+          },
+          {
+            "perturbation_class": "date_format",
+            "n_variants": 5,
+            "decision_flips": 0,
+            "decision_flip_rate": 0.0,
+            "details": [
+              {
+                "variant_id": "sc-platform-engineer-02+date_format",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-data-analyst-02+date_format",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-frontend-developer-02+date_format",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-project-manager-02+date_format",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-support-team-lead-02+date_format",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              }
+            ]
+          },
+          {
+            "perturbation_class": "whitespace",
+            "n_variants": 5,
+            "decision_flips": 0,
+            "decision_flip_rate": 0.0,
+            "details": [
+              {
+                "variant_id": "sc-platform-engineer-02+whitespace",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-data-analyst-02+whitespace",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-frontend-developer-02+whitespace",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-project-manager-02+whitespace",
+                "condition_id": "t0.0_n5",
+                "base_decision": "reject",
+                "variant_decision": "reject",
+                "flipped": false
+              },
+              {
+                "variant_id": "sc-support-team-lead-02+whitespace",
+                "condition_id": "t0.0_n5",
+                "base_decision": "accept",
+                "variant_decision": "accept",
+                "flipped": false
+              }
+            ]
+          }
+        ],
+        "overall_decision_flip_rate": 0.0,
+        "missing_blocks": []
+      }
+    }
+  ],
+  "total_cost_usd": 0.0385965,
+  "missing_blocks": [],
+  "provenance": {
+    "corpus_hash": "19c4784a46690211bc4403d41fa0dc7788df12a2f493dfb67a4f0fca977144d0|20f1fe676436005dff51633fa069ab021ff4b1ff67216f6e3b09421907b8343d|47796f8df874c4ecaaffa713163393a6ce4541311ab7441c91548a2005560a0e|8afdeedfcc62925992dcf9053e221d253f8a814bd03a800c7063aade003eac1f|b92d1f2f6f2a0cd484fb717f669356b2070748b564420400ed6a344c78a2aa96",
+    "runner_version": "0.1.0",
+    "parser_version": "0.1.0",
+    "normaliser_version": "0.1.0",
+    "taxonomy_version": "1.0.0+1dfd20707ff9",
+    "metrics_version": "0.2.0",
+    "audit_version": "0.1.0",
+    "recomputed_from": {
+      "source_metrics_version": "0.1.0",
+      "eligible_parse_status": [
+        "ok"
+      ],
+      "min_pairs_floor": 3,
+      "legacy_direction_denominator": "distinct topics observed across scored repeats; Goalpost v0.1 operationalisation",
+      "direction_reversal_denominator": "unambiguous shared topics across same-decision scored-run pairs",
+      "inputs": [
+        {
+          "path": "metrics/0.1.0/metrics.json",
+          "sha256": "249ced124b8c53d57750f261e7f11646a2986e8a28a6d54f603ed95da8ec7b8a"
+        },
+        {
+          "path": "normalised/0.1.0/a634bbe86dc4c9a1/mapping_log.jsonl",
+          "sha256": "ed85665c2a0f7b85f3b59fd28f53880dcc2e130f9883b44d6c0ee822e124f4c9"
+        },
+        {
+          "path": "normalised/0.1.0/a634bbe86dc4c9a1/normalised_runs.jsonl",
+          "sha256": "194b879c5391b4ce76733ceb42117c77f3f34f67bd317dd292c9fe63ab47183c"
+        },
+        {
+          "path": "runs/a634bbe86dc4c9a1/runs.jsonl",
+          "sha256": "f2748e3fa6e3d892a3ba9c22da97aed90ee47bf953e8e497485a1b7a39a6057b"
+        }
+      ]
+    }
+  }
+}

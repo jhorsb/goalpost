@@ -15,8 +15,10 @@ from goalpost.metrics import (
     decision_stability,
     direction_flip_rate,
     jaccard,
+    legacy_topic_reversal_incidence_stats,
     pairwise_jaccard_stats,
     same_decision_pairwise_jaccard,
+    shared_topic_direction_disagreement,
 )
 
 
@@ -97,6 +99,14 @@ def test_same_decision_no_pairs_survive_when_all_differ():
     assert result.discarded_pair_fraction == 1.0
 
 
+def test_same_decision_discarded_fraction_is_undefined_without_run_pairs():
+    result = same_decision_pairwise_jaccard([], [])
+
+    assert result.stats.n_pairs == 0
+    assert result.stats.mean_jaccard is None
+    assert result.discarded_pair_fraction is None
+
+
 # ── decision stability ───────────────────────────────────────────────
 
 def test_decision_stability_unanimous():
@@ -134,6 +144,22 @@ def test_coverage_companions_flags_empty_sets():
     assert cov.empty_empty_pair_fraction == pytest.approx(1 / 3)
 
 
+def test_coverage_companions_are_undefined_without_scored_runs():
+    cov = coverage_companions([])
+
+    assert cov.emptiness_rate is None
+    assert cov.mean_set_size is None
+    assert cov.empty_empty_pair_fraction is None
+
+
+def test_empty_pair_fraction_is_undefined_without_a_run_pair():
+    cov = coverage_companions([set()])
+
+    assert cov.emptiness_rate == 1.0
+    assert cov.mean_set_size == 0.0
+    assert cov.empty_empty_pair_fraction is None
+
+
 # ── direction flips (honours definition) ─────────────────────────────
 
 def test_direction_flip_rate_no_flips():
@@ -151,6 +177,115 @@ def test_direction_flip_rate_one_of_two_features_flips():
 
 def test_direction_flip_rate_empty_maps():
     assert direction_flip_rate([{}, {}]) == 0.0
+
+
+def test_legacy_topic_reversal_incidence_names_its_topic_denominator():
+    stats = legacy_topic_reversal_incidence_stats(
+        [
+            {"experience": {"negative"}, "skills": {"positive"}},
+            {"experience": {"positive"}, "skills": {"positive"}},
+        ]
+    )
+
+    assert stats.rate == pytest.approx(1 / 2)
+    assert stats.n_topics == 2
+    assert stats.n_reversal_topics == 1
+
+
+def test_legacy_topic_reversal_incidence_is_undefined_without_topics():
+    stats = legacy_topic_reversal_incidence_stats([{}, {}])
+
+    assert stats.rate is None
+    assert stats.n_topics == 0
+    assert stats.n_reversal_topics == 0
+
+
+def test_pairwise_direction_disagreement_counts_all_three_opposite_pairs():
+    stats = shared_topic_direction_disagreement(
+        [
+            {"experience": {"positive"}},
+            {"experience": {"negative"}},
+            {"experience": {"negative"}},
+        ],
+        ["reject", "reject", "reject"],
+    )
+
+    # Pair directions: (+,-), (+,-), (-,-) -> two opposites of three.
+    assert stats.rate == pytest.approx(2 / 3)
+    assert stats.n_opposite_direction_comparisons == 2
+    assert stats.n_unambiguous_shared_topic_comparisons == 3
+    assert stats.n_contributing_run_pairs == 3
+
+
+def test_pairwise_direction_disagreement_uses_shared_topics_and_same_decision_pairs():
+    stats = shared_topic_direction_disagreement(
+        [
+            {"experience": {"negative"}, "skills": {"positive"}},
+            {"experience": {"positive"}, "skills": {"positive"}},
+            {"experience": {"negative"}, "skills": {"negative"}},
+        ],
+        ["reject", "reject", "accept"],
+    )
+
+    # Only runs 0 and 1 share a decision. They share two topics, and one
+    # direction differs. Cross-decision comparisons never enter the rate.
+    assert stats.rate == pytest.approx(1 / 2)
+    assert stats.n_opposite_direction_comparisons == 1
+    assert stats.n_unambiguous_shared_topic_comparisons == 2
+    assert stats.n_ambiguous_shared_topic_comparisons == 0
+    assert stats.n_contributing_run_pairs == 1
+    assert stats.n_same_decision_run_pairs == 1
+
+
+def test_pairwise_direction_disagreement_is_undefined_without_shared_topics():
+    stats = shared_topic_direction_disagreement(
+        [{"experience": {"negative"}}, {"skills": {"positive"}}],
+        ["reject", "reject"],
+    )
+
+    assert stats.rate is None
+    assert stats.n_opposite_direction_comparisons == 0
+    assert stats.n_unambiguous_shared_topic_comparisons == 0
+    assert stats.n_ambiguous_shared_topic_comparisons == 0
+    assert stats.n_contributing_run_pairs == 0
+    assert stats.n_same_decision_run_pairs == 1
+
+
+def test_non_binary_direction_is_an_ambiguous_exclusion_not_an_opposite():
+    stats = shared_topic_direction_disagreement(
+        [
+            {"experience": {"positive"}},
+            {"experience": {"neutral"}},
+        ],
+        ["reject", "reject"],
+    )
+
+    assert stats.rate is None
+    assert stats.n_opposite_direction_comparisons == 0
+    assert stats.n_unambiguous_shared_topic_comparisons == 0
+    assert stats.n_ambiguous_shared_topic_comparisons == 1
+    assert stats.n_contributing_run_pairs == 0
+
+
+def test_pairwise_direction_disagreement_exposes_ambiguous_topic_exclusions():
+    stats = shared_topic_direction_disagreement(
+        [
+            {
+                "experience": {"positive", "negative"},
+                "skills": {"positive"},
+            },
+            {"experience": {"negative"}, "skills": {"negative"}},
+        ],
+        ["reject", "reject"],
+    )
+
+    # Experience is internally contradictory in the first run and therefore
+    # cannot supply a literal positive-vs-negative comparison. Skills can.
+    assert stats.rate == 1.0
+    assert stats.n_opposite_direction_comparisons == 1
+    assert stats.n_unambiguous_shared_topic_comparisons == 1
+    assert stats.n_ambiguous_shared_topic_comparisons == 1
+    assert stats.n_contributing_run_pairs == 1
 
 
 # ── property tests ───────────────────────────────────────────────────

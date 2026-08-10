@@ -1,6 +1,7 @@
 {
-  "board_version": "0.1.0",
-  "anchors_version": "anchors-1.0.0",
+  "board_version": "0.2.0",
+  "metrics_version": "0.2.0",
+  "anchors_version": "anchors-1.1.0",
   "groups": [
     {
       "key": {
@@ -15,19 +16,22 @@
           "audit_id": "target2-csa-002-fallback",
           "mode": "freeform",
           "reader": "gemma-4-31b",
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.9359999999999999,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.7287222222222222,
-              "band": "advice mostly repeats, with noticeable variation"
+              "band": "reasons mostly repeat, with noticeable variation",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.5555380952380953,
-              "band": "advice changes about as often as it repeats"
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 25
             }
           }
         }
@@ -46,19 +50,22 @@
           "audit_id": "control-bare-model-001",
           "mode": "freeform",
           "reader": "gemma-4-31b",
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.96,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.6122761904761905,
-              "band": "advice changes about as often as it repeats"
+              "band": "reasons change about as often as they repeat",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.5067683982683983,
-              "band": "advice changes about as often as it repeats"
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 25
             }
           }
         },
@@ -67,19 +74,22 @@
           "audit_id": "matched-target-gemma-001",
           "mode": "freeform",
           "reader": "gemma-4-31b",
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.968,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.9928,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "reasons are largely consistent across repeat queries",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.4556825396825397,
-              "band": "advice changes about as often as it repeats"
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 25
             }
           }
         }
@@ -98,19 +108,22 @@
           "audit_id": "realtarget-hs-screener-002-gptoss",
           "mode": "freeform",
           "reader": "gpt-4.1-2025-04-14",
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.968,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.9828,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "reasons are largely consistent across repeat queries",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.44837777777777776,
-              "band": "advice changes more often than it repeats"
+              "band": "advice changes more often than it repeats",
+              "n_cases": 25
             }
           }
         }
@@ -129,19 +142,22 @@
           "audit_id": "phase4-validation-001",
           "mode": "structured",
           "reader": null,
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.96,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.7896666666666667,
-              "band": "advice mostly repeats, with noticeable variation"
+              "band": "reasons mostly repeat, with noticeable variation",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.6701333333333334,
-              "band": "advice mostly repeats, with noticeable variation"
+              "band": "advice mostly repeats, with noticeable variation",
+              "n_cases": 25
             }
           }
         },
@@ -150,19 +166,22 @@
           "audit_id": "phase4-validation-001",
           "mode": "structured",
           "reader": null,
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.976,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.9713333333333333,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "reasons are largely consistent across repeat queries",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.6819333333333333,
-              "band": "advice mostly repeats, with noticeable variation"
+              "band": "advice mostly repeats, with noticeable variation",
+              "n_cases": 25
             }
           }
         },
@@ -171,19 +190,22 @@
           "audit_id": "phase4-crosslab-claude-001",
           "mode": "structured",
           "reader": null,
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
-              "value": 0.9840000000000001,
-              "band": "advice is largely consistent across repeat queries"
+              "value": 0.99,
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
-              "value": 0.7886444444444445,
-              "band": "advice mostly repeats, with noticeable variation"
+              "value": 0.7953935185185186,
+              "band": "reasons mostly repeat, with noticeable variation",
+              "n_cases": 24
             },
             "recourse": {
-              "value": 0.4974095238095238,
-              "band": "advice changes about as often as it repeats"
+              "value": 0.5702645502645503,
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 24
             }
           }
         },
@@ -192,19 +214,22 @@
           "audit_id": "phase4-validation-001",
           "mode": "structured",
           "reader": null,
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
               "value": 0.9840000000000001,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 25
             },
             "reasons": {
               "value": 0.8588,
-              "band": "advice is largely consistent across repeat queries"
+              "band": "reasons are largely consistent across repeat queries",
+              "n_cases": 25
             },
             "recourse": {
               "value": 0.5700333333333333,
-              "band": "advice changes about as often as it repeats"
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 25
             }
           }
         }
@@ -223,19 +248,22 @@
           "audit_id": "kimi-k3-lab-001",
           "mode": "structured",
           "reader": null,
-          "n_cases": 25,
+          "n_cases_audited": 25,
           "measures": {
             "decision": {
-              "value": 0.9791666666666666,
-              "band": "advice is largely consistent across repeat queries"
+              "value": 1.0,
+              "band": "decision is largely consistent across repeat queries",
+              "n_cases": 22
             },
             "reasons": {
-              "value": 0.7360777777777778,
-              "band": "advice mostly repeats, with noticeable variation"
+              "value": 0.7609722222222223,
+              "band": "reasons mostly repeat, with noticeable variation",
+              "n_cases": 20
             },
             "recourse": {
-              "value": 0.5790825396825396,
-              "band": "advice changes about as often as it repeats"
+              "value": 0.6200357142857144,
+              "band": "advice changes about as often as it repeats",
+              "n_cases": 20
             }
           }
         }

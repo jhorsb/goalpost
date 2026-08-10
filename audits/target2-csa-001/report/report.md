@@ -1,6 +1,6 @@
 # Goalpost audit — csa-screening-agent
 
-*Audit `target2-csa-001` · goalpost 0.1.0 · anchors-1.0.0 · sut `6aed88bc` (freeform mode)*
+*Audit `target2-csa-001` · audit schema 0.1.0 · metrics 0.2.0 · anchors-1.1.0 · sut `6aed88bc` (freeform mode)*
 
 ## The headline
 
@@ -23,6 +23,18 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 ## Technical appendix
 
 ### Condition `t0.3_n5` (T=0.3, N=5)
+
+#### Condition aggregates
+
+Unweighted case means after the floor ≥3 contributing run-pairs; exclusions are explicit.
+
+| measure | mean | median | IQR | eligible cases | exclusions |
+|---|---|---|---|---|---|
+| Reason stability (cluster) | 0.719 | 0.750 | [0.578, 0.850] | 25 | none |
+| Recourse stability (cluster) | 0.567 | 0.550 | [0.490, 0.667] | 25 | none |
+| Opposite direction (raw) | 0.019 | 0.000 | [0.000, 0.000] | 25 | none |
+| Opposite direction (normalised) | 0.019 | 0.000 | [0.000, 0.000] | 25 | none |
+| Opposite direction (cluster) | 0.032 | 0.000 | [0.000, 0.009] | 24 | sc-frontend-developer-04: n_pairs 1 < 3 |
 
 | case | level | reason J | recourse J | n_pairs | decision | attempted/parsed/scored | refusals |
 |---|---|---|---|---|---|---|---|
@@ -127,6 +139,86 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 | sc-support-team-lead-05 | cluster | 0.90 | 0.44 | 10 | 1.00 | 5/5/5 | 0 |
 | sc-support-team-lead-05 | coverage | emptiness 0.00, size 3.2 | emptiness 0.00, size 3.0 | — | — | discarded pairs 0% | — |
 
+#### Direction reversal denominators
+
+| case | level | opposite direction | opposite/unambiguous | ambiguous | contributing/same-decision run-pairs | legacy topic incidence |
+|---|---|---|---|---|---|---|
+| sc-platform-engineer-01 | raw | 0.000 | 0/21 | 0 | 6/10 | 0/11 |
+| sc-platform-engineer-01 | normalised | 0.000 | 0/21 | 0 | 6/10 | 0/11 |
+| sc-platform-engineer-01 | cluster | 0.000 | 0/25 | 7 | 10/10 | 1/4 |
+| sc-platform-engineer-02 | raw | 0.000 | 0/30 | 1 | 10/10 | 1/4 |
+| sc-platform-engineer-02 | normalised | 0.000 | 0/30 | 1 | 10/10 | 1/4 |
+| sc-platform-engineer-02 | cluster | 0.000 | 0/30 | 1 | 10/10 | 1/4 |
+| sc-platform-engineer-03 | raw | 0.000 | 0/27 | 0 | 10/10 | 0/12 |
+| sc-platform-engineer-03 | normalised | 0.000 | 0/27 | 0 | 10/10 | 0/12 |
+| sc-platform-engineer-03 | cluster | 0.000 | 0/27 | 0 | 10/10 | 0/5 |
+| sc-platform-engineer-04 | raw | 0.000 | 0/30 | 0 | 10/10 | 0/5 |
+| sc-platform-engineer-04 | normalised | 0.000 | 0/30 | 0 | 10/10 | 0/5 |
+| sc-platform-engineer-04 | cluster | 0.000 | 0/30 | 1 | 10/10 | 1/4 |
+| sc-platform-engineer-05 | raw | 0.000 | 0/15 | 0 | 6/10 | 0/10 |
+| sc-platform-engineer-05 | normalised | 0.000 | 0/15 | 0 | 6/10 | 0/10 |
+| sc-platform-engineer-05 | cluster | 0.000 | 0/23 | 4 | 10/10 | 0/4 |
+| sc-data-analyst-01 | raw | 0.000 | 0/24 | 0 | 10/10 | 0/27 |
+| sc-data-analyst-01 | normalised | 0.000 | 0/24 | 0 | 10/10 | 0/27 |
+| sc-data-analyst-01 | cluster | 0.000 | 0/20 | 18 | 10/10 | 1/10 |
+| sc-data-analyst-02 | raw | 0.000 | 0/10 | 0 | 6/10 | 0/19 |
+| sc-data-analyst-02 | normalised | 0.000 | 0/10 | 0 | 6/10 | 0/19 |
+| sc-data-analyst-02 | cluster | 0.000 | 0/12 | 10 | 6/10 | 0/5 |
+| sc-data-analyst-03 | raw | 0.000 | 0/24 | 0 | 10/10 | 0/15 |
+| sc-data-analyst-03 | normalised | 0.000 | 0/24 | 0 | 10/10 | 0/15 |
+| sc-data-analyst-03 | cluster | 0.000 | 0/29 | 0 | 10/10 | 0/7 |
+| sc-data-analyst-04 | raw | 0.000 | 0/18 | 2 | 10/10 | 0/5 |
+| sc-data-analyst-04 | normalised | 0.000 | 0/18 | 2 | 10/10 | 0/5 |
+| sc-data-analyst-04 | cluster | 0.000 | 0/21 | 2 | 10/10 | 0/4 |
+| sc-data-analyst-05 | raw | 0.095 | 4/42 | 0 | 10/10 | 1/5 |
+| sc-data-analyst-05 | normalised | 0.095 | 4/42 | 0 | 10/10 | 1/5 |
+| sc-data-analyst-05 | cluster | 0.037 | 1/27 | 9 | 10/10 | 1/4 |
+| sc-frontend-developer-01 | raw | 0.000 | 0/42 | 0 | 10/10 | 0/5 |
+| sc-frontend-developer-01 | normalised | 0.000 | 0/42 | 0 | 10/10 | 0/5 |
+| sc-frontend-developer-01 | cluster | 0.000 | 0/26 | 10 | 10/10 | 1/4 |
+| sc-frontend-developer-02 | raw | 0.000 | 0/5 | 0 | 4/4 | 0/6 |
+| sc-frontend-developer-02 | normalised | 0.000 | 0/5 | 0 | 4/4 | 0/6 |
+| sc-frontend-developer-02 | cluster | 0.000 | 0/8 | 0 | 4/4 | 0/3 |
+| sc-frontend-developer-03 | raw | 0.000 | 0/19 | 0 | 9/10 | 0/12 |
+| sc-frontend-developer-03 | normalised | 0.000 | 0/19 | 0 | 9/10 | 0/12 |
+| sc-frontend-developer-03 | cluster | 0.000 | 0/19 | 0 | 10/10 | 0/5 |
+| sc-frontend-developer-04 | raw | 0.000 | 0/3 | 0 | 3/6 | 0/28 |
+| sc-frontend-developer-04 | normalised | 0.000 | 0/3 | 0 | 3/6 | 0/28 |
+| sc-frontend-developer-04 | cluster | 0.000 | 0/2 | 8 | 1/6 | 0/7 |
+| sc-frontend-developer-05 | raw | 0.111 | 3/27 | 0 | 10/10 | 1/5 |
+| sc-frontend-developer-05 | normalised | 0.111 | 3/27 | 0 | 10/10 | 1/5 |
+| sc-frontend-developer-05 | cluster | 0.115 | 3/26 | 4 | 10/10 | 1/3 |
+| sc-project-manager-01 | raw | 0.000 | 0/15 | 3 | 6/10 | 1/9 |
+| sc-project-manager-01 | normalised | 0.000 | 0/15 | 3 | 6/10 | 1/9 |
+| sc-project-manager-01 | cluster | 0.000 | 0/15 | 7 | 6/10 | 1/4 |
+| sc-project-manager-02 | raw | 0.000 | 0/6 | 0 | 3/4 | 0/17 |
+| sc-project-manager-02 | normalised | 0.000 | 0/6 | 0 | 3/4 | 0/17 |
+| sc-project-manager-02 | cluster | 0.000 | 0/10 | 1 | 4/4 | 2/6 |
+| sc-project-manager-03 | raw | 0.000 | 0/37 | 0 | 10/10 | 0/12 |
+| sc-project-manager-03 | normalised | 0.000 | 0/37 | 0 | 10/10 | 0/12 |
+| sc-project-manager-03 | cluster | 0.000 | 0/32 | 0 | 10/10 | 0/5 |
+| sc-project-manager-04 | raw | 0.000 | 0/10 | 0 | 6/6 | 0/21 |
+| sc-project-manager-04 | normalised | 0.000 | 0/10 | 0 | 6/6 | 0/21 |
+| sc-project-manager-04 | cluster | 0.154 | 2/13 | 6 | 6/6 | 1/8 |
+| sc-project-manager-05 | raw | 0.000 | 0/34 | 0 | 10/10 | 0/5 |
+| sc-project-manager-05 | normalised | 0.000 | 0/34 | 0 | 10/10 | 0/5 |
+| sc-project-manager-05 | cluster | 0.000 | 0/26 | 7 | 10/10 | 1/4 |
+| sc-support-team-lead-01 | raw | 0.111 | 2/18 | 0 | 6/10 | 1/15 |
+| sc-support-team-lead-01 | normalised | 0.111 | 2/18 | 0 | 6/10 | 1/15 |
+| sc-support-team-lead-01 | cluster | 0.059 | 1/17 | 9 | 10/10 | 1/5 |
+| sc-support-team-lead-02 | raw | 0.000 | 0/4 | 0 | 3/6 | 1/24 |
+| sc-support-team-lead-02 | normalised | 0.000 | 0/4 | 0 | 3/6 | 1/24 |
+| sc-support-team-lead-02 | cluster | 0.250 | 1/4 | 14 | 3/6 | 3/4 |
+| sc-support-team-lead-03 | raw | 0.000 | 0/23 | 0 | 10/10 | 0/7 |
+| sc-support-team-lead-03 | normalised | 0.000 | 0/23 | 0 | 10/10 | 0/7 |
+| sc-support-team-lead-03 | cluster | 0.000 | 0/21 | 0 | 10/10 | 0/4 |
+| sc-support-team-lead-04 | raw | 0.167 | 2/12 | 4 | 6/10 | 1/18 |
+| sc-support-team-lead-04 | normalised | 0.167 | 2/12 | 4 | 6/10 | 1/18 |
+| sc-support-team-lead-04 | cluster | 0.143 | 2/14 | 16 | 8/10 | 3/6 |
+| sc-support-team-lead-05 | raw | 0.000 | 0/30 | 0 | 10/10 | 0/4 |
+| sc-support-team-lead-05 | normalised | 0.000 | 0/30 | 0 | 10/10 | 0/4 |
+| sc-support-team-lead-05 | cluster | 0.000 | 0/30 | 0 | 10/10 | 0/4 |
+
 ### Provenance
 
 - corpus_hash: `0032c8d7ad6047f87b73b4538f29e708774cc90f7eb04047e76868e0a7f8546c|07909789767558501b66e32e70b4282ea274f414de1d43bbe94467700e5b2ffd|1846b5bfce9c08e39e032181bd9a49e9b3f42be3e4568d55a62947efa4a9e7a4|1fd57a2bf307ae9b1bdc429d4c531ed7d0181d99212b0d256926cc7fdd2bdd9d|4058efd90adffbda46fcd7895c2fae3d1a4594aba7002ff71f47338ebce3464e|4436a93298c379acaa7a56dcafa16c766817b2c2eaa1a689c15ec3316e504684|457634a2217a98597589624f532d77811776d49ddb1505da1cf063911f838c04|4832b6cfe6c26aa8c385fe0fb6a78d0eb7a50a5ad4d4e5abc37c9275723dbb41|4c69c678a3473c1a211323a83e0fe02a62acfb06fbb0d3002826711118b95b0a|54adfd2768eb92cd45210ea18c4dff8ce70696e1389ebc250ff2712dadb4579b|6713b68537b953291d36baa9228797437f60b91e07559dd7302cd9ef95b29910|741fa6cf51332f298e442b9714914bf121b4b5dd454b258ffd4ad14d34ea8d35|8f4925646116026702900f1e20f58cbf8e59788077871b648d37c090e998c24d|a0307a3c9c3c0d8993788dc11b7261dcf8b5eb03bf4b5d3167686e90468ac636|a61889df1cb0e64f08e11e5f610c8100c55e624b3ce929c3c11648bbb46a8b4b|af18c1be308e883d3cbfee1ede3d5d33e2a405968e98774a59fbbf828d701291|c5a2040dc8c5ecbe4d212abb9f3a7ecb265d8cec4de1827564af9cf47889ba83|d400a96c16cfe494095a16b22c43d3e319e04022c6c2640fd833a0ceb59146eb|d59884b238be00caf6278d9b324cc8ee06530190cc64ba774ca59b8cdd290900|da2cac2caf8c65e91576f7b27b7f595c9c586f3ad55094b00f0b66df3187ca8c|dfa2684ece9451632d630f61b633d27f5b4f755778b585efe7c6f0cc61fc3030|eb133be5efd9ea46a07f9bd4551c0cabc76725db9eb2125a58c8ca232a767ab8|ed66669c08c966c101f88c30bbf89fa7743d190eee5dd8916a825b11d76c26ee|fd438a0bf30f1558194521a14f1398f5f741070ec91fc3e2a5cd3864a70062f2|fea36593fa1726ae170aff4c3e30ca590d915c96739f93e36339f3eb140bba2d`
@@ -134,7 +226,8 @@ Imagine a sat-nav that always tells you *why* you haven't arrived — "you're 40
 - parser_version: `0.1.0`
 - normaliser_version: `0.1.0`
 - taxonomy_version: `1.0.0+1dfd20707ff9`
-- metrics_version: `0.1.0`
+- metrics_version: `0.2.0`
 - audit_version: `0.1.0`
-- report_version: `0.1.0` · anchors: `anchors-1.0.0`
+- recomputed_from: `{'source_metrics_version': '0.1.0', 'eligible_parse_status': ['ok'], 'min_pairs_floor': 3, 'legacy_direction_denominator': 'distinct topics observed across scored repeats; Goalpost v0.1 operationalisation', 'direction_reversal_denominator': 'unambiguous shared topics across same-decision scored-run pairs', 'inputs': [{'path': 'metrics/0.1.0/metrics.json', 'sha256': '8dffbe3df8fcc2eae1e99227396de84d23677ef0ddb32b8a6d6b799fe0aa6d68'}, {'path': 'normalised/0.1.0/6aed88bcce3e158c/mapping_log.jsonl', 'sha256': '4756ecdec99d8a13469e74cb39febbcd0699d6a71c226cfaa350ad03e90ddbfc'}, {'path': 'normalised/0.1.0/6aed88bcce3e158c/normalised_runs.jsonl', 'sha256': '67ce627837c206277a047f40dc524ce05755afb75650b8465e8bf371c8ecbb66'}, {'path': 'runs/6aed88bcce3e158c/runs.jsonl', 'sha256': '439950631a290dd6ec1bce8274c4f66727bbd7f6c331b43efb7c403c8af9c7fb'}]}`
+- report_version: `0.2.0` · anchors: `anchors-1.1.0`
 - total cost: $3.9979

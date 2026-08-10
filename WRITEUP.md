@@ -4,6 +4,11 @@
 D-024; full identification (URL, pinned commit, content hashes) is in the
 audit evidence.*
 
+> **Correction status — v1.0.2.** The v1.0.1 archive is preserved
+> as the superseded historical record. This release rebuilds the
+> evidence and derived claims under corrected parse-eligibility,
+> aggregation-floor and direction-metric definitions (D-083–D-085).
+
 > **Cite this work.** The instrument, the three audits and every
 > transcript behind the numbers below are archived and citable:
 > Horsburgh, J. (2026). *Goalpost: A Certification-Gated Protocol for
@@ -74,7 +79,10 @@ measurement: twenty-five fictional CVs
 against five job specs, five identical runs each, at the pipeline's own
 default settings. The extraction layer is the exception, and it is
 described below: it failed its own gate mid-audit and was rebuilt, then
-re-certified. Every run's inputs and outputs recorded in full. Decision, reasons, and advice
+re-certified. Goalpost retained every run's input and final system output;
+the audited pipeline's internal provider calls are represented by its final
+response and aggregate usage, not claimed as separate transcripts. Decision,
+reasons, and advice were
 pulled from the tool's free-text output by a separate extraction model —
 a different model family from the one being audited, following the
 cross-model practice the LLM-as-judge literature recommends — whose own
@@ -169,13 +177,17 @@ the real result.
 The pipeline's recruiter agent always evaluates under the same four
 headings — skills, experience, education, extras. Those headings are
 almost perfectly stable across runs: measure "did it discuss the same
-topics?" and you get 0.983. But measure whether each topic *counted for or
-against the candidate*, and it flips in **roughly a third to a half** of
-paired comparisons (0.378–0.508, depending on which of two independently
-certified extraction lenses does the reading). Your experience can be the
-reason you're recommended on one run and the reason you're not on the
-next. The explanation looks stable at the level of what
-it mentions, and is unstable in what it asserts.
+topics?" and you get 0.983. But when a topic is present in two
+same-verdict runs and each run gives it one unambiguous direction, the
+direction is opposite in **about one comparison in six to just under one in five**
+(0.156–0.188, depending on which of two independently certified readers
+does the reading). A topic assigned both signs within one run is counted as
+ambiguous and excluded, rather than collapsed by item order; a non-binary
+direction label is treated the same way. Cases also need three contributing
+run-pairs to enter the aggregate. Your experience can be
+the reason you're recommended on one run and the reason you're not on the
+next. The explanation looks stable at the level of what it mentions, and is
+less stable in what it asserts.
 
 That is my dissertation's thesis in a sharper form than my dissertation
 managed to state it, and unlike the number beside it, it never needed a
@@ -235,21 +247,26 @@ the full pipeline on three. Flipping happens with or without the chain;
 twenty-five cases per arm cannot say whether the chain changes how often
 it happens, only that it would be unfair to the developer to pin the
 phenomenon on the design. This was not
-unique to the audited developer: every configuration I have measured
-(eight, on six base models from three providers) exhibited at least one verdict flip
-on identical inputs.
+unique to the audited developer: seven of the eight configurations I have
+measured exhibited at least one scored verdict flip on identical inputs,
+spanning five of six base-model families from three providers. Kimi K3 is
+the exception: after failed parses are excluded, its 22 measurable cases
+contain no verdict flip.
 
-**What tracks the design.** The gap, and the valence flipping. Under the
-same model, host, corpus and lens, the
+**What tracks the design.** The reason–recourse gap. Under the same model,
+host, corpus and lens, the
 chain's fixed rubric lifts topic-stability from 0.61 to 0.99 while leaving
 advice no more stable than the bare model's (0.456 against 0.507, if
 anything slightly worse). It manufactures consistent-looking
 *explanations* without manufacturing
-consistent *guidance*. It also shows more meaning-flipping: 0.378
-against the bare model's 0.249. I read this as design-associated
-evidence rather than a clean causal estimate; still, the association
-survived every matched thing I could hold constant. The architecture
-that was presumably
+consistent *guidance*. The corrected direction comparison does not support
+the former amplification claim: at the cluster level, over the 22 cases
+eligible in both arms, the target is 0.167 and the control 0.157 — a
+difference of +0.010. At the raw level, over 19 common cases, the values are
+0.186 and 0.066. That change across the ladder makes direction a
+granularity-sensitive diagnostic, not an unqualified design effect. I read
+the gap as design-associated evidence rather than a clean causal estimate.
+The architecture that was presumably
 added to make the system more rigorous made its explanations more
 authoritative-looking and no more stable.
 
@@ -292,12 +309,12 @@ Before the real target, I pointed the same instrument at four
 configurations I built myself on current frontier-lab models (three
 OpenAI, one Anthropic; temperature zero; same frozen corpus). The
 dissertation's asymmetry appeared on every one: reasons more stable than
-advice, gaps of +0.12 to +0.29, with advice stability between 0.50 and
+advice, gaps of +0.12 to +0.29, with advice stability between 0.57 and
 0.68. Directionally consistent with my 2026 result, and consistent with
 the gap having *narrowed* on current models, measured differently enough
 that I'd call it an evolution rather than a replication. Notably, even the
 *decisions* flipped occasionally at temperature zero (agreement
-0.96–0.98), something my dissertation's design couldn't observe. Since
+0.96–0.99), something my dissertation's design couldn't observe. Since
 that first audit completed, the lab set has grown to six base models
 from three providers,
 including an open-weights model and a Chinese lab's flagship, and the
@@ -310,8 +327,9 @@ target's free-text measurement compares architectures as much as systems.
 And on decisions, the target was less stable than three of the four but
 not all: one lab configuration flipped verdicts at a comparable rate.
 
-Set against the control above, the reading is that verdict instability
-appeared in every configuration measured, including at temperature zero,
+Set against the control above, the reading is that scored verdict
+instability appeared in seven of eight configurations and five of six
+base-model families, including every temperature-zero configuration,
 while the explanation/advice
 pattern tracks the chained design, which is why the piece is
 about a pattern rather than a project.
@@ -325,8 +343,8 @@ corroboration, not replication: in two unrelated domains, the part of the
 output that identifies the situation holds still while the part that
 prescribes action moves. And one exploratory cut of my own data points
 the same way: my corpus was built with deliberately strong, weak and
-borderline candidates, and **every verdict flip in this project — fourteen,
-across the four systems with per-case certified records — landed on a
+borderline candidates, and **every scored verdict flip in this project —
+thirteen, across the four systems with per-case certified records — landed on a
 borderline candidate.** Strong and weak
 candidates never flipped. Instability is not spread evenly; it
 concentrates exactly where the decision is genuinely contestable, which is
@@ -358,11 +376,12 @@ of a coffee.
 
 *On the target's identity: this piece describes a design
 category rather than naming a small open-source project. The full
-identification is pinned in the audit evidence. The project's author was
-sent the complete findings privately before publication, with a standing
-offer to correct anything in error and to have any response printed
-alongside. The project is not named in the narrative unless its author
-opts in. If
+identification is pinned in the audit evidence. The decision log records
+that the project's author was contacted privately before publication,
+with a standing correction and response offer. The repository preserves a
+draft disclosure note, not a byte-exact copy of the sent message; D-084
+records that limitation and supersedes the draft's stale analytical claims.
+The project is not named in the narrative unless its author opts in. If
 you're going to measure people's work, you owe them the first read.*
 
 **Next:** more targets. Asking "does your screening tool give the same

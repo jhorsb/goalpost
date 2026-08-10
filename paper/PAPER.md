@@ -2,20 +2,26 @@
 
 **Jamie Horsburgh** — independent researcher
 ([ORCID 0009-0005-2567-5906](https://orcid.org/0009-0005-2567-5906))
-*v1 (2026-08-09) — for arXiv (cs.CY). Every measurement traces to a
+*v1.0.2 (2026-08-10) — for arXiv (cs.CY). Every
+measurement traces to a
 committed transcript in the accompanying evidence repository;
 literature, model-metadata and cost figures cite named sources. Audited
 systems are described by design category; identification is pinned in
-the evidence. The first pipeline's author received the complete findings
-privately before publication, with a standing correction offer; the
-second publishes no contact channel — a public contact request stands on
-their repository and the full findings note is held for any reply.
+the evidence. The decision log records that the first pipeline's author
+was contacted before publication, but the repository does not preserve a
+byte-exact copy of the sent message. The second author's full note remains
+unsent and no private contact channel is recorded here.
 Neither is named in the narrative unless its author opts in;
 identification is pinned in the public evidence — narrative non-naming,
 not anonymity.*
 
 *Keywords:* LLM auditing; algorithmic recourse; repeatability; automated
 hiring; contestability; explanation stability; LLM-as-judge.
+
+> **Correction status — v1.0.2.** Release v1.0.1 is preserved as
+> the superseded historical record. This release rebuilds the evidence and
+> every derived claim under corrected parse-eligibility, aggregation-floor
+> and direction-metric definitions recorded in D-083–D-085.
 
 ---
 
@@ -78,8 +84,8 @@ This paper contributes:
 
 1. **A construct and measurement design** (§3): repeat-stability of
    decision, reasons and recourse; a three-level normalisation ladder
-   with the raw level always reported; direction (valence) flip rate as a
-   granularity-robust companion; explicit denominators.
+   with the raw level always reported; an ambiguity-aware, pairwise
+   opposite-direction rate at every level; explicit denominators.
 2. **A protocol** (§4) whose citable core is the **certification gate** —
    the extraction model's self-agreement is measured on the audited
    system's own transcripts and claims below a pre-registered bar are
@@ -176,16 +182,30 @@ committed, versioned synonym taxonomy — and the raw level is always
 reported beside the headline cluster level, because the taxonomy does
 real, visible work (e.g. raw 0.31 → cluster 0.86 on one lab model).
 
-**Valence flips.** Because coarse categories inflate topic-overlap, I
-also measure the **direction flip rate**: among same-topic pairs, how
-often the topic's direction (counts *for* vs *against* the candidate)
-differs between runs. This companion is robust to granularity — given
-the same topic came up, did its sign change? — and carries the sharpest
-finding here (§5).
+**Direction reversal.** Because coarse categories inflate topic-overlap,
+I also measure an **opposite-direction rate** at raw, normalised and
+cluster levels. For each unordered pair of same-decision scored runs, a
+shared topic is scorable only when each run assigns that topic exactly one
+binary direction (*for* or *against* the candidate). The numerator counts
+opposite directions; the denominator counts unambiguous shared-topic
+comparisons. Mixed-sign and non-binary states within either run are counted as
+ambiguous exclusions rather than collapsed by item order, and a case enters the
+condition aggregate only when at least three run-pairs contribute a
+scorable topic. Cluster is the headline level, with raw and normalised
+reported beside it. The earlier Goalpost v0.1 statistic — topics that ever
+took both directions divided by topics observed — remains only as labelled
+legacy topic-reversal incidence; it is not pairwise, and the dissertation
+record did not specify its denominator.
 
-**Denominators, always.** Every case reports attempted / parsed / scored
-runs and refusals; failed parses never silently join a stability number.
-Format non-compliance turned out to be a finding in its own right (§5.4).
+**Denominators, always.** *Attempted* counts completed run records;
+*parsed* counts records with `parse_status == ok`; *scored* further
+requires a nonblank valid decision. Every case reports attempted / parsed /
+scored runs and refusals. Refusals and failed parses remain countable
+evidence but are excluded wholesale from decision, set-overlap, coverage
+and direction measures; partial fields never score. Reason and recourse
+condition aggregates are unweighted means of cases with at least three
+surviving same-decision run-pairs. Format non-compliance turned out to be a
+finding in its own right (§5.4).
 
 ## 4. The protocol
 
@@ -212,10 +232,11 @@ measurement:
   10 in audit #3's smaller block B). Its
   self-agreement is computed with the same ladder as the audit itself.
 - **Bar:** no stability claim is certified unless reader self-agreement
-  ≥ 0.90 at the level the claim is made. **Margin:** a claim of
-  *instability* (including any reason–recourse gap) additionally requires
-  a pre-registered stricter margin, because extraction noise
-  preferentially manufactures exactly that finding.
+  ≥ 0.90 at the level the claim is made. **Margin:** for any individual
+  observed stability below 0.85, the reader must additionally exceed that
+  stability by 0.15, because extraction noise preferentially manufactures
+  exactly that finding. Reasons and recourse are tested separately; a
+  reason–recourse gap is reportable only when both component claims pass.
 - Below either threshold, the result is **withheld**: printed as
   uncertified in the evidence, excluded from claims. Withheld is a
   publishable outcome, not a failure to report.
@@ -332,7 +353,7 @@ counts and headline measures for the three audits and the lab set.
 
 | audit | mode | reader status | n | headline measures | outcome |
 |---|---|---|---|---|---|
-| #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; valence ~⅓–½ | certified |
+| #1 pipeline | freeform | v2 failed margin; v3 certified (0.988/0.932); 2nd reader certified | 25×5 | dec 0.968 (3/25 flips); recourse 0.448; opposite direction 0.156–0.188 | certified |
 | bare-model control | freeform | v3+gpt-4.1 **withheld** (0.895/0.817); v3+gemma certified | 25×5 | dec 0.960 (4/25); gap +0.106 vs pipeline +0.537 | certified (2nd reader) |
 | #2 pipeline | freeform | primary frozen reader **withheld** (0.876/0.814); pre-declared fallback certified (0.989/0.975) | 25×5 | dec 0.936 (6/25); 6/25 modal-no-verdict; gap +0.173 | certified (fallback; both reported) |
 | #3 causal | freeform (decisions) | decision agreement 1.000 both blocks | 220 runs (280 planned; 6 arms excluded pre-run) | H1 not supported; 14/20 effects = 0 vs placebo | negative result |
@@ -344,28 +365,32 @@ as-shipped T=0.7). Certified: decision stability 0.968 — the verdict
 changed on 3/25 identical inputs, including a 3–2 split; recourse
 stability **0.448** (reader SA 0.932 vs bar 0.90); reason-topic stability
 0.983 at the pipeline's own four-heading rubric granularity (raw 0.895).
-Valence: the same heading flipped between counting for and against the
-candidate in **0.378–0.508** of same-topic pairs, depending on which of
-two independently certified readers is used — reported as "roughly a
-third to a half", never a point estimate.
+Direction: among unambiguous shared-topic comparisons, the same heading
+was assigned opposite directions in **0.156–0.188**, depending on which of
+two independently certified readers is used. Within-run mixed-sign states
+are counted as ambiguous exclusions and the three-contributing-pair floor
+is applied before aggregation.
 
 **Bare-model control.** The same serving model, corpus, settings and
 certified reader, with a plain one-prompt screener replacing the chain:
 decision 0.960 (4/25 flips); reasons 0.612; recourse 0.507; gap +0.106
-vs the pipeline's +0.537 under the matched reader; valence 0.249 vs
-0.378. Attribution, stated at the strength the sample supports:
+vs the pipeline's +0.537 under the matched reader. Attribution, stated at
+the strength the sample supports:
 verdict-flipping occurred **with and without the chain**, so the chain
 is not necessary for it — 3 vs 4 flip-cases on 25 cannot identify
 whether the chain changes its frequency. The larger reason–recourse
-contrast and the valence amplification **track the chained design**
-under the matched comparison — the chain's fixed rubric lifts
+contrast **tracks the chained design** under the matched comparison — the
+chain's fixed rubric lifts
 topic-stability from 0.61 to 0.99 while leaving advice no more stable
 than the bare model's. The matched control holds model, host, corpus,
 settings and reader constant, which narrows the major confounds; it
 does not guarantee that architecture-specific output structure
 interacts identically with extraction and granularity, so I report the
 contrast as design-associated evidence rather than a fully identified
-causal estimate.
+causal estimate. The corrected direction comparison does not establish
+amplification: on the 22 cases cluster-eligible in both arms, target 0.167
+versus control 0.157 (difference +0.010); on 19 raw-eligible common cases,
+0.186 versus 0.066. Its sensitivity to the ladder is itself a limitation.
 
 **Audit #2 — a published three-stage LangGraph screener** (frontier
 serving model, disclosed same-class substitute for its retired pin;
@@ -390,13 +415,18 @@ and Moonshot's Kimi K3; six models from three providers — ranging
 governance observations arrived unbidden: one frontier model (Kimi K3)
 **rejects any temperature but 1.0** — determinism cannot even be
 requested — and posted the worst output-contract compliance measured
-(36/125 runs unparseable); and both audited pipelines pin models that no
+(36/125 runs unparseable). Once those failures are excluded, Kimi has
+decision stability 1.000 across 22 measurable cases with zero flips;
+reason stability 0.761 and recourse 0.620 over the 20 cases clearing the
+pair floor (gap +0.141). Haiku's corresponding corrected values are
+decision 0.990, reason 0.795 and recourse 0.570 over 24 floor-eligible
+cases (gap +0.225). Both audited pipelines pin models that no
 longer exist at any provider — published screening tools silently become
 unrunnable as shipped.
 
 **Exploratory, labelled as such.** The corpus was strength-banded at
 design time. Across the four systems with per-case certified records,
-**all 14 verdict flips landed in the deliberately borderline third**
+**all 13 scored verdict flips landed in the deliberately borderline third**
 (0/60 strong and weak case-slots flipped), and Kimi's contract failures
 concentrated there too (28/36). Post-hoc cut; a designed manipulation is
 future work (§9).
@@ -496,10 +526,12 @@ directly — finding, at the registered doses, none demonstrable.
 
 **T2 — "The reason–recourse gap is a granularity artifact."** Partly, and
 I say so: the two sides are measured at different resolutions, and I do
-not quantify the absolute share granularity explains. The valence-flip
-companion is granularity-robust and leads the findings for that reason;
-the control supplies the differential argument (+0.537 vs +0.106 under
-one reader and one grain).
+not quantify the absolute share granularity explains. The control supplies
+the differential argument (+0.537 vs +0.106 under one reader and one
+grain). The direction companion is reported at all three levels precisely
+because it is not granularity-invariant: the matched target–control
+contrast is +0.010 at cluster level but +0.120 at raw level on their
+respective common eligible case sets.
 
 **T3 — "Your reader is an LLM judge; judges are noisy; your gate rests on
 k=3 and at most 25 sampled responses."** The thresholds were pre-registered and never revised; the
@@ -556,17 +588,18 @@ N≥5 before design-class language fully earns itself.
 ## 10. Availability
 
 The instrument, all configurations, pre-registrations with amendment
-logs, the append-only decision log (D-001 onward), and complete evidence
+logs, the append-only decision log (D-001 onward), and run-level evidence
 for every audit (transcripts, normalised sets, metrics, reports, metered
 costs)
 are in the accompanying repository, MIT-licensed. Where pipeline stages
 ran on accounts the instrument's meter does not see, provider dashboard
 totals are the cost source of truth. The repository is archived at
 Zenodo under DOI 10.5281/zenodo.21862442, which resolves to the latest
-version; the exact snapshot underlying this paper is the release tagged
-**v1.0.1** in that archive (each release carries its own version DOI,
-recorded in `CITATION.cff`). Cite this paper for the method and
-findings, and the software DOI when using the instrument itself or
+version. This paper and repository are released as **v1.0.2**. Zenodo
+mints its per-version DOI from the release tag; the current repository
+records that identifier in `CITATION.cff` once available. Until the archive
+finishes, cite the concept DOI. Cite this paper for the method
+and findings, and the software DOI when using the instrument itself or
 depending on the archived evidence. One audited upstream carries no licence and its
 prompts are therefore never stored — fetched at runtime from a pinned
 commit and hash-verified; the other is vendored under its MIT licence

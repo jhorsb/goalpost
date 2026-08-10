@@ -8,17 +8,52 @@ minimal HTML; comparison report is Phase 3.
 
 from fractions import Fraction
 
-REPORT_VERSION = "0.1.0"
+REPORT_VERSION = "0.2.0"
 
 # Committed, versioned anchors artifact (author amendment S5-2).
 ANCHORS = {
-    "version": "anchors-1.0.0",
+    "version": "anchors-1.1.0",
     "bands": [
-        {"min": 0.85, "label": "advice is largely consistent across repeat queries"},
-        {"min": 0.65, "label": "advice mostly repeats, with noticeable variation"},
-        {"min": 0.45, "label": "advice changes about as often as it repeats"},
-        {"min": 0.25, "label": "advice changes more often than it repeats"},
-        {"min": 0.0, "label": "advice is closer to noise than guidance"},
+        {
+            "min": 0.85,
+            "labels": {
+                "decision": "decision is largely consistent across repeat queries",
+                "reasons": "reasons are largely consistent across repeat queries",
+                "recourse": "advice is largely consistent across repeat queries",
+            },
+        },
+        {
+            "min": 0.65,
+            "labels": {
+                "decision": "decision mostly repeats, with noticeable variation",
+                "reasons": "reasons mostly repeat, with noticeable variation",
+                "recourse": "advice mostly repeats, with noticeable variation",
+            },
+        },
+        {
+            "min": 0.45,
+            "labels": {
+                "decision": "decision changes about as often as it repeats",
+                "reasons": "reasons change about as often as they repeat",
+                "recourse": "advice changes about as often as it repeats",
+            },
+        },
+        {
+            "min": 0.25,
+            "labels": {
+                "decision": "decision changes more often than it repeats",
+                "reasons": "reasons change more often than they repeat",
+                "recourse": "advice changes more often than it repeats",
+            },
+        },
+        {
+            "min": 0.0,
+            "labels": {
+                "decision": "decision is closer to noise than consistency",
+                "reasons": "reasons are closer to noise than consistency",
+                "recourse": "advice is closer to noise than guidance",
+            },
+        },
     ],
 }
 
@@ -32,11 +67,18 @@ SATNAV = (
 )
 
 
-def anchor_label(score: float) -> str:
+def anchor_label(score: float, *, measure: str = "recourse") -> str:
+    """Return the anchor phrase for one named stability construct.
+
+    The thresholds are shared, but the words are not: calling a decision
+    score "advice" changes the construct displayed by the board.
+    """
+    if measure not in {"decision", "reasons", "recourse"}:
+        raise ValueError(f"unknown anchor measure: {measure}")
     for band in ANCHORS["bands"]:
         if score >= band["min"]:
-            return band["label"]
-    return ANCHORS["bands"][-1]["label"]
+            return band["labels"][measure]
+    return ANCHORS["bands"][-1]["labels"][measure]
 
 
 def headline_statistic(recourse_jaccard: float) -> str:
@@ -74,28 +116,57 @@ def _pooled_discarded_pairs(sut: dict) -> tuple[int, int]:
             n = case["denominators"]["scored"]
             pairs = n * (n - 1) // 2
             total += pairs
-            discarded += round(case.get("discarded_pair_fraction", 0.0) * pairs)
+            fraction = case.get("discarded_pair_fraction")
+            if pairs and fraction is not None:
+                discarded += round(fraction * pairs)
     return discarded, total
 
 
 def _sut_headline_numbers(sut: dict) -> dict:
-    """Pool per-case cluster-level numbers across conditions (unweighted)."""
-    values = {"recourse": [], "reasons": [], "decision": []}
+    """Pool floor-eligible condition aggregates across conditions.
+
+    Reason and recourse aggregates are the protocol output that applies the
+    effective-pair floor. Weighting each condition mean by ``n_included``
+    preserves unweighted case aggregation across multi-condition reports.
+    Decision has no pair-floor aggregate and remains a case-level mean.
+    """
+    decision_values = []
+    weighted = {
+        "recourse": {"total": 0.0, "n": 0},
+        "reasons": {"total": 0.0, "n": 0},
+    }
     for condition in sut["conditions"]:
+        aggregates = condition.get("aggregates") or {}
+        for measure, aggregate_key in (
+            ("recourse", "recourse_cluster"),
+            ("reasons", "reason_cluster"),
+        ):
+            aggregate = aggregates.get(aggregate_key) or {}
+            mean = aggregate.get("mean")
+            n_included = aggregate.get("n_included", 0)
+            if mean is not None and n_included > 0:
+                weighted[measure]["total"] += mean * n_included
+                weighted[measure]["n"] += n_included
         for case in condition["cases"]:
-            recourse = case["recourse_stability"]["cluster"]["mean_jaccard"]
-            reasons = case["reason_stability"]["cluster"]["mean_jaccard"]
-            if recourse is not None:
-                values["recourse"].append(recourse)
-            if reasons is not None:
-                values["reasons"].append(reasons)
             if case["decision_stability"]["modal_agreement"] is not None:
-                values["decision"].append(case["decision_stability"]["modal_agreement"])
+                decision_values.append(case["decision_stability"]["modal_agreement"])
 
     def mean(xs):
         return sum(xs) / len(xs) if xs else None
 
-    return {k: mean(v) for k, v in values.items()}
+    return {
+        "recourse": (
+            weighted["recourse"]["total"] / weighted["recourse"]["n"]
+            if weighted["recourse"]["n"]
+            else None
+        ),
+        "reasons": (
+            weighted["reasons"]["total"] / weighted["reasons"]["n"]
+            if weighted["reasons"]["n"]
+            else None
+        ),
+        "decision": mean(decision_values),
+    }
 
 
 # Pre-registered gate constants (D-012; unrevised per D-016).
@@ -140,21 +211,29 @@ def render_report(metrics: dict) -> str:
 
     for sut in metrics["suts"]:
         heads = _sut_headline_numbers(sut)
-        recourse = heads["recourse"] if heads["recourse"] is not None else 0.0
+        recourse = heads["recourse"]
         extracted = sut.get("extracted", False)
         sa = sut.get("extractor_self_agreement", {})
-        recourse_ok = (not extracted) or _reportable(
-            heads["recourse"], _gate_agreement_value(sa.get("recourse", {}))
+        recourse_ok = recourse is not None and (
+            (not extracted)
+            or _reportable(
+                recourse, _gate_agreement_value(sa.get("recourse", {}))
+            )
         )
-        reasons_ok = (not extracted) or _reportable(
-            heads["reasons"], _gate_agreement_value(sa.get("reasons", {}))
+        reasons_ok = heads["reasons"] is not None and (
+            (not extracted)
+            or _reportable(
+                heads["reasons"],
+                _gate_agreement_value(sa.get("reasons", {})),
+            )
         )
 
         lines.append(f"# Goalpost audit — {sut['name']}")
         lines.append("")
         # minimal provenance stamp on page one (author amendment S5-note)
         lines.append(
-            f"*Audit `{audit_id}` · goalpost {prov['audit_version']} · "
+            f"*Audit `{audit_id}` · audit schema {prov['audit_version']} · "
+            f"metrics {prov['metrics_version']} · "
             f"{ANCHORS['version']} · sut `{sut['sut_id'][:8]}` "
             f"({sut['elicitation_mode']} mode)*"
         )
@@ -162,7 +241,14 @@ def render_report(metrics: dict) -> str:
 
         lines.append("## The headline")
         lines.append("")
-        if not recourse_ok:
+        if recourse is None:
+            lines.append(
+                "**No recourse-stability aggregate is available:** no cases "
+                "cleared the n_pairs floor. The attempted, parsed and scored "
+                "denominators and every floor exclusion remain in the "
+                "technical appendix."
+            )
+        elif not recourse_ok:
             sa_recourse = _gate_agreement_value(sa.get("recourse", {}))
             sa_reasons = _gate_agreement_value(sa.get("reasons", {}))
             lines.append(
@@ -256,17 +342,27 @@ def render_report(metrics: dict) -> str:
                     return f"{cluster:.3f} at the reported grouping ({raw:.3f} raw)"
                 return f"{raw:.2f}"
 
+            if recourse_ok:
+                measurement_note = (
+                    "figures are certified estimates under the committed "
+                    "reader, not exact properties of the underlying prose."
+                )
+            elif recourse is None:
+                measurement_note = (
+                    "no recourse-stability aggregate is available because "
+                    "no cases cleared the n_pairs floor."
+                )
+            else:
+                measurement_note = (
+                    "stability figures are withheld under the pre-registered "
+                    "gate, and no certified estimate is offered."
+                )
             caveats.append(
                 "This system's free-text output was converted to comparable "
                 "form by a separate extraction model (self-agreement: reasons "
                 f"{_fmt_sa('reasons')}, recourse {_fmt_sa('recourse')}, "
                 f"k={sa.get('k')}, {sa.get('sampled_cases', '?')} sampled "
-                "cases); "
-                + ("figures are certified estimates under the committed "
-                   "reader, not exact properties of the underlying prose."
-                   if recourse_ok else
-                   "stability figures are withheld under the pre-registered "
-                   "gate, and no certified estimate is offered.")
+                "cases); " + measurement_note
             )
         for caveat in caveats:
             lines.append(f"- {caveat}")
@@ -289,6 +385,7 @@ def render_report(metrics: dict) -> str:
                 f"(T={condition['temperature']}, N={condition['repeats']})"
             )
             lines.append("")
+            lines.extend(_aggregate_markdown(condition))
             lines.append(
                 "| case | level | reason J | recourse J | n_pairs | "
                 "decision | attempted/parsed/scored | refusals |"
@@ -309,14 +406,15 @@ def render_report(metrics: dict) -> str:
                     )
                 lines.append(
                     f"| {case['case_id']} | coverage "
-                    f"| emptiness {case['reason_coverage']['emptiness_rate']:.2f}, "
-                    f"size {case['reason_coverage']['mean_set_size']:.1f} "
-                    f"| emptiness {case['recourse_coverage']['emptiness_rate']:.2f}, "
-                    f"size {case['recourse_coverage']['mean_set_size']:.1f} "
+                    f"| emptiness {_fmt_fixed(case['reason_coverage']['emptiness_rate'], 2)}, "
+                    f"size {_fmt_fixed(case['reason_coverage']['mean_set_size'], 1)} "
+                    f"| emptiness {_fmt_fixed(case['recourse_coverage']['emptiness_rate'], 2)}, "
+                    f"size {_fmt_fixed(case['recourse_coverage']['mean_set_size'], 1)} "
                     f"| — | — | discarded pairs "
-                    f"{case['discarded_pair_fraction']:.0%} | — |"
+                    f"{_fmt_percent(case['discarded_pair_fraction'])} | — |"
                 )
             lines.append("")
+            lines.extend(_direction_markdown(condition))
 
         lines.append("### Provenance")
         lines.append("")
@@ -331,6 +429,105 @@ def render_report(metrics: dict) -> str:
 
 def _fmt(value) -> str:
     return f"{value:.2f}" if value is not None else "n/a"
+
+
+def _fmt_fixed(value, digits: int) -> str:
+    return f"{value:.{digits}f}" if value is not None else "n/a"
+
+
+def _fmt_percent(value) -> str:
+    return f"{value:.0%}" if value is not None else "n/a"
+
+
+def _fmt_technical(value) -> str:
+    return f"{value:.3f}" if value is not None else "n/a"
+
+
+def _aggregate_rows(condition: dict) -> list[tuple[str, dict]]:
+    aggregates = condition.get("aggregates") or {}
+    rows: list[tuple[str, dict]] = []
+    for label, key in (
+        ("Reason stability (cluster)", "reason_cluster"),
+        ("Recourse stability (cluster)", "recourse_cluster"),
+        ("Opposite direction (raw)", "direction_reversal_raw"),
+        ("Opposite direction (normalised)", "direction_reversal_normalised"),
+        ("Opposite direction (cluster)", "direction_reversal_cluster"),
+    ):
+        value = aggregates.get(key)
+        if isinstance(value, dict):
+            rows.append((label, value))
+    return rows
+
+
+def _exclusions_text(aggregate: dict) -> str:
+    excluded = aggregate.get("excluded") or []
+    if not excluded:
+        return "none"
+    return "; ".join(
+        f"{entry.get('case_id', '?')}: {entry.get('reason', 'unspecified')}"
+        for entry in excluded
+    )
+
+
+def _aggregate_markdown(condition: dict) -> list[str]:
+    rows = _aggregate_rows(condition)
+    if not rows:
+        return []
+    floor = (condition.get("aggregates") or {}).get("min_pairs_floor", 3)
+    lines = [
+        "#### Condition aggregates",
+        "",
+        "Unweighted case means after the floor "
+        f"≥{floor} contributing run-pairs; exclusions are explicit.",
+        "",
+        "| measure | mean | median | IQR | eligible cases | exclusions |",
+        "|---|---|---|---|---|---|",
+    ]
+    for label, aggregate in rows:
+        iqr = aggregate.get("iqr")
+        iqr_text = (
+            f"[{_fmt_technical(iqr[0])}, {_fmt_technical(iqr[1])}]"
+            if iqr
+            else "n/a"
+        )
+        lines.append(
+            f"| {label} | {_fmt_technical(aggregate.get('mean'))} "
+            f"| {_fmt_technical(aggregate.get('median'))} | {iqr_text} "
+            f"| {aggregate.get('n_included', 0)} "
+            f"| {_exclusions_text(aggregate)} |"
+        )
+    lines.append("")
+    return lines
+
+
+def _direction_markdown(condition: dict) -> list[str]:
+    if not any(case.get("direction_reversal") for case in condition["cases"]):
+        return []
+    lines = [
+        "#### Direction reversal denominators",
+        "",
+        "| case | level | opposite direction | opposite/unambiguous | ambiguous | contributing/same-decision run-pairs | legacy topic incidence |",
+        "|---|---|---|---|---|---|---|",
+    ]
+    for case in condition["cases"]:
+        for level in ("raw", "normalised", "cluster"):
+            direction = (case.get("direction_reversal") or {}).get(level)
+            if not direction:
+                continue
+            pairwise = direction["pairwise"]
+            legacy = direction["legacy_topic_incidence"]
+            lines.append(
+                f"| {case['case_id']} | {level} "
+                f"| {_fmt_technical(pairwise.get('rate'))} "
+                f"| {pairwise['n_opposite_direction_comparisons']}/"
+                f"{pairwise['n_unambiguous_shared_topic_comparisons']} "
+                f"| {pairwise['n_ambiguous_shared_topic_comparisons']} "
+                f"| {pairwise['n_contributing_run_pairs']}/"
+                f"{pairwise['n_same_decision_run_pairs']} "
+                f"| {legacy['n_reversal_topics']}/{legacy['n_topics']} |"
+            )
+    lines.append("")
+    return lines
 
 
 def _html_escape(value) -> str:
@@ -378,15 +575,17 @@ def _html_ladder_table(condition: dict) -> str:
                 "</tr>"
             )
         reason_coverage = (
-            f"emptiness {case['reason_coverage']['emptiness_rate']:.2f}, "
-            f"size {case['reason_coverage']['mean_set_size']:.1f}"
+            "emptiness "
+            f"{_fmt_fixed(case['reason_coverage']['emptiness_rate'], 2)}, "
+            f"size {_fmt_fixed(case['reason_coverage']['mean_set_size'], 1)}"
         )
         recourse_coverage = (
-            f"emptiness {case['recourse_coverage']['emptiness_rate']:.2f}, "
-            f"size {case['recourse_coverage']['mean_set_size']:.1f}"
+            "emptiness "
+            f"{_fmt_fixed(case['recourse_coverage']['emptiness_rate'], 2)}, "
+            f"size {_fmt_fixed(case['recourse_coverage']['mean_set_size'], 1)}"
         )
         discarded_pairs = (
-            f"discarded pairs {case['discarded_pair_fraction']:.0%}"
+            f"discarded pairs {_fmt_percent(case['discarded_pair_fraction'])}"
         )
         rows.append(
             "<tr class='coverage-row'>"
@@ -418,18 +617,96 @@ def _html_ladder_table(condition: dict) -> str:
     )
 
 
+def _html_condition_aggregates(condition: dict) -> str:
+    rows = _aggregate_rows(condition)
+    if not rows:
+        return ""
+    floor = (condition.get("aggregates") or {}).get("min_pairs_floor", 3)
+    body = []
+    for label, aggregate in rows:
+        iqr = aggregate.get("iqr")
+        iqr_text = (
+            f"[{_fmt_technical(iqr[0])}, {_fmt_technical(iqr[1])}]"
+            if iqr
+            else "n/a"
+        )
+        body.append(
+            "<tr>"
+            f"<th scope='row'>{_html_escape(label)}</th>"
+            f"<td>{_html_escape(_fmt_technical(aggregate.get('mean')))}</td>"
+            f"<td>{_html_escape(_fmt_technical(aggregate.get('median')))}</td>"
+            f"<td>{_html_escape(iqr_text)}</td>"
+            f"<td>{_html_escape(aggregate.get('n_included', 0))}</td>"
+            f"<td>{_html_escape(_exclusions_text(aggregate))}</td>"
+            "</tr>"
+        )
+    return (
+        "<h4>Condition aggregates</h4>"
+        "<p>Unweighted case means after the floor "
+        f"&ge;{_html_escape(floor)} contributing run-pairs; exclusions are explicit.</p>"
+        "<div class='table-wrap'><table><thead><tr>"
+        "<th scope='col'>measure</th><th scope='col'>mean</th>"
+        "<th scope='col'>median</th><th scope='col'>IQR</th>"
+        "<th scope='col'>eligible cases</th><th scope='col'>exclusions</th>"
+        "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+    )
+
+
+def _html_direction_table(condition: dict) -> str:
+    if not any(case.get("direction_reversal") for case in condition["cases"]):
+        return ""
+    rows = []
+    for case in condition["cases"]:
+        for level in ("raw", "normalised", "cluster"):
+            direction = (case.get("direction_reversal") or {}).get(level)
+            if not direction:
+                continue
+            pairwise = direction["pairwise"]
+            legacy = direction["legacy_topic_incidence"]
+            rows.append(
+                "<tr>"
+                f"<th scope='row'>{_html_escape(case['case_id'])}</th>"
+                f"<td>{_html_escape(level)}</td>"
+                f"<td>{_html_escape(_fmt_technical(pairwise.get('rate')))}</td>"
+                f"<td>{pairwise['n_opposite_direction_comparisons']}/"
+                f"{pairwise['n_unambiguous_shared_topic_comparisons']}</td>"
+                f"<td>{pairwise['n_ambiguous_shared_topic_comparisons']}</td>"
+                f"<td>{pairwise['n_contributing_run_pairs']}/"
+                f"{pairwise['n_same_decision_run_pairs']}</td>"
+                f"<td>{legacy['n_reversal_topics']}/{legacy['n_topics']}</td>"
+                "</tr>"
+            )
+    return (
+        "<h4>Direction reversal denominators</h4>"
+        "<div class='table-wrap'><table><thead><tr>"
+        "<th scope='col'>case</th><th scope='col'>level</th>"
+        "<th scope='col'>Opposite direction</th>"
+        "<th scope='col'>opposite/unambiguous</th>"
+        "<th scope='col'>ambiguous</th>"
+        "<th scope='col'>contributing/same-decision run-pairs</th>"
+        "<th scope='col'>legacy topic incidence</th>"
+        "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
+    )
+
+
 def _html_sut_report(metrics: dict, sut: dict) -> str:
     audit_id = metrics["audit_id"]
     prov = metrics["provenance"]
     heads = _sut_headline_numbers(sut)
-    recourse = heads["recourse"] if heads["recourse"] is not None else 0.0
+    recourse = heads["recourse"]
     extracted = sut.get("extracted", False)
     sa = sut.get("extractor_self_agreement", {})
-    recourse_ok = (not extracted) or _reportable(
-        heads["recourse"], _gate_agreement_value(sa.get("recourse", {}))
+    recourse_ok = recourse is not None and (
+        (not extracted)
+        or _reportable(
+            recourse, _gate_agreement_value(sa.get("recourse", {}))
+        )
     )
-    reasons_ok = (not extracted) or _reportable(
-        heads["reasons"], _gate_agreement_value(sa.get("reasons", {}))
+    reasons_ok = heads["reasons"] is not None and (
+        (not extracted)
+        or _reportable(
+            heads["reasons"], _gate_agreement_value(sa.get("reasons", {}))
+        )
     )
 
     parts = [
@@ -437,7 +714,8 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
         f"<h1>Goalpost audit <span aria-hidden='true'>&mdash;</span> {_html_escape(sut['name'])}</h1>",
         "<p class='stamp'>"
         f"Audit <code>{_html_escape(audit_id)}</code> "
-        f"<span aria-hidden='true'>&middot;</span> goalpost {_html_escape(prov['audit_version'])} "
+        f"<span aria-hidden='true'>&middot;</span> audit schema {_html_escape(prov['audit_version'])} "
+        f"<span aria-hidden='true'>&middot;</span> metrics {_html_escape(prov['metrics_version'])} "
         f"<span aria-hidden='true'>&middot;</span> {_html_escape(ANCHORS['version'])} "
         f"<span aria-hidden='true'>&middot;</span> sut <code>{_html_escape(sut['sut_id'][:8])}</code> "
         f"({_html_escape(sut['elicitation_mode'])} mode)"
@@ -445,7 +723,15 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
         "<section aria-labelledby='headline'><h2 id='headline'>The headline</h2>",
     ]
 
-    if not recourse_ok:
+    if recourse is None:
+        parts.append(
+            "<p class='headline withheld'>"
+            "<strong>No recourse-stability aggregate is available.</strong> "
+            "No cases cleared the n_pairs floor. The attempted, parsed and "
+            "scored denominators and every floor exclusion remain in the "
+            "technical appendix.</p>"
+        )
+    elif not recourse_ok:
         sa_recourse = _gate_agreement_value(sa.get("recourse", {}))
         sa_reasons = _gate_agreement_value(sa.get("reasons", {}))
         sa_recourse_text = f"{sa_recourse if sa_recourse is not None else 0:.2f}"
@@ -545,11 +831,18 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
             f"{_html_self_agreement(sa, 'reasons')}, recourse "
             f"{_html_self_agreement(sa, 'recourse')}, k={sa.get('k')}, "
             f"{sa.get('sampled_cases', '?')} sampled cases); "
-            + ("figures are certified estimates under the committed reader, "
-               "not exact properties of the underlying prose."
-               if recourse_ok else
-               "stability figures are withheld under the pre-registered "
-               "gate, and no certified estimate is offered.")
+            + (
+                "figures are certified estimates under the committed reader, "
+                "not exact properties of the underlying prose."
+                if recourse_ok
+                else (
+                    "no recourse-stability aggregate is available because "
+                    "no cases cleared the n_pairs floor."
+                    if recourse is None
+                    else "stability figures are withheld under the "
+                    "pre-registered gate, and no certified estimate is offered."
+                )
+            )
         )
         parts.append(f"<li>{_html_escape(caveat)}</li>")
     parts.extend(["</ul>", "</section>"])
@@ -579,7 +872,9 @@ def _html_sut_report(metrics: dict, sut: dict) -> str:
                 f"<h3>Condition <code>{_html_escape(condition['condition_id'])}</code> "
                 f"(T={_html_escape(condition['temperature'])}, "
                 f"N={_html_escape(condition['repeats'])})</h3>",
+                _html_condition_aggregates(condition),
                 _html_ladder_table(condition),
+                _html_direction_table(condition),
             ]
         )
 
@@ -770,11 +1065,11 @@ def _eligibility(sut: dict, row: dict | None) -> str | None:
         return "no cases cleared the n_pairs floor"
     if sut.get("extracted"):
         sa = sut.get("extractor_self_agreement", {})
-        if not _reportable(row["mean"], sa.get("recourse", {}).get("mean_jaccard")):
+        agreement = _gate_agreement_value(sa.get("recourse", {}))
+        if not _reportable(row["mean"], agreement):
             return (
-                "extractor self-agreement below the pre-registered gate "
-                f"(recourse {sa.get('recourse', {}).get('mean_jaccard', 0):.2f} "
-                f"< {GATE_AGREEMENT:.2f})"
+                "extractor self-agreement fails the pre-registered gate at "
+                f"the reported level (recourse {agreement or 0:.2f})"
             )
     return None
 
@@ -845,7 +1140,8 @@ def render_comparison(metrics: dict) -> str:
 
     prov = metrics["provenance"]
     lines.append(
-        f"*goalpost {prov['audit_version']} · {ANCHORS['version']} · "
+        f"*audit schema {prov['audit_version']} · metrics {prov['metrics_version']} · "
+        f"{ANCHORS['version']} · "
         f"taxonomy {prov['taxonomy_version']} · report {REPORT_VERSION}*"
     )
     return "\n".join(lines)
